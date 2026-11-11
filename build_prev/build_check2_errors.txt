@@ -1,0 +1,2 @@
+﻿i/bin/ld.exe: warning: build/uart_AT32.elf has a LOAD segment with RWX permissions
+    + FullyQualifiedErrorId : NativeCommandError

@@ -1,0 +1,2041 @@
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccyHDoPr.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.arch armv7e-m
+   3              		.fpu fpv4-sp-d16
+   4              		.eabi_attribute 27, 1
+   5              		.eabi_attribute 28, 1
+   6              		.eabi_attribute 20, 1
+   7              		.eabi_attribute 21, 1
+   8              		.eabi_attribute 23, 3
+   9              		.eabi_attribute 24, 1
+  10              		.eabi_attribute 25, 1
+  11              		.eabi_attribute 26, 1
+  12              		.eabi_attribute 30, 1
+  13              		.eabi_attribute 34, 1
+  14              		.eabi_attribute 18, 4
+  15              		.file	"main.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.file 1 "project/src/main.c"
+  20              		.section	.text.tmr1_capture_process,"ax",%progbits
+  21              		.align	1
+  22              		.syntax unified
+  23              		.thumb
+  24              		.thumb_func
+  26              	tmr1_capture_process:
+  27              	.LVL0:
+  28              	.LFB142:
+   1:project/src/main.c **** /* add user code begin Header */
+   2:project/src/main.c **** /**
+   3:project/src/main.c ****   **************************************************************************
+   4:project/src/main.c ****   * @file     main.c
+   5:project/src/main.c ****   * @brief    main program
+   6:project/src/main.c ****   **************************************************************************
+   7:project/src/main.c ****   * Copyright (c) 2025, Artery Technology, All rights reserved.
+   8:project/src/main.c ****   *
+   9:project/src/main.c ****   * The software Board Support Package (BSP) that is made available to
+  10:project/src/main.c ****   * download from Artery official website is the copyrighted work of Artery.
+  11:project/src/main.c ****   * Artery authorizes customers to use, copy, and distribute the BSP
+  12:project/src/main.c ****   * software and its related documentation for the purpose of design and
+  13:project/src/main.c ****   * development in conjunction with Artery microcontrollers. Use of the
+  14:project/src/main.c ****   * software is governed by this copyright notice and the following disclaimer.
+  15:project/src/main.c ****   *
+  16:project/src/main.c ****   * THIS SOFTWARE IS PROVIDED ON "AS IS" BASIS WITHOUT WARRANTIES,
+  17:project/src/main.c ****   * GUARANTEES OR REPRESENTATIONS OF ANY KIND. ARTERY EXPRESSLY DISCLAIMS,
+  18:project/src/main.c ****   * TO THE FULLEST EXTENT PERMITTED BY LAW, ALL EXPRESS, IMPLIED OR
+  19:project/src/main.c ****   * STATUTORY OR OTHER WARRANTIES, GUARANTEES OR REPRESENTATIONS,
+  20:project/src/main.c ****   * INCLUDING BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY,
+  21:project/src/main.c ****   * FITNESS FOR A PARTICULAR PURPOSE, OR NON-INFRINGEMENT.
+  22:project/src/main.c ****   *
+  23:project/src/main.c ****   **************************************************************************
+  24:project/src/main.c ****   */
+  25:project/src/main.c **** /* add user code end Header */
+  26:project/src/main.c **** 
+  27:project/src/main.c **** /* Includes ------------------------------------------------------------------*/
+  28:project/src/main.c **** #include "at32f403a_407_wk_config.h"
+  29:project/src/main.c **** #include "wk_exint.h"
+  30:project/src/main.c **** #include "wk_i2c.h"
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccyHDoPr.s 			page 2
+
+
+  31:project/src/main.c **** #include "wk_tmr.h"
+  32:project/src/main.c **** #include "wk_usart.h"
+  33:project/src/main.c **** #include "wk_dma.h"
+  34:project/src/main.c **** #include "wk_system.h"
+  35:project/src/main.c **** #include "i2c_app.h"
+  36:project/src/main.c **** 
+  37:project/src/main.c **** /* private includes ----------------------------------------------------------*/
+  38:project/src/main.c **** /* add user code begin private includes */
+  39:project/src/main.c **** 
+  40:project/src/main.c **** 
+  41:project/src/main.c **** /*PE9,PC6-->PA0*/
+  42:project/src/main.c **** 
+  43:project/src/main.c **** 
+  44:project/src/main.c **** #define DELAY  100
+  45:project/src/main.c **** #define FAST   1
+  46:project/src/main.c **** #define SLOW   4
+  47:project/src/main.c **** #define PULSE_HIGH_US   1U            //脉冲步长
+  48:project/src/main.c **** #define TMR1_TICKS_PER_US 200U        
+  49:project/src/main.c **** #define MAX_PULSE_INDEX (65535U / (PULSE_HIGH_US * TMR1_TICKS_PER_US))
+  50:project/src/main.c **** 
+  51:project/src/main.c **** 
+  52:project/src/main.c **** 
+  53:project/src/main.c **** 
+  54:project/src/main.c **** 
+  55:project/src/main.c **** 
+  56:project/src/main.c **** 
+  57:project/src/main.c **** #include "button.h"
+  58:project/src/main.c **** #include "OLED.h"
+  59:project/src/main.c **** #include "led.h"
+  60:project/src/main.c **** #include "delay.h"
+  61:project/src/main.c **** #include "usmart.h"
+  62:project/src/main.c **** #include "string.h"
+  63:project/src/main.c **** /* add user code end private includes */
+  64:project/src/main.c **** 
+  65:project/src/main.c **** /* private typedef -----------------------------------------------------------*/
+  66:project/src/main.c **** /* add user code begin private typedef */
+  67:project/src/main.c **** 
+  68:project/src/main.c **** /* add user code end private typedef */
+  69:project/src/main.c **** 
+  70:project/src/main.c **** /* private define ------------------------------------------------------------*/
+  71:project/src/main.c **** /* add user code begin private define */
+  72:project/src/main.c **** #define MAX_LEN     256
+  73:project/src/main.c **** /* add user code end private define */
+  74:project/src/main.c **** 
+  75:project/src/main.c **** /* private macro -------------------------------------------------------------*/
+  76:project/src/main.c **** /* add user code begin private macro */
+  77:project/src/main.c **** 
+  78:project/src/main.c **** /* add user code end private macro */
+  79:project/src/main.c **** 
+  80:project/src/main.c **** /* private variables ---------------------------------------------------------*/
+  81:project/src/main.c **** /* add user code begin private variables */
+  82:project/src/main.c **** uint16_t i=1;
+  83:project/src/main.c **** u8 uart_rx_buf[MAX_LEN] = {0};     /* USART1 RX DMA 缓冲区, 空闲中断后交给 USMART */
+  84:project/src/main.c **** u8 uart_tx_buf[MAX_LEN] = {0};
+  85:project/src/main.c **** 
+  86:project/src/main.c **** static uint32_t tmr1_rising_edge_us;
+  87:project/src/main.c **** static uint32_t measured_elapsed_us;
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccyHDoPr.s 			page 3
+
+
+  88:project/src/main.c **** static uint8_t waiting_for_tmr8_rising_edge;
+  89:project/src/main.c **** static uint8_t measurement_available;
+  90:project/src/main.c **** 
+  91:project/src/main.c **** 
+  92:project/src/main.c **** 
+  93:project/src/main.c **** /* add user code end private variables */
+  94:project/src/main.c **** 
+  95:project/src/main.c **** /* private function prototypes --------------------------------------------*/
+  96:project/src/main.c **** /* add user code begin function prototypes */
+  97:project/src/main.c **** 
+  98:project/src/main.c **** /* add user code end function prototypes */
+  99:project/src/main.c **** 
+ 100:project/src/main.c **** /* private user code ---------------------------------------------------------*/
+ 101:project/src/main.c **** /* add user code begin 0 */
+ 102:project/src/main.c **** 
+ 103:project/src/main.c **** 
+ 104:project/src/main.c **** //这个完成了TMR1脉冲启动的准备工作
+ 105:project/src/main.c **** static void at32_tmr1_pulse_start(void)
+ 106:project/src/main.c **** {
+ 107:project/src/main.c ****   tmr_counter_enable(TMR1,FALSE);     //先禁用TMR1计数器
+ 108:project/src/main.c ****   tmr_counter_value_set(TMR1,0);      //设置TMR1计数器值=0
+ 109:project/src/main.c ****   tmr_flag_clear(TMR1,TMR_OVF_FLAG);  //清除TMR1的标志位：溢出中断标记
+ 110:project/src/main.c ****   tmr_counter_enable(TMR1,TRUE);      //后启用TMR1计数器
+ 111:project/src/main.c **** }
+ 112:project/src/main.c **** 
+ 113:project/src/main.c **** 
+ 114:project/src/main.c **** //这个完成了TMR8脉冲启动的准备工作
+ 115:project/src/main.c **** static void at32_tmr8_pulse_start(void)
+ 116:project/src/main.c **** {
+ 117:project/src/main.c ****   tmr_counter_enable(TMR8,FALSE);     //先禁用TMR1计数器
+ 118:project/src/main.c ****   tmr_counter_value_set(TMR8,0);      //设置TMR1计数器值=0
+ 119:project/src/main.c ****   tmr_flag_clear(TMR8,TMR_OVF_FLAG);  //清除TMR1的标志位：溢出中断标记
+ 120:project/src/main.c ****   tmr_counter_enable(TMR8,TRUE);      //后启用TMR1计数器
+ 121:project/src/main.c **** }
+ 122:project/src/main.c **** 
+ 123:project/src/main.c **** 
+ 124:project/src/main.c **** 
+ 125:project/src/main.c **** 
+ 126:project/src/main.c **** /*usmart专门用于调试*/
+ 127:project/src/main.c **** 
+ 128:project/src/main.c **** uint8_t usmart_set_pulse_width_us(uint32_t width_us)
+ 129:project/src/main.c **** {
+ 130:project/src/main.c ****   if ((width_us == 0U) || (width_us > MAX_PULSE_INDEX))
+ 131:project/src/main.c ****   {
+ 132:project/src/main.c ****     return USMART_PARMERR;
+ 133:project/src/main.c ****   }
+ 134:project/src/main.c **** 
+ 135:project/src/main.c ****   i = (uint16_t)width_us;
+ 136:project/src/main.c ****   tmr_period_value_set(TMR1, i * PULSE_HIGH_US * TMR1_TICKS_PER_US);
+ 137:project/src/main.c **** 
+ 138:project/src/main.c ****   OLED_ShowNum(3, 5, i, 3);
+ 139:project/src/main.c ****   OLED_ShowNum(2, 5, i * PULSE_HIGH_US, 3);
+ 140:project/src/main.c ****   at32_tmr1_pulse_start();      //开始发射脉冲
+ 141:project/src/main.c ****   at32_led_toggle(LED2);
+ 142:project/src/main.c **** 
+ 143:project/src/main.c ****   return USMART_OK;
+ 144:project/src/main.c **** }
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccyHDoPr.s 			page 4
+
+
+ 145:project/src/main.c **** 
+ 146:project/src/main.c **** uint8_t usmart_set_pulse_width_us2(uint32_t width_us)
+ 147:project/src/main.c **** {
+ 148:project/src/main.c ****   if ((width_us == 0U) || (width_us > MAX_PULSE_INDEX))
+ 149:project/src/main.c ****   {
+ 150:project/src/main.c ****     return USMART_PARMERR;
+ 151:project/src/main.c ****   }
+ 152:project/src/main.c **** 
+ 153:project/src/main.c ****   i = (uint16_t)width_us;
+ 154:project/src/main.c ****   tmr_period_value_set(TMR8, i * PULSE_HIGH_US * TMR1_TICKS_PER_US);
+ 155:project/src/main.c **** 
+ 156:project/src/main.c ****   OLED_ShowNum(3, 5, i, 3);
+ 157:project/src/main.c ****   OLED_ShowNum(2, 5, i * PULSE_HIGH_US, 3);
+ 158:project/src/main.c ****   at32_tmr8_pulse_start();      //开始发射脉冲
+ 159:project/src/main.c ****   at32_led_toggle(LED2);
+ 160:project/src/main.c **** 
+ 161:project/src/main.c ****   return USMART_OK;
+ 162:project/src/main.c **** }
+ 163:project/src/main.c **** 
+ 164:project/src/main.c **** 
+ 165:project/src/main.c **** void send_data(u8 *buf,u16 len)
+ 166:project/src/main.c **** {
+ 167:project/src/main.c ****     memcpy(uart_tx_buf,buf,len);
+ 168:project/src/main.c ****     while (usart_flag_get(USART1,USART_TDBE_FLAG) == RESET);
+ 169:project/src/main.c ****     dma_channel_enable(DMA1_CHANNEL2,FALSE);
+ 170:project/src/main.c ****     dma_data_number_set(DMA1_CHANNEL2,len);
+ 171:project/src/main.c ****     dma_channel_enable(DMA1_CHANNEL2,TRUE);
+ 172:project/src/main.c **** }
+ 173:project/src/main.c **** 
+ 174:project/src/main.c **** 
+ 175:project/src/main.c **** static void tmr1_capture_process(uint32_t edge_time_us)
+ 176:project/src/main.c **** {
+  29              		.loc 1 176 1 view -0
+  30              		.cfi_startproc
+  31              		@ args = 0, pretend = 0, frame = 0
+  32              		@ frame_needed = 0, uses_anonymous_args = 0
+  33              		@ link register save eliminated.
+ 177:project/src/main.c ****   tmr1_rising_edge_us = edge_time_us;
+  34              		.loc 1 177 3 view .LVU1
+  35              		.loc 1 177 23 is_stmt 0 view .LVU2
+  36 0000 044B     		ldr	r3, .L2
+  37 0002 1860     		str	r0, [r3]
+ 178:project/src/main.c ****   waiting_for_tmr8_rising_edge = 1U;
+  38              		.loc 1 178 3 is_stmt 1 view .LVU3
+  39              		.loc 1 178 32 is_stmt 0 view .LVU4
+  40 0004 044B     		ldr	r3, .L2+4
+  41 0006 0122     		movs	r2, #1
+  42 0008 1A70     		strb	r2, [r3]
+ 179:project/src/main.c ****   measurement_available = 0U;
+  43              		.loc 1 179 3 is_stmt 1 view .LVU5
+  44              		.loc 1 179 25 is_stmt 0 view .LVU6
+  45 000a 044B     		ldr	r3, .L2+8
+  46 000c 0022     		movs	r2, #0
+  47 000e 1A70     		strb	r2, [r3]
+ 180:project/src/main.c **** }
+  48              		.loc 1 180 1 view .LVU7
+  49 0010 7047     		bx	lr
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccyHDoPr.s 			page 5
+
+
+  50              	.L3:
+  51 0012 00BF     		.align	2
+  52              	.L2:
+  53 0014 00000000 		.word	tmr1_rising_edge_us
+  54 0018 00000000 		.word	waiting_for_tmr8_rising_edge
+  55 001c 00000000 		.word	measurement_available
+  56              		.cfi_endproc
+  57              	.LFE142:
+  59              		.section	.text.tmr8_capture_process,"ax",%progbits
+  60              		.align	1
+  61              		.syntax unified
+  62              		.thumb
+  63              		.thumb_func
+  65              	tmr8_capture_process:
+  66              	.LVL1:
+  67              	.LFB143:
+ 181:project/src/main.c **** 
+ 182:project/src/main.c **** static void tmr8_capture_process(uint32_t edge_time_us)
+ 183:project/src/main.c **** {
+  68              		.loc 1 183 1 is_stmt 1 view -0
+  69              		.cfi_startproc
+  70              		@ args = 0, pretend = 0, frame = 0
+  71              		@ frame_needed = 0, uses_anonymous_args = 0
+  72              		@ link register save eliminated.
+ 184:project/src/main.c ****   if (waiting_for_tmr8_rising_edge != 0U)
+  73              		.loc 1 184 3 view .LVU9
+  74              		.loc 1 184 36 is_stmt 0 view .LVU10
+  75 0000 074B     		ldr	r3, .L6
+  76 0002 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+  77              		.loc 1 184 6 view .LVU11
+  78 0004 53B1     		cbz	r3, .L4
+ 185:project/src/main.c ****   {
+ 186:project/src/main.c ****     measured_elapsed_us = edge_time_us - tmr1_rising_edge_us;
+  79              		.loc 1 186 5 is_stmt 1 view .LVU12
+  80              		.loc 1 186 40 is_stmt 0 view .LVU13
+  81 0006 074B     		ldr	r3, .L6+4
+  82 0008 1B68     		ldr	r3, [r3]
+  83 000a C01A     		subs	r0, r0, r3
+  84              	.LVL2:
+  85              		.loc 1 186 25 view .LVU14
+  86 000c 064B     		ldr	r3, .L6+8
+  87 000e 1860     		str	r0, [r3]
+ 187:project/src/main.c ****     measurement_available = 1U;
+  88              		.loc 1 187 5 is_stmt 1 view .LVU15
+  89              		.loc 1 187 27 is_stmt 0 view .LVU16
+  90 0010 064B     		ldr	r3, .L6+12
+  91 0012 0122     		movs	r2, #1
+  92 0014 1A70     		strb	r2, [r3]
+ 188:project/src/main.c ****     waiting_for_tmr8_rising_edge = 0U;
+  93              		.loc 1 188 5 is_stmt 1 view .LVU17
+  94              		.loc 1 188 34 is_stmt 0 view .LVU18
+  95 0016 024B     		ldr	r3, .L6
+  96 0018 0022     		movs	r2, #0
+  97 001a 1A70     		strb	r2, [r3]
+  98              	.L4:
+ 189:project/src/main.c ****   }
+ 190:project/src/main.c **** }
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccyHDoPr.s 			page 6
+
+
+  99              		.loc 1 190 1 view .LVU19
+ 100 001c 7047     		bx	lr
+ 101              	.L7:
+ 102 001e 00BF     		.align	2
+ 103              	.L6:
+ 104 0020 00000000 		.word	waiting_for_tmr8_rising_edge
+ 105 0024 00000000 		.word	tmr1_rising_edge_us
+ 106 0028 00000000 		.word	measured_elapsed_us
+ 107 002c 00000000 		.word	measurement_available
+ 108              		.cfi_endproc
+ 109              	.LFE143:
+ 111              		.section	.text.at32_tmr1_pulse_start,"ax",%progbits
+ 112              		.align	1
+ 113              		.syntax unified
+ 114              		.thumb
+ 115              		.thumb_func
+ 117              	at32_tmr1_pulse_start:
+ 118              	.LFB137:
+ 106:project/src/main.c ****   tmr_counter_enable(TMR1,FALSE);     //先禁用TMR1计数器
+ 119              		.loc 1 106 1 is_stmt 1 view -0
+ 120              		.cfi_startproc
+ 121              		@ args = 0, pretend = 0, frame = 0
+ 122              		@ frame_needed = 0, uses_anonymous_args = 0
+ 123 0000 10B5     		push	{r4, lr}
+ 124              	.LCFI0:
+ 125              		.cfi_def_cfa_offset 8
+ 126              		.cfi_offset 4, -8
+ 127              		.cfi_offset 14, -4
+ 107:project/src/main.c ****   tmr_counter_value_set(TMR1,0);      //设置TMR1计数器值=0
+ 128              		.loc 1 107 3 view .LVU21
+ 129 0002 094C     		ldr	r4, .L10
+ 130 0004 0021     		movs	r1, #0
+ 131 0006 2046     		mov	r0, r4
+ 132 0008 FFF7FEFF 		bl	tmr_counter_enable
+ 133              	.LVL3:
+ 108:project/src/main.c ****   tmr_flag_clear(TMR1,TMR_OVF_FLAG);  //清除TMR1的标志位：溢出中断标记
+ 134              		.loc 1 108 3 view .LVU22
+ 135 000c 0021     		movs	r1, #0
+ 136 000e 2046     		mov	r0, r4
+ 137 0010 FFF7FEFF 		bl	tmr_counter_value_set
+ 138              	.LVL4:
+ 109:project/src/main.c ****   tmr_counter_enable(TMR1,TRUE);      //后启用TMR1计数器
+ 139              		.loc 1 109 3 view .LVU23
+ 140 0014 0121     		movs	r1, #1
+ 141 0016 2046     		mov	r0, r4
+ 142 0018 FFF7FEFF 		bl	tmr_flag_clear
+ 143              	.LVL5:
+ 110:project/src/main.c **** }
+ 144              		.loc 1 110 3 view .LVU24
+ 145 001c 0121     		movs	r1, #1
+ 146 001e 2046     		mov	r0, r4
+ 147 0020 FFF7FEFF 		bl	tmr_counter_enable
+ 148              	.LVL6:
+ 111:project/src/main.c **** 
+ 149              		.loc 1 111 1 is_stmt 0 view .LVU25
+ 150 0024 10BD     		pop	{r4, pc}
+ 151              	.L11:
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccyHDoPr.s 			page 7
+
+
+ 152 0026 00BF     		.align	2
+ 153              	.L10:
+ 154 0028 002C0140 		.word	1073818624
+ 155              		.cfi_endproc
+ 156              	.LFE137:
+ 158              		.section	.text.at32_tmr8_pulse_start,"ax",%progbits
+ 159              		.align	1
+ 160              		.syntax unified
+ 161              		.thumb
+ 162              		.thumb_func
+ 164              	at32_tmr8_pulse_start:
+ 165              	.LFB138:
+ 116:project/src/main.c ****   tmr_counter_enable(TMR8,FALSE);     //先禁用TMR1计数器
+ 166              		.loc 1 116 1 is_stmt 1 view -0
+ 167              		.cfi_startproc
+ 168              		@ args = 0, pretend = 0, frame = 0
+ 169              		@ frame_needed = 0, uses_anonymous_args = 0
+ 170 0000 10B5     		push	{r4, lr}
+ 171              	.LCFI1:
+ 172              		.cfi_def_cfa_offset 8
+ 173              		.cfi_offset 4, -8
+ 174              		.cfi_offset 14, -4
+ 117:project/src/main.c ****   tmr_counter_value_set(TMR8,0);      //设置TMR1计数器值=0
+ 175              		.loc 1 117 3 view .LVU27
+ 176 0002 094C     		ldr	r4, .L14
+ 177 0004 0021     		movs	r1, #0
+ 178 0006 2046     		mov	r0, r4
+ 179 0008 FFF7FEFF 		bl	tmr_counter_enable
+ 180              	.LVL7:
+ 118:project/src/main.c ****   tmr_flag_clear(TMR8,TMR_OVF_FLAG);  //清除TMR1的标志位：溢出中断标记
+ 181              		.loc 1 118 3 view .LVU28
+ 182 000c 0021     		movs	r1, #0
+ 183 000e 2046     		mov	r0, r4
+ 184 0010 FFF7FEFF 		bl	tmr_counter_value_set
+ 185              	.LVL8:
+ 119:project/src/main.c ****   tmr_counter_enable(TMR8,TRUE);      //后启用TMR1计数器
+ 186              		.loc 1 119 3 view .LVU29
+ 187 0014 0121     		movs	r1, #1
+ 188 0016 2046     		mov	r0, r4
+ 189 0018 FFF7FEFF 		bl	tmr_flag_clear
+ 190              	.LVL9:
+ 120:project/src/main.c **** }
+ 191              		.loc 1 120 3 view .LVU30
+ 192 001c 0121     		movs	r1, #1
+ 193 001e 2046     		mov	r0, r4
+ 194 0020 FFF7FEFF 		bl	tmr_counter_enable
+ 195              	.LVL10:
+ 121:project/src/main.c **** 
+ 196              		.loc 1 121 1 is_stmt 0 view .LVU31
+ 197 0024 10BD     		pop	{r4, pc}
+ 198              	.L15:
+ 199 0026 00BF     		.align	2
+ 200              	.L14:
+ 201 0028 00340140 		.word	1073820672
+ 202              		.cfi_endproc
+ 203              	.LFE138:
+ 205              		.section	.text.tmr2_capture_poll,"ax",%progbits
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccyHDoPr.s 			page 8
+
+
+ 206              		.align	1
+ 207              		.syntax unified
+ 208              		.thumb
+ 209              		.thumb_func
+ 211              	tmr2_capture_poll:
+ 212              	.LFB144:
+ 191:project/src/main.c **** 
+ 192:project/src/main.c **** static void tmr2_capture_poll(void)
+ 193:project/src/main.c **** {
+ 213              		.loc 1 193 1 is_stmt 1 view -0
+ 214              		.cfi_startproc
+ 215              		@ args = 0, pretend = 0, frame = 0
+ 216              		@ frame_needed = 0, uses_anonymous_args = 0
+ 217 0000 F8B5     		push	{r3, r4, r5, r6, r7, lr}
+ 218              	.LCFI2:
+ 219              		.cfi_def_cfa_offset 24
+ 220              		.cfi_offset 3, -24
+ 221              		.cfi_offset 4, -20
+ 222              		.cfi_offset 5, -16
+ 223              		.cfi_offset 6, -12
+ 224              		.cfi_offset 7, -8
+ 225              		.cfi_offset 14, -4
+ 194:project/src/main.c ****   uint8_t tmr1_pending = (tmr_flag_get(TMR2, TMR_C1_FLAG) == SET);
+ 226              		.loc 1 194 3 view .LVU33
+ 227              		.loc 1 194 27 is_stmt 0 view .LVU34
+ 228 0002 0221     		movs	r1, #2
+ 229 0004 4FF08040 		mov	r0, #1073741824
+ 230 0008 FFF7FEFF 		bl	tmr_flag_get
+ 231              	.LVL11:
+ 232 000c 0546     		mov	r5, r0
+ 233              	.LVL12:
+ 195:project/src/main.c ****   uint8_t tmr8_pending = (tmr_flag_get(TMR2, TMR_C2_FLAG) == SET);
+ 234              		.loc 1 195 3 is_stmt 1 view .LVU35
+ 235              		.loc 1 195 27 is_stmt 0 view .LVU36
+ 236 000e 0421     		movs	r1, #4
+ 237 0010 4FF08040 		mov	r0, #1073741824
+ 238 0014 FFF7FEFF 		bl	tmr_flag_get
+ 239              	.LVL13:
+ 240 0018 0446     		mov	r4, r0
+ 241              	.LVL14:
+ 196:project/src/main.c ****   uint32_t tmr1_time = 0U;
+ 242              		.loc 1 196 3 is_stmt 1 view .LVU37
+ 197:project/src/main.c ****   uint32_t tmr8_time = 0U;
+ 243              		.loc 1 197 3 view .LVU38
+ 198:project/src/main.c **** 
+ 199:project/src/main.c ****   if (tmr1_pending != 0U)
+ 244              		.loc 1 199 3 view .LVU39
+ 245              		.loc 1 199 6 is_stmt 0 view .LVU40
+ 246 001a 012D     		cmp	r5, #1
+ 247 001c 08D0     		beq	.L26
+ 196:project/src/main.c ****   uint32_t tmr8_time = 0U;
+ 248              		.loc 1 196 12 view .LVU41
+ 249 001e 0026     		movs	r6, #0
+ 250              	.LVL15:
+ 251              	.L17:
+ 200:project/src/main.c ****   {
+ 201:project/src/main.c ****     tmr1_time = tmr_channel_value_get(TMR2, TMR_SELECT_CHANNEL_1);
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccyHDoPr.s 			page 9
+
+
+ 202:project/src/main.c ****     tmr_flag_clear(TMR2, TMR_C1_FLAG);
+ 203:project/src/main.c ****   }
+ 204:project/src/main.c **** 
+ 205:project/src/main.c ****   if (tmr8_pending != 0U)
+ 252              		.loc 1 205 3 is_stmt 1 view .LVU42
+ 253              		.loc 1 205 6 is_stmt 0 view .LVU43
+ 254 0020 012C     		cmp	r4, #1
+ 255 0022 11D0     		beq	.L27
+ 197:project/src/main.c **** 
+ 256              		.loc 1 197 12 view .LVU44
+ 257 0024 0027     		movs	r7, #0
+ 258              	.LVL16:
+ 259              	.L18:
+ 206:project/src/main.c ****   {
+ 207:project/src/main.c ****     tmr8_time = tmr_channel_value_get(TMR2, TMR_SELECT_CHANNEL_2);
+ 208:project/src/main.c ****     tmr_flag_clear(TMR2, TMR_C2_FLAG);
+ 209:project/src/main.c ****   }
+ 210:project/src/main.c **** 
+ 211:project/src/main.c ****   if ((tmr1_pending != 0U) && (tmr8_pending != 0U))
+ 260              		.loc 1 211 3 is_stmt 1 view .LVU45
+ 261              		.loc 1 211 6 is_stmt 0 view .LVU46
+ 262 0026 012D     		cmp	r5, #1
+ 263 0028 1AD0     		beq	.L28
+ 212:project/src/main.c ****   {
+ 213:project/src/main.c ****     if ((uint32_t)(tmr8_time - tmr1_time) < 0x80000000U)
+ 214:project/src/main.c ****     {
+ 215:project/src/main.c ****       tmr1_capture_process(tmr1_time);
+ 216:project/src/main.c ****       tmr8_capture_process(tmr8_time);
+ 217:project/src/main.c ****     }
+ 218:project/src/main.c ****     else
+ 219:project/src/main.c ****     {
+ 220:project/src/main.c ****       tmr8_capture_process(tmr8_time);
+ 221:project/src/main.c ****       tmr1_capture_process(tmr1_time);
+ 222:project/src/main.c ****     }
+ 223:project/src/main.c ****   }
+ 224:project/src/main.c ****   else if (tmr1_pending != 0U)
+ 225:project/src/main.c ****   {
+ 226:project/src/main.c ****     tmr1_capture_process(tmr1_time);
+ 227:project/src/main.c ****   }
+ 228:project/src/main.c ****   else if (tmr8_pending != 0U)
+ 264              		.loc 1 228 8 is_stmt 1 view .LVU47
+ 265              		.loc 1 228 11 is_stmt 0 view .LVU48
+ 266 002a 012C     		cmp	r4, #1
+ 267 002c 2FD0     		beq	.L29
+ 268              	.L16:
+ 229:project/src/main.c ****   {
+ 230:project/src/main.c ****     tmr8_capture_process(tmr8_time);
+ 231:project/src/main.c ****   }
+ 232:project/src/main.c **** }
+ 269              		.loc 1 232 1 view .LVU49
+ 270 002e F8BD     		pop	{r3, r4, r5, r6, r7, pc}
+ 271              	.LVL17:
+ 272              	.L26:
+ 201:project/src/main.c ****     tmr_flag_clear(TMR2, TMR_C1_FLAG);
+ 273              		.loc 1 201 5 is_stmt 1 view .LVU50
+ 201:project/src/main.c ****     tmr_flag_clear(TMR2, TMR_C1_FLAG);
+ 274              		.loc 1 201 17 is_stmt 0 view .LVU51
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccyHDoPr.s 			page 10
+
+
+ 275 0030 0021     		movs	r1, #0
+ 276 0032 4FF08040 		mov	r0, #1073741824
+ 277 0036 FFF7FEFF 		bl	tmr_channel_value_get
+ 278              	.LVL18:
+ 279 003a 0646     		mov	r6, r0
+ 280              	.LVL19:
+ 202:project/src/main.c ****   }
+ 281              		.loc 1 202 5 is_stmt 1 view .LVU52
+ 282 003c 0221     		movs	r1, #2
+ 283 003e 4FF08040 		mov	r0, #1073741824
+ 284              	.LVL20:
+ 202:project/src/main.c ****   }
+ 285              		.loc 1 202 5 is_stmt 0 view .LVU53
+ 286 0042 FFF7FEFF 		bl	tmr_flag_clear
+ 287              	.LVL21:
+ 288 0046 EBE7     		b	.L17
+ 289              	.L27:
+ 207:project/src/main.c ****     tmr_flag_clear(TMR2, TMR_C2_FLAG);
+ 290              		.loc 1 207 5 is_stmt 1 view .LVU54
+ 207:project/src/main.c ****     tmr_flag_clear(TMR2, TMR_C2_FLAG);
+ 291              		.loc 1 207 17 is_stmt 0 view .LVU55
+ 292 0048 0221     		movs	r1, #2
+ 293 004a 4FF08040 		mov	r0, #1073741824
+ 294 004e FFF7FEFF 		bl	tmr_channel_value_get
+ 295              	.LVL22:
+ 296 0052 0746     		mov	r7, r0
+ 297              	.LVL23:
+ 208:project/src/main.c ****   }
+ 298              		.loc 1 208 5 is_stmt 1 view .LVU56
+ 299 0054 0421     		movs	r1, #4
+ 300 0056 4FF08040 		mov	r0, #1073741824
+ 301              	.LVL24:
+ 208:project/src/main.c ****   }
+ 302              		.loc 1 208 5 is_stmt 0 view .LVU57
+ 303 005a FFF7FEFF 		bl	tmr_flag_clear
+ 304              	.LVL25:
+ 305 005e E2E7     		b	.L18
+ 306              	.L28:
+ 211:project/src/main.c ****   {
+ 307              		.loc 1 211 28 discriminator 1 view .LVU58
+ 308 0060 012C     		cmp	r4, #1
+ 309 0062 10D1     		bne	.L20
+ 213:project/src/main.c ****     {
+ 310              		.loc 1 213 5 is_stmt 1 view .LVU59
+ 213:project/src/main.c ****     {
+ 311              		.loc 1 213 30 is_stmt 0 view .LVU60
+ 312 0064 BB1B     		subs	r3, r7, r6
+ 213:project/src/main.c ****     {
+ 313              		.loc 1 213 8 view .LVU61
+ 314 0066 002B     		cmp	r3, #0
+ 315 0068 06DB     		blt	.L21
+ 215:project/src/main.c ****       tmr8_capture_process(tmr8_time);
+ 316              		.loc 1 215 7 is_stmt 1 view .LVU62
+ 317 006a 3046     		mov	r0, r6
+ 318 006c FFF7FEFF 		bl	tmr1_capture_process
+ 319              	.LVL26:
+ 216:project/src/main.c ****     }
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccyHDoPr.s 			page 11
+
+
+ 320              		.loc 1 216 7 view .LVU63
+ 321 0070 3846     		mov	r0, r7
+ 322 0072 FFF7FEFF 		bl	tmr8_capture_process
+ 323              	.LVL27:
+ 324 0076 DAE7     		b	.L16
+ 325              	.L21:
+ 220:project/src/main.c ****       tmr1_capture_process(tmr1_time);
+ 326              		.loc 1 220 7 view .LVU64
+ 327 0078 3846     		mov	r0, r7
+ 328 007a FFF7FEFF 		bl	tmr8_capture_process
+ 329              	.LVL28:
+ 221:project/src/main.c ****     }
+ 330              		.loc 1 221 7 view .LVU65
+ 331 007e 3046     		mov	r0, r6
+ 332 0080 FFF7FEFF 		bl	tmr1_capture_process
+ 333              	.LVL29:
+ 334 0084 D3E7     		b	.L16
+ 335              	.L20:
+ 224:project/src/main.c ****   {
+ 336              		.loc 1 224 8 view .LVU66
+ 226:project/src/main.c ****   }
+ 337              		.loc 1 226 5 view .LVU67
+ 338 0086 3046     		mov	r0, r6
+ 339 0088 FFF7FEFF 		bl	tmr1_capture_process
+ 340              	.LVL30:
+ 341 008c CFE7     		b	.L16
+ 342              	.L29:
+ 230:project/src/main.c ****   }
+ 343              		.loc 1 230 5 view .LVU68
+ 344 008e 3846     		mov	r0, r7
+ 345 0090 FFF7FEFF 		bl	tmr8_capture_process
+ 346              	.LVL31:
+ 347              		.loc 1 232 1 is_stmt 0 view .LVU69
+ 348 0094 CBE7     		b	.L16
+ 349              		.cfi_endproc
+ 350              	.LFE144:
+ 352              		.section	.text.usmart_set_pulse_width_us,"ax",%progbits
+ 353              		.align	1
+ 354              		.global	usmart_set_pulse_width_us
+ 355              		.syntax unified
+ 356              		.thumb
+ 357              		.thumb_func
+ 359              	usmart_set_pulse_width_us:
+ 360              	.LVL32:
+ 361              	.LFB139:
+ 129:project/src/main.c ****   if ((width_us == 0U) || (width_us > MAX_PULSE_INDEX))
+ 362              		.loc 1 129 1 is_stmt 1 view -0
+ 363              		.cfi_startproc
+ 364              		@ args = 0, pretend = 0, frame = 0
+ 365              		@ frame_needed = 0, uses_anonymous_args = 0
+ 130:project/src/main.c ****   {
+ 366              		.loc 1 130 3 view .LVU71
+ 130:project/src/main.c ****   {
+ 367              		.loc 1 130 24 is_stmt 0 view .LVU72
+ 368 0000 431E     		subs	r3, r0, #1
+ 130:project/src/main.c ****   {
+ 369              		.loc 1 130 6 view .LVU73
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccyHDoPr.s 			page 12
+
+
+ 370 0002 B3F5A37F 		cmp	r3, #326
+ 371 0006 1CD8     		bhi	.L32
+ 129:project/src/main.c ****   if ((width_us == 0U) || (width_us > MAX_PULSE_INDEX))
+ 372              		.loc 1 129 1 view .LVU74
+ 373 0008 10B5     		push	{r4, lr}
+ 374              	.LCFI3:
+ 375              		.cfi_def_cfa_offset 8
+ 376              		.cfi_offset 4, -8
+ 377              		.cfi_offset 14, -4
+ 135:project/src/main.c ****   tmr_period_value_set(TMR1, i * PULSE_HIGH_US * TMR1_TICKS_PER_US);
+ 378              		.loc 1 135 3 is_stmt 1 view .LVU75
+ 135:project/src/main.c ****   tmr_period_value_set(TMR1, i * PULSE_HIGH_US * TMR1_TICKS_PER_US);
+ 379              		.loc 1 135 7 is_stmt 0 view .LVU76
+ 380 000a 80B2     		uxth	r0, r0
+ 381              	.LVL33:
+ 135:project/src/main.c ****   tmr_period_value_set(TMR1, i * PULSE_HIGH_US * TMR1_TICKS_PER_US);
+ 382              		.loc 1 135 5 view .LVU77
+ 383 000c 0E4C     		ldr	r4, .L37
+ 384 000e 2080     		strh	r0, [r4]	@ movhi
+ 136:project/src/main.c **** 
+ 385              		.loc 1 136 3 is_stmt 1 view .LVU78
+ 386 0010 C821     		movs	r1, #200
+ 387 0012 00FB01F1 		mul	r1, r0, r1
+ 388 0016 0D48     		ldr	r0, .L37+4
+ 389 0018 FFF7FEFF 		bl	tmr_period_value_set
+ 390              	.LVL34:
+ 138:project/src/main.c ****   OLED_ShowNum(2, 5, i * PULSE_HIGH_US, 3);
+ 391              		.loc 1 138 3 view .LVU79
+ 392 001c 0323     		movs	r3, #3
+ 393 001e 2288     		ldrh	r2, [r4]
+ 394 0020 0521     		movs	r1, #5
+ 395 0022 1846     		mov	r0, r3
+ 396 0024 FFF7FEFF 		bl	OLED_ShowNum
+ 397              	.LVL35:
+ 139:project/src/main.c ****   at32_tmr1_pulse_start();      //开始发射脉冲
+ 398              		.loc 1 139 3 view .LVU80
+ 399 0028 0323     		movs	r3, #3
+ 400 002a 2288     		ldrh	r2, [r4]
+ 401 002c 0521     		movs	r1, #5
+ 402 002e 0220     		movs	r0, #2
+ 403 0030 FFF7FEFF 		bl	OLED_ShowNum
+ 404              	.LVL36:
+ 140:project/src/main.c ****   at32_led_toggle(LED2);
+ 405              		.loc 1 140 3 view .LVU81
+ 406 0034 FFF7FEFF 		bl	at32_tmr1_pulse_start
+ 407              	.LVL37:
+ 141:project/src/main.c **** 
+ 408              		.loc 1 141 3 view .LVU82
+ 409 0038 0020     		movs	r0, #0
+ 410 003a FFF7FEFF 		bl	at32_led_toggle
+ 411              	.LVL38:
+ 143:project/src/main.c **** }
+ 412              		.loc 1 143 3 view .LVU83
+ 143:project/src/main.c **** }
+ 413              		.loc 1 143 10 is_stmt 0 view .LVU84
+ 414 003e 0020     		movs	r0, #0
+ 144:project/src/main.c **** 
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccyHDoPr.s 			page 13
+
+
+ 415              		.loc 1 144 1 view .LVU85
+ 416 0040 10BD     		pop	{r4, pc}
+ 417              	.LVL39:
+ 418              	.L32:
+ 419              	.LCFI4:
+ 420              		.cfi_def_cfa_offset 0
+ 421              		.cfi_restore 4
+ 422              		.cfi_restore 14
+ 132:project/src/main.c ****   }
+ 423              		.loc 1 132 12 view .LVU86
+ 424 0042 0220     		movs	r0, #2
+ 425              	.LVL40:
+ 144:project/src/main.c **** 
+ 426              		.loc 1 144 1 view .LVU87
+ 427 0044 7047     		bx	lr
+ 428              	.L38:
+ 429 0046 00BF     		.align	2
+ 430              	.L37:
+ 431 0048 00000000 		.word	i
+ 432 004c 002C0140 		.word	1073818624
+ 433              		.cfi_endproc
+ 434              	.LFE139:
+ 436              		.section	.text.usmart_set_pulse_width_us2,"ax",%progbits
+ 437              		.align	1
+ 438              		.global	usmart_set_pulse_width_us2
+ 439              		.syntax unified
+ 440              		.thumb
+ 441              		.thumb_func
+ 443              	usmart_set_pulse_width_us2:
+ 444              	.LVL41:
+ 445              	.LFB140:
+ 147:project/src/main.c ****   if ((width_us == 0U) || (width_us > MAX_PULSE_INDEX))
+ 446              		.loc 1 147 1 is_stmt 1 view -0
+ 447              		.cfi_startproc
+ 448              		@ args = 0, pretend = 0, frame = 0
+ 449              		@ frame_needed = 0, uses_anonymous_args = 0
+ 148:project/src/main.c ****   {
+ 450              		.loc 1 148 3 view .LVU89
+ 148:project/src/main.c ****   {
+ 451              		.loc 1 148 24 is_stmt 0 view .LVU90
+ 452 0000 431E     		subs	r3, r0, #1
+ 148:project/src/main.c ****   {
+ 453              		.loc 1 148 6 view .LVU91
+ 454 0002 B3F5A37F 		cmp	r3, #326
+ 455 0006 1CD8     		bhi	.L41
+ 147:project/src/main.c ****   if ((width_us == 0U) || (width_us > MAX_PULSE_INDEX))
+ 456              		.loc 1 147 1 view .LVU92
+ 457 0008 10B5     		push	{r4, lr}
+ 458              	.LCFI5:
+ 459              		.cfi_def_cfa_offset 8
+ 460              		.cfi_offset 4, -8
+ 461              		.cfi_offset 14, -4
+ 153:project/src/main.c ****   tmr_period_value_set(TMR8, i * PULSE_HIGH_US * TMR1_TICKS_PER_US);
+ 462              		.loc 1 153 3 is_stmt 1 view .LVU93
+ 153:project/src/main.c ****   tmr_period_value_set(TMR8, i * PULSE_HIGH_US * TMR1_TICKS_PER_US);
+ 463              		.loc 1 153 7 is_stmt 0 view .LVU94
+ 464 000a 80B2     		uxth	r0, r0
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccyHDoPr.s 			page 14
+
+
+ 465              	.LVL42:
+ 153:project/src/main.c ****   tmr_period_value_set(TMR8, i * PULSE_HIGH_US * TMR1_TICKS_PER_US);
+ 466              		.loc 1 153 5 view .LVU95
+ 467 000c 0E4C     		ldr	r4, .L46
+ 468 000e 2080     		strh	r0, [r4]	@ movhi
+ 154:project/src/main.c **** 
+ 469              		.loc 1 154 3 is_stmt 1 view .LVU96
+ 470 0010 C821     		movs	r1, #200
+ 471 0012 00FB01F1 		mul	r1, r0, r1
+ 472 0016 0D48     		ldr	r0, .L46+4
+ 473 0018 FFF7FEFF 		bl	tmr_period_value_set
+ 474              	.LVL43:
+ 156:project/src/main.c ****   OLED_ShowNum(2, 5, i * PULSE_HIGH_US, 3);
+ 475              		.loc 1 156 3 view .LVU97
+ 476 001c 0323     		movs	r3, #3
+ 477 001e 2288     		ldrh	r2, [r4]
+ 478 0020 0521     		movs	r1, #5
+ 479 0022 1846     		mov	r0, r3
+ 480 0024 FFF7FEFF 		bl	OLED_ShowNum
+ 481              	.LVL44:
+ 157:project/src/main.c ****   at32_tmr8_pulse_start();      //开始发射脉冲
+ 482              		.loc 1 157 3 view .LVU98
+ 483 0028 0323     		movs	r3, #3
+ 484 002a 2288     		ldrh	r2, [r4]
+ 485 002c 0521     		movs	r1, #5
+ 486 002e 0220     		movs	r0, #2
+ 487 0030 FFF7FEFF 		bl	OLED_ShowNum
+ 488              	.LVL45:
+ 158:project/src/main.c ****   at32_led_toggle(LED2);
+ 489              		.loc 1 158 3 view .LVU99
+ 490 0034 FFF7FEFF 		bl	at32_tmr8_pulse_start
+ 491              	.LVL46:
+ 159:project/src/main.c **** 
+ 492              		.loc 1 159 3 view .LVU100
+ 493 0038 0020     		movs	r0, #0
+ 494 003a FFF7FEFF 		bl	at32_led_toggle
+ 495              	.LVL47:
+ 161:project/src/main.c **** }
+ 496              		.loc 1 161 3 view .LVU101
+ 161:project/src/main.c **** }
+ 497              		.loc 1 161 10 is_stmt 0 view .LVU102
+ 498 003e 0020     		movs	r0, #0
+ 162:project/src/main.c **** 
+ 499              		.loc 1 162 1 view .LVU103
+ 500 0040 10BD     		pop	{r4, pc}
+ 501              	.LVL48:
+ 502              	.L41:
+ 503              	.LCFI6:
+ 504              		.cfi_def_cfa_offset 0
+ 505              		.cfi_restore 4
+ 506              		.cfi_restore 14
+ 150:project/src/main.c ****   }
+ 507              		.loc 1 150 12 view .LVU104
+ 508 0042 0220     		movs	r0, #2
+ 509              	.LVL49:
+ 162:project/src/main.c **** 
+ 510              		.loc 1 162 1 view .LVU105
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccyHDoPr.s 			page 15
+
+
+ 511 0044 7047     		bx	lr
+ 512              	.L47:
+ 513 0046 00BF     		.align	2
+ 514              	.L46:
+ 515 0048 00000000 		.word	i
+ 516 004c 00340140 		.word	1073820672
+ 517              		.cfi_endproc
+ 518              	.LFE140:
+ 520              		.section	.text.send_data,"ax",%progbits
+ 521              		.align	1
+ 522              		.global	send_data
+ 523              		.syntax unified
+ 524              		.thumb
+ 525              		.thumb_func
+ 527              	send_data:
+ 528              	.LVL50:
+ 529              	.LFB141:
+ 166:project/src/main.c ****     memcpy(uart_tx_buf,buf,len);
+ 530              		.loc 1 166 1 is_stmt 1 view -0
+ 531              		.cfi_startproc
+ 532              		@ args = 0, pretend = 0, frame = 0
+ 533              		@ frame_needed = 0, uses_anonymous_args = 0
+ 166:project/src/main.c ****     memcpy(uart_tx_buf,buf,len);
+ 534              		.loc 1 166 1 is_stmt 0 view .LVU107
+ 535 0000 38B5     		push	{r3, r4, r5, lr}
+ 536              	.LCFI7:
+ 537              		.cfi_def_cfa_offset 16
+ 538              		.cfi_offset 3, -16
+ 539              		.cfi_offset 4, -12
+ 540              		.cfi_offset 5, -8
+ 541              		.cfi_offset 14, -4
+ 542 0002 0C46     		mov	r4, r1
+ 167:project/src/main.c ****     while (usart_flag_get(USART1,USART_TDBE_FLAG) == RESET);
+ 543              		.loc 1 167 5 is_stmt 1 view .LVU108
+ 544 0004 0A46     		mov	r2, r1
+ 545 0006 0146     		mov	r1, r0
+ 546              	.LVL51:
+ 167:project/src/main.c ****     while (usart_flag_get(USART1,USART_TDBE_FLAG) == RESET);
+ 547              		.loc 1 167 5 is_stmt 0 view .LVU109
+ 548 0008 0B48     		ldr	r0, .L51
+ 549              	.LVL52:
+ 167:project/src/main.c ****     while (usart_flag_get(USART1,USART_TDBE_FLAG) == RESET);
+ 550              		.loc 1 167 5 view .LVU110
+ 551 000a FFF7FEFF 		bl	memcpy
+ 552              	.LVL53:
+ 168:project/src/main.c ****     dma_channel_enable(DMA1_CHANNEL2,FALSE);
+ 553              		.loc 1 168 5 is_stmt 1 view .LVU111
+ 554              	.L49:
+ 168:project/src/main.c ****     dma_channel_enable(DMA1_CHANNEL2,FALSE);
+ 555              		.loc 1 168 51 discriminator 1 view .LVU112
+ 168:project/src/main.c ****     dma_channel_enable(DMA1_CHANNEL2,FALSE);
+ 556              		.loc 1 168 12 is_stmt 0 discriminator 1 view .LVU113
+ 557 000e 8021     		movs	r1, #128
+ 558 0010 0A48     		ldr	r0, .L51+4
+ 559 0012 FFF7FEFF 		bl	usart_flag_get
+ 560              	.LVL54:
+ 168:project/src/main.c ****     dma_channel_enable(DMA1_CHANNEL2,FALSE);
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccyHDoPr.s 			page 16
+
+
+ 561              		.loc 1 168 51 discriminator 1 view .LVU114
+ 562 0016 0028     		cmp	r0, #0
+ 563 0018 F9D0     		beq	.L49
+ 169:project/src/main.c ****     dma_data_number_set(DMA1_CHANNEL2,len);
+ 564              		.loc 1 169 5 is_stmt 1 view .LVU115
+ 565 001a 094D     		ldr	r5, .L51+8
+ 566 001c 0021     		movs	r1, #0
+ 567 001e 2846     		mov	r0, r5
+ 568 0020 FFF7FEFF 		bl	dma_channel_enable
+ 569              	.LVL55:
+ 170:project/src/main.c ****     dma_channel_enable(DMA1_CHANNEL2,TRUE);
+ 570              		.loc 1 170 5 view .LVU116
+ 571 0024 2146     		mov	r1, r4
+ 572 0026 2846     		mov	r0, r5
+ 573 0028 FFF7FEFF 		bl	dma_data_number_set
+ 574              	.LVL56:
+ 171:project/src/main.c **** }
+ 575              		.loc 1 171 5 view .LVU117
+ 576 002c 0121     		movs	r1, #1
+ 577 002e 2846     		mov	r0, r5
+ 578 0030 FFF7FEFF 		bl	dma_channel_enable
+ 579              	.LVL57:
+ 172:project/src/main.c **** 
+ 580              		.loc 1 172 1 is_stmt 0 view .LVU118
+ 581 0034 38BD     		pop	{r3, r4, r5, pc}
+ 582              	.LVL58:
+ 583              	.L52:
+ 172:project/src/main.c **** 
+ 584              		.loc 1 172 1 view .LVU119
+ 585 0036 00BF     		.align	2
+ 586              	.L51:
+ 587 0038 00000000 		.word	uart_tx_buf
+ 588 003c 00380140 		.word	1073821696
+ 589 0040 1C000240 		.word	1073872924
+ 590              		.cfi_endproc
+ 591              	.LFE141:
+ 593              		.section	.rodata.main.str1.4,"aMS",%progbits,1
+ 594              		.align	2
+ 595              	.LC0:
+ 596 0000 50756C73 		.ascii	"Pulse Generator\000"
+ 596      65204765 
+ 596      6E657261 
+ 596      746F7200 
+ 597              		.align	2
+ 598              	.LC1:
+ 599 0010 50573D00 		.ascii	"PW=\000"
+ 600              		.align	2
+ 601              	.LC2:
+ 602 0014 757300   		.ascii	"us\000"
+ 603 0017 00       		.align	2
+ 604              	.LC3:
+ 605 0018 693D00   		.ascii	"i=\000"
+ 606 001b 00       		.align	2
+ 607              	.LC4:
+ 608 001c 73746570 		.ascii	"step:\000"
+ 608      3A00
+ 609 0022 0000     		.align	2
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccyHDoPr.s 			page 17
+
+
+ 610              	.LC5:
+ 611 0024 54494D31 		.ascii	"TIM1->TIM8: %lu us\015\012\000"
+ 611      2D3E5449 
+ 611      4D383A20 
+ 611      256C7520 
+ 611      75730D0A 
+ 612 0039 000000   		.align	2
+ 613              	.LC6:
+ 614 003c 4E6F2063 		.ascii	"No complete TIM1->TIM8 measurement\015\000"
+ 614      6F6D706C 
+ 614      65746520 
+ 614      54494D31 
+ 614      2D3E5449 
+ 615              		.section	.text.main,"ax",%progbits
+ 616              		.align	1
+ 617              		.global	main
+ 618              		.syntax unified
+ 619              		.thumb
+ 620              		.thumb_func
+ 622              	main:
+ 623              	.LFB145:
+ 233:project/src/main.c **** 
+ 234:project/src/main.c **** 
+ 235:project/src/main.c **** /* add user code end 0 */
+ 236:project/src/main.c **** 
+ 237:project/src/main.c **** /**
+ 238:project/src/main.c ****   * @brief main function.
+ 239:project/src/main.c ****   * @param  none
+ 240:project/src/main.c ****   * @retval none
+ 241:project/src/main.c ****   */
+ 242:project/src/main.c **** int main(void)
+ 243:project/src/main.c **** {
+ 624              		.loc 1 243 1 is_stmt 1 view -0
+ 625              		.cfi_startproc
+ 626              		@ args = 0, pretend = 0, frame = 0
+ 627              		@ frame_needed = 0, uses_anonymous_args = 0
+ 628 0000 70B5     		push	{r4, r5, r6, lr}
+ 629              	.LCFI8:
+ 630              		.cfi_def_cfa_offset 16
+ 631              		.cfi_offset 4, -16
+ 632              		.cfi_offset 5, -12
+ 633              		.cfi_offset 6, -8
+ 634              		.cfi_offset 14, -4
+ 244:project/src/main.c ****   /* add user code begin 1 */
+ 245:project/src/main.c **** 
+ 246:project/src/main.c ****   // wk_dma_channel_config(DMA1_CHANNEL1, 
+ 247:project/src/main.c ****   //                       (uint32_t)&USART1->dt, 
+ 248:project/src/main.c ****   //                       (uint32_t)uart_rx_buf, 
+ 249:project/src/main.c ****   //                       sizeof(uart_rx_buf));
+ 250:project/src/main.c **** 
+ 251:project/src/main.c **** 
+ 252:project/src/main.c **** 
+ 253:project/src/main.c **** 
+ 254:project/src/main.c ****   button_type key_num,key_num2,key_num3,key_num4,key_num5;
+ 635              		.loc 1 254 3 view .LVU121
+ 255:project/src/main.c ****   // button_type key_num2;
+ 256:project/src/main.c ****   /* add user code end 1 */
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccyHDoPr.s 			page 18
+
+
+ 257:project/src/main.c **** 
+ 258:project/src/main.c ****   /* system clock config. */
+ 259:project/src/main.c ****   wk_system_clock_config();
+ 636              		.loc 1 259 3 view .LVU122
+ 637 0002 FFF7FEFF 		bl	wk_system_clock_config
+ 638              	.LVL59:
+ 260:project/src/main.c **** 
+ 261:project/src/main.c ****   /* config periph clock. */
+ 262:project/src/main.c ****   wk_periph_clock_config();
+ 639              		.loc 1 262 3 view .LVU123
+ 640 0006 FFF7FEFF 		bl	wk_periph_clock_config
+ 641              	.LVL60:
+ 263:project/src/main.c **** 
+ 264:project/src/main.c ****   /* nvic config. */
+ 265:project/src/main.c ****   wk_nvic_config();
+ 642              		.loc 1 265 3 view .LVU124
+ 643 000a FFF7FEFF 		bl	wk_nvic_config
+ 644              	.LVL61:
+ 266:project/src/main.c **** 
+ 267:project/src/main.c ****   /* timebase config for
+ 268:project/src/main.c ****      void wk_delay_us(uint32_t delay);
+ 269:project/src/main.c ****      void wk_delay_ms(uint32_t delay); */
+ 270:project/src/main.c ****   wk_timebase_init();
+ 645              		.loc 1 270 3 view .LVU125
+ 646 000e FFF7FEFF 		bl	wk_timebase_init
+ 647              	.LVL62:
+ 271:project/src/main.c **** 
+ 272:project/src/main.c ****   /* init usart1 function. */
+ 273:project/src/main.c ****   wk_usart1_init();
+ 648              		.loc 1 273 3 view .LVU126
+ 649 0012 FFF7FEFF 		bl	wk_usart1_init
+ 650              	.LVL63:
+ 274:project/src/main.c **** 
+ 275:project/src/main.c ****   /* init i2c1 function. */
+ 276:project/src/main.c ****   wk_i2c1_init();
+ 651              		.loc 1 276 3 view .LVU127
+ 652 0016 FFF7FEFF 		bl	wk_i2c1_init
+ 653              	.LVL64:
+ 277:project/src/main.c **** 
+ 278:project/src/main.c ****   /* init i2c app function. */
+ 279:project/src/main.c ****   wk_i2c_app_init();
+ 654              		.loc 1 279 3 view .LVU128
+ 655 001a FFF7FEFF 		bl	wk_i2c_app_init
+ 656              	.LVL65:
+ 280:project/src/main.c **** 
+ 281:project/src/main.c ****   /* init dma1 channel1 */
+ 282:project/src/main.c ****   wk_dma1_channel1_init();
+ 657              		.loc 1 282 3 view .LVU129
+ 658 001e FFF7FEFF 		bl	wk_dma1_channel1_init
+ 659              	.LVL66:
+ 283:project/src/main.c ****   /* config dma channel transfer parameter */
+ 284:project/src/main.c ****   /* user need to modify define values DMAx_CHANNELy_XXX_BASE_ADDR 
+ 285:project/src/main.c ****      and DMAx_CHANNELy_BUFFER_SIZE in at32xxx_wk_config.h */
+ 286:project/src/main.c ****   wk_dma_channel_config(DMA1_CHANNEL1, 
+ 660              		.loc 1 286 3 view .LVU130
+ 661 0022 904D     		ldr	r5, .L65
+ 662 0024 904C     		ldr	r4, .L65+4
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccyHDoPr.s 			page 19
+
+
+ 663 0026 4FF48073 		mov	r3, #256
+ 664 002a 904A     		ldr	r2, .L65+8
+ 665 002c 2946     		mov	r1, r5
+ 666 002e 2046     		mov	r0, r4
+ 667 0030 FFF7FEFF 		bl	wk_dma_channel_config
+ 668              	.LVL67:
+ 287:project/src/main.c ****                         (uint32_t)&USART1->dt, 
+ 288:project/src/main.c ****                         (uint32_t)uart_rx_buf, 
+ 289:project/src/main.c ****                         sizeof(uart_rx_buf));
+ 290:project/src/main.c ****   dma_channel_enable(DMA1_CHANNEL1, TRUE);
+ 669              		.loc 1 290 3 view .LVU131
+ 670 0034 0121     		movs	r1, #1
+ 671 0036 2046     		mov	r0, r4
+ 672 0038 FFF7FEFF 		bl	dma_channel_enable
+ 673              	.LVL68:
+ 291:project/src/main.c **** 
+ 292:project/src/main.c ****   /* init dma1 channel2 */
+ 293:project/src/main.c ****   wk_dma1_channel2_init();
+ 674              		.loc 1 293 3 view .LVU132
+ 675 003c FFF7FEFF 		bl	wk_dma1_channel2_init
+ 676              	.LVL69:
+ 294:project/src/main.c ****   /* config dma channel transfer parameter */
+ 295:project/src/main.c ****   /* user need to modify define values DMAx_CHANNELy_XXX_BASE_ADDR 
+ 296:project/src/main.c ****      and DMAx_CHANNELy_BUFFER_SIZE in at32xxx_wk_config.h */
+ 297:project/src/main.c ****   wk_dma_channel_config(DMA1_CHANNEL2, 
+ 677              		.loc 1 297 3 view .LVU133
+ 678 0040 1434     		adds	r4, r4, #20
+ 679 0042 0023     		movs	r3, #0
+ 680 0044 1A46     		mov	r2, r3
+ 681 0046 2946     		mov	r1, r5
+ 682 0048 2046     		mov	r0, r4
+ 683 004a FFF7FEFF 		bl	wk_dma_channel_config
+ 684              	.LVL70:
+ 298:project/src/main.c ****                         (uint32_t)&USART1->dt, 
+ 299:project/src/main.c ****                         DMA1_CHANNEL2_MEMORY_BASE_ADDR, 
+ 300:project/src/main.c ****                         DMA1_CHANNEL2_BUFFER_SIZE);
+ 301:project/src/main.c ****   dma_channel_enable(DMA1_CHANNEL2, TRUE);
+ 685              		.loc 1 301 3 view .LVU134
+ 686 004e 0121     		movs	r1, #1
+ 687 0050 2046     		mov	r0, r4
+ 688 0052 FFF7FEFF 		bl	dma_channel_enable
+ 689              	.LVL71:
+ 302:project/src/main.c **** 
+ 303:project/src/main.c ****   /* init exint function. */
+ 304:project/src/main.c ****   wk_exint_config();
+ 690              		.loc 1 304 3 view .LVU135
+ 691 0056 FFF7FEFF 		bl	wk_exint_config
+ 692              	.LVL72:
+ 305:project/src/main.c **** 
+ 306:project/src/main.c ****   /* init tmr1 function. */
+ 307:project/src/main.c ****   wk_tmr1_init();
+ 693              		.loc 1 307 3 view .LVU136
+ 694 005a FFF7FEFF 		bl	wk_tmr1_init
+ 695              	.LVL73:
+ 308:project/src/main.c **** 
+ 309:project/src/main.c ****   /* init tmr8 function. */
+ 310:project/src/main.c ****   wk_tmr8_init();
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccyHDoPr.s 			page 20
+
+
+ 696              		.loc 1 310 3 view .LVU137
+ 697 005e FFF7FEFF 		bl	wk_tmr8_init
+ 698              	.LVL74:
+ 311:project/src/main.c **** 
+ 312:project/src/main.c ****   /* init tmr2 function. */
+ 313:project/src/main.c ****   wk_tmr2_init();
+ 699              		.loc 1 313 3 view .LVU138
+ 700 0062 FFF7FEFF 		bl	wk_tmr2_init
+ 701              	.LVL75:
+ 314:project/src/main.c **** 
+ 315:project/src/main.c ****   /* add user code begin 2 */
+ 316:project/src/main.c ****   OLED_Init();
+ 702              		.loc 1 316 3 view .LVU139
+ 703 0066 FFF7FEFF 		bl	OLED_Init
+ 704              	.LVL76:
+ 317:project/src/main.c ****   at32_board_init();
+ 705              		.loc 1 317 3 view .LVU140
+ 706 006a FFF7FEFF 		bl	at32_board_init
+ 707              	.LVL77:
+ 318:project/src/main.c ****   at32_button_init();
+ 708              		.loc 1 318 3 view .LVU141
+ 709 006e FFF7FEFF 		bl	at32_button_init
+ 710              	.LVL78:
+ 319:project/src/main.c **** 
+ 320:project/src/main.c ****   //脉冲发生器1设置
+ 321:project/src/main.c ****   tmr_counter_enable(TMR1, FALSE);      //先禁用TMR1计数器
+ 711              		.loc 1 321 3 view .LVU142
+ 712 0072 7F4C     		ldr	r4, .L65+12
+ 713 0074 0021     		movs	r1, #0
+ 714 0076 2046     		mov	r0, r4
+ 715 0078 FFF7FEFF 		bl	tmr_counter_enable
+ 716              	.LVL79:
+ 322:project/src/main.c ****   tmr_counter_value_set(TMR1, 0);       //设置TMR1计数器值=0
+ 717              		.loc 1 322 3 view .LVU143
+ 718 007c 0021     		movs	r1, #0
+ 719 007e 2046     		mov	r0, r4
+ 720 0080 FFF7FEFF 		bl	tmr_counter_value_set
+ 721              	.LVL80:
+ 323:project/src/main.c ****   tmr_period_value_set(TMR1, i* PULSE_HIGH_US * TMR1_TICKS_PER_US);
+ 722              		.loc 1 323 3 view .LVU144
+ 723              		.loc 1 323 31 is_stmt 0 view .LVU145
+ 724 0084 7B4D     		ldr	r5, .L65+16
+ 725 0086 2988     		ldrh	r1, [r5]
+ 726              		.loc 1 323 47 view .LVU146
+ 727 0088 C826     		movs	r6, #200
+ 728              		.loc 1 323 3 view .LVU147
+ 729 008a 06FB01F1 		mul	r1, r6, r1
+ 730 008e 2046     		mov	r0, r4
+ 731 0090 FFF7FEFF 		bl	tmr_period_value_set
+ 732              	.LVL81:
+ 324:project/src/main.c ****   //设置TMR1 设置定时器周期
+ 325:project/src/main.c ****   tmr_output_channel_mode_select(TMR1, TMR_SELECT_CHANNEL_1, TMR_OUTPUT_CONTROL_PWM_MODE_B);
+ 733              		.loc 1 325 3 is_stmt 1 view .LVU148
+ 734 0094 0722     		movs	r2, #7
+ 735 0096 0021     		movs	r1, #0
+ 736 0098 2046     		mov	r0, r4
+ 737 009a FFF7FEFF 		bl	tmr_output_channel_mode_select
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccyHDoPr.s 			page 21
+
+
+ 738              	.LVL82:
+ 326:project/src/main.c ****   //设置TMR1 通道1 模式：PWM模式B
+ 327:project/src/main.c ****   tmr_channel_value_set(TMR1, TMR_SELECT_CHANNEL_1, 1); //设置TMR1 定时器通道1 值为1
+ 739              		.loc 1 327 3 view .LVU149
+ 740 009e 0122     		movs	r2, #1
+ 741 00a0 0021     		movs	r1, #0
+ 742 00a2 2046     		mov	r0, r4
+ 743 00a4 FFF7FEFF 		bl	tmr_channel_value_set
+ 744              	.LVL83:
+ 328:project/src/main.c ****   tmr_one_cycle_mode_enable(TMR1, TRUE); //启动TMR1单周期模式
+ 745              		.loc 1 328 3 view .LVU150
+ 746 00a8 0121     		movs	r1, #1
+ 747 00aa 2046     		mov	r0, r4
+ 748 00ac FFF7FEFF 		bl	tmr_one_cycle_mode_enable
+ 749              	.LVL84:
+ 329:project/src/main.c ****   tmr_flag_clear(TMR1, TMR_OVF_FLAG);   //清除TMR1溢出标志位
+ 750              		.loc 1 329 3 view .LVU151
+ 751 00b0 0121     		movs	r1, #1
+ 752 00b2 2046     		mov	r0, r4
+ 753 00b4 FFF7FEFF 		bl	tmr_flag_clear
+ 754              	.LVL85:
+ 330:project/src/main.c **** 
+ 331:project/src/main.c **** 
+ 332:project/src/main.c **** 
+ 333:project/src/main.c **** 
+ 334:project/src/main.c ****   //脉冲发生器2设置
+ 335:project/src/main.c ****   tmr_counter_enable(TMR8, FALSE);      //先禁用TMR8计数器
+ 755              		.loc 1 335 3 view .LVU152
+ 756 00b8 04F50064 		add	r4, r4, #2048
+ 757 00bc 0021     		movs	r1, #0
+ 758 00be 2046     		mov	r0, r4
+ 759 00c0 FFF7FEFF 		bl	tmr_counter_enable
+ 760              	.LVL86:
+ 336:project/src/main.c ****   tmr_counter_value_set(TMR8, 0);       //设置TMR8计数器值=0
+ 761              		.loc 1 336 3 view .LVU153
+ 762 00c4 0021     		movs	r1, #0
+ 763 00c6 2046     		mov	r0, r4
+ 764 00c8 FFF7FEFF 		bl	tmr_counter_value_set
+ 765              	.LVL87:
+ 337:project/src/main.c ****   tmr_period_value_set(TMR8, i* PULSE_HIGH_US * TMR1_TICKS_PER_US);
+ 766              		.loc 1 337 3 view .LVU154
+ 767              		.loc 1 337 31 is_stmt 0 view .LVU155
+ 768 00cc 2988     		ldrh	r1, [r5]
+ 769              		.loc 1 337 3 view .LVU156
+ 770 00ce 06FB01F1 		mul	r1, r6, r1
+ 771 00d2 2046     		mov	r0, r4
+ 772 00d4 FFF7FEFF 		bl	tmr_period_value_set
+ 773              	.LVL88:
+ 338:project/src/main.c ****   //设置TMR8 设置定时器周期
+ 339:project/src/main.c ****   tmr_output_channel_mode_select(TMR8, TMR_SELECT_CHANNEL_1, TMR_OUTPUT_CONTROL_PWM_MODE_B);
+ 774              		.loc 1 339 3 is_stmt 1 view .LVU157
+ 775 00d8 0722     		movs	r2, #7
+ 776 00da 0021     		movs	r1, #0
+ 777 00dc 2046     		mov	r0, r4
+ 778 00de FFF7FEFF 		bl	tmr_output_channel_mode_select
+ 779              	.LVL89:
+ 340:project/src/main.c ****   //设置TMR8 通道1 模式：PWM模式B
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccyHDoPr.s 			page 22
+
+
+ 341:project/src/main.c ****   tmr_channel_value_set(TMR8, TMR_SELECT_CHANNEL_1, 1); //设置TMR8 定时器通道1 值为1
+ 780              		.loc 1 341 3 view .LVU158
+ 781 00e2 0122     		movs	r2, #1
+ 782 00e4 0021     		movs	r1, #0
+ 783 00e6 2046     		mov	r0, r4
+ 784 00e8 FFF7FEFF 		bl	tmr_channel_value_set
+ 785              	.LVL90:
+ 342:project/src/main.c ****   tmr_one_cycle_mode_enable(TMR8, TRUE); //启动TMR8单周期模式
+ 786              		.loc 1 342 3 view .LVU159
+ 787 00ec 0121     		movs	r1, #1
+ 788 00ee 2046     		mov	r0, r4
+ 789 00f0 FFF7FEFF 		bl	tmr_one_cycle_mode_enable
+ 790              	.LVL91:
+ 343:project/src/main.c ****   tmr_flag_clear(TMR8, TMR_OVF_FLAG);   //清除TMR8溢出标志位
+ 791              		.loc 1 343 3 view .LVU160
+ 792 00f4 0121     		movs	r1, #1
+ 793 00f6 2046     		mov	r0, r4
+ 794 00f8 FFF7FEFF 		bl	tmr_flag_clear
+ 795              	.LVL92:
+ 344:project/src/main.c **** 
+ 345:project/src/main.c **** 
+ 346:project/src/main.c **** 
+ 347:project/src/main.c **** 
+ 348:project/src/main.c ****   OLED_ShowString(1, 1, "Pulse Generator");
+ 796              		.loc 1 348 3 view .LVU161
+ 797 00fc 5E4A     		ldr	r2, .L65+20
+ 798 00fe 0121     		movs	r1, #1
+ 799 0100 0846     		mov	r0, r1
+ 800 0102 FFF7FEFF 		bl	OLED_ShowString
+ 801              	.LVL93:
+ 349:project/src/main.c **** 
+ 350:project/src/main.c **** 
+ 351:project/src/main.c ****   OLED_ShowString(2, 1, "PW=");
+ 802              		.loc 1 351 3 view .LVU162
+ 803 0106 5D4A     		ldr	r2, .L65+24
+ 804 0108 0121     		movs	r1, #1
+ 805 010a 0220     		movs	r0, #2
+ 806 010c FFF7FEFF 		bl	OLED_ShowString
+ 807              	.LVL94:
+ 352:project/src/main.c ****   OLED_ShowNum(2, 5, i * PULSE_HIGH_US, 3);
+ 808              		.loc 1 352 3 view .LVU163
+ 809 0110 0323     		movs	r3, #3
+ 810 0112 2A88     		ldrh	r2, [r5]
+ 811 0114 0521     		movs	r1, #5
+ 812 0116 0220     		movs	r0, #2
+ 813 0118 FFF7FEFF 		bl	OLED_ShowNum
+ 814              	.LVL95:
+ 353:project/src/main.c ****   OLED_ShowString(2, 13, "us");
+ 815              		.loc 1 353 3 view .LVU164
+ 816 011c 584A     		ldr	r2, .L65+28
+ 817 011e 0D21     		movs	r1, #13
+ 818 0120 0220     		movs	r0, #2
+ 819 0122 FFF7FEFF 		bl	OLED_ShowString
+ 820              	.LVL96:
+ 354:project/src/main.c **** 
+ 355:project/src/main.c ****   OLED_ShowString(3, 1, "i=");
+ 821              		.loc 1 355 3 view .LVU165
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccyHDoPr.s 			page 23
+
+
+ 822 0126 574A     		ldr	r2, .L65+32
+ 823 0128 0121     		movs	r1, #1
+ 824 012a 0320     		movs	r0, #3
+ 825 012c FFF7FEFF 		bl	OLED_ShowString
+ 826              	.LVL97:
+ 356:project/src/main.c ****   OLED_ShowNum(3, 5, i, 3);
+ 827              		.loc 1 356 3 view .LVU166
+ 828 0130 0323     		movs	r3, #3
+ 829 0132 2A88     		ldrh	r2, [r5]
+ 830 0134 0521     		movs	r1, #5
+ 831 0136 1846     		mov	r0, r3
+ 832 0138 FFF7FEFF 		bl	OLED_ShowNum
+ 833              	.LVL98:
+ 357:project/src/main.c **** 
+ 358:project/src/main.c ****   OLED_ShowString(4, 1, "step:");
+ 834              		.loc 1 358 3 view .LVU167
+ 835 013c 524A     		ldr	r2, .L65+36
+ 836 013e 0121     		movs	r1, #1
+ 837 0140 0420     		movs	r0, #4
+ 838 0142 FFF7FEFF 		bl	OLED_ShowString
+ 839              	.LVL99:
+ 359:project/src/main.c ****   OLED_ShowNum(4, 10, PULSE_HIGH_US, 3);
+ 840              		.loc 1 359 3 view .LVU168
+ 841 0146 0323     		movs	r3, #3
+ 842 0148 0122     		movs	r2, #1
+ 843 014a 0A21     		movs	r1, #10
+ 844 014c 0420     		movs	r0, #4
+ 845 014e FFF7FEFF 		bl	OLED_ShowNum
+ 846              	.LVL100:
+ 360:project/src/main.c **** 
+ 361:project/src/main.c **** 
+ 362:project/src/main.c ****   usart_interrupt_enable(USART1,USART_IDLE_INT,TRUE);
+ 847              		.loc 1 362 3 view .LVU169
+ 848 0152 0122     		movs	r2, #1
+ 849 0154 4D49     		ldr	r1, .L65+40
+ 850 0156 4E48     		ldr	r0, .L65+44
+ 851 0158 FFF7FEFF 		bl	usart_interrupt_enable
+ 852              	.LVL101:
+ 363:project/src/main.c **** 
+ 364:project/src/main.c ****   /* init usmart: TMR3 计数 10kHz, 用于函数运行时间统计 */
+ 365:project/src/main.c ****   usmart_init(USMART_TIMX_CLK_MHZ);
+ 853              		.loc 1 365 3 view .LVU170
+ 854 015c 3046     		mov	r0, r6
+ 855 015e FFF7FEFF 		bl	usmart_init
+ 856              	.LVL102:
+ 857 0162 28E0     		b	.L59
+ 858              	.LVL103:
+ 859              	.L56:
+ 366:project/src/main.c ****   /* add user code end 2 */
+ 367:project/src/main.c **** 
+ 368:project/src/main.c ****   while(1)
+ 369:project/src/main.c ****   {
+ 370:project/src/main.c ****     /* add user code begin 3 */
+ 371:project/src/main.c ****     /* USMART 命令解析与执行: 必须周期性调用.
+ 372:project/src/main.c ****      * 串口数据由 USART1 RX DMA + 空闲中断送入 usmart_port_uart_rx_byte(),
+ 373:project/src/main.c ****      * 这里只负责取出已接收完整的一行并执行, 不能再去读 USART1->dt,
+ 374:project/src/main.c ****      * 否则会与 DMA 抢接收数据, 造成命令缺字符. */
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccyHDoPr.s 			page 24
+
+
+ 375:project/src/main.c ****     usmart_scan();
+ 376:project/src/main.c ****     tmr2_capture_poll();
+ 377:project/src/main.c ****     
+ 378:project/src/main.c ****     key_num = at32_button_user_press();
+ 379:project/src/main.c ****     key_num2 = at32_button_s1_press();
+ 380:project/src/main.c ****     key_num3 = at32_button_s2_press();
+ 381:project/src/main.c ****     key_num4 = at32_button_s3_press();
+ 382:project/src/main.c ****     key_num5 = at32_button_s4_press();
+ 383:project/src/main.c ****     if(key_num == USER_BUTTON)
+ 384:project/src/main.c ****     {
+ 385:project/src/main.c ****       if(i < MAX_PULSE_INDEX)
+ 386:project/src/main.c ****       {
+ 387:project/src/main.c ****         i++;
+ 388:project/src/main.c ****       }
+ 389:project/src/main.c ****       tmr_period_value_set(TMR1, i * PULSE_HIGH_US * TMR1_TICKS_PER_US);
+ 860              		.loc 1 389 7 view .LVU171
+ 861              		.loc 1 389 36 is_stmt 0 view .LVU172
+ 862 0164 434E     		ldr	r6, .L65+16
+ 863              	.LVL104:
+ 864              		.loc 1 389 36 view .LVU173
+ 865 0166 3388     		ldrh	r3, [r6]
+ 866              		.loc 1 389 7 view .LVU174
+ 867 0168 C821     		movs	r1, #200
+ 868 016a 03FB01F1 		mul	r1, r3, r1
+ 869 016e 4048     		ldr	r0, .L65+12
+ 870 0170 FFF7FEFF 		bl	tmr_period_value_set
+ 871              	.LVL105:
+ 390:project/src/main.c ****       
+ 391:project/src/main.c ****       
+ 392:project/src/main.c ****       OLED_ShowString(3, 1, "i=");
+ 872              		.loc 1 392 7 is_stmt 1 view .LVU175
+ 873 0174 434A     		ldr	r2, .L65+32
+ 874 0176 0121     		movs	r1, #1
+ 875 0178 0320     		movs	r0, #3
+ 876 017a FFF7FEFF 		bl	OLED_ShowString
+ 877              	.LVL106:
+ 393:project/src/main.c ****       OLED_ShowNum(3, 5, i, 3);
+ 878              		.loc 1 393 7 view .LVU176
+ 879 017e 0323     		movs	r3, #3
+ 880 0180 3288     		ldrh	r2, [r6]
+ 881 0182 0521     		movs	r1, #5
+ 882 0184 1846     		mov	r0, r3
+ 883 0186 FFF7FEFF 		bl	OLED_ShowNum
+ 884              	.LVL107:
+ 394:project/src/main.c **** 
+ 395:project/src/main.c ****       OLED_ShowString(2, 1, "PW=");
+ 885              		.loc 1 395 7 view .LVU177
+ 886 018a 3C4A     		ldr	r2, .L65+24
+ 887 018c 0121     		movs	r1, #1
+ 888 018e 0220     		movs	r0, #2
+ 889 0190 FFF7FEFF 		bl	OLED_ShowString
+ 890              	.LVL108:
+ 396:project/src/main.c ****       OLED_ShowNum(2, 5, i * PULSE_HIGH_US, 3);
+ 891              		.loc 1 396 7 view .LVU178
+ 892 0194 0323     		movs	r3, #3
+ 893 0196 3288     		ldrh	r2, [r6]
+ 894 0198 0521     		movs	r1, #5
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccyHDoPr.s 			page 25
+
+
+ 895 019a 0220     		movs	r0, #2
+ 896 019c FFF7FEFF 		bl	OLED_ShowNum
+ 897              	.LVL109:
+ 397:project/src/main.c ****       OLED_ShowString(2, 13, "us");
+ 898              		.loc 1 397 7 view .LVU179
+ 899 01a0 374A     		ldr	r2, .L65+28
+ 900 01a2 0D21     		movs	r1, #13
+ 901 01a4 0220     		movs	r0, #2
+ 902 01a6 FFF7FEFF 		bl	OLED_ShowString
+ 903              	.LVL110:
+ 398:project/src/main.c ****       at32_tmr1_pulse_start();
+ 904              		.loc 1 398 7 view .LVU180
+ 905 01aa FFF7FEFF 		bl	at32_tmr1_pulse_start
+ 906              	.LVL111:
+ 907              	.L55:
+ 399:project/src/main.c ****     }
+ 400:project/src/main.c **** 
+ 401:project/src/main.c ****     if(key_num2 == S1_BUTTON)
+ 908              		.loc 1 401 5 view .LVU181
+ 909              		.loc 1 401 7 is_stmt 0 view .LVU182
+ 910 01ae 012D     		cmp	r5, #1
+ 911 01b0 1DD0     		beq	.L63
+ 912              	.LVL112:
+ 913              	.L57:
+ 402:project/src/main.c ****     {
+ 403:project/src/main.c ****       if(i < MAX_PULSE_INDEX)
+ 404:project/src/main.c ****       {
+ 405:project/src/main.c ****         i++;
+ 406:project/src/main.c ****       }
+ 407:project/src/main.c ****       tmr_period_value_set(TMR8, i * PULSE_HIGH_US * TMR1_TICKS_PER_US);
+ 408:project/src/main.c ****       
+ 409:project/src/main.c ****       
+ 410:project/src/main.c ****       OLED_ShowString(3, 1, "i=");
+ 411:project/src/main.c ****       OLED_ShowNum(3, 5, i, 3);
+ 412:project/src/main.c **** 
+ 413:project/src/main.c ****       OLED_ShowString(2, 1, "PW=");
+ 414:project/src/main.c ****       OLED_ShowNum(2, 5, i * PULSE_HIGH_US, 3);
+ 415:project/src/main.c ****       OLED_ShowString(2, 13, "us");
+ 416:project/src/main.c ****       at32_tmr8_pulse_start();
+ 417:project/src/main.c ****     }
+ 418:project/src/main.c **** 
+ 419:project/src/main.c ****     if(key_num3 == S2_BUTTON)
+ 914              		.loc 1 419 5 is_stmt 1 view .LVU183
+ 915              		.loc 1 419 7 is_stmt 0 view .LVU184
+ 916 01b2 022C     		cmp	r4, #2
+ 917 01b4 49D0     		beq	.L64
+ 918              	.LVL113:
+ 919              	.L59:
+ 368:project/src/main.c ****   {
+ 920              		.loc 1 368 3 is_stmt 1 view .LVU185
+ 375:project/src/main.c ****     tmr2_capture_poll();
+ 921              		.loc 1 375 5 view .LVU186
+ 922 01b6 FFF7FEFF 		bl	usmart_scan
+ 923              	.LVL114:
+ 376:project/src/main.c ****     
+ 924              		.loc 1 376 5 view .LVU187
+ 925 01ba FFF7FEFF 		bl	tmr2_capture_poll
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccyHDoPr.s 			page 26
+
+
+ 926              	.LVL115:
+ 378:project/src/main.c ****     key_num2 = at32_button_s1_press();
+ 927              		.loc 1 378 5 view .LVU188
+ 378:project/src/main.c ****     key_num2 = at32_button_s1_press();
+ 928              		.loc 1 378 15 is_stmt 0 view .LVU189
+ 929 01be FFF7FEFF 		bl	at32_button_user_press
+ 930              	.LVL116:
+ 931 01c2 0646     		mov	r6, r0
+ 932              	.LVL117:
+ 379:project/src/main.c ****     key_num3 = at32_button_s2_press();
+ 933              		.loc 1 379 5 is_stmt 1 view .LVU190
+ 379:project/src/main.c ****     key_num3 = at32_button_s2_press();
+ 934              		.loc 1 379 16 is_stmt 0 view .LVU191
+ 935 01c4 FFF7FEFF 		bl	at32_button_s1_press
+ 936              	.LVL118:
+ 937 01c8 0546     		mov	r5, r0
+ 938              	.LVL119:
+ 380:project/src/main.c ****     key_num4 = at32_button_s3_press();
+ 939              		.loc 1 380 5 is_stmt 1 view .LVU192
+ 380:project/src/main.c ****     key_num4 = at32_button_s3_press();
+ 940              		.loc 1 380 16 is_stmt 0 view .LVU193
+ 941 01ca FFF7FEFF 		bl	at32_button_s2_press
+ 942              	.LVL120:
+ 943 01ce 0446     		mov	r4, r0
+ 944              	.LVL121:
+ 381:project/src/main.c ****     key_num5 = at32_button_s4_press();
+ 945              		.loc 1 381 5 is_stmt 1 view .LVU194
+ 381:project/src/main.c ****     key_num5 = at32_button_s4_press();
+ 946              		.loc 1 381 16 is_stmt 0 view .LVU195
+ 947 01d0 FFF7FEFF 		bl	at32_button_s3_press
+ 948              	.LVL122:
+ 382:project/src/main.c ****     if(key_num == USER_BUTTON)
+ 949              		.loc 1 382 5 is_stmt 1 view .LVU196
+ 382:project/src/main.c ****     if(key_num == USER_BUTTON)
+ 950              		.loc 1 382 16 is_stmt 0 view .LVU197
+ 951 01d4 FFF7FEFF 		bl	at32_button_s4_press
+ 952              	.LVL123:
+ 383:project/src/main.c ****     {
+ 953              		.loc 1 383 5 is_stmt 1 view .LVU198
+ 383:project/src/main.c ****     {
+ 954              		.loc 1 383 7 is_stmt 0 view .LVU199
+ 955 01d8 002E     		cmp	r6, #0
+ 956 01da E8D1     		bne	.L55
+ 385:project/src/main.c ****       {
+ 957              		.loc 1 385 7 is_stmt 1 view .LVU200
+ 385:project/src/main.c ****       {
+ 958              		.loc 1 385 12 is_stmt 0 view .LVU201
+ 959 01dc 254B     		ldr	r3, .L65+16
+ 960 01de 1B88     		ldrh	r3, [r3]
+ 385:project/src/main.c ****       {
+ 961              		.loc 1 385 9 view .LVU202
+ 962 01e0 B3F5A37F 		cmp	r3, #326
+ 963 01e4 BED8     		bhi	.L56
+ 387:project/src/main.c ****       }
+ 964              		.loc 1 387 9 is_stmt 1 view .LVU203
+ 387:project/src/main.c ****       }
+ 965              		.loc 1 387 10 is_stmt 0 view .LVU204
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccyHDoPr.s 			page 27
+
+
+ 966 01e6 0133     		adds	r3, r3, #1
+ 967 01e8 224A     		ldr	r2, .L65+16
+ 968 01ea 1380     		strh	r3, [r2]	@ movhi
+ 969 01ec BAE7     		b	.L56
+ 970              	.LVL124:
+ 971              	.L63:
+ 403:project/src/main.c ****       {
+ 972              		.loc 1 403 7 is_stmt 1 view .LVU205
+ 403:project/src/main.c ****       {
+ 973              		.loc 1 403 12 is_stmt 0 view .LVU206
+ 974 01ee 214B     		ldr	r3, .L65+16
+ 975 01f0 1B88     		ldrh	r3, [r3]
+ 403:project/src/main.c ****       {
+ 976              		.loc 1 403 9 view .LVU207
+ 977 01f2 B3F5A37F 		cmp	r3, #326
+ 978 01f6 02D8     		bhi	.L58
+ 405:project/src/main.c ****       }
+ 979              		.loc 1 405 9 is_stmt 1 view .LVU208
+ 405:project/src/main.c ****       }
+ 980              		.loc 1 405 10 is_stmt 0 view .LVU209
+ 981 01f8 0133     		adds	r3, r3, #1
+ 982 01fa 1E4A     		ldr	r2, .L65+16
+ 983 01fc 1380     		strh	r3, [r2]	@ movhi
+ 984              	.L58:
+ 407:project/src/main.c ****       
+ 985              		.loc 1 407 7 is_stmt 1 view .LVU210
+ 407:project/src/main.c ****       
+ 986              		.loc 1 407 36 is_stmt 0 view .LVU211
+ 987 01fe 1D4D     		ldr	r5, .L65+16
+ 988              	.LVL125:
+ 407:project/src/main.c ****       
+ 989              		.loc 1 407 36 view .LVU212
+ 990 0200 2B88     		ldrh	r3, [r5]
+ 407:project/src/main.c ****       
+ 991              		.loc 1 407 7 view .LVU213
+ 992 0202 C821     		movs	r1, #200
+ 993 0204 03FB01F1 		mul	r1, r3, r1
+ 994 0208 2248     		ldr	r0, .L65+48
+ 995 020a FFF7FEFF 		bl	tmr_period_value_set
+ 996              	.LVL126:
+ 410:project/src/main.c ****       OLED_ShowNum(3, 5, i, 3);
+ 997              		.loc 1 410 7 is_stmt 1 view .LVU214
+ 998 020e 1D4A     		ldr	r2, .L65+32
+ 999 0210 0121     		movs	r1, #1
+ 1000 0212 0320     		movs	r0, #3
+ 1001 0214 FFF7FEFF 		bl	OLED_ShowString
+ 1002              	.LVL127:
+ 411:project/src/main.c **** 
+ 1003              		.loc 1 411 7 view .LVU215
+ 1004 0218 0323     		movs	r3, #3
+ 1005 021a 2A88     		ldrh	r2, [r5]
+ 1006 021c 0521     		movs	r1, #5
+ 1007 021e 1846     		mov	r0, r3
+ 1008 0220 FFF7FEFF 		bl	OLED_ShowNum
+ 1009              	.LVL128:
+ 413:project/src/main.c ****       OLED_ShowNum(2, 5, i * PULSE_HIGH_US, 3);
+ 1010              		.loc 1 413 7 view .LVU216
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccyHDoPr.s 			page 28
+
+
+ 1011 0224 154A     		ldr	r2, .L65+24
+ 1012 0226 0121     		movs	r1, #1
+ 1013 0228 0220     		movs	r0, #2
+ 1014 022a FFF7FEFF 		bl	OLED_ShowString
+ 1015              	.LVL129:
+ 414:project/src/main.c ****       OLED_ShowString(2, 13, "us");
+ 1016              		.loc 1 414 7 view .LVU217
+ 1017 022e 0323     		movs	r3, #3
+ 1018 0230 2A88     		ldrh	r2, [r5]
+ 1019 0232 0521     		movs	r1, #5
+ 1020 0234 0220     		movs	r0, #2
+ 1021 0236 FFF7FEFF 		bl	OLED_ShowNum
+ 1022              	.LVL130:
+ 415:project/src/main.c ****       at32_tmr8_pulse_start();
+ 1023              		.loc 1 415 7 view .LVU218
+ 1024 023a 114A     		ldr	r2, .L65+28
+ 1025 023c 0D21     		movs	r1, #13
+ 1026 023e 0220     		movs	r0, #2
+ 1027 0240 FFF7FEFF 		bl	OLED_ShowString
+ 1028              	.LVL131:
+ 416:project/src/main.c ****     }
+ 1029              		.loc 1 416 7 view .LVU219
+ 1030 0244 FFF7FEFF 		bl	at32_tmr8_pulse_start
+ 1031              	.LVL132:
+ 1032 0248 B3E7     		b	.L57
+ 1033              	.L64:
+ 420:project/src/main.c ****     {
+ 421:project/src/main.c ****       if (measurement_available != 0U)
+ 1034              		.loc 1 421 7 view .LVU220
+ 1035              		.loc 1 421 33 is_stmt 0 view .LVU221
+ 1036 024a 134B     		ldr	r3, .L65+52
+ 1037 024c 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 1038              		.loc 1 421 10 view .LVU222
+ 1039 024e 2BB1     		cbz	r3, .L60
+ 422:project/src/main.c ****       {
+ 423:project/src/main.c ****         printf("TIM1->TIM8: %lu us\r\n",
+ 1040              		.loc 1 423 9 is_stmt 1 view .LVU223
+ 1041 0250 124B     		ldr	r3, .L65+56
+ 1042 0252 1968     		ldr	r1, [r3]
+ 1043 0254 1248     		ldr	r0, .L65+60
+ 1044 0256 FFF7FEFF 		bl	printf
+ 1045              	.LVL133:
+ 1046 025a ACE7     		b	.L59
+ 1047              	.L60:
+ 424:project/src/main.c ****               (unsigned long)measured_elapsed_us);
+ 425:project/src/main.c ****       }
+ 426:project/src/main.c ****       else
+ 427:project/src/main.c ****       {
+ 428:project/src/main.c ****         printf("No complete TIM1->TIM8 measurement\r\n");
+ 1048              		.loc 1 428 9 view .LVU224
+ 1049 025c 1148     		ldr	r0, .L65+64
+ 1050 025e FFF7FEFF 		bl	puts
+ 1051              	.LVL134:
+ 1052 0262 A8E7     		b	.L59
+ 1053              	.L66:
+ 1054              		.align	2
+ 1055              	.L65:
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccyHDoPr.s 			page 29
+
+
+ 1056 0264 04380140 		.word	1073821700
+ 1057 0268 08000240 		.word	1073872904
+ 1058 026c 00000000 		.word	uart_rx_buf
+ 1059 0270 002C0140 		.word	1073818624
+ 1060 0274 00000000 		.word	i
+ 1061 0278 00000000 		.word	.LC0
+ 1062 027c 10000000 		.word	.LC1
+ 1063 0280 14000000 		.word	.LC2
+ 1064 0284 18000000 		.word	.LC3
+ 1065 0288 1C000000 		.word	.LC4
+ 1066 028c 04000C00 		.word	786436
+ 1067 0290 00380140 		.word	1073821696
+ 1068 0294 00340140 		.word	1073820672
+ 1069 0298 00000000 		.word	measurement_available
+ 1070 029c 00000000 		.word	measured_elapsed_us
+ 1071 02a0 24000000 		.word	.LC5
+ 1072 02a4 3C000000 		.word	.LC6
+ 1073              		.cfi_endproc
+ 1074              	.LFE145:
+ 1076              		.section	.text.USART1_IRQHandler,"ax",%progbits
+ 1077              		.align	1
+ 1078              		.global	USART1_IRQHandler
+ 1079              		.syntax unified
+ 1080              		.thumb
+ 1081              		.thumb_func
+ 1083              	USART1_IRQHandler:
+ 1084              	.LFB146:
+ 429:project/src/main.c ****       }
+ 430:project/src/main.c ****     }
+ 431:project/src/main.c **** 
+ 432:project/src/main.c **** 
+ 433:project/src/main.c ****     /* add user code end 3 */
+ 434:project/src/main.c ****   }
+ 435:project/src/main.c **** }
+ 436:project/src/main.c **** 
+ 437:project/src/main.c ****   /* add user code begin 4 */
+ 438:project/src/main.c **** void USART1_IRQHandler(void)
+ 439:project/src/main.c **** {
+ 1085              		.loc 1 439 1 view -0
+ 1086              		.cfi_startproc
+ 1087              		@ args = 0, pretend = 0, frame = 0
+ 1088              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1089 0000 10B5     		push	{r4, lr}
+ 1090              	.LCFI9:
+ 1091              		.cfi_def_cfa_offset 8
+ 1092              		.cfi_offset 4, -8
+ 1093              		.cfi_offset 14, -4
+ 440:project/src/main.c ****     u16 tmp_len;
+ 1094              		.loc 1 440 5 view .LVU226
+ 441:project/src/main.c **** 
+ 442:project/src/main.c ****     if (usart_flag_get(USART1,USART_IDLEF_FLAG)!=RESET)
+ 1095              		.loc 1 442 5 view .LVU227
+ 1096              		.loc 1 442 9 is_stmt 0 view .LVU228
+ 1097 0002 1021     		movs	r1, #16
+ 1098 0004 1848     		ldr	r0, .L76
+ 1099 0006 FFF7FEFF 		bl	usart_flag_get
+ 1100              	.LVL135:
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccyHDoPr.s 			page 30
+
+
+ 1101              		.loc 1 442 8 discriminator 1 view .LVU229
+ 1102 000a 30B3     		cbz	r0, .L67
+ 1103              	.LBB2:
+ 443:project/src/main.c ****     {
+ 444:project/src/main.c ****       uint32_t guard = 10000U;
+ 1104              		.loc 1 444 16 view .LVU230
+ 1105 000c 42F21074 		movw	r4, #10000
+ 1106              	.L70:
+ 1107              	.LVL136:
+ 445:project/src/main.c **** 
+ 446:project/src/main.c ****       /* 等待 DMA 取走最后一个字节(RDBF 清零), 否则下面清除空闲标志时
+ 447:project/src/main.c ****        * 库函数会读 USART1->dt, 从而把 DMA 还没搬走的最后一个字节丢掉 */
+ 448:project/src/main.c ****       while ((usart_flag_get(USART1,USART_RDBF_FLAG)!=RESET) && (--guard != 0U))
+ 449:project/src/main.c ****       {
+ 450:project/src/main.c ****       }
+ 1108              		.loc 1 450 7 is_stmt 1 view .LVU231
+ 448:project/src/main.c ****       {
+ 1109              		.loc 1 448 62 discriminator 2 view .LVU232
+ 448:project/src/main.c ****       {
+ 1110              		.loc 1 448 15 is_stmt 0 discriminator 2 view .LVU233
+ 1111 0010 2021     		movs	r1, #32
+ 1112 0012 1548     		ldr	r0, .L76
+ 1113 0014 FFF7FEFF 		bl	usart_flag_get
+ 1114              	.LVL137:
+ 448:project/src/main.c ****       {
+ 1115              		.loc 1 448 62 discriminator 2 view .LVU234
+ 1116 0018 08B1     		cbz	r0, .L69
+ 1117              	.LVL138:
+ 448:project/src/main.c ****       {
+ 1118              		.loc 1 448 62 discriminator 1 view .LVU235
+ 1119 001a 013C     		subs	r4, r4, #1
+ 1120              	.LVL139:
+ 448:project/src/main.c ****       {
+ 1121              		.loc 1 448 62 discriminator 1 view .LVU236
+ 1122 001c F8D1     		bne	.L70
+ 1123              	.L69:
+ 451:project/src/main.c **** 
+ 452:project/src/main.c ****       dma_channel_enable(DMA1_CHANNEL1,FALSE);
+ 1124              		.loc 1 452 7 is_stmt 1 view .LVU237
+ 1125 001e 134C     		ldr	r4, .L76+4
+ 1126              	.LVL140:
+ 1127              		.loc 1 452 7 is_stmt 0 view .LVU238
+ 1128 0020 0021     		movs	r1, #0
+ 1129 0022 2046     		mov	r0, r4
+ 1130 0024 FFF7FEFF 		bl	dma_channel_enable
+ 1131              	.LVL141:
+ 453:project/src/main.c ****       tmp_len = MAX_LEN - dma_data_number_get(DMA1_CHANNEL1);
+ 1132              		.loc 1 453 7 is_stmt 1 view .LVU239
+ 1133              		.loc 1 453 27 is_stmt 0 view .LVU240
+ 1134 0028 2046     		mov	r0, r4
+ 1135 002a FFF7FEFF 		bl	dma_data_number_get
+ 1136              	.LVL142:
+ 1137              		.loc 1 453 15 discriminator 1 view .LVU241
+ 1138 002e C0F58074 		rsb	r4, r0, #256
+ 1139 0032 A4B2     		uxth	r4, r4
+ 1140              	.LVL143:
+ 454:project/src/main.c ****       if (tmp_len > MAX_LEN)
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccyHDoPr.s 			page 31
+
+
+ 1141              		.loc 1 454 7 is_stmt 1 view .LVU242
+ 1142              		.loc 1 454 10 is_stmt 0 view .LVU243
+ 1143 0034 B4F5807F 		cmp	r4, #256
+ 1144 0038 01D9     		bls	.L71
+ 455:project/src/main.c ****       {
+ 456:project/src/main.c ****         tmp_len = MAX_LEN;
+ 1145              		.loc 1 456 17 view .LVU244
+ 1146 003a 4FF48074 		mov	r4, #256
+ 1147              	.LVL144:
+ 1148              	.L71:
+ 457:project/src/main.c ****       }
+ 458:project/src/main.c ****       dma_data_number_set(DMA1_CHANNEL1,MAX_LEN);
+ 1149              		.loc 1 458 7 is_stmt 1 view .LVU245
+ 1150 003e 4FF48071 		mov	r1, #256
+ 1151 0042 0A48     		ldr	r0, .L76+4
+ 1152 0044 FFF7FEFF 		bl	dma_data_number_set
+ 1153              	.LVL145:
+ 459:project/src/main.c **** 
+ 460:project/src/main.c ****       /* 读 STS + DT 清除 IDLE 标志 */
+ 461:project/src/main.c ****       usart_flag_clear(USART1,USART_IDLEF_FLAG);
+ 1154              		.loc 1 461 7 view .LVU246
+ 1155 0048 1021     		movs	r1, #16
+ 1156 004a 0748     		ldr	r0, .L76
+ 1157 004c FFF7FEFF 		bl	usart_flag_clear
+ 1158              	.LVL146:
+ 462:project/src/main.c **** 
+ 463:project/src/main.c ****       if (tmp_len != 0U)
+ 1159              		.loc 1 463 7 view .LVU247
+ 1160              		.loc 1 463 10 is_stmt 0 view .LVU248
+ 1161 0050 24B9     		cbnz	r4, .L75
+ 1162              	.L72:
+ 464:project/src/main.c ****       {
+ 465:project/src/main.c ****         usmart_port_uart_rx_frame(uart_rx_buf,tmp_len);
+ 466:project/src/main.c ****       }
+ 467:project/src/main.c **** 
+ 468:project/src/main.c ****       dma_channel_enable(DMA1_CHANNEL1,TRUE);
+ 1163              		.loc 1 468 7 is_stmt 1 view .LVU249
+ 1164 0052 0121     		movs	r1, #1
+ 1165 0054 0548     		ldr	r0, .L76+4
+ 1166 0056 FFF7FEFF 		bl	dma_channel_enable
+ 1167              	.LVL147:
+ 1168              	.L67:
+ 1169              		.loc 1 468 7 is_stmt 0 view .LVU250
+ 1170              	.LBE2:
+ 469:project/src/main.c **** 
+ 470:project/src/main.c **** 
+ 471:project/src/main.c ****     }
+ 472:project/src/main.c ****   
+ 473:project/src/main.c **** 
+ 474:project/src/main.c **** }
+ 1171              		.loc 1 474 1 view .LVU251
+ 1172 005a 10BD     		pop	{r4, pc}
+ 1173              	.LVL148:
+ 1174              	.L75:
+ 1175              	.LBB3:
+ 465:project/src/main.c ****       }
+ 1176              		.loc 1 465 9 is_stmt 1 view .LVU252
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccyHDoPr.s 			page 32
+
+
+ 1177 005c 2146     		mov	r1, r4
+ 1178 005e 0448     		ldr	r0, .L76+8
+ 1179 0060 FFF7FEFF 		bl	usmart_port_uart_rx_frame
+ 1180              	.LVL149:
+ 1181 0064 F5E7     		b	.L72
+ 1182              	.L77:
+ 1183 0066 00BF     		.align	2
+ 1184              	.L76:
+ 1185 0068 00380140 		.word	1073821696
+ 1186 006c 08000240 		.word	1073872904
+ 1187 0070 00000000 		.word	uart_rx_buf
+ 1188              	.LBE3:
+ 1189              		.cfi_endproc
+ 1190              	.LFE146:
+ 1192              		.section	.bss.measurement_available,"aw",%nobits
+ 1195              	measurement_available:
+ 1196 0000 00       		.space	1
+ 1197              		.section	.bss.waiting_for_tmr8_rising_edge,"aw",%nobits
+ 1200              	waiting_for_tmr8_rising_edge:
+ 1201 0000 00       		.space	1
+ 1202              		.section	.bss.measured_elapsed_us,"aw",%nobits
+ 1203              		.align	2
+ 1206              	measured_elapsed_us:
+ 1207 0000 00000000 		.space	4
+ 1208              		.section	.bss.tmr1_rising_edge_us,"aw",%nobits
+ 1209              		.align	2
+ 1212              	tmr1_rising_edge_us:
+ 1213 0000 00000000 		.space	4
+ 1214              		.global	uart_tx_buf
+ 1215              		.section	.bss.uart_tx_buf,"aw",%nobits
+ 1216              		.align	2
+ 1219              	uart_tx_buf:
+ 1220 0000 00000000 		.space	256
+ 1220      00000000 
+ 1220      00000000 
+ 1220      00000000 
+ 1220      00000000 
+ 1221              		.global	uart_rx_buf
+ 1222              		.section	.bss.uart_rx_buf,"aw",%nobits
+ 1223              		.align	2
+ 1226              	uart_rx_buf:
+ 1227 0000 00000000 		.space	256
+ 1227      00000000 
+ 1227      00000000 
+ 1227      00000000 
+ 1227      00000000 
+ 1228              		.global	i
+ 1229              		.section	.data.i,"aw"
+ 1230              		.align	1
+ 1233              	i:
+ 1234 0000 0100     		.short	1
+ 1235              		.text
+ 1236              	.Letext0:
+ 1237              		.file 2 "D:/gnu_toolchain/arm-none-eabi/include/machine/_default_types.h"
+ 1238              		.file 3 "D:/gnu_toolchain/arm-none-eabi/include/sys/_stdint.h"
+ 1239              		.file 4 "libraries/cmsis/cm4/device_support/at32f403a_407.h"
+ 1240              		.file 5 "libraries/drivers/inc/at32f403a_407_dma.h"
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccyHDoPr.s 			page 33
+
+
+ 1241              		.file 6 "libraries/drivers/inc/at32f403a_407_tmr.h"
+ 1242              		.file 7 "libraries/drivers/inc/at32f403a_407_usart.h"
+ 1243              		.file 8 "project/inc/button.h"
+ 1244              		.file 9 "project/inc/led.h"
+ 1245              		.file 10 "project/inc/usmart_port.h"
+ 1246              		.file 11 "D:/gnu_toolchain/arm-none-eabi/include/stdio.h"
+ 1247              		.file 12 "project/inc/usmart.h"
+ 1248              		.file 13 "project/inc/OLED.h"
+ 1249              		.file 14 "project/inc/wk_tmr.h"
+ 1250              		.file 15 "project/inc/wk_exint.h"
+ 1251              		.file 16 "project/inc/wk_dma.h"
+ 1252              		.file 17 "project/inc/i2c_app.h"
+ 1253              		.file 18 "project/inc/wk_i2c.h"
+ 1254              		.file 19 "project/inc/wk_usart.h"
+ 1255              		.file 20 "project/inc/wk_system.h"
+ 1256              		.file 21 "project/inc/at32f403a_407_wk_config.h"
+ 1257              		.file 22 "D:/gnu_toolchain/arm-none-eabi/include/string.h"
+ 1258              		.file 23 "<built-in>"
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccyHDoPr.s 			page 34
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 main.c
+C:\Users\bians\AppData\Local\Temp\ccyHDoPr.s:21     .text.tmr1_capture_process:00000000 $t
+C:\Users\bians\AppData\Local\Temp\ccyHDoPr.s:26     .text.tmr1_capture_process:00000000 tmr1_capture_process
+C:\Users\bians\AppData\Local\Temp\ccyHDoPr.s:53     .text.tmr1_capture_process:00000014 $d
+C:\Users\bians\AppData\Local\Temp\ccyHDoPr.s:1212   .bss.tmr1_rising_edge_us:00000000 tmr1_rising_edge_us
+C:\Users\bians\AppData\Local\Temp\ccyHDoPr.s:1200   .bss.waiting_for_tmr8_rising_edge:00000000 waiting_for_tmr8_rising_edge
+C:\Users\bians\AppData\Local\Temp\ccyHDoPr.s:1195   .bss.measurement_available:00000000 measurement_available
+C:\Users\bians\AppData\Local\Temp\ccyHDoPr.s:60     .text.tmr8_capture_process:00000000 $t
+C:\Users\bians\AppData\Local\Temp\ccyHDoPr.s:65     .text.tmr8_capture_process:00000000 tmr8_capture_process
+C:\Users\bians\AppData\Local\Temp\ccyHDoPr.s:104    .text.tmr8_capture_process:00000020 $d
+C:\Users\bians\AppData\Local\Temp\ccyHDoPr.s:1206   .bss.measured_elapsed_us:00000000 measured_elapsed_us
+C:\Users\bians\AppData\Local\Temp\ccyHDoPr.s:112    .text.at32_tmr1_pulse_start:00000000 $t
+C:\Users\bians\AppData\Local\Temp\ccyHDoPr.s:117    .text.at32_tmr1_pulse_start:00000000 at32_tmr1_pulse_start
+C:\Users\bians\AppData\Local\Temp\ccyHDoPr.s:154    .text.at32_tmr1_pulse_start:00000028 $d
+C:\Users\bians\AppData\Local\Temp\ccyHDoPr.s:159    .text.at32_tmr8_pulse_start:00000000 $t
+C:\Users\bians\AppData\Local\Temp\ccyHDoPr.s:164    .text.at32_tmr8_pulse_start:00000000 at32_tmr8_pulse_start
+C:\Users\bians\AppData\Local\Temp\ccyHDoPr.s:201    .text.at32_tmr8_pulse_start:00000028 $d
+C:\Users\bians\AppData\Local\Temp\ccyHDoPr.s:206    .text.tmr2_capture_poll:00000000 $t
+C:\Users\bians\AppData\Local\Temp\ccyHDoPr.s:211    .text.tmr2_capture_poll:00000000 tmr2_capture_poll
+C:\Users\bians\AppData\Local\Temp\ccyHDoPr.s:353    .text.usmart_set_pulse_width_us:00000000 $t
+C:\Users\bians\AppData\Local\Temp\ccyHDoPr.s:359    .text.usmart_set_pulse_width_us:00000000 usmart_set_pulse_width_us
+C:\Users\bians\AppData\Local\Temp\ccyHDoPr.s:431    .text.usmart_set_pulse_width_us:00000048 $d
+C:\Users\bians\AppData\Local\Temp\ccyHDoPr.s:1233   .data.i:00000000 i
+C:\Users\bians\AppData\Local\Temp\ccyHDoPr.s:437    .text.usmart_set_pulse_width_us2:00000000 $t
+C:\Users\bians\AppData\Local\Temp\ccyHDoPr.s:443    .text.usmart_set_pulse_width_us2:00000000 usmart_set_pulse_width_us2
+C:\Users\bians\AppData\Local\Temp\ccyHDoPr.s:515    .text.usmart_set_pulse_width_us2:00000048 $d
+C:\Users\bians\AppData\Local\Temp\ccyHDoPr.s:521    .text.send_data:00000000 $t
+C:\Users\bians\AppData\Local\Temp\ccyHDoPr.s:527    .text.send_data:00000000 send_data
+C:\Users\bians\AppData\Local\Temp\ccyHDoPr.s:587    .text.send_data:00000038 $d
+C:\Users\bians\AppData\Local\Temp\ccyHDoPr.s:1219   .bss.uart_tx_buf:00000000 uart_tx_buf
+C:\Users\bians\AppData\Local\Temp\ccyHDoPr.s:594    .rodata.main.str1.4:00000000 $d
+C:\Users\bians\AppData\Local\Temp\ccyHDoPr.s:616    .text.main:00000000 $t
+C:\Users\bians\AppData\Local\Temp\ccyHDoPr.s:622    .text.main:00000000 main
+C:\Users\bians\AppData\Local\Temp\ccyHDoPr.s:1056   .text.main:00000264 $d
+C:\Users\bians\AppData\Local\Temp\ccyHDoPr.s:1226   .bss.uart_rx_buf:00000000 uart_rx_buf
+C:\Users\bians\AppData\Local\Temp\ccyHDoPr.s:1077   .text.USART1_IRQHandler:00000000 $t
+C:\Users\bians\AppData\Local\Temp\ccyHDoPr.s:1083   .text.USART1_IRQHandler:00000000 USART1_IRQHandler
+C:\Users\bians\AppData\Local\Temp\ccyHDoPr.s:1185   .text.USART1_IRQHandler:00000068 $d
+C:\Users\bians\AppData\Local\Temp\ccyHDoPr.s:1196   .bss.measurement_available:00000000 $d
+C:\Users\bians\AppData\Local\Temp\ccyHDoPr.s:1201   .bss.waiting_for_tmr8_rising_edge:00000000 $d
+C:\Users\bians\AppData\Local\Temp\ccyHDoPr.s:1203   .bss.measured_elapsed_us:00000000 $d
+C:\Users\bians\AppData\Local\Temp\ccyHDoPr.s:1209   .bss.tmr1_rising_edge_us:00000000 $d
+C:\Users\bians\AppData\Local\Temp\ccyHDoPr.s:1216   .bss.uart_tx_buf:00000000 $d
+C:\Users\bians\AppData\Local\Temp\ccyHDoPr.s:1223   .bss.uart_rx_buf:00000000 $d
+C:\Users\bians\AppData\Local\Temp\ccyHDoPr.s:1230   .data.i:00000000 $d
+
+UNDEFINED SYMBOLS
+tmr_counter_enable
+tmr_counter_value_set
+tmr_flag_clear
+tmr_flag_get
+tmr_channel_value_get
+tmr_period_value_set
+OLED_ShowNum
+at32_led_toggle
+memcpy
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccyHDoPr.s 			page 35
+
+
+usart_flag_get
+dma_channel_enable
+dma_data_number_set
+wk_system_clock_config
+wk_periph_clock_config
+wk_nvic_config
+wk_timebase_init
+wk_usart1_init
+wk_i2c1_init
+wk_i2c_app_init
+wk_dma1_channel1_init
+wk_dma_channel_config
+wk_dma1_channel2_init
+wk_exint_config
+wk_tmr1_init
+wk_tmr8_init
+wk_tmr2_init
+OLED_Init
+at32_board_init
+at32_button_init
+tmr_output_channel_mode_select
+tmr_channel_value_set
+tmr_one_cycle_mode_enable
+OLED_ShowString
+usart_interrupt_enable
+usmart_init
+usmart_scan
+at32_button_user_press
+at32_button_s1_press
+at32_button_s2_press
+at32_button_s3_press
+at32_button_s4_press
+printf
+puts
+dma_data_number_get
+usart_flag_clear
+usmart_port_uart_rx_frame

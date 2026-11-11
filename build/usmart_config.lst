@@ -1,0 +1,154 @@
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccTf8ytt.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.arch armv7e-m
+   3              		.fpu fpv4-sp-d16
+   4              		.eabi_attribute 27, 1
+   5              		.eabi_attribute 28, 1
+   6              		.eabi_attribute 20, 1
+   7              		.eabi_attribute 21, 1
+   8              		.eabi_attribute 23, 3
+   9              		.eabi_attribute 24, 1
+  10              		.eabi_attribute 25, 1
+  11              		.eabi_attribute 26, 1
+  12              		.eabi_attribute 30, 1
+  13              		.eabi_attribute 34, 1
+  14              		.eabi_attribute 18, 4
+  15              		.file	"usmart_config.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.file 1 "project/src/usmart_config.c"
+  20              		.global	usmart_dev
+  21              		.section	.data.usmart_dev,"aw"
+  22              		.align	2
+  25              	usmart_dev:
+  26 0000 00000000 		.word	usmart_nametab
+  27 0004 00000000 		.word	usmart_init
+  28 0008 00000000 		.word	usmart_cmd_rec
+  29 000c 00000000 		.word	usmart_exe
+  30 0010 00000000 		.word	usmart_scan
+  31 0014 07       		.byte	7
+  32 0015 00       		.byte	0
+  33 0016 00       		.byte	0
+  34 0017 01       		.byte	1
+  35 0018 0000     		.short	0
+  36 001a 0000     		.ascii	"\000\000"
+  37 001c 00000000 		.space	8
+  37      00000000 
+  38 0024 0000     		.ascii	"\000\000"
+  39 0026 00000000 		.space	198
+  39      00000000 
+  39      00000000 
+  39      00000000 
+  39      00000000 
+  40 00ec 00       		.byte	0
+  41 00ed 000000   		.space	3
+  42 00f0 00000000 		.word	0
+  43              		.global	usmart_nametab
+  44              		.section	.rodata.str1.4,"aMS",%progbits,1
+  45              		.align	2
+  46              	.LC0:
+  47 0000 75696E74 		.ascii	"uint32_t read_addr(uint32_t addr);\000"
+  47      33325F74 
+  47      20726561 
+  47      645F6164 
+  47      64722875 
+  48 0023 00       		.align	2
+  49              	.LC1:
+  50 0024 766F6964 		.ascii	"void write_addr(uint32_t addr,uint32_t val);\000"
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccTf8ytt.s 			page 2
+
+
+  50      20777269 
+  50      74655F61 
+  50      64647228 
+  50      75696E74 
+  51 0051 000000   		.align	2
+  52              	.LC2:
+  53 0054 766F6964 		.ascii	"void at32_led_on(led_type led);\000"
+  53      20617433 
+  53      325F6C65 
+  53      645F6F6E 
+  53      286C6564 
+  54              		.align	2
+  55              	.LC3:
+  56 0074 766F6964 		.ascii	"void at32_led_off(led_type led);\000"
+  56      20617433 
+  56      325F6C65 
+  56      645F6F66 
+  56      66286C65 
+  57 0095 000000   		.align	2
+  58              	.LC4:
+  59 0098 766F6964 		.ascii	"void at32_led_toggle(led_type led);\000"
+  59      20617433 
+  59      325F6C65 
+  59      645F746F 
+  59      67676C65 
+  60              		.align	2
+  61              	.LC5:
+  62 00bc 75696E74 		.ascii	"uint8_t usmart_set_pulse_width_us(uint32_t width_us"
+  62      385F7420 
+  62      75736D61 
+  62      72745F73 
+  62      65745F70 
+  63 00ef 293B00   		.ascii	");\000"
+  64 00f2 0000     		.align	2
+  65              	.LC6:
+  66 00f4 75696E74 		.ascii	"uint8_t usmart_set_pulse_width_us2(uint32_t width_u"
+  66      385F7420 
+  66      75736D61 
+  66      72745F73 
+  66      65745F70 
+  67 0127 73293B00 		.ascii	"s);\000"
+  68              		.section	.data.usmart_nametab,"aw"
+  69              		.align	2
+  72              	usmart_nametab:
+  73 0000 00000000 		.word	read_addr
+  74 0004 00000000 		.word	.LC0
+  75 0008 00000000 		.word	write_addr
+  76 000c 24000000 		.word	.LC1
+  77 0010 00000000 		.word	at32_led_on
+  78 0014 54000000 		.word	.LC2
+  79 0018 00000000 		.word	at32_led_off
+  80 001c 74000000 		.word	.LC3
+  81 0020 00000000 		.word	at32_led_toggle
+  82 0024 98000000 		.word	.LC4
+  83 0028 00000000 		.word	usmart_set_pulse_width_us
+  84 002c BC000000 		.word	.LC5
+  85 0030 00000000 		.word	usmart_set_pulse_width_us2
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccTf8ytt.s 			page 3
+
+
+  86 0034 F4000000 		.word	.LC6
+  87              		.text
+  88              	.Letext0:
+  89              		.file 2 "D:/gnu_toolchain/arm-none-eabi/include/machine/_default_types.h"
+  90              		.file 3 "D:/gnu_toolchain/arm-none-eabi/include/sys/_stdint.h"
+  91              		.file 4 "libraries/drivers/inc/at32f403a_407_tmr.h"
+  92              		.file 5 "project/inc/usmart.h"
+  93              		.file 6 "project/inc/led.h"
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccTf8ytt.s 			page 4
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 usmart_config.c
+C:\Users\bians\AppData\Local\Temp\ccTf8ytt.s:25     .data.usmart_dev:00000000 usmart_dev
+C:\Users\bians\AppData\Local\Temp\ccTf8ytt.s:22     .data.usmart_dev:00000000 $d
+C:\Users\bians\AppData\Local\Temp\ccTf8ytt.s:72     .data.usmart_nametab:00000000 usmart_nametab
+C:\Users\bians\AppData\Local\Temp\ccTf8ytt.s:45     .rodata.str1.4:00000000 $d
+C:\Users\bians\AppData\Local\Temp\ccTf8ytt.s:69     .data.usmart_nametab:00000000 $d
+
+UNDEFINED SYMBOLS
+usmart_init
+usmart_cmd_rec
+usmart_exe
+usmart_scan
+read_addr
+write_addr
+at32_led_on
+at32_led_off
+at32_led_toggle
+usmart_set_pulse_width_us
+usmart_set_pulse_width_us2

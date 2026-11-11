@@ -1,0 +1,115 @@
+﻿ 217: /**
+ 218:  * @brief       浠巗tr涓幏鍙栧嚱鏁板悕,id,鍙婂弬鏁颁俊鎭?
+ 219:  * @param       str: 瀛楃涓叉寚閽?
+ 220:  * @retval      0,璇嗗埆鎴愬姛;鍏朵粬,閿欒浠ｇ爜.
+ 221:  */
+ 222: uint8_t usmart_cmd_rec(char *str)
+ 223: {
+ 224:     uint8_t sta, i, rval;   /* 鐘舵€?*/
+ 225:     uint8_t rpnum, spnum;
+ 226:     char rfname[MAX_FNAME_LEN];  /* 鏆傚瓨绌洪棿,鐢ㄤ簬瀛樻斁鎺ユ敹鍒扮殑鍑芥暟鍚?*/
+ 227:     char sfname[MAX_FNAME_LEN];  /* 瀛樻斁鏈湴鍑芥暟鍚?*/
+ 228:     sta = usmart_get_fname(str, rfname, &rpnum, &rval); /* 寰楀埌鎺ユ敹鍒扮殑鏁版嵁鐨勫嚱鏁板悕鍙婂弬鏁颁釜鏁?*/
+ 229: 
+ 230:     if (sta)return sta; /* 閿欒 */
+ 231: 
+ 232:     for (i = 0; i < usmart_dev.fnum; i++)
+ 233:     {
+ 234:         sta = usmart_get_fname((char *)usmart_dev.funs[i].name, sfname, &spnum, &rval); /* 寰楀埌鏈湴鍑芥暟鍚嶅強鍙傛暟涓暟 */
+ 235: 
+ 236:         if (sta)return sta; /* 鏈湴瑙ｆ瀽鏈夎 */
+ 237: 
+ 238:         if (usmart_strcmp(sfname, rfname) == 0) /* 鐩哥瓑 */
+ 239:         {
+ 240:             if (spnum > rpnum)return USMART_PARMERR;/* 鍙傛暟閿欒(杈撳叆鍙傛暟姣旀簮鍑芥暟鍙傛暟灏? */
+ 241: 
+ 242:             usmart_dev.id = i;  /* 璁板綍鍑芥暟ID. */
+ 243:             break;  /* 璺冲嚭. */
+ 244:         }
+ 245:     }
+ 246: 
+ 247:     if (i == usmart_dev.fnum)return USMART_NOFUNCFIND;  /* 鏈壘鍒板尮閰嶇殑鍑芥暟 */
+ 248: 
+ 249:     sta = usmart_get_fparam(str, &i);   /* 寰楀埌鍑芥暟鍙傛暟涓暟 */
+ 250: 
+ 251:     if (sta)return sta;     /* 杩斿洖閿欒 */
+ 252: 
+ 253:     usmart_dev.pnum = i;    /* 鍙傛暟涓暟璁板綍 */
+ 254:     return USMART_OK;
+ 255: }
+ 256: 
+ 257: 
+ 258: 
+ 259: 
+ 260: 
+ 261: 
+ 262: 
+ 263: 
+ 264: 
+ 265: 
+ 266: /**
+ 267:  * @brief       USMART鎵ц鍑芥暟
+ 268:  *   @note
+ 269:  *              璇ュ嚱鏁扮敤浜庢渶缁堟墽琛屼粠涓插彛鏀跺埌鐨勬湁鏁堝嚱鏁?
+ 270:  *              鏈€澶氭敮鎸?0涓弬鏁扮殑鍑芥暟,鏇村鐨勫弬鏁版敮鎸佷篃寰堝鏄撳疄鐜?涓嶈繃鐢ㄧ殑寰堝皯.涓€鑸?涓乏鍙崇殑鍙傛暟鐨勫嚱鏁板凡缁忓緢灏戣浜?
+ 271:  *              璇ュ嚱鏁颁細鍦ㄤ覆鍙ｆ墦鍗版墽琛屾儏鍐?浠?"鍑芥暟鍚?鍙傛暟1锛屽弬鏁?...鍙傛暟N)=杩斿洖鍊?.鐨勫舰寮忔墦鍗?
+ 272:  *              褰撴墍鎵ц鐨勫嚱鏁版病鏈夎繑鍥炲€肩殑鏃跺€?鎵€鎵撳嵃鐨勮繑鍥炲€兼槸涓€涓棤鎰忎箟鐨勬暟鎹?
+ 273:  *
+ 274:  * @param       鏃?
+ 275:  * @retval      鏃?
+ 276:  */
+ 277: void usmart_exe(void)
+ 278: {
+ 279:     uint8_t id, i;
+ 280:     uint32_t res = 0;
+ 281:     uint32_t temp[MAX_PARM];        /* 鍙傛暟杞崲,浣夸箣鏀寔浜嗗瓧绗︿覆 */
+ 282:     char sfname[MAX_FNAME_LEN];  /* 瀛樻斁鏈湴鍑芥暟鍚?*/
+ 283:     uint8_t pnum, rval;
+ 284:     id = usmart_dev.id;
+ 285: 
+ 286:     if (id >= usmart_dev.fnum)return;   /* 涓嶆墽琛? */
+ 287: 
+ 288:     usmart_get_fname((char *)usmart_dev.funs[id].name, sfname, &pnum, &rval);    /* 寰楀埌鏈湴鍑芥暟鍚?鍙婂弬鏁颁釜鏁?*/
+ 289:     USMART_PRINTF("\r\n%s(", sfname);   /* 杈撳嚭姝ｈ鎵ц鐨勫嚱鏁板悕 */
+ 290: 
+ 291:     for (i = 0; i < pnum; i++)      /* 杈撳嚭鍙傛暟 */
+ 292:     {
+ 293:         if (usmart_dev.parmtype & (1 << i)) /* 鍙傛暟鏄瓧绗︿覆 */
+ 294:         {
+ 295:             USMART_PRINTF("%c", '"');
+ 296:             USMART_PRINTF("%s", usmart_dev.parm + usmart_get_parmpos(i));
+ 297:             USMART_PRINTF("%c", '"');
+ 298:             temp[i] = (uint32_t) & (usmart_dev.parm[usmart_get_parmpos(i)]);
+ 299:         }
+ 300:         else    /* 鍙傛暟鏄暟瀛?*/
+ 301:         {
+ 302:             memcpy(&temp[i], usmart_dev.parm + usmart_get_parmpos(i), sizeof(temp[i]));
+ 303: 
+ 304:             if (usmart_dev.sptype == SP_TYPE_DEC)
+ 305:             {
+ 306:                 USMART_PRINTF("%ld", (long)temp[i]);  /* 10杩涘埗鍙傛暟鏄剧ず */
+ 307:             }
+ 308:             else 
+ 309:             {
+ 310:                 USMART_PRINTF("0X%X", (unsigned int)temp[i]); /* 16杩涘埗鍙傛暟鏄剧ず */
+ 311:             }
+ 312:         }
+ 313: 
+ 314:         if (i != pnum - 1)USMART_PRINTF(",");
+ 315:     }
+ 316: 
+ 317:     USMART_PRINTF(")");
+ 318: #if USMART_ENTIMX_SCAN==1
+ 319:     usmart_timx_reset_time();   /* 璁℃椂鍣ㄦ竻闆?寮€濮嬭鏃?*/
+ 320: #endif
+ 321: 
+ 322:     switch (pnum)
+ 323:     {
+ 324:         case 0: /* 鏃犲弬鏁?void绫诲瀷) */
+ 325:             res = (*(uint32_t(*)())usmart_dev.funs[id].func)();
+ 326:             break;
+ 327: 
+ 328:         case 1: /* 鏈?涓弬鏁?*/
+ 329:             res = (*(uint32_t(*)())usmart_dev.funs[id].func)(temp[0]);
+ 330:             break;
+ 331: 

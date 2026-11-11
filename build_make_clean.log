@@ -1,0 +1,16 @@
+﻿arm-none-eabi-gcc -c -mcpu=cortex-m4 -mthumb -mfpu=fpv4-sp-d16 -mfloat-abi=hard -DUSE_STDPERIPH_DRIVER -DAT32F403AVGT7 -Iproject/inc -Ilibraries/drivers/inc -Ilibraries/cmsis/cm4/core_support -Ilibraries/cmsis/cm4/device_support -Imiddlewares/i2c_application_library  -Og -Wall -fdata-sections -ffunction-sections -g -gdwarf-2 -MMD -MP -MF"build/usmart_config.d" -Wa,-a,-ad,-alms=build/usmart_config.lst project/src/usmart_config.c -o build/usmart_config.o
+arm-none-eabi-gcc build/main.o build/syscalls.o build/sysmem.o build/at32f403a_407_wk_config.o build/at32f403a_407_int.o build/wk_system.o build/wk_i2c.o build/wk_usart.o build/wk_dma.o build/wk_exint.o build/wk_tmr.o build/i2c_app.o build/OLED.o build/button.o build/led.o build/delay.o build/usmart.o build/usmart_str.o build/usmart_config.o build/usmart_port.o build/system_at32f403a_407.o build/at32f403a_407_crm.o build/at32f403a_407_tmr.o build/at32f403a_407_gpio.o build/at32f403a_407_i2c.o build/at32f403a_407_usart.o build/at32f403a_407_pwc.o build/at32f403a_407_dma.o build/at32f403a_407_flash.o build/at32f403a_407_exint.o build/at32f403a_407_misc.o build/i2c_application.o build/startup_at32f403a_407.o  -mcpu=cortex-m4 -mthumb -mfpu=fpv4-sp-d16 -mfloat-abi=hard -specs=nano.specs -TAT32F403AxG_FLASH.ld  -lc -lm -lnosys  -Wl,-Map=build/uart_AT32.map,--cref -Wl,--gc-sections -o build/uart_AT32.elf
+mingw32-make : D:/gnu_toolchain/bin/../lib/gcc/arm-none-eabi/14.3.1/../../../../arm-none-eab
+i/bin/ld.exe: warning: build/uart_AT32.elf has a LOAD segment with RWX permissions
+所在位置 行:1 字符: 1
++ mingw32-make -j4 2>&1 | Out-File -Encoding utf8 build_make_clean.log; ...
++ ~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (D:/gnu_toolchai...RWX permissions:String) [],  
+   RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+arm-none-eabi-size build/uart_AT32.elf
+   text	   data	    bss	    dec	    hex	filename
+  19140	    452	   2628	  22220	   56cc	build/uart_AT32.elf
+arm-none-eabi-objcopy -O ihex build/uart_AT32.elf build/uart_AT32.hex
+arm-none-eabi-objcopy -O binary -S build/uart_AT32.elf build/uart_AT32.bin	

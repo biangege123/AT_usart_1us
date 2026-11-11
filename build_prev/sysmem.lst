@@ -1,0 +1,236 @@
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccS2Jkgf.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.arch armv7e-m
+   3              		.fpu fpv4-sp-d16
+   4              		.eabi_attribute 27, 1
+   5              		.eabi_attribute 28, 1
+   6              		.eabi_attribute 20, 1
+   7              		.eabi_attribute 21, 1
+   8              		.eabi_attribute 23, 3
+   9              		.eabi_attribute 24, 1
+  10              		.eabi_attribute 25, 1
+  11              		.eabi_attribute 26, 1
+  12              		.eabi_attribute 30, 1
+  13              		.eabi_attribute 34, 1
+  14              		.eabi_attribute 18, 4
+  15              		.file	"sysmem.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.file 1 "project/src/sysmem.c"
+  20              		.section	.text._sbrk,"ax",%progbits
+  21              		.align	1
+  22              		.global	_sbrk
+  23              		.syntax unified
+  24              		.thumb
+  25              		.thumb_func
+  27              	_sbrk:
+  28              	.LVL0:
+  29              	.LFB0:
+   1:project/src/sysmem.c **** /* add user code begin Header */
+   2:project/src/sysmem.c **** /**
+   3:project/src/sysmem.c ****   **************************************************************************
+   4:project/src/sysmem.c ****   * @file     sysmem.c
+   5:project/src/sysmem.c ****   * @brief    system memory calls file
+   6:project/src/sysmem.c ****   **************************************************************************
+   7:project/src/sysmem.c ****   * Copyright (c) 2025, Artery Technology, All rights reserved.
+   8:project/src/sysmem.c ****   *
+   9:project/src/sysmem.c ****   * The software Board Support Package (BSP) that is made available to
+  10:project/src/sysmem.c ****   * download from Artery official website is the copyrighted work of Artery.
+  11:project/src/sysmem.c ****   * Artery authorizes customers to use, copy, and distribute the BSP
+  12:project/src/sysmem.c ****   * software and its related documentation for the purpose of design and
+  13:project/src/sysmem.c ****   * development in conjunction with Artery microcontrollers. Use of the
+  14:project/src/sysmem.c ****   * software is governed by this copyright notice and the following disclaimer.
+  15:project/src/sysmem.c ****   *
+  16:project/src/sysmem.c ****   * THIS SOFTWARE IS PROVIDED ON "AS IS" BASIS WITHOUT WARRANTIES,
+  17:project/src/sysmem.c ****   * GUARANTEES OR REPRESENTATIONS OF ANY KIND. ARTERY EXPRESSLY DISCLAIMS,
+  18:project/src/sysmem.c ****   * TO THE FULLEST EXTENT PERMITTED BY LAW, ALL EXPRESS, IMPLIED OR
+  19:project/src/sysmem.c ****   * STATUTORY OR OTHER WARRANTIES, GUARANTEES OR REPRESENTATIONS,
+  20:project/src/sysmem.c ****   * INCLUDING BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY,
+  21:project/src/sysmem.c ****   * FITNESS FOR A PARTICULAR PURPOSE, OR NON-INFRINGEMENT.
+  22:project/src/sysmem.c ****   *
+  23:project/src/sysmem.c ****   **************************************************************************
+  24:project/src/sysmem.c ****   */
+  25:project/src/sysmem.c **** /* add user code end Header */
+  26:project/src/sysmem.c **** 
+  27:project/src/sysmem.c **** #include <errno.h>
+  28:project/src/sysmem.c **** #include <stdint.h>
+  29:project/src/sysmem.c **** 
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccS2Jkgf.s 			page 2
+
+
+  30:project/src/sysmem.c **** /**
+  31:project/src/sysmem.c ****  * pointer to the current high watermark of the heap usage
+  32:project/src/sysmem.c ****  */
+  33:project/src/sysmem.c **** static uint8_t *__sbrk_heap_end = NULL;
+  34:project/src/sysmem.c **** 
+  35:project/src/sysmem.c **** /**
+  36:project/src/sysmem.c ****  * @brief _sbrk() allocates memory to the newlib heap and is used by malloc
+  37:project/src/sysmem.c ****  *        and others from the c library
+  38:project/src/sysmem.c ****  *
+  39:project/src/sysmem.c ****  * @verbatim
+  40:project/src/sysmem.c ****  * ############################################################################
+  41:project/src/sysmem.c ****  * #  .data  #  .bss  #       newlib heap       #          msp stack          #
+  42:project/src/sysmem.c ****  * #         #        #                         # reserved by _min_stack_size #
+  43:project/src/sysmem.c ****  * ############################################################################
+  44:project/src/sysmem.c ****  * ^-- ram start      ^-- _end                             _estack, ram end --^
+  45:project/src/sysmem.c ****  * @endverbatim
+  46:project/src/sysmem.c ****  *
+  47:project/src/sysmem.c ****  * this implementation starts allocating at the '_end' linker symbol
+  48:project/src/sysmem.c ****  * the '_min_stack_size' linker symbol reserves a memory for the msp stack
+  49:project/src/sysmem.c ****  * the implementation considers '_estack' linker symbol to be ram end
+  50:project/src/sysmem.c ****  * note: if the msp stack, at any point during execution, grows larger than the
+  51:project/src/sysmem.c ****  * reserved size, please increase the '_min_stack_size'.
+  52:project/src/sysmem.c ****  *
+  53:project/src/sysmem.c ****  * @param incr memory size
+  54:project/src/sysmem.c ****  * @return pointer to allocated memory
+  55:project/src/sysmem.c ****  */
+  56:project/src/sysmem.c **** void *_sbrk(ptrdiff_t incr)
+  57:project/src/sysmem.c **** {
+  30              		.loc 1 57 1 view -0
+  31              		.cfi_startproc
+  32              		@ args = 0, pretend = 0, frame = 0
+  33              		@ frame_needed = 0, uses_anonymous_args = 0
+  34              		.loc 1 57 1 is_stmt 0 view .LVU1
+  35 0000 10B5     		push	{r4, lr}
+  36              	.LCFI0:
+  37              		.cfi_def_cfa_offset 8
+  38              		.cfi_offset 4, -8
+  39              		.cfi_offset 14, -4
+  40 0002 0346     		mov	r3, r0
+  58:project/src/sysmem.c ****   extern uint8_t _end; /* symbol defined in the linker script */
+  41              		.loc 1 58 3 is_stmt 1 view .LVU2
+  59:project/src/sysmem.c ****   extern uint8_t _estack; /* symbol defined in the linker script */
+  42              		.loc 1 59 3 view .LVU3
+  60:project/src/sysmem.c ****   extern uint32_t _Min_Stack_Size; /* symbol defined in the linker script */
+  43              		.loc 1 60 3 view .LVU4
+  61:project/src/sysmem.c ****   const uint32_t stack_limit = (uint32_t)&_estack - (uint32_t)&_Min_Stack_Size;
+  44              		.loc 1 61 3 view .LVU5
+  45              	.LVL1:
+  62:project/src/sysmem.c ****   const uint8_t *max_heap = (uint8_t *)stack_limit;
+  46              		.loc 1 62 3 view .LVU6
+  61:project/src/sysmem.c ****   const uint32_t stack_limit = (uint32_t)&_estack - (uint32_t)&_Min_Stack_Size;
+  47              		.loc 1 61 51 is_stmt 0 view .LVU7
+  48 0004 0C4A     		ldr	r2, .L8
+  49 0006 0D49     		ldr	r1, .L8+4
+  50              	.LVL2:
+  63:project/src/sysmem.c ****   uint8_t *prev_heap_end;
+  51              		.loc 1 63 3 is_stmt 1 view .LVU8
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccS2Jkgf.s 			page 3
+
+
+  64:project/src/sysmem.c **** 
+  65:project/src/sysmem.c ****   /* initialize heap end at first call */
+  66:project/src/sysmem.c ****   if (NULL == __sbrk_heap_end)
+  52              		.loc 1 66 3 view .LVU9
+  53              		.loc 1 66 12 is_stmt 0 view .LVU10
+  54 0008 0D48     		ldr	r0, .L8+8
+  55              	.LVL3:
+  56              		.loc 1 66 12 view .LVU11
+  57 000a 0068     		ldr	r0, [r0]
+  58              		.loc 1 66 6 view .LVU12
+  59 000c 40B1     		cbz	r0, .L6
+  60              	.L2:
+  67:project/src/sysmem.c ****   {
+  68:project/src/sysmem.c ****     __sbrk_heap_end = &_end;
+  69:project/src/sysmem.c ****   }
+  70:project/src/sysmem.c **** 
+  71:project/src/sysmem.c ****   /* protect heap from growing into the reserved MSP stack */
+  72:project/src/sysmem.c ****   if (__sbrk_heap_end + incr > max_heap)
+  61              		.loc 1 72 3 is_stmt 1 view .LVU13
+  62              		.loc 1 72 23 is_stmt 0 view .LVU14
+  63 000e 0C48     		ldr	r0, .L8+8
+  64 0010 0068     		ldr	r0, [r0]
+  65 0012 0344     		add	r3, r3, r0
+  66              	.LVL4:
+  67              		.loc 1 72 6 view .LVU15
+  68 0014 521A     		subs	r2, r2, r1
+  69 0016 9342     		cmp	r3, r2
+  70 0018 06D8     		bhi	.L7
+  73:project/src/sysmem.c ****   {
+  74:project/src/sysmem.c ****     errno = ENOMEM;
+  75:project/src/sysmem.c ****     return (void *)-1;
+  76:project/src/sysmem.c ****   }
+  77:project/src/sysmem.c **** 
+  78:project/src/sysmem.c ****   prev_heap_end = __sbrk_heap_end;
+  71              		.loc 1 78 3 is_stmt 1 view .LVU16
+  72              	.LVL5:
+  79:project/src/sysmem.c ****   __sbrk_heap_end += incr;
+  73              		.loc 1 79 3 view .LVU17
+  74              		.loc 1 79 19 is_stmt 0 view .LVU18
+  75 001a 094A     		ldr	r2, .L8+8
+  76 001c 1360     		str	r3, [r2]
+  80:project/src/sysmem.c **** 
+  81:project/src/sysmem.c ****   return (void *)prev_heap_end;
+  77              		.loc 1 81 3 is_stmt 1 view .LVU19
+  78              	.LVL6:
+  79              	.L1:
+  82:project/src/sysmem.c **** }
+  80              		.loc 1 82 1 is_stmt 0 view .LVU20
+  81 001e 10BD     		pop	{r4, pc}
+  82              	.LVL7:
+  83              	.L6:
+  68:project/src/sysmem.c ****   }
+  84              		.loc 1 68 5 is_stmt 1 view .LVU21
+  68:project/src/sysmem.c ****   }
+  85              		.loc 1 68 21 is_stmt 0 view .LVU22
+  86 0020 0748     		ldr	r0, .L8+8
+  87 0022 084C     		ldr	r4, .L8+12
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccS2Jkgf.s 			page 4
+
+
+  88 0024 0460     		str	r4, [r0]
+  89 0026 F2E7     		b	.L2
+  90              	.LVL8:
+  91              	.L7:
+  74:project/src/sysmem.c ****     return (void *)-1;
+  92              		.loc 1 74 5 is_stmt 1 view .LVU23
+  93 0028 FFF7FEFF 		bl	__errno
+  94              	.LVL9:
+  74:project/src/sysmem.c ****     return (void *)-1;
+  95              		.loc 1 74 11 is_stmt 0 discriminator 1 view .LVU24
+  96 002c 0C23     		movs	r3, #12
+  97 002e 0360     		str	r3, [r0]
+  75:project/src/sysmem.c ****   }
+  98              		.loc 1 75 5 is_stmt 1 view .LVU25
+  75:project/src/sysmem.c ****   }
+  99              		.loc 1 75 12 is_stmt 0 view .LVU26
+ 100 0030 4FF0FF30 		mov	r0, #-1
+ 101 0034 F3E7     		b	.L1
+ 102              	.L9:
+ 103 0036 00BF     		.align	2
+ 104              	.L8:
+ 105 0038 00000000 		.word	_estack
+ 106 003c 00000000 		.word	_Min_Stack_Size
+ 107 0040 00000000 		.word	__sbrk_heap_end
+ 108 0044 00000000 		.word	_end
+ 109              		.cfi_endproc
+ 110              	.LFE0:
+ 112              		.section	.bss.__sbrk_heap_end,"aw",%nobits
+ 113              		.align	2
+ 116              	__sbrk_heap_end:
+ 117 0000 00000000 		.space	4
+ 118              		.text
+ 119              	.Letext0:
+ 120              		.file 2 "D:/gnu_toolchain/lib/gcc/arm-none-eabi/14.3.1/include/stddef.h"
+ 121              		.file 3 "D:/gnu_toolchain/arm-none-eabi/include/machine/_default_types.h"
+ 122              		.file 4 "D:/gnu_toolchain/arm-none-eabi/include/sys/_stdint.h"
+ 123              		.file 5 "D:/gnu_toolchain/arm-none-eabi/include/sys/errno.h"
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccS2Jkgf.s 			page 5
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 sysmem.c
+C:\Users\bians\AppData\Local\Temp\ccS2Jkgf.s:21     .text._sbrk:00000000 $t
+C:\Users\bians\AppData\Local\Temp\ccS2Jkgf.s:27     .text._sbrk:00000000 _sbrk
+C:\Users\bians\AppData\Local\Temp\ccS2Jkgf.s:105    .text._sbrk:00000038 $d
+C:\Users\bians\AppData\Local\Temp\ccS2Jkgf.s:116    .bss.__sbrk_heap_end:00000000 __sbrk_heap_end
+C:\Users\bians\AppData\Local\Temp\ccS2Jkgf.s:113    .bss.__sbrk_heap_end:00000000 $d
+
+UNDEFINED SYMBOLS
+__errno
+_estack
+_Min_Stack_Size
+_end

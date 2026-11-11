@@ -1,0 +1,273 @@
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccpx2ont.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.arch armv7e-m
+   3              		.fpu fpv4-sp-d16
+   4              		.eabi_attribute 27, 1
+   5              		.eabi_attribute 28, 1
+   6              		.eabi_attribute 20, 1
+   7              		.eabi_attribute 21, 1
+   8              		.eabi_attribute 23, 3
+   9              		.eabi_attribute 24, 1
+  10              		.eabi_attribute 25, 1
+  11              		.eabi_attribute 26, 1
+  12              		.eabi_attribute 30, 1
+  13              		.eabi_attribute 34, 1
+  14              		.eabi_attribute 18, 4
+  15              		.file	"i2c_app.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.file 1 "project/src/i2c_app.c"
+  20              		.section	.text.wk_i2c_app_init,"ax",%progbits
+  21              		.align	1
+  22              		.global	wk_i2c_app_init
+  23              		.syntax unified
+  24              		.thumb
+  25              		.thumb_func
+  27              	wk_i2c_app_init:
+  28              	.LFB134:
+   1:project/src/i2c_app.c **** /* add user code begin Header */
+   2:project/src/i2c_app.c **** /**
+   3:project/src/i2c_app.c ****   **************************************************************************
+   4:project/src/i2c_app.c ****   * @file     wk_i2c_app.c
+   5:project/src/i2c_app.c ****   * @brief    i2c device app
+   6:project/src/i2c_app.c ****   **************************************************************************
+   7:project/src/i2c_app.c ****   * Copyright (c) 2025, Artery Technology, All rights reserved.
+   8:project/src/i2c_app.c ****   *
+   9:project/src/i2c_app.c ****   * The software Board Support Package (BSP) that is made available to
+  10:project/src/i2c_app.c ****   * download from Artery official website is the copyrighted work of Artery.
+  11:project/src/i2c_app.c ****   * Artery authorizes customers to use, copy, and distribute the BSP
+  12:project/src/i2c_app.c ****   * software and its related documentation for the purpose of design and
+  13:project/src/i2c_app.c ****   * development in conjunction with Artery microcontrollers. Use of the
+  14:project/src/i2c_app.c ****   * software is governed by this copyright notice and the following disclaimer.
+  15:project/src/i2c_app.c ****   *
+  16:project/src/i2c_app.c ****   * THIS SOFTWARE IS PROVIDED ON "AS IS" BASIS WITHOUT WARRANTIES,
+  17:project/src/i2c_app.c ****   * GUARANTEES OR REPRESENTATIONS OF ANY KIND. ARTERY EXPRESSLY DISCLAIMS,
+  18:project/src/i2c_app.c ****   * TO THE FULLEST EXTENT PERMITTED BY LAW, ALL EXPRESS, IMPLIED OR
+  19:project/src/i2c_app.c ****   * STATUTORY OR OTHER WARRANTIES, GUARANTEES OR REPRESENTATIONS,
+  20:project/src/i2c_app.c ****   * INCLUDING BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY,
+  21:project/src/i2c_app.c ****   * FITNESS FOR A PARTICULAR PURPOSE, OR NON-INFRINGEMENT.
+  22:project/src/i2c_app.c ****   *
+  23:project/src/i2c_app.c ****   **************************************************************************
+  24:project/src/i2c_app.c ****   */
+  25:project/src/i2c_app.c **** /* add user code end Header */
+  26:project/src/i2c_app.c **** 
+  27:project/src/i2c_app.c **** #include "i2c_app.h"
+  28:project/src/i2c_app.c **** 
+  29:project/src/i2c_app.c **** /* private includes ----------------------------------------------------------*/
+  30:project/src/i2c_app.c **** /* add user code begin private includes */
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccpx2ont.s 			page 2
+
+
+  31:project/src/i2c_app.c **** 
+  32:project/src/i2c_app.c **** /* add user code end private includes */
+  33:project/src/i2c_app.c **** 
+  34:project/src/i2c_app.c **** /* private typedef -----------------------------------------------------------*/
+  35:project/src/i2c_app.c **** /* add user code begin private typedef */
+  36:project/src/i2c_app.c **** 
+  37:project/src/i2c_app.c **** /* add user code end private typedef */
+  38:project/src/i2c_app.c **** 
+  39:project/src/i2c_app.c **** /* private define ------------------------------------------------------------*/
+  40:project/src/i2c_app.c **** /* add user code begin private define */
+  41:project/src/i2c_app.c **** 
+  42:project/src/i2c_app.c **** /* add user code end private define */
+  43:project/src/i2c_app.c **** 
+  44:project/src/i2c_app.c **** /* private macro -------------------------------------------------------------*/
+  45:project/src/i2c_app.c **** /* add user code begin private macro */
+  46:project/src/i2c_app.c **** 
+  47:project/src/i2c_app.c **** /* add user code end private macro */
+  48:project/src/i2c_app.c **** 
+  49:project/src/i2c_app.c **** /* private variables ---------------------------------------------------------*/
+  50:project/src/i2c_app.c **** /* add user code begin private variables */
+  51:project/src/i2c_app.c **** 
+  52:project/src/i2c_app.c **** /* add user code end private variables */
+  53:project/src/i2c_app.c **** 
+  54:project/src/i2c_app.c **** /* private function prototypes --------------------------------------------*/
+  55:project/src/i2c_app.c **** /* add user code begin function prototypes */
+  56:project/src/i2c_app.c **** 
+  57:project/src/i2c_app.c **** /* add user code end function prototypes */
+  58:project/src/i2c_app.c **** 
+  59:project/src/i2c_app.c **** #define I2C1_MASTER_TRANSMIT_ADDRESS                         0x78
+  60:project/src/i2c_app.c **** #define I2C1_MASTER_TRANSMIT_DATA_ADDRESS                    0x00
+  61:project/src/i2c_app.c **** #define I2C1_MASTER_TRANSMIT_NUM                             1
+  62:project/src/i2c_app.c **** #define I2C1_MASTER_TRANSMIT_TIMEOUT                         0xFFFFFFFF
+  63:project/src/i2c_app.c **** 
+  64:project/src/i2c_app.c **** uint8_t i2c1_master_transmit_buf[I2C1_MASTER_TRANSMIT_NUM] = {0};
+  65:project/src/i2c_app.c **** 
+  66:project/src/i2c_app.c **** i2c_handle_type hi2c1;
+  67:project/src/i2c_app.c **** 
+  68:project/src/i2c_app.c **** /* private user code ---------------------------------------------------------*/
+  69:project/src/i2c_app.c **** /* add user code begin 0 */
+  70:project/src/i2c_app.c **** 
+  71:project/src/i2c_app.c **** /* add user code end 0 */
+  72:project/src/i2c_app.c **** 
+  73:project/src/i2c_app.c **** /**
+  74:project/src/i2c_app.c ****   * @brief  i2c application initialization
+  75:project/src/i2c_app.c ****   * @param  none
+  76:project/src/i2c_app.c ****   * @retval none
+  77:project/src/i2c_app.c ****   */
+  78:project/src/i2c_app.c **** void wk_i2c_app_init(void)
+  79:project/src/i2c_app.c **** {
+  29              		.loc 1 79 1 view -0
+  30              		.cfi_startproc
+  31              		@ args = 0, pretend = 0, frame = 0
+  32              		@ frame_needed = 0, uses_anonymous_args = 0
+  33              		@ link register save eliminated.
+  80:project/src/i2c_app.c ****   /* add user code begin i2c_app_init 0 */
+  81:project/src/i2c_app.c **** 
+  82:project/src/i2c_app.c ****   /* add user code end i2c_app_init 0 */
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccpx2ont.s 			page 3
+
+
+  83:project/src/i2c_app.c **** 
+  84:project/src/i2c_app.c ****   hi2c1.i2cx = I2C1;
+  34              		.loc 1 84 3 view .LVU1
+  35              		.loc 1 84 14 is_stmt 0 view .LVU2
+  36 0000 014B     		ldr	r3, .L2
+  37 0002 024A     		ldr	r2, .L2+4
+  38 0004 1A60     		str	r2, [r3]
+  85:project/src/i2c_app.c **** 
+  86:project/src/i2c_app.c ****   /* add user code begin i2c_app_init 1 */
+  87:project/src/i2c_app.c **** 
+  88:project/src/i2c_app.c ****   /* add user code end i2c_app_init 1 */
+  89:project/src/i2c_app.c **** 
+  90:project/src/i2c_app.c ****   /* add user code begin i2c_app_init 2 */
+  91:project/src/i2c_app.c **** 
+  92:project/src/i2c_app.c ****   /* add user code end i2c_app_init 2 */
+  93:project/src/i2c_app.c **** }
+  39              		.loc 1 93 1 view .LVU3
+  40 0006 7047     		bx	lr
+  41              	.L3:
+  42              		.align	2
+  43              	.L2:
+  44 0008 00000000 		.word	hi2c1
+  45 000c 00540040 		.word	1073763328
+  46              		.cfi_endproc
+  47              	.LFE134:
+  49              		.section	.text.wk_i2c_app_task,"ax",%progbits
+  50              		.align	1
+  51              		.global	wk_i2c_app_task
+  52              		.syntax unified
+  53              		.thumb
+  54              		.thumb_func
+  56              	wk_i2c_app_task:
+  57              	.LFB135:
+  94:project/src/i2c_app.c **** 
+  95:project/src/i2c_app.c **** /**
+  96:project/src/i2c_app.c ****   * @brief  i2c application task
+  97:project/src/i2c_app.c ****   * @param  none
+  98:project/src/i2c_app.c ****   * @retval none
+  99:project/src/i2c_app.c ****   */
+ 100:project/src/i2c_app.c **** void wk_i2c_app_task(void)
+ 101:project/src/i2c_app.c **** {
+  58              		.loc 1 101 1 is_stmt 1 view -0
+  59              		.cfi_startproc
+  60              		@ args = 0, pretend = 0, frame = 0
+  61              		@ frame_needed = 0, uses_anonymous_args = 0
+  62 0000 00B5     		push	{lr}
+  63              	.LCFI0:
+  64              		.cfi_def_cfa_offset 4
+  65              		.cfi_offset 14, -4
+  66 0002 85B0     		sub	sp, sp, #20
+  67              	.LCFI1:
+  68              		.cfi_def_cfa_offset 24
+ 102:project/src/i2c_app.c ****   /* add user code begin i2c_app_task 0 */
+ 103:project/src/i2c_app.c **** 
+ 104:project/src/i2c_app.c ****   /* add user code end i2c_app_task 0 */
+ 105:project/src/i2c_app.c **** 
+ 106:project/src/i2c_app.c ****   /* start i2c1 master transmit process */
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccpx2ont.s 			page 4
+
+
+ 107:project/src/i2c_app.c ****   if(i2c_memory_write(&hi2c1, I2C_MEM_ADDR_WIDTH_8, I2C1_MASTER_TRANSMIT_ADDRESS, I2C1_MASTER_TRANS
+  69              		.loc 1 107 3 view .LVU5
+  70              		.loc 1 107 6 is_stmt 0 view .LVU6
+  71 0004 4FF0FF33 		mov	r3, #-1
+  72 0008 0293     		str	r3, [sp, #8]
+  73 000a 0121     		movs	r1, #1
+  74 000c 0191     		str	r1, [sp, #4]
+  75 000e 054B     		ldr	r3, .L6
+  76 0010 0093     		str	r3, [sp]
+  77 0012 0023     		movs	r3, #0
+  78 0014 7822     		movs	r2, #120
+  79 0016 0448     		ldr	r0, .L6+4
+  80 0018 FFF7FEFF 		bl	i2c_memory_write
+  81              	.LVL0:
+ 108:project/src/i2c_app.c ****   {
+ 109:project/src/i2c_app.c ****     /* add user code begin i2c1_memory_write error process */
+ 110:project/src/i2c_app.c **** 
+ 111:project/src/i2c_app.c ****     /* add user code end i2c1_memory_write error process */
+ 112:project/src/i2c_app.c ****   }
+  82              		.loc 1 112 3 is_stmt 1 view .LVU7
+ 113:project/src/i2c_app.c **** 
+ 114:project/src/i2c_app.c ****   /* add user code begin i2c_app_task 1 */
+ 115:project/src/i2c_app.c **** 
+ 116:project/src/i2c_app.c ****   /* add user code end i2c_app_task 1 */
+ 117:project/src/i2c_app.c **** 
+ 118:project/src/i2c_app.c ****   /* add user code begin i2c_app_task 2 */
+ 119:project/src/i2c_app.c **** 
+ 120:project/src/i2c_app.c ****   /* add user code end i2c_app_task 2 */
+ 121:project/src/i2c_app.c **** 
+ 122:project/src/i2c_app.c ****   /* add user code begin i2c_app_task 3 */
+ 123:project/src/i2c_app.c **** 
+ 124:project/src/i2c_app.c ****   /* add user code end i2c_app_task 3 */
+ 125:project/src/i2c_app.c **** }
+  83              		.loc 1 125 1 is_stmt 0 view .LVU8
+  84 001c 05B0     		add	sp, sp, #20
+  85              	.LCFI2:
+  86              		.cfi_def_cfa_offset 4
+  87              		@ sp needed
+  88 001e 5DF804FB 		ldr	pc, [sp], #4
+  89              	.L7:
+  90 0022 00BF     		.align	2
+  91              	.L6:
+  92 0024 00000000 		.word	i2c1_master_transmit_buf
+  93 0028 00000000 		.word	hi2c1
+  94              		.cfi_endproc
+  95              	.LFE135:
+  97              		.global	hi2c1
+  98              		.section	.bss.hi2c1,"aw",%nobits
+  99              		.align	2
+ 102              	hi2c1:
+ 103 0000 00000000 		.space	56
+ 103      00000000 
+ 103      00000000 
+ 103      00000000 
+ 103      00000000 
+ 104              		.global	i2c1_master_transmit_buf
+ 105              		.section	.bss.i2c1_master_transmit_buf,"aw",%nobits
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccpx2ont.s 			page 5
+
+
+ 106              		.align	2
+ 109              	i2c1_master_transmit_buf:
+ 110 0000 00       		.space	1
+ 111              		.text
+ 112              	.Letext0:
+ 113              		.file 2 "D:/gnu_toolchain/arm-none-eabi/include/machine/_default_types.h"
+ 114              		.file 3 "D:/gnu_toolchain/arm-none-eabi/include/sys/_stdint.h"
+ 115              		.file 4 "libraries/cmsis/cm4/device_support/at32f403a_407.h"
+ 116              		.file 5 "libraries/drivers/inc/at32f403a_407_dma.h"
+ 117              		.file 6 "libraries/drivers/inc/at32f403a_407_i2c.h"
+ 118              		.file 7 "libraries/drivers/inc/at32f403a_407_tmr.h"
+ 119              		.file 8 "middlewares/i2c_application_library/i2c_application.h"
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccpx2ont.s 			page 6
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 i2c_app.c
+C:\Users\bians\AppData\Local\Temp\ccpx2ont.s:21     .text.wk_i2c_app_init:00000000 $t
+C:\Users\bians\AppData\Local\Temp\ccpx2ont.s:27     .text.wk_i2c_app_init:00000000 wk_i2c_app_init
+C:\Users\bians\AppData\Local\Temp\ccpx2ont.s:44     .text.wk_i2c_app_init:00000008 $d
+C:\Users\bians\AppData\Local\Temp\ccpx2ont.s:102    .bss.hi2c1:00000000 hi2c1
+C:\Users\bians\AppData\Local\Temp\ccpx2ont.s:50     .text.wk_i2c_app_task:00000000 $t
+C:\Users\bians\AppData\Local\Temp\ccpx2ont.s:56     .text.wk_i2c_app_task:00000000 wk_i2c_app_task
+C:\Users\bians\AppData\Local\Temp\ccpx2ont.s:92     .text.wk_i2c_app_task:00000024 $d
+C:\Users\bians\AppData\Local\Temp\ccpx2ont.s:109    .bss.i2c1_master_transmit_buf:00000000 i2c1_master_transmit_buf
+C:\Users\bians\AppData\Local\Temp\ccpx2ont.s:99     .bss.hi2c1:00000000 $d
+C:\Users\bians\AppData\Local\Temp\ccpx2ont.s:106    .bss.i2c1_master_transmit_buf:00000000 $d
+
+UNDEFINED SYMBOLS
+i2c_memory_write

@@ -1,0 +1,797 @@
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccfGXnQ6.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.arch armv7e-m
+   3              		.fpu fpv4-sp-d16
+   4              		.eabi_attribute 27, 1
+   5              		.eabi_attribute 28, 1
+   6              		.eabi_attribute 20, 1
+   7              		.eabi_attribute 21, 1
+   8              		.eabi_attribute 23, 3
+   9              		.eabi_attribute 24, 1
+  10              		.eabi_attribute 25, 1
+  11              		.eabi_attribute 26, 1
+  12              		.eabi_attribute 30, 1
+  13              		.eabi_attribute 34, 1
+  14              		.eabi_attribute 18, 4
+  15              		.file	"button.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.file 1 "project/src/button.c"
+  20              		.section	.text.button_gpio_init,"ax",%progbits
+  21              		.align	1
+  22              		.syntax unified
+  23              		.thumb
+  24              		.thumb_func
+  26              	button_gpio_init:
+  27              	.LVL0:
+  28              	.LFB137:
+   1:project/src/button.c **** #include "button.h"
+   2:project/src/button.c **** #include "wk_system.h"
+   3:project/src/button.c **** 
+   4:project/src/button.c **** #define BUTTON_DEBOUNCE_MS 10U
+   5:project/src/button.c **** 
+   6:project/src/button.c **** static uint8_t user_button_pressed = 1U;
+   7:project/src/button.c **** static uint8_t s1_button_pressed = 1U;
+   8:project/src/button.c **** static uint8_t s2_button_pressed = 1U;
+   9:project/src/button.c **** static uint8_t s3_button_pressed = 1U;
+  10:project/src/button.c **** static uint8_t s4_button_pressed = 1U;
+  11:project/src/button.c **** 
+  12:project/src/button.c **** static void button_gpio_init(gpio_type *port, uint16_t pin)
+  13:project/src/button.c **** {
+  29              		.loc 1 13 1 view -0
+  30              		.cfi_startproc
+  31              		@ args = 0, pretend = 0, frame = 8
+  32              		@ frame_needed = 0, uses_anonymous_args = 0
+  33              		.loc 1 13 1 is_stmt 0 view .LVU1
+  34 0000 70B5     		push	{r4, r5, r6, lr}
+  35              	.LCFI0:
+  36              		.cfi_def_cfa_offset 16
+  37              		.cfi_offset 4, -16
+  38              		.cfi_offset 5, -12
+  39              		.cfi_offset 6, -8
+  40              		.cfi_offset 14, -4
+  41 0002 82B0     		sub	sp, sp, #8
+  42              	.LCFI1:
+  43              		.cfi_def_cfa_offset 24
+  44 0004 0446     		mov	r4, r0
+  45 0006 0D46     		mov	r5, r1
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccfGXnQ6.s 			page 2
+
+
+  14:project/src/button.c ****     gpio_init_type gpio_init_struct;
+  46              		.loc 1 14 5 is_stmt 1 view .LVU2
+  15:project/src/button.c **** 
+  16:project/src/button.c ****     gpio_default_para_init(&gpio_init_struct);
+  47              		.loc 1 16 5 view .LVU3
+  48 0008 6846     		mov	r0, sp
+  49              	.LVL1:
+  50              		.loc 1 16 5 is_stmt 0 view .LVU4
+  51 000a FFF7FEFF 		bl	gpio_default_para_init
+  52              	.LVL2:
+  17:project/src/button.c ****     gpio_init_struct.gpio_drive_strength = GPIO_DRIVE_STRENGTH_STRONGER;
+  53              		.loc 1 17 5 is_stmt 1 view .LVU5
+  54              		.loc 1 17 42 is_stmt 0 view .LVU6
+  55 000e 0123     		movs	r3, #1
+  56 0010 8DF80730 		strb	r3, [sp, #7]
+  18:project/src/button.c ****     gpio_init_struct.gpio_out_type = GPIO_OUTPUT_PUSH_PULL;
+  57              		.loc 1 18 5 is_stmt 1 view .LVU7
+  58              		.loc 1 18 36 is_stmt 0 view .LVU8
+  59 0014 0023     		movs	r3, #0
+  60 0016 8DF80430 		strb	r3, [sp, #4]
+  19:project/src/button.c ****     gpio_init_struct.gpio_mode = GPIO_MODE_INPUT;
+  61              		.loc 1 19 5 is_stmt 1 view .LVU9
+  62              		.loc 1 19 32 is_stmt 0 view .LVU10
+  63 001a 8DF80630 		strb	r3, [sp, #6]
+  20:project/src/button.c ****     gpio_init_struct.gpio_pins = pin;
+  64              		.loc 1 20 5 is_stmt 1 view .LVU11
+  65              		.loc 1 20 32 is_stmt 0 view .LVU12
+  66 001e 0095     		str	r5, [sp]
+  21:project/src/button.c ****     gpio_init_struct.gpio_pull = GPIO_PULL_DOWN;
+  67              		.loc 1 21 5 is_stmt 1 view .LVU13
+  68              		.loc 1 21 32 is_stmt 0 view .LVU14
+  69 0020 2823     		movs	r3, #40
+  70 0022 8DF80530 		strb	r3, [sp, #5]
+  22:project/src/button.c ****     gpio_init(port, &gpio_init_struct);
+  71              		.loc 1 22 5 is_stmt 1 view .LVU15
+  72 0026 6946     		mov	r1, sp
+  73 0028 2046     		mov	r0, r4
+  74 002a FFF7FEFF 		bl	gpio_init
+  75              	.LVL3:
+  23:project/src/button.c **** }
+  76              		.loc 1 23 1 is_stmt 0 view .LVU16
+  77 002e 02B0     		add	sp, sp, #8
+  78              	.LCFI2:
+  79              		.cfi_def_cfa_offset 16
+  80              		@ sp needed
+  81 0030 70BD     		pop	{r4, r5, r6, pc}
+  82              		.loc 1 23 1 view .LVU17
+  83              		.cfi_endproc
+  84              	.LFE137:
+  86              		.section	.text.button_press_check,"ax",%progbits
+  87              		.align	1
+  88              		.syntax unified
+  89              		.thumb
+  90              		.thumb_func
+  92              	button_press_check:
+  93              	.LVL4:
+  94              	.LFB138:
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccfGXnQ6.s 			page 3
+
+
+  24:project/src/button.c **** 
+  25:project/src/button.c **** static button_type button_press_check(gpio_type *port, uint16_t pin,
+  26:project/src/button.c ****                                       uint8_t *pressed, button_type button)
+  27:project/src/button.c **** {
+  95              		.loc 1 27 1 is_stmt 1 view -0
+  96              		.cfi_startproc
+  97              		@ args = 0, pretend = 0, frame = 0
+  98              		@ frame_needed = 0, uses_anonymous_args = 0
+  99              		.loc 1 27 1 is_stmt 0 view .LVU19
+ 100 0000 F8B5     		push	{r3, r4, r5, r6, r7, lr}
+ 101              	.LCFI3:
+ 102              		.cfi_def_cfa_offset 24
+ 103              		.cfi_offset 3, -24
+ 104              		.cfi_offset 4, -20
+ 105              		.cfi_offset 5, -16
+ 106              		.cfi_offset 6, -12
+ 107              		.cfi_offset 7, -8
+ 108              		.cfi_offset 14, -4
+ 109 0002 0746     		mov	r7, r0
+ 110 0004 0E46     		mov	r6, r1
+ 111 0006 1546     		mov	r5, r2
+ 112 0008 1C46     		mov	r4, r3
+  28:project/src/button.c ****     if ((*pressed != 0U) &&
+ 113              		.loc 1 28 5 is_stmt 1 view .LVU20
+ 114              		.loc 1 28 10 is_stmt 0 view .LVU21
+ 115 000a 1378     		ldrb	r3, [r2]	@ zero_extendqisi2
+ 116              	.LVL5:
+ 117              		.loc 1 28 8 view .LVU22
+ 118 000c 13B1     		cbz	r3, .L4
+  29:project/src/button.c ****         (gpio_input_data_bit_read(port, pin) != RESET))
+ 119              		.loc 1 29 10 view .LVU23
+ 120 000e FFF7FEFF 		bl	gpio_input_data_bit_read
+ 121              	.LVL6:
+  28:project/src/button.c ****     if ((*pressed != 0U) &&
+ 122              		.loc 1 28 26 discriminator 1 view .LVU24
+ 123 0012 40B9     		cbnz	r0, .L9
+ 124              	.L4:
+  30:project/src/button.c ****     {
+  31:project/src/button.c ****         *pressed = 0U;
+  32:project/src/button.c ****         wk_delay_ms(BUTTON_DEBOUNCE_MS);
+  33:project/src/button.c ****         if (gpio_input_data_bit_read(port, pin) != RESET)
+  34:project/src/button.c ****         {
+  35:project/src/button.c ****             return button;
+  36:project/src/button.c ****         }
+  37:project/src/button.c ****     }
+  38:project/src/button.c ****     else if (gpio_input_data_bit_read(port, pin) == RESET)
+ 125              		.loc 1 38 10 is_stmt 1 view .LVU25
+ 126              		.loc 1 38 14 is_stmt 0 view .LVU26
+ 127 0014 3146     		mov	r1, r6
+ 128 0016 3846     		mov	r0, r7
+ 129 0018 FFF7FEFF 		bl	gpio_input_data_bit_read
+ 130              	.LVL7:
+ 131              		.loc 1 38 13 discriminator 1 view .LVU27
+ 132 001c 88B9     		cbnz	r0, .L7
+  39:project/src/button.c ****     {
+  40:project/src/button.c ****         *pressed = 1U;
+ 133              		.loc 1 40 9 is_stmt 1 view .LVU28
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccfGXnQ6.s 			page 4
+
+
+ 134              		.loc 1 40 18 is_stmt 0 view .LVU29
+ 135 001e 0123     		movs	r3, #1
+ 136 0020 2B70     		strb	r3, [r5]
+  41:project/src/button.c ****     }
+  42:project/src/button.c **** 
+  43:project/src/button.c ****     return NO_BUTTON;
+ 137              		.loc 1 43 12 view .LVU30
+ 138 0022 0520     		movs	r0, #5
+ 139              	.L5:
+  44:project/src/button.c **** }
+ 140              		.loc 1 44 1 view .LVU31
+ 141 0024 F8BD     		pop	{r3, r4, r5, r6, r7, pc}
+ 142              	.LVL8:
+ 143              	.L9:
+  31:project/src/button.c ****         wk_delay_ms(BUTTON_DEBOUNCE_MS);
+ 144              		.loc 1 31 9 is_stmt 1 view .LVU32
+  31:project/src/button.c ****         wk_delay_ms(BUTTON_DEBOUNCE_MS);
+ 145              		.loc 1 31 18 is_stmt 0 view .LVU33
+ 146 0026 0023     		movs	r3, #0
+ 147 0028 2B70     		strb	r3, [r5]
+  32:project/src/button.c ****         if (gpio_input_data_bit_read(port, pin) != RESET)
+ 148              		.loc 1 32 9 is_stmt 1 view .LVU34
+ 149 002a 0A20     		movs	r0, #10
+ 150 002c FFF7FEFF 		bl	wk_delay_ms
+ 151              	.LVL9:
+  33:project/src/button.c ****         {
+ 152              		.loc 1 33 9 view .LVU35
+  33:project/src/button.c ****         {
+ 153              		.loc 1 33 13 is_stmt 0 view .LVU36
+ 154 0030 3146     		mov	r1, r6
+ 155 0032 3846     		mov	r0, r7
+ 156 0034 FFF7FEFF 		bl	gpio_input_data_bit_read
+ 157              	.LVL10:
+  33:project/src/button.c ****         {
+ 158              		.loc 1 33 12 discriminator 1 view .LVU37
+ 159 0038 08B9     		cbnz	r0, .L6
+  43:project/src/button.c **** }
+ 160              		.loc 1 43 12 view .LVU38
+ 161 003a 0520     		movs	r0, #5
+ 162 003c F2E7     		b	.L5
+ 163              	.L6:
+  35:project/src/button.c ****         }
+ 164              		.loc 1 35 20 view .LVU39
+ 165 003e 2046     		mov	r0, r4
+ 166 0040 F0E7     		b	.L5
+ 167              	.L7:
+  43:project/src/button.c **** }
+ 168              		.loc 1 43 12 view .LVU40
+ 169 0042 0520     		movs	r0, #5
+ 170 0044 EEE7     		b	.L5
+ 171              		.cfi_endproc
+ 172              	.LFE138:
+ 174              		.section	.text.at32_button_init,"ax",%progbits
+ 175              		.align	1
+ 176              		.global	at32_button_init
+ 177              		.syntax unified
+ 178              		.thumb
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccfGXnQ6.s 			page 5
+
+
+ 179              		.thumb_func
+ 181              	at32_button_init:
+ 182              	.LFB139:
+  45:project/src/button.c **** 
+  46:project/src/button.c **** void at32_button_init(void)
+  47:project/src/button.c **** {
+ 183              		.loc 1 47 1 is_stmt 1 view -0
+ 184              		.cfi_startproc
+ 185              		@ args = 0, pretend = 0, frame = 0
+ 186              		@ frame_needed = 0, uses_anonymous_args = 0
+ 187 0000 10B5     		push	{r4, lr}
+ 188              	.LCFI4:
+ 189              		.cfi_def_cfa_offset 8
+ 190              		.cfi_offset 4, -8
+ 191              		.cfi_offset 14, -4
+  48:project/src/button.c ****     crm_periph_clock_enable(USER_BUTTON_CRM_CLK, TRUE);
+ 192              		.loc 1 48 5 view .LVU42
+ 193 0002 0121     		movs	r1, #1
+ 194 0004 0E48     		ldr	r0, .L12
+ 195 0006 FFF7FEFF 		bl	crm_periph_clock_enable
+ 196              	.LVL11:
+  49:project/src/button.c ****     crm_periph_clock_enable(S1_BUTTON_CRM_CLK, TRUE);
+ 197              		.loc 1 49 5 view .LVU43
+ 198 000a 0121     		movs	r1, #1
+ 199 000c 0D48     		ldr	r0, .L12+4
+ 200 000e FFF7FEFF 		bl	crm_periph_clock_enable
+ 201              	.LVL12:
+  50:project/src/button.c **** 
+  51:project/src/button.c ****     button_gpio_init(USER_BUTTON_PORT, USER_BUTTON_PIN);
+ 202              		.loc 1 51 5 view .LVU44
+ 203 0012 0121     		movs	r1, #1
+ 204 0014 0C48     		ldr	r0, .L12+8
+ 205 0016 FFF7FEFF 		bl	button_gpio_init
+ 206              	.LVL13:
+  52:project/src/button.c ****     button_gpio_init(S1_BUTTON_PORT, S1_BUTTON_PIN);
+ 207              		.loc 1 52 5 view .LVU45
+ 208 001a 0C4C     		ldr	r4, .L12+12
+ 209 001c 0421     		movs	r1, #4
+ 210 001e 2046     		mov	r0, r4
+ 211 0020 FFF7FEFF 		bl	button_gpio_init
+ 212              	.LVL14:
+  53:project/src/button.c ****     button_gpio_init(S2_BUTTON_PORT, S2_BUTTON_PIN);
+ 213              		.loc 1 53 5 view .LVU46
+ 214 0024 0821     		movs	r1, #8
+ 215 0026 2046     		mov	r0, r4
+ 216 0028 FFF7FEFF 		bl	button_gpio_init
+ 217              	.LVL15:
+  54:project/src/button.c ****     button_gpio_init(S3_BUTTON_PORT, S3_BUTTON_PIN);
+ 218              		.loc 1 54 5 view .LVU47
+ 219 002c 1021     		movs	r1, #16
+ 220 002e 2046     		mov	r0, r4
+ 221 0030 FFF7FEFF 		bl	button_gpio_init
+ 222              	.LVL16:
+  55:project/src/button.c ****     button_gpio_init(S4_BUTTON_PORT, S4_BUTTON_PIN);
+ 223              		.loc 1 55 5 view .LVU48
+ 224 0034 2021     		movs	r1, #32
+ 225 0036 2046     		mov	r0, r4
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccfGXnQ6.s 			page 6
+
+
+ 226 0038 FFF7FEFF 		bl	button_gpio_init
+ 227              	.LVL17:
+  56:project/src/button.c **** }
+ 228              		.loc 1 56 1 is_stmt 0 view .LVU49
+ 229 003c 10BD     		pop	{r4, pc}
+ 230              	.L13:
+ 231 003e 00BF     		.align	2
+ 232              	.L12:
+ 233 0040 02001800 		.word	1572866
+ 234 0044 06001800 		.word	1572870
+ 235 0048 00080140 		.word	1073809408
+ 236 004c 00180140 		.word	1073813504
+ 237              		.cfi_endproc
+ 238              	.LFE139:
+ 240              		.section	.text.at32_button_user_state,"ax",%progbits
+ 241              		.align	1
+ 242              		.global	at32_button_user_state
+ 243              		.syntax unified
+ 244              		.thumb
+ 245              		.thumb_func
+ 247              	at32_button_user_state:
+ 248              	.LFB140:
+  57:project/src/button.c **** 
+  58:project/src/button.c **** uint8_t at32_button_user_state(void)
+  59:project/src/button.c **** {
+ 249              		.loc 1 59 1 is_stmt 1 view -0
+ 250              		.cfi_startproc
+ 251              		@ args = 0, pretend = 0, frame = 0
+ 252              		@ frame_needed = 0, uses_anonymous_args = 0
+ 253 0000 08B5     		push	{r3, lr}
+ 254              	.LCFI5:
+ 255              		.cfi_def_cfa_offset 8
+ 256              		.cfi_offset 3, -8
+ 257              		.cfi_offset 14, -4
+  60:project/src/button.c ****     return gpio_input_data_bit_read(USER_BUTTON_PORT, USER_BUTTON_PIN);
+ 258              		.loc 1 60 5 view .LVU51
+ 259              		.loc 1 60 12 is_stmt 0 view .LVU52
+ 260 0002 0121     		movs	r1, #1
+ 261 0004 0148     		ldr	r0, .L16
+ 262 0006 FFF7FEFF 		bl	gpio_input_data_bit_read
+ 263              	.LVL18:
+  61:project/src/button.c **** }
+ 264              		.loc 1 61 1 view .LVU53
+ 265 000a 08BD     		pop	{r3, pc}
+ 266              	.L17:
+ 267              		.align	2
+ 268              	.L16:
+ 269 000c 00080140 		.word	1073809408
+ 270              		.cfi_endproc
+ 271              	.LFE140:
+ 273              		.section	.text.at32_button_s1_state,"ax",%progbits
+ 274              		.align	1
+ 275              		.global	at32_button_s1_state
+ 276              		.syntax unified
+ 277              		.thumb
+ 278              		.thumb_func
+ 280              	at32_button_s1_state:
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccfGXnQ6.s 			page 7
+
+
+ 281              	.LFB141:
+  62:project/src/button.c **** 
+  63:project/src/button.c **** uint8_t at32_button_s1_state(void)
+  64:project/src/button.c **** {
+ 282              		.loc 1 64 1 is_stmt 1 view -0
+ 283              		.cfi_startproc
+ 284              		@ args = 0, pretend = 0, frame = 0
+ 285              		@ frame_needed = 0, uses_anonymous_args = 0
+ 286 0000 08B5     		push	{r3, lr}
+ 287              	.LCFI6:
+ 288              		.cfi_def_cfa_offset 8
+ 289              		.cfi_offset 3, -8
+ 290              		.cfi_offset 14, -4
+  65:project/src/button.c ****     return gpio_input_data_bit_read(S1_BUTTON_PORT, S1_BUTTON_PIN);
+ 291              		.loc 1 65 5 view .LVU55
+ 292              		.loc 1 65 12 is_stmt 0 view .LVU56
+ 293 0002 0421     		movs	r1, #4
+ 294 0004 0148     		ldr	r0, .L20
+ 295 0006 FFF7FEFF 		bl	gpio_input_data_bit_read
+ 296              	.LVL19:
+  66:project/src/button.c **** }
+ 297              		.loc 1 66 1 view .LVU57
+ 298 000a 08BD     		pop	{r3, pc}
+ 299              	.L21:
+ 300              		.align	2
+ 301              	.L20:
+ 302 000c 00180140 		.word	1073813504
+ 303              		.cfi_endproc
+ 304              	.LFE141:
+ 306              		.section	.text.at32_button_s2_state,"ax",%progbits
+ 307              		.align	1
+ 308              		.global	at32_button_s2_state
+ 309              		.syntax unified
+ 310              		.thumb
+ 311              		.thumb_func
+ 313              	at32_button_s2_state:
+ 314              	.LFB142:
+  67:project/src/button.c **** 
+  68:project/src/button.c **** uint8_t at32_button_s2_state(void)
+  69:project/src/button.c **** {
+ 315              		.loc 1 69 1 is_stmt 1 view -0
+ 316              		.cfi_startproc
+ 317              		@ args = 0, pretend = 0, frame = 0
+ 318              		@ frame_needed = 0, uses_anonymous_args = 0
+ 319 0000 08B5     		push	{r3, lr}
+ 320              	.LCFI7:
+ 321              		.cfi_def_cfa_offset 8
+ 322              		.cfi_offset 3, -8
+ 323              		.cfi_offset 14, -4
+  70:project/src/button.c ****     return gpio_input_data_bit_read(S2_BUTTON_PORT, S2_BUTTON_PIN);
+ 324              		.loc 1 70 5 view .LVU59
+ 325              		.loc 1 70 12 is_stmt 0 view .LVU60
+ 326 0002 0821     		movs	r1, #8
+ 327 0004 0148     		ldr	r0, .L24
+ 328 0006 FFF7FEFF 		bl	gpio_input_data_bit_read
+ 329              	.LVL20:
+  71:project/src/button.c **** }
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccfGXnQ6.s 			page 8
+
+
+ 330              		.loc 1 71 1 view .LVU61
+ 331 000a 08BD     		pop	{r3, pc}
+ 332              	.L25:
+ 333              		.align	2
+ 334              	.L24:
+ 335 000c 00180140 		.word	1073813504
+ 336              		.cfi_endproc
+ 337              	.LFE142:
+ 339              		.section	.text.at32_button_s3_state,"ax",%progbits
+ 340              		.align	1
+ 341              		.global	at32_button_s3_state
+ 342              		.syntax unified
+ 343              		.thumb
+ 344              		.thumb_func
+ 346              	at32_button_s3_state:
+ 347              	.LFB143:
+  72:project/src/button.c **** 
+  73:project/src/button.c **** uint8_t at32_button_s3_state(void)
+  74:project/src/button.c **** {
+ 348              		.loc 1 74 1 is_stmt 1 view -0
+ 349              		.cfi_startproc
+ 350              		@ args = 0, pretend = 0, frame = 0
+ 351              		@ frame_needed = 0, uses_anonymous_args = 0
+ 352 0000 08B5     		push	{r3, lr}
+ 353              	.LCFI8:
+ 354              		.cfi_def_cfa_offset 8
+ 355              		.cfi_offset 3, -8
+ 356              		.cfi_offset 14, -4
+  75:project/src/button.c ****     return gpio_input_data_bit_read(S3_BUTTON_PORT, S3_BUTTON_PIN);
+ 357              		.loc 1 75 5 view .LVU63
+ 358              		.loc 1 75 12 is_stmt 0 view .LVU64
+ 359 0002 1021     		movs	r1, #16
+ 360 0004 0148     		ldr	r0, .L28
+ 361 0006 FFF7FEFF 		bl	gpio_input_data_bit_read
+ 362              	.LVL21:
+  76:project/src/button.c **** }
+ 363              		.loc 1 76 1 view .LVU65
+ 364 000a 08BD     		pop	{r3, pc}
+ 365              	.L29:
+ 366              		.align	2
+ 367              	.L28:
+ 368 000c 00180140 		.word	1073813504
+ 369              		.cfi_endproc
+ 370              	.LFE143:
+ 372              		.section	.text.at32_button_s4_state,"ax",%progbits
+ 373              		.align	1
+ 374              		.global	at32_button_s4_state
+ 375              		.syntax unified
+ 376              		.thumb
+ 377              		.thumb_func
+ 379              	at32_button_s4_state:
+ 380              	.LFB144:
+  77:project/src/button.c **** 
+  78:project/src/button.c **** uint8_t at32_button_s4_state(void)
+  79:project/src/button.c **** {
+ 381              		.loc 1 79 1 is_stmt 1 view -0
+ 382              		.cfi_startproc
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccfGXnQ6.s 			page 9
+
+
+ 383              		@ args = 0, pretend = 0, frame = 0
+ 384              		@ frame_needed = 0, uses_anonymous_args = 0
+ 385 0000 08B5     		push	{r3, lr}
+ 386              	.LCFI9:
+ 387              		.cfi_def_cfa_offset 8
+ 388              		.cfi_offset 3, -8
+ 389              		.cfi_offset 14, -4
+  80:project/src/button.c ****     return gpio_input_data_bit_read(S4_BUTTON_PORT, S4_BUTTON_PIN);
+ 390              		.loc 1 80 5 view .LVU67
+ 391              		.loc 1 80 12 is_stmt 0 view .LVU68
+ 392 0002 2021     		movs	r1, #32
+ 393 0004 0148     		ldr	r0, .L32
+ 394 0006 FFF7FEFF 		bl	gpio_input_data_bit_read
+ 395              	.LVL22:
+  81:project/src/button.c **** }
+ 396              		.loc 1 81 1 view .LVU69
+ 397 000a 08BD     		pop	{r3, pc}
+ 398              	.L33:
+ 399              		.align	2
+ 400              	.L32:
+ 401 000c 00180140 		.word	1073813504
+ 402              		.cfi_endproc
+ 403              	.LFE144:
+ 405              		.section	.text.at32_button_user_press,"ax",%progbits
+ 406              		.align	1
+ 407              		.global	at32_button_user_press
+ 408              		.syntax unified
+ 409              		.thumb
+ 410              		.thumb_func
+ 412              	at32_button_user_press:
+ 413              	.LFB145:
+  82:project/src/button.c **** 
+  83:project/src/button.c **** button_type at32_button_user_press(void)
+  84:project/src/button.c **** {
+ 414              		.loc 1 84 1 is_stmt 1 view -0
+ 415              		.cfi_startproc
+ 416              		@ args = 0, pretend = 0, frame = 0
+ 417              		@ frame_needed = 0, uses_anonymous_args = 0
+ 418 0000 08B5     		push	{r3, lr}
+ 419              	.LCFI10:
+ 420              		.cfi_def_cfa_offset 8
+ 421              		.cfi_offset 3, -8
+ 422              		.cfi_offset 14, -4
+  85:project/src/button.c ****     return button_press_check(USER_BUTTON_PORT, USER_BUTTON_PIN,
+ 423              		.loc 1 85 5 view .LVU71
+ 424              		.loc 1 85 12 is_stmt 0 view .LVU72
+ 425 0002 0023     		movs	r3, #0
+ 426 0004 024A     		ldr	r2, .L36
+ 427 0006 0121     		movs	r1, #1
+ 428 0008 0248     		ldr	r0, .L36+4
+ 429 000a FFF7FEFF 		bl	button_press_check
+ 430              	.LVL23:
+  86:project/src/button.c ****                               &user_button_pressed, USER_BUTTON);
+  87:project/src/button.c **** }
+ 431              		.loc 1 87 1 view .LVU73
+ 432 000e 08BD     		pop	{r3, pc}
+ 433              	.L37:
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccfGXnQ6.s 			page 10
+
+
+ 434              		.align	2
+ 435              	.L36:
+ 436 0010 00000000 		.word	user_button_pressed
+ 437 0014 00080140 		.word	1073809408
+ 438              		.cfi_endproc
+ 439              	.LFE145:
+ 441              		.section	.text.at32_button_s1_press,"ax",%progbits
+ 442              		.align	1
+ 443              		.global	at32_button_s1_press
+ 444              		.syntax unified
+ 445              		.thumb
+ 446              		.thumb_func
+ 448              	at32_button_s1_press:
+ 449              	.LFB146:
+  88:project/src/button.c **** 
+  89:project/src/button.c **** button_type at32_button_s1_press(void)
+  90:project/src/button.c **** {
+ 450              		.loc 1 90 1 is_stmt 1 view -0
+ 451              		.cfi_startproc
+ 452              		@ args = 0, pretend = 0, frame = 0
+ 453              		@ frame_needed = 0, uses_anonymous_args = 0
+ 454 0000 08B5     		push	{r3, lr}
+ 455              	.LCFI11:
+ 456              		.cfi_def_cfa_offset 8
+ 457              		.cfi_offset 3, -8
+ 458              		.cfi_offset 14, -4
+  91:project/src/button.c ****     return button_press_check(S1_BUTTON_PORT, S1_BUTTON_PIN,
+ 459              		.loc 1 91 5 view .LVU75
+ 460              		.loc 1 91 12 is_stmt 0 view .LVU76
+ 461 0002 0123     		movs	r3, #1
+ 462 0004 024A     		ldr	r2, .L40
+ 463 0006 0421     		movs	r1, #4
+ 464 0008 0248     		ldr	r0, .L40+4
+ 465 000a FFF7FEFF 		bl	button_press_check
+ 466              	.LVL24:
+  92:project/src/button.c ****                               &s1_button_pressed, S1_BUTTON);
+  93:project/src/button.c **** }
+ 467              		.loc 1 93 1 view .LVU77
+ 468 000e 08BD     		pop	{r3, pc}
+ 469              	.L41:
+ 470              		.align	2
+ 471              	.L40:
+ 472 0010 00000000 		.word	s1_button_pressed
+ 473 0014 00180140 		.word	1073813504
+ 474              		.cfi_endproc
+ 475              	.LFE146:
+ 477              		.section	.text.at32_button_s2_press,"ax",%progbits
+ 478              		.align	1
+ 479              		.global	at32_button_s2_press
+ 480              		.syntax unified
+ 481              		.thumb
+ 482              		.thumb_func
+ 484              	at32_button_s2_press:
+ 485              	.LFB147:
+  94:project/src/button.c **** 
+  95:project/src/button.c **** button_type at32_button_s2_press(void)
+  96:project/src/button.c **** {
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccfGXnQ6.s 			page 11
+
+
+ 486              		.loc 1 96 1 is_stmt 1 view -0
+ 487              		.cfi_startproc
+ 488              		@ args = 0, pretend = 0, frame = 0
+ 489              		@ frame_needed = 0, uses_anonymous_args = 0
+ 490 0000 08B5     		push	{r3, lr}
+ 491              	.LCFI12:
+ 492              		.cfi_def_cfa_offset 8
+ 493              		.cfi_offset 3, -8
+ 494              		.cfi_offset 14, -4
+  97:project/src/button.c ****     return button_press_check(S2_BUTTON_PORT, S2_BUTTON_PIN,
+ 495              		.loc 1 97 5 view .LVU79
+ 496              		.loc 1 97 12 is_stmt 0 view .LVU80
+ 497 0002 0223     		movs	r3, #2
+ 498 0004 024A     		ldr	r2, .L44
+ 499 0006 0821     		movs	r1, #8
+ 500 0008 0248     		ldr	r0, .L44+4
+ 501 000a FFF7FEFF 		bl	button_press_check
+ 502              	.LVL25:
+  98:project/src/button.c ****                               &s2_button_pressed, S2_BUTTON);
+  99:project/src/button.c **** }
+ 503              		.loc 1 99 1 view .LVU81
+ 504 000e 08BD     		pop	{r3, pc}
+ 505              	.L45:
+ 506              		.align	2
+ 507              	.L44:
+ 508 0010 00000000 		.word	s2_button_pressed
+ 509 0014 00180140 		.word	1073813504
+ 510              		.cfi_endproc
+ 511              	.LFE147:
+ 513              		.section	.text.at32_button_s3_press,"ax",%progbits
+ 514              		.align	1
+ 515              		.global	at32_button_s3_press
+ 516              		.syntax unified
+ 517              		.thumb
+ 518              		.thumb_func
+ 520              	at32_button_s3_press:
+ 521              	.LFB148:
+ 100:project/src/button.c **** 
+ 101:project/src/button.c **** button_type at32_button_s3_press(void)
+ 102:project/src/button.c **** {
+ 522              		.loc 1 102 1 is_stmt 1 view -0
+ 523              		.cfi_startproc
+ 524              		@ args = 0, pretend = 0, frame = 0
+ 525              		@ frame_needed = 0, uses_anonymous_args = 0
+ 526 0000 08B5     		push	{r3, lr}
+ 527              	.LCFI13:
+ 528              		.cfi_def_cfa_offset 8
+ 529              		.cfi_offset 3, -8
+ 530              		.cfi_offset 14, -4
+ 103:project/src/button.c ****     return button_press_check(S3_BUTTON_PORT, S3_BUTTON_PIN,
+ 531              		.loc 1 103 5 view .LVU83
+ 532              		.loc 1 103 12 is_stmt 0 view .LVU84
+ 533 0002 0323     		movs	r3, #3
+ 534 0004 024A     		ldr	r2, .L48
+ 535 0006 1021     		movs	r1, #16
+ 536 0008 0248     		ldr	r0, .L48+4
+ 537 000a FFF7FEFF 		bl	button_press_check
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccfGXnQ6.s 			page 12
+
+
+ 538              	.LVL26:
+ 104:project/src/button.c ****                               &s3_button_pressed, S3_BUTTON);
+ 105:project/src/button.c **** }
+ 539              		.loc 1 105 1 view .LVU85
+ 540 000e 08BD     		pop	{r3, pc}
+ 541              	.L49:
+ 542              		.align	2
+ 543              	.L48:
+ 544 0010 00000000 		.word	s3_button_pressed
+ 545 0014 00180140 		.word	1073813504
+ 546              		.cfi_endproc
+ 547              	.LFE148:
+ 549              		.section	.text.at32_button_s4_press,"ax",%progbits
+ 550              		.align	1
+ 551              		.global	at32_button_s4_press
+ 552              		.syntax unified
+ 553              		.thumb
+ 554              		.thumb_func
+ 556              	at32_button_s4_press:
+ 557              	.LFB149:
+ 106:project/src/button.c **** 
+ 107:project/src/button.c **** button_type at32_button_s4_press(void)
+ 108:project/src/button.c **** {
+ 558              		.loc 1 108 1 is_stmt 1 view -0
+ 559              		.cfi_startproc
+ 560              		@ args = 0, pretend = 0, frame = 0
+ 561              		@ frame_needed = 0, uses_anonymous_args = 0
+ 562 0000 08B5     		push	{r3, lr}
+ 563              	.LCFI14:
+ 564              		.cfi_def_cfa_offset 8
+ 565              		.cfi_offset 3, -8
+ 566              		.cfi_offset 14, -4
+ 109:project/src/button.c ****     return button_press_check(S4_BUTTON_PORT, S4_BUTTON_PIN,
+ 567              		.loc 1 109 5 view .LVU87
+ 568              		.loc 1 109 12 is_stmt 0 view .LVU88
+ 569 0002 0423     		movs	r3, #4
+ 570 0004 024A     		ldr	r2, .L52
+ 571 0006 2021     		movs	r1, #32
+ 572 0008 0248     		ldr	r0, .L52+4
+ 573 000a FFF7FEFF 		bl	button_press_check
+ 574              	.LVL27:
+ 110:project/src/button.c ****                               &s4_button_pressed, S4_BUTTON);
+ 111:project/src/button.c **** }
+ 575              		.loc 1 111 1 view .LVU89
+ 576 000e 08BD     		pop	{r3, pc}
+ 577              	.L53:
+ 578              		.align	2
+ 579              	.L52:
+ 580 0010 00000000 		.word	s4_button_pressed
+ 581 0014 00180140 		.word	1073813504
+ 582              		.cfi_endproc
+ 583              	.LFE149:
+ 585              		.section	.data.s4_button_pressed,"aw"
+ 588              	s4_button_pressed:
+ 589 0000 01       		.byte	1
+ 590              		.section	.data.s3_button_pressed,"aw"
+ 593              	s3_button_pressed:
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccfGXnQ6.s 			page 13
+
+
+ 594 0000 01       		.byte	1
+ 595              		.section	.data.s2_button_pressed,"aw"
+ 598              	s2_button_pressed:
+ 599 0000 01       		.byte	1
+ 600              		.section	.data.s1_button_pressed,"aw"
+ 603              	s1_button_pressed:
+ 604 0000 01       		.byte	1
+ 605              		.section	.data.user_button_pressed,"aw"
+ 608              	user_button_pressed:
+ 609 0000 01       		.byte	1
+ 610              		.text
+ 611              	.Letext0:
+ 612              		.file 2 "D:/gnu_toolchain/arm-none-eabi/include/machine/_default_types.h"
+ 613              		.file 3 "D:/gnu_toolchain/arm-none-eabi/include/sys/_stdint.h"
+ 614              		.file 4 "libraries/cmsis/cm4/device_support/at32f403a_407.h"
+ 615              		.file 5 "libraries/drivers/inc/at32f403a_407_crm.h"
+ 616              		.file 6 "libraries/drivers/inc/at32f403a_407_gpio.h"
+ 617              		.file 7 "libraries/drivers/inc/at32f403a_407_tmr.h"
+ 618              		.file 8 "project/inc/button.h"
+ 619              		.file 9 "project/inc/wk_system.h"
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccfGXnQ6.s 			page 14
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 button.c
+C:\Users\bians\AppData\Local\Temp\ccfGXnQ6.s:21     .text.button_gpio_init:00000000 $t
+C:\Users\bians\AppData\Local\Temp\ccfGXnQ6.s:26     .text.button_gpio_init:00000000 button_gpio_init
+C:\Users\bians\AppData\Local\Temp\ccfGXnQ6.s:87     .text.button_press_check:00000000 $t
+C:\Users\bians\AppData\Local\Temp\ccfGXnQ6.s:92     .text.button_press_check:00000000 button_press_check
+C:\Users\bians\AppData\Local\Temp\ccfGXnQ6.s:175    .text.at32_button_init:00000000 $t
+C:\Users\bians\AppData\Local\Temp\ccfGXnQ6.s:181    .text.at32_button_init:00000000 at32_button_init
+C:\Users\bians\AppData\Local\Temp\ccfGXnQ6.s:233    .text.at32_button_init:00000040 $d
+C:\Users\bians\AppData\Local\Temp\ccfGXnQ6.s:241    .text.at32_button_user_state:00000000 $t
+C:\Users\bians\AppData\Local\Temp\ccfGXnQ6.s:247    .text.at32_button_user_state:00000000 at32_button_user_state
+C:\Users\bians\AppData\Local\Temp\ccfGXnQ6.s:269    .text.at32_button_user_state:0000000c $d
+C:\Users\bians\AppData\Local\Temp\ccfGXnQ6.s:274    .text.at32_button_s1_state:00000000 $t
+C:\Users\bians\AppData\Local\Temp\ccfGXnQ6.s:280    .text.at32_button_s1_state:00000000 at32_button_s1_state
+C:\Users\bians\AppData\Local\Temp\ccfGXnQ6.s:302    .text.at32_button_s1_state:0000000c $d
+C:\Users\bians\AppData\Local\Temp\ccfGXnQ6.s:307    .text.at32_button_s2_state:00000000 $t
+C:\Users\bians\AppData\Local\Temp\ccfGXnQ6.s:313    .text.at32_button_s2_state:00000000 at32_button_s2_state
+C:\Users\bians\AppData\Local\Temp\ccfGXnQ6.s:335    .text.at32_button_s2_state:0000000c $d
+C:\Users\bians\AppData\Local\Temp\ccfGXnQ6.s:340    .text.at32_button_s3_state:00000000 $t
+C:\Users\bians\AppData\Local\Temp\ccfGXnQ6.s:346    .text.at32_button_s3_state:00000000 at32_button_s3_state
+C:\Users\bians\AppData\Local\Temp\ccfGXnQ6.s:368    .text.at32_button_s3_state:0000000c $d
+C:\Users\bians\AppData\Local\Temp\ccfGXnQ6.s:373    .text.at32_button_s4_state:00000000 $t
+C:\Users\bians\AppData\Local\Temp\ccfGXnQ6.s:379    .text.at32_button_s4_state:00000000 at32_button_s4_state
+C:\Users\bians\AppData\Local\Temp\ccfGXnQ6.s:401    .text.at32_button_s4_state:0000000c $d
+C:\Users\bians\AppData\Local\Temp\ccfGXnQ6.s:406    .text.at32_button_user_press:00000000 $t
+C:\Users\bians\AppData\Local\Temp\ccfGXnQ6.s:412    .text.at32_button_user_press:00000000 at32_button_user_press
+C:\Users\bians\AppData\Local\Temp\ccfGXnQ6.s:436    .text.at32_button_user_press:00000010 $d
+C:\Users\bians\AppData\Local\Temp\ccfGXnQ6.s:608    .data.user_button_pressed:00000000 user_button_pressed
+C:\Users\bians\AppData\Local\Temp\ccfGXnQ6.s:442    .text.at32_button_s1_press:00000000 $t
+C:\Users\bians\AppData\Local\Temp\ccfGXnQ6.s:448    .text.at32_button_s1_press:00000000 at32_button_s1_press
+C:\Users\bians\AppData\Local\Temp\ccfGXnQ6.s:472    .text.at32_button_s1_press:00000010 $d
+C:\Users\bians\AppData\Local\Temp\ccfGXnQ6.s:603    .data.s1_button_pressed:00000000 s1_button_pressed
+C:\Users\bians\AppData\Local\Temp\ccfGXnQ6.s:478    .text.at32_button_s2_press:00000000 $t
+C:\Users\bians\AppData\Local\Temp\ccfGXnQ6.s:484    .text.at32_button_s2_press:00000000 at32_button_s2_press
+C:\Users\bians\AppData\Local\Temp\ccfGXnQ6.s:508    .text.at32_button_s2_press:00000010 $d
+C:\Users\bians\AppData\Local\Temp\ccfGXnQ6.s:598    .data.s2_button_pressed:00000000 s2_button_pressed
+C:\Users\bians\AppData\Local\Temp\ccfGXnQ6.s:514    .text.at32_button_s3_press:00000000 $t
+C:\Users\bians\AppData\Local\Temp\ccfGXnQ6.s:520    .text.at32_button_s3_press:00000000 at32_button_s3_press
+C:\Users\bians\AppData\Local\Temp\ccfGXnQ6.s:544    .text.at32_button_s3_press:00000010 $d
+C:\Users\bians\AppData\Local\Temp\ccfGXnQ6.s:593    .data.s3_button_pressed:00000000 s3_button_pressed
+C:\Users\bians\AppData\Local\Temp\ccfGXnQ6.s:550    .text.at32_button_s4_press:00000000 $t
+C:\Users\bians\AppData\Local\Temp\ccfGXnQ6.s:556    .text.at32_button_s4_press:00000000 at32_button_s4_press
+C:\Users\bians\AppData\Local\Temp\ccfGXnQ6.s:580    .text.at32_button_s4_press:00000010 $d
+C:\Users\bians\AppData\Local\Temp\ccfGXnQ6.s:588    .data.s4_button_pressed:00000000 s4_button_pressed
+
+UNDEFINED SYMBOLS
+gpio_default_para_init
+gpio_init
+gpio_input_data_bit_read
+wk_delay_ms
+crm_periph_clock_enable

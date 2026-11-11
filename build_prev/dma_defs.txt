@@ -1,0 +1,36 @@
+﻿#define DMA1_GL1_FLAG                    ((uint32_t)0x00000001) /*!< dma1 channel1 global flag */
+#define DMA1_FDT1_FLAG                   ((uint32_t)0x00000002) /*!< dma1 channel1 full data transfer flag */
+#define DMA1_HDT1_FLAG                   ((uint32_t)0x00000004) /*!< dma1 channel1 half data transfer flag */
+#define DMA1_DTERR1_FLAG                 ((uint32_t)0x00000008) /*!< dma1 channel1 error flag */
+#define DMA1_GL2_FLAG                    ((uint32_t)0x00000010) /*!< dma1 channel2 global flag */
+#define DMA1_FDT2_FLAG                   ((uint32_t)0x00000020) /*!< dma1 channel2 full data transfer flag */
+#define DMA1_HDT2_FLAG                   ((uint32_t)0x00000040) /*!< dma1 channel2 half data transfer flag */
+#define DMA1_DTERR2_FLAG                 ((uint32_t)0x00000080) /*!< dma1 channel2 error flag */
+#define DMA1_GL3_FLAG                    ((uint32_t)0x00000100) /*!< dma1 channel3 global flag */
+#define DMA1_FDT3_FLAG                   ((uint32_t)0x00000200) /*!< dma1 channel3 full data transfer flag */
+#define DMA1_HDT3_FLAG                   ((uint32_t)0x00000400) /*!< dma1 channel3 half data transfer flag */
+#define DMA1_DTERR3_FLAG                 ((uint32_t)0x00000800) /*!< dma1 channel3 error flag */
+#define DMA1_GL4_FLAG                    ((uint32_t)0x00001000) /*!< dma1 channel4 global flag */
+#define DMA1_FDT4_FLAG                   ((uint32_t)0x00002000) /*!< dma1 channel4 full data transfer flag */
+#define DMA1_HDT4_FLAG                   ((uint32_t)0x00004000) /*!< dma1 channel4 half data transfer flag */
+#define DMA1_DTERR4_FLAG                 ((uint32_t)0x00008000) /*!< dma1 channel4 error flag */
+#define DMA1_GL5_FLAG                    ((uint32_t)0x00010000) /*!< dma1 channel5 global flag */
+#define DMA1_FDT5_FLAG                   ((uint32_t)0x00020000) /*!< dma1 channel5 full data transfer flag */
+#define DMA1_HDT5_FLAG                   ((uint32_t)0x00040000) /*!< dma1 channel5 half data transfer flag */
+#define DMA1_DTERR5_FLAG                 ((uint32_t)0x00080000) /*!< dma1 channel5 error flag */
+#define DMA1_GL6_FLAG                    ((uint32_t)0x00100000) /*!< dma1 channel6 global flag */
+#define DMA1_FDT6_FLAG                   ((uint32_t)0x00200000) /*!< dma1 channel6 full data transfer flag */
+#define DMA1_HDT6_FLAG                   ((uint32_t)0x00400000) /*!< dma1 channel6 half data transfer flag */
+#define DMA1_DTERR6_FLAG                 ((uint32_t)0x00800000) /*!< dma1 channel6 error flag */
+#define DMA1_GL7_FLAG                    ((uint32_t)0x01000000) /*!< dma1 channel7 global flag */
+#define DMA1_FDT7_FLAG                   ((uint32_t)0x02000000) /*!< dma1 channel7 full data transfer flag */
+#define DMA1_HDT7_FLAG                   ((uint32_t)0x04000000) /*!< dma1 channel7 half data transfer flag */
+#define DMA1_DTERR7_FLAG                 ((uint32_t)0x08000000) /*!< dma1 channel7 error flag */
+#define DMA1                             ((dma_type *) DMA1_BASE)
+#define DMA1_CHANNEL1                    ((dma_channel_type *) DMA1_CHANNEL1_BASE)
+#define DMA1_CHANNEL2                    ((dma_channel_type *) DMA1_CHANNEL2_BASE)
+#define DMA1_CHANNEL3                    ((dma_channel_type *) DMA1_CHANNEL3_BASE)
+#define DMA1_CHANNEL4                    ((dma_channel_type *) DMA1_CHANNEL4_BASE)
+#define DMA1_CHANNEL5                    ((dma_channel_type *) DMA1_CHANNEL5_BASE)
+#define DMA1_CHANNEL6                    ((dma_channel_type *) DMA1_CHANNEL6_BASE)
+#define DMA1_CHANNEL7                    ((dma_channel_type *) DMA1_CHANNEL7_BASE)

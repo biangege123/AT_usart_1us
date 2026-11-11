@@ -1,0 +1,2371 @@
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccHzhFIx.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.arch armv7e-m
+   3              		.fpu fpv4-sp-d16
+   4              		.eabi_attribute 27, 1
+   5              		.eabi_attribute 28, 1
+   6              		.eabi_attribute 20, 1
+   7              		.eabi_attribute 21, 1
+   8              		.eabi_attribute 23, 3
+   9              		.eabi_attribute 24, 1
+  10              		.eabi_attribute 25, 1
+  11              		.eabi_attribute 26, 1
+  12              		.eabi_attribute 30, 1
+  13              		.eabi_attribute 34, 1
+  14              		.eabi_attribute 18, 4
+  15              		.file	"at32f403a_407_usart.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.file 1 "libraries/drivers/src/at32f403a_407_usart.c"
+  20              		.section	.text.usart_reset,"ax",%progbits
+  21              		.align	1
+  22              		.global	usart_reset
+  23              		.syntax unified
+  24              		.thumb
+  25              		.thumb_func
+  27              	usart_reset:
+  28              	.LVL0:
+  29              	.LFB134:
+   1:libraries/drivers/src/at32f403a_407_usart.c **** /**
+   2:libraries/drivers/src/at32f403a_407_usart.c ****   **************************************************************************
+   3:libraries/drivers/src/at32f403a_407_usart.c ****   * @file     at32f403a_407_usart.c
+   4:libraries/drivers/src/at32f403a_407_usart.c ****   * @brief    contains all the functions for the usart firmware library
+   5:libraries/drivers/src/at32f403a_407_usart.c ****   **************************************************************************
+   6:libraries/drivers/src/at32f403a_407_usart.c ****   *
+   7:libraries/drivers/src/at32f403a_407_usart.c ****   * Copyright (c) 2025, Artery Technology, All rights reserved.
+   8:libraries/drivers/src/at32f403a_407_usart.c ****   *
+   9:libraries/drivers/src/at32f403a_407_usart.c ****   * The software Board Support Package (BSP) that is made available to
+  10:libraries/drivers/src/at32f403a_407_usart.c ****   * download from Artery official website is the copyrighted work of Artery.
+  11:libraries/drivers/src/at32f403a_407_usart.c ****   * Artery authorizes customers to use, copy, and distribute the BSP
+  12:libraries/drivers/src/at32f403a_407_usart.c ****   * software and its related documentation for the purpose of design and
+  13:libraries/drivers/src/at32f403a_407_usart.c ****   * development in conjunction with Artery microcontrollers. Use of the
+  14:libraries/drivers/src/at32f403a_407_usart.c ****   * software is governed by this copyright notice and the following disclaimer.
+  15:libraries/drivers/src/at32f403a_407_usart.c ****   *
+  16:libraries/drivers/src/at32f403a_407_usart.c ****   * THIS SOFTWARE IS PROVIDED ON "AS IS" BASIS WITHOUT WARRANTIES,
+  17:libraries/drivers/src/at32f403a_407_usart.c ****   * GUARANTEES OR REPRESENTATIONS OF ANY KIND. ARTERY EXPRESSLY DISCLAIMS,
+  18:libraries/drivers/src/at32f403a_407_usart.c ****   * TO THE FULLEST EXTENT PERMITTED BY LAW, ALL EXPRESS, IMPLIED OR
+  19:libraries/drivers/src/at32f403a_407_usart.c ****   * STATUTORY OR OTHER WARRANTIES, GUARANTEES OR REPRESENTATIONS,
+  20:libraries/drivers/src/at32f403a_407_usart.c ****   * INCLUDING BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY,
+  21:libraries/drivers/src/at32f403a_407_usart.c ****   * FITNESS FOR A PARTICULAR PURPOSE, OR NON-INFRINGEMENT.
+  22:libraries/drivers/src/at32f403a_407_usart.c ****   *
+  23:libraries/drivers/src/at32f403a_407_usart.c ****   **************************************************************************
+  24:libraries/drivers/src/at32f403a_407_usart.c ****   */
+  25:libraries/drivers/src/at32f403a_407_usart.c **** 
+  26:libraries/drivers/src/at32f403a_407_usart.c **** /* includes ------------------------------------------------------------------*/
+  27:libraries/drivers/src/at32f403a_407_usart.c **** #include "at32f403a_407_conf.h"
+  28:libraries/drivers/src/at32f403a_407_usart.c **** 
+  29:libraries/drivers/src/at32f403a_407_usart.c **** /** @addtogroup AT32F403A_407_periph_driver
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccHzhFIx.s 			page 2
+
+
+  30:libraries/drivers/src/at32f403a_407_usart.c ****   * @{
+  31:libraries/drivers/src/at32f403a_407_usart.c ****   */
+  32:libraries/drivers/src/at32f403a_407_usart.c **** 
+  33:libraries/drivers/src/at32f403a_407_usart.c **** /** @defgroup USART
+  34:libraries/drivers/src/at32f403a_407_usart.c ****   * @brief USART driver modules
+  35:libraries/drivers/src/at32f403a_407_usart.c ****   * @{
+  36:libraries/drivers/src/at32f403a_407_usart.c ****   */
+  37:libraries/drivers/src/at32f403a_407_usart.c **** 
+  38:libraries/drivers/src/at32f403a_407_usart.c **** #ifdef USART_MODULE_ENABLED
+  39:libraries/drivers/src/at32f403a_407_usart.c **** 
+  40:libraries/drivers/src/at32f403a_407_usart.c **** /** @defgroup USART_private_functions
+  41:libraries/drivers/src/at32f403a_407_usart.c ****   * @{
+  42:libraries/drivers/src/at32f403a_407_usart.c ****   */
+  43:libraries/drivers/src/at32f403a_407_usart.c **** 
+  44:libraries/drivers/src/at32f403a_407_usart.c **** /**
+  45:libraries/drivers/src/at32f403a_407_usart.c ****   * @brief  deinitialize the usart peripheral registers to their default reset values.
+  46:libraries/drivers/src/at32f403a_407_usart.c ****   * @param  usart_x: select the usart or the uart peripheral.
+  47:libraries/drivers/src/at32f403a_407_usart.c ****   *         this parameter can be one of the following values:
+  48:libraries/drivers/src/at32f403a_407_usart.c ****   *         USART1, USART2, USART3, UART4, UART5, USART6, UART7,or UART8.
+  49:libraries/drivers/src/at32f403a_407_usart.c ****   * @retval none
+  50:libraries/drivers/src/at32f403a_407_usart.c ****   */
+  51:libraries/drivers/src/at32f403a_407_usart.c **** void usart_reset(usart_type* usart_x)
+  52:libraries/drivers/src/at32f403a_407_usart.c **** {
+  30              		.loc 1 52 1 view -0
+  31              		.cfi_startproc
+  32              		@ args = 0, pretend = 0, frame = 0
+  33              		@ frame_needed = 0, uses_anonymous_args = 0
+  34              		.loc 1 52 1 is_stmt 0 view .LVU1
+  35 0000 10B5     		push	{r4, lr}
+  36              	.LCFI0:
+  37              		.cfi_def_cfa_offset 8
+  38              		.cfi_offset 4, -8
+  39              		.cfi_offset 14, -4
+  53:libraries/drivers/src/at32f403a_407_usart.c ****   if(usart_x == USART1)
+  40              		.loc 1 53 3 is_stmt 1 view .LVU2
+  41              		.loc 1 53 5 is_stmt 0 view .LVU3
+  42 0002 344B     		ldr	r3, .L19
+  43 0004 9842     		cmp	r0, r3
+  44 0006 15D0     		beq	.L11
+  54:libraries/drivers/src/at32f403a_407_usart.c ****   {
+  55:libraries/drivers/src/at32f403a_407_usart.c ****     crm_periph_reset(CRM_USART1_PERIPH_RESET, TRUE);
+  56:libraries/drivers/src/at32f403a_407_usart.c ****     crm_periph_reset(CRM_USART1_PERIPH_RESET, FALSE);
+  57:libraries/drivers/src/at32f403a_407_usart.c ****   }
+  58:libraries/drivers/src/at32f403a_407_usart.c ****   else if(usart_x == USART2)
+  45              		.loc 1 58 8 is_stmt 1 view .LVU4
+  46              		.loc 1 58 10 is_stmt 0 view .LVU5
+  47 0008 334B     		ldr	r3, .L19+4
+  48 000a 9842     		cmp	r0, r3
+  49 000c 1CD0     		beq	.L12
+  59:libraries/drivers/src/at32f403a_407_usart.c ****   {
+  60:libraries/drivers/src/at32f403a_407_usart.c ****     crm_periph_reset(CRM_USART2_PERIPH_RESET, TRUE);
+  61:libraries/drivers/src/at32f403a_407_usart.c ****     crm_periph_reset(CRM_USART2_PERIPH_RESET, FALSE);
+  62:libraries/drivers/src/at32f403a_407_usart.c ****   }
+  63:libraries/drivers/src/at32f403a_407_usart.c ****   else if(usart_x == USART3)
+  50              		.loc 1 63 8 is_stmt 1 view .LVU6
+  51              		.loc 1 63 10 is_stmt 0 view .LVU7
+  52 000e 334B     		ldr	r3, .L19+8
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccHzhFIx.s 			page 3
+
+
+  53 0010 9842     		cmp	r0, r3
+  54 0012 23D0     		beq	.L13
+  64:libraries/drivers/src/at32f403a_407_usart.c ****   {
+  65:libraries/drivers/src/at32f403a_407_usart.c ****     crm_periph_reset(CRM_USART3_PERIPH_RESET, TRUE);
+  66:libraries/drivers/src/at32f403a_407_usart.c ****     crm_periph_reset(CRM_USART3_PERIPH_RESET, FALSE);
+  67:libraries/drivers/src/at32f403a_407_usart.c ****   }
+  68:libraries/drivers/src/at32f403a_407_usart.c ****   else if(usart_x == UART4)
+  55              		.loc 1 68 8 is_stmt 1 view .LVU8
+  56              		.loc 1 68 10 is_stmt 0 view .LVU9
+  57 0014 324B     		ldr	r3, .L19+12
+  58 0016 9842     		cmp	r0, r3
+  59 0018 2AD0     		beq	.L14
+  69:libraries/drivers/src/at32f403a_407_usart.c ****   {
+  70:libraries/drivers/src/at32f403a_407_usart.c ****     crm_periph_reset(CRM_UART4_PERIPH_RESET, TRUE);
+  71:libraries/drivers/src/at32f403a_407_usart.c ****     crm_periph_reset(CRM_UART4_PERIPH_RESET, FALSE);
+  72:libraries/drivers/src/at32f403a_407_usart.c ****   }
+  73:libraries/drivers/src/at32f403a_407_usart.c ****   else if(usart_x == UART5)
+  60              		.loc 1 73 8 is_stmt 1 view .LVU10
+  61              		.loc 1 73 10 is_stmt 0 view .LVU11
+  62 001a 324B     		ldr	r3, .L19+16
+  63 001c 9842     		cmp	r0, r3
+  64 001e 31D0     		beq	.L15
+  74:libraries/drivers/src/at32f403a_407_usart.c ****   {
+  75:libraries/drivers/src/at32f403a_407_usart.c ****     crm_periph_reset(CRM_UART5_PERIPH_RESET, TRUE);
+  76:libraries/drivers/src/at32f403a_407_usart.c ****     crm_periph_reset(CRM_UART5_PERIPH_RESET, FALSE);
+  77:libraries/drivers/src/at32f403a_407_usart.c ****   }
+  78:libraries/drivers/src/at32f403a_407_usart.c ****   else if(usart_x == USART6)
+  65              		.loc 1 78 8 is_stmt 1 view .LVU12
+  66              		.loc 1 78 10 is_stmt 0 view .LVU13
+  67 0020 314B     		ldr	r3, .L19+20
+  68 0022 9842     		cmp	r0, r3
+  69 0024 38D0     		beq	.L16
+  79:libraries/drivers/src/at32f403a_407_usart.c ****   {
+  80:libraries/drivers/src/at32f403a_407_usart.c ****     crm_periph_reset(CRM_USART6_PERIPH_RESET, TRUE);
+  81:libraries/drivers/src/at32f403a_407_usart.c ****     crm_periph_reset(CRM_USART6_PERIPH_RESET, FALSE);
+  82:libraries/drivers/src/at32f403a_407_usart.c ****   }
+  83:libraries/drivers/src/at32f403a_407_usart.c ****   else if(usart_x == UART7)
+  70              		.loc 1 83 8 is_stmt 1 view .LVU14
+  71              		.loc 1 83 10 is_stmt 0 view .LVU15
+  72 0026 314B     		ldr	r3, .L19+24
+  73 0028 9842     		cmp	r0, r3
+  74 002a 3FD0     		beq	.L17
+  84:libraries/drivers/src/at32f403a_407_usart.c ****   {
+  85:libraries/drivers/src/at32f403a_407_usart.c ****     crm_periph_reset(CRM_UART7_PERIPH_RESET, TRUE);
+  86:libraries/drivers/src/at32f403a_407_usart.c ****     crm_periph_reset(CRM_UART7_PERIPH_RESET, FALSE);
+  87:libraries/drivers/src/at32f403a_407_usart.c ****   }
+  88:libraries/drivers/src/at32f403a_407_usart.c **** #if defined (AT32F403ARx) || defined (AT32F403AVx) || defined (AT32F407Rx) || \
+  89:libraries/drivers/src/at32f403a_407_usart.c ****     defined (AT32F407Vx)
+  90:libraries/drivers/src/at32f403a_407_usart.c ****   else if(usart_x == UART8)
+  75              		.loc 1 90 8 is_stmt 1 view .LVU16
+  76              		.loc 1 90 10 is_stmt 0 view .LVU17
+  77 002c 304B     		ldr	r3, .L19+28
+  78 002e 9842     		cmp	r0, r3
+  79 0030 46D0     		beq	.L18
+  80              	.LVL1:
+  81              	.L1:
+  91:libraries/drivers/src/at32f403a_407_usart.c ****   {
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccHzhFIx.s 			page 4
+
+
+  92:libraries/drivers/src/at32f403a_407_usart.c ****     crm_periph_reset(CRM_UART8_PERIPH_RESET, TRUE);
+  93:libraries/drivers/src/at32f403a_407_usart.c ****     crm_periph_reset(CRM_UART8_PERIPH_RESET, FALSE);
+  94:libraries/drivers/src/at32f403a_407_usart.c ****   }
+  95:libraries/drivers/src/at32f403a_407_usart.c **** #endif
+  96:libraries/drivers/src/at32f403a_407_usart.c **** }
+  82              		.loc 1 96 1 view .LVU18
+  83 0032 10BD     		pop	{r4, pc}
+  84              	.LVL2:
+  85              	.L11:
+  55:libraries/drivers/src/at32f403a_407_usart.c ****     crm_periph_reset(CRM_USART1_PERIPH_RESET, FALSE);
+  86              		.loc 1 55 5 is_stmt 1 view .LVU19
+  87 0034 2F4C     		ldr	r4, .L19+32
+  88 0036 0121     		movs	r1, #1
+  89 0038 2046     		mov	r0, r4
+  90              	.LVL3:
+  55:libraries/drivers/src/at32f403a_407_usart.c ****     crm_periph_reset(CRM_USART1_PERIPH_RESET, FALSE);
+  91              		.loc 1 55 5 is_stmt 0 view .LVU20
+  92 003a FFF7FEFF 		bl	crm_periph_reset
+  93              	.LVL4:
+  56:libraries/drivers/src/at32f403a_407_usart.c ****   }
+  94              		.loc 1 56 5 is_stmt 1 view .LVU21
+  95 003e 0021     		movs	r1, #0
+  96 0040 2046     		mov	r0, r4
+  97 0042 FFF7FEFF 		bl	crm_periph_reset
+  98              	.LVL5:
+  99 0046 F4E7     		b	.L1
+ 100              	.LVL6:
+ 101              	.L12:
+  60:libraries/drivers/src/at32f403a_407_usart.c ****     crm_periph_reset(CRM_USART2_PERIPH_RESET, FALSE);
+ 102              		.loc 1 60 5 view .LVU22
+ 103 0048 2B4C     		ldr	r4, .L19+36
+ 104 004a 0121     		movs	r1, #1
+ 105 004c 2046     		mov	r0, r4
+ 106              	.LVL7:
+  60:libraries/drivers/src/at32f403a_407_usart.c ****     crm_periph_reset(CRM_USART2_PERIPH_RESET, FALSE);
+ 107              		.loc 1 60 5 is_stmt 0 view .LVU23
+ 108 004e FFF7FEFF 		bl	crm_periph_reset
+ 109              	.LVL8:
+  61:libraries/drivers/src/at32f403a_407_usart.c ****   }
+ 110              		.loc 1 61 5 is_stmt 1 view .LVU24
+ 111 0052 0021     		movs	r1, #0
+ 112 0054 2046     		mov	r0, r4
+ 113 0056 FFF7FEFF 		bl	crm_periph_reset
+ 114              	.LVL9:
+ 115 005a EAE7     		b	.L1
+ 116              	.LVL10:
+ 117              	.L13:
+  65:libraries/drivers/src/at32f403a_407_usart.c ****     crm_periph_reset(CRM_USART3_PERIPH_RESET, FALSE);
+ 118              		.loc 1 65 5 view .LVU25
+ 119 005c 274C     		ldr	r4, .L19+40
+ 120 005e 0121     		movs	r1, #1
+ 121 0060 2046     		mov	r0, r4
+ 122              	.LVL11:
+  65:libraries/drivers/src/at32f403a_407_usart.c ****     crm_periph_reset(CRM_USART3_PERIPH_RESET, FALSE);
+ 123              		.loc 1 65 5 is_stmt 0 view .LVU26
+ 124 0062 FFF7FEFF 		bl	crm_periph_reset
+ 125              	.LVL12:
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccHzhFIx.s 			page 5
+
+
+  66:libraries/drivers/src/at32f403a_407_usart.c ****   }
+ 126              		.loc 1 66 5 is_stmt 1 view .LVU27
+ 127 0066 0021     		movs	r1, #0
+ 128 0068 2046     		mov	r0, r4
+ 129 006a FFF7FEFF 		bl	crm_periph_reset
+ 130              	.LVL13:
+ 131 006e E0E7     		b	.L1
+ 132              	.LVL14:
+ 133              	.L14:
+  70:libraries/drivers/src/at32f403a_407_usart.c ****     crm_periph_reset(CRM_UART4_PERIPH_RESET, FALSE);
+ 134              		.loc 1 70 5 view .LVU28
+ 135 0070 234C     		ldr	r4, .L19+44
+ 136 0072 0121     		movs	r1, #1
+ 137 0074 2046     		mov	r0, r4
+ 138              	.LVL15:
+  70:libraries/drivers/src/at32f403a_407_usart.c ****     crm_periph_reset(CRM_UART4_PERIPH_RESET, FALSE);
+ 139              		.loc 1 70 5 is_stmt 0 view .LVU29
+ 140 0076 FFF7FEFF 		bl	crm_periph_reset
+ 141              	.LVL16:
+  71:libraries/drivers/src/at32f403a_407_usart.c ****   }
+ 142              		.loc 1 71 5 is_stmt 1 view .LVU30
+ 143 007a 0021     		movs	r1, #0
+ 144 007c 2046     		mov	r0, r4
+ 145 007e FFF7FEFF 		bl	crm_periph_reset
+ 146              	.LVL17:
+ 147 0082 D6E7     		b	.L1
+ 148              	.LVL18:
+ 149              	.L15:
+  75:libraries/drivers/src/at32f403a_407_usart.c ****     crm_periph_reset(CRM_UART5_PERIPH_RESET, FALSE);
+ 150              		.loc 1 75 5 view .LVU31
+ 151 0084 1F4C     		ldr	r4, .L19+48
+ 152 0086 0121     		movs	r1, #1
+ 153 0088 2046     		mov	r0, r4
+ 154              	.LVL19:
+  75:libraries/drivers/src/at32f403a_407_usart.c ****     crm_periph_reset(CRM_UART5_PERIPH_RESET, FALSE);
+ 155              		.loc 1 75 5 is_stmt 0 view .LVU32
+ 156 008a FFF7FEFF 		bl	crm_periph_reset
+ 157              	.LVL20:
+  76:libraries/drivers/src/at32f403a_407_usart.c ****   }
+ 158              		.loc 1 76 5 is_stmt 1 view .LVU33
+ 159 008e 0021     		movs	r1, #0
+ 160 0090 2046     		mov	r0, r4
+ 161 0092 FFF7FEFF 		bl	crm_periph_reset
+ 162              	.LVL21:
+ 163 0096 CCE7     		b	.L1
+ 164              	.LVL22:
+ 165              	.L16:
+  80:libraries/drivers/src/at32f403a_407_usart.c ****     crm_periph_reset(CRM_USART6_PERIPH_RESET, FALSE);
+ 166              		.loc 1 80 5 view .LVU34
+ 167 0098 1B4C     		ldr	r4, .L19+52
+ 168 009a 0121     		movs	r1, #1
+ 169 009c 2046     		mov	r0, r4
+ 170              	.LVL23:
+  80:libraries/drivers/src/at32f403a_407_usart.c ****     crm_periph_reset(CRM_USART6_PERIPH_RESET, FALSE);
+ 171              		.loc 1 80 5 is_stmt 0 view .LVU35
+ 172 009e FFF7FEFF 		bl	crm_periph_reset
+ 173              	.LVL24:
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccHzhFIx.s 			page 6
+
+
+  81:libraries/drivers/src/at32f403a_407_usart.c ****   }
+ 174              		.loc 1 81 5 is_stmt 1 view .LVU36
+ 175 00a2 0021     		movs	r1, #0
+ 176 00a4 2046     		mov	r0, r4
+ 177 00a6 FFF7FEFF 		bl	crm_periph_reset
+ 178              	.LVL25:
+ 179 00aa C2E7     		b	.L1
+ 180              	.LVL26:
+ 181              	.L17:
+  85:libraries/drivers/src/at32f403a_407_usart.c ****     crm_periph_reset(CRM_UART7_PERIPH_RESET, FALSE);
+ 182              		.loc 1 85 5 view .LVU37
+ 183 00ac 174C     		ldr	r4, .L19+56
+ 184 00ae 0121     		movs	r1, #1
+ 185 00b0 2046     		mov	r0, r4
+ 186              	.LVL27:
+  85:libraries/drivers/src/at32f403a_407_usart.c ****     crm_periph_reset(CRM_UART7_PERIPH_RESET, FALSE);
+ 187              		.loc 1 85 5 is_stmt 0 view .LVU38
+ 188 00b2 FFF7FEFF 		bl	crm_periph_reset
+ 189              	.LVL28:
+  86:libraries/drivers/src/at32f403a_407_usart.c ****   }
+ 190              		.loc 1 86 5 is_stmt 1 view .LVU39
+ 191 00b6 0021     		movs	r1, #0
+ 192 00b8 2046     		mov	r0, r4
+ 193 00ba FFF7FEFF 		bl	crm_periph_reset
+ 194              	.LVL29:
+ 195 00be B8E7     		b	.L1
+ 196              	.LVL30:
+ 197              	.L18:
+  92:libraries/drivers/src/at32f403a_407_usart.c ****     crm_periph_reset(CRM_UART8_PERIPH_RESET, FALSE);
+ 198              		.loc 1 92 5 view .LVU40
+ 199 00c0 134C     		ldr	r4, .L19+60
+ 200 00c2 0121     		movs	r1, #1
+ 201 00c4 2046     		mov	r0, r4
+ 202              	.LVL31:
+  92:libraries/drivers/src/at32f403a_407_usart.c ****     crm_periph_reset(CRM_UART8_PERIPH_RESET, FALSE);
+ 203              		.loc 1 92 5 is_stmt 0 view .LVU41
+ 204 00c6 FFF7FEFF 		bl	crm_periph_reset
+ 205              	.LVL32:
+  93:libraries/drivers/src/at32f403a_407_usart.c ****   }
+ 206              		.loc 1 93 5 is_stmt 1 view .LVU42
+ 207 00ca 0021     		movs	r1, #0
+ 208 00cc 2046     		mov	r0, r4
+ 209 00ce FFF7FEFF 		bl	crm_periph_reset
+ 210              	.LVL33:
+ 211              		.loc 1 96 1 is_stmt 0 view .LVU43
+ 212 00d2 AEE7     		b	.L1
+ 213              	.L20:
+ 214              		.align	2
+ 215              	.L19:
+ 216 00d4 00380140 		.word	1073821696
+ 217 00d8 00440040 		.word	1073759232
+ 218 00dc 00480040 		.word	1073760256
+ 219 00e0 004C0040 		.word	1073761280
+ 220 00e4 00500040 		.word	1073762304
+ 221 00e8 00600140 		.word	1073831936
+ 222 00ec 00640140 		.word	1073832960
+ 223 00f0 00680140 		.word	1073833984
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccHzhFIx.s 			page 7
+
+
+ 224 00f4 0E000C00 		.word	786446
+ 225 00f8 11001000 		.word	1048593
+ 226 00fc 12001000 		.word	1048594
+ 227 0100 13001000 		.word	1048595
+ 228 0104 14001000 		.word	1048596
+ 229 0108 18000C00 		.word	786456
+ 230 010c 19000C00 		.word	786457
+ 231 0110 1A000C00 		.word	786458
+ 232              		.cfi_endproc
+ 233              	.LFE134:
+ 235              		.section	.text.usart_init,"ax",%progbits
+ 236              		.align	1
+ 237              		.global	usart_init
+ 238              		.syntax unified
+ 239              		.thumb
+ 240              		.thumb_func
+ 242              	usart_init:
+ 243              	.LVL34:
+ 244              	.LFB135:
+  97:libraries/drivers/src/at32f403a_407_usart.c **** 
+  98:libraries/drivers/src/at32f403a_407_usart.c **** /**
+  99:libraries/drivers/src/at32f403a_407_usart.c ****   * @brief  initialize the usart peripheral according to the specified parameters.
+ 100:libraries/drivers/src/at32f403a_407_usart.c ****   * @param  usart_x: select the usart or the uart peripheral.
+ 101:libraries/drivers/src/at32f403a_407_usart.c ****   *         this parameter can be one of the following values:
+ 102:libraries/drivers/src/at32f403a_407_usart.c ****   *         USART1, USART2, USART3, UART4 ,UART5, USART6, UART7 or UART8.
+ 103:libraries/drivers/src/at32f403a_407_usart.c ****   * @param  baud_rate: configure the usart communication baud rate.
+ 104:libraries/drivers/src/at32f403a_407_usart.c ****   * @param  data_bit: data bits transmitted or received in a frame
+ 105:libraries/drivers/src/at32f403a_407_usart.c ****   *         this parameter can be one of the following values:
+ 106:libraries/drivers/src/at32f403a_407_usart.c ****   *         - USART_DATA_8BITS
+ 107:libraries/drivers/src/at32f403a_407_usart.c ****   *         - USART_DATA_9BITS.
+ 108:libraries/drivers/src/at32f403a_407_usart.c ****   *         note:
+ 109:libraries/drivers/src/at32f403a_407_usart.c ****   *         - when parity check is disabled, the data bit width is the actual data bit number.
+ 110:libraries/drivers/src/at32f403a_407_usart.c ****   *         - when parity check is enabled, the data bit width is the actual data bit number minus 
+ 111:libraries/drivers/src/at32f403a_407_usart.c ****   * @param  stop_bit: stop bits transmitted
+ 112:libraries/drivers/src/at32f403a_407_usart.c ****   *         this parameter can be one of the following values:
+ 113:libraries/drivers/src/at32f403a_407_usart.c ****   *         - USART_STOP_1_BIT
+ 114:libraries/drivers/src/at32f403a_407_usart.c ****   *         - USART_STOP_0_5_BIT.
+ 115:libraries/drivers/src/at32f403a_407_usart.c ****   *         - USART_STOP_2_BIT
+ 116:libraries/drivers/src/at32f403a_407_usart.c ****   *         - USART_STOP_1_5_BIT.
+ 117:libraries/drivers/src/at32f403a_407_usart.c ****   * @retval none
+ 118:libraries/drivers/src/at32f403a_407_usart.c ****   */
+ 119:libraries/drivers/src/at32f403a_407_usart.c **** void usart_init(usart_type* usart_x, uint32_t baud_rate, usart_data_bit_num_type data_bit, usart_st
+ 120:libraries/drivers/src/at32f403a_407_usart.c **** {
+ 245              		.loc 1 120 1 is_stmt 1 view -0
+ 246              		.cfi_startproc
+ 247              		@ args = 0, pretend = 0, frame = 24
+ 248              		@ frame_needed = 0, uses_anonymous_args = 0
+ 249              		.loc 1 120 1 is_stmt 0 view .LVU45
+ 250 0000 2DE9F041 		push	{r4, r5, r6, r7, r8, lr}
+ 251              	.LCFI1:
+ 252              		.cfi_def_cfa_offset 24
+ 253              		.cfi_offset 4, -24
+ 254              		.cfi_offset 5, -20
+ 255              		.cfi_offset 6, -16
+ 256              		.cfi_offset 7, -12
+ 257              		.cfi_offset 8, -8
+ 258              		.cfi_offset 14, -4
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccHzhFIx.s 			page 8
+
+
+ 259 0004 86B0     		sub	sp, sp, #24
+ 260              	.LCFI2:
+ 261              		.cfi_def_cfa_offset 48
+ 262 0006 0546     		mov	r5, r0
+ 263 0008 8846     		mov	r8, r1
+ 264 000a 1746     		mov	r7, r2
+ 265 000c 1E46     		mov	r6, r3
+ 121:libraries/drivers/src/at32f403a_407_usart.c ****   crm_clocks_freq_type clocks_freq;
+ 266              		.loc 1 121 3 is_stmt 1 view .LVU46
+ 122:libraries/drivers/src/at32f403a_407_usart.c ****   uint32_t apb_clock, temp_val;
+ 267              		.loc 1 122 3 view .LVU47
+ 123:libraries/drivers/src/at32f403a_407_usart.c ****   crm_clocks_freq_get(&clocks_freq);
+ 268              		.loc 1 123 3 view .LVU48
+ 269 000e 01A8     		add	r0, sp, #4
+ 270              	.LVL35:
+ 271              		.loc 1 123 3 is_stmt 0 view .LVU49
+ 272 0010 FFF7FEFF 		bl	crm_clocks_freq_get
+ 273              	.LVL36:
+ 124:libraries/drivers/src/at32f403a_407_usart.c ****   if((usart_x == USART1) || (usart_x == USART6) || (usart_x == UART7)
+ 274              		.loc 1 124 3 is_stmt 1 view .LVU50
+ 275              		.loc 1 124 5 is_stmt 0 view .LVU51
+ 276 0014 1D4B     		ldr	r3, .L28
+ 277 0016 9D42     		cmp	r5, r3
+ 278 0018 0DD0     		beq	.L22
+ 279              		.loc 1 124 26 discriminator 1 view .LVU52
+ 280 001a 03F52053 		add	r3, r3, #10240
+ 281 001e 9D42     		cmp	r5, r3
+ 282 0020 09D0     		beq	.L22
+ 283              		.loc 1 124 49 discriminator 2 view .LVU53
+ 284 0022 03F58063 		add	r3, r3, #1024
+ 285 0026 9D42     		cmp	r5, r3
+ 286 0028 05D0     		beq	.L22
+ 125:libraries/drivers/src/at32f403a_407_usart.c **** #if defined (AT32F403ARx) || defined (AT32F403AVx) || defined (AT32F407Rx) || \
+ 126:libraries/drivers/src/at32f403a_407_usart.c ****     defined (AT32F407Vx)
+ 127:libraries/drivers/src/at32f403a_407_usart.c ****     || (usart_x == UART8)
+ 287              		.loc 1 127 5 view .LVU54
+ 288 002a 03F58063 		add	r3, r3, #1024
+ 289 002e 9D42     		cmp	r5, r3
+ 290 0030 01D0     		beq	.L22
+ 128:libraries/drivers/src/at32f403a_407_usart.c **** #endif
+ 129:libraries/drivers/src/at32f403a_407_usart.c ****   )
+ 130:libraries/drivers/src/at32f403a_407_usart.c ****   {
+ 131:libraries/drivers/src/at32f403a_407_usart.c ****     apb_clock = clocks_freq.apb2_freq;
+ 132:libraries/drivers/src/at32f403a_407_usart.c ****   }
+ 133:libraries/drivers/src/at32f403a_407_usart.c ****   else
+ 134:libraries/drivers/src/at32f403a_407_usart.c ****   {
+ 135:libraries/drivers/src/at32f403a_407_usart.c ****     apb_clock = clocks_freq.apb1_freq;
+ 291              		.loc 1 135 5 is_stmt 1 view .LVU55
+ 292              		.loc 1 135 15 is_stmt 0 view .LVU56
+ 293 0032 049C     		ldr	r4, [sp, #16]
+ 294 0034 00E0     		b	.L24
+ 295              	.L22:
+ 131:libraries/drivers/src/at32f403a_407_usart.c ****   }
+ 296              		.loc 1 131 5 is_stmt 1 view .LVU57
+ 131:libraries/drivers/src/at32f403a_407_usart.c ****   }
+ 297              		.loc 1 131 15 is_stmt 0 view .LVU58
+ 298 0036 039C     		ldr	r4, [sp, #12]
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccHzhFIx.s 			page 9
+
+
+ 299              	.LVL37:
+ 300              	.L24:
+ 136:libraries/drivers/src/at32f403a_407_usart.c ****   }
+ 137:libraries/drivers/src/at32f403a_407_usart.c ****   temp_val = (apb_clock * 10 / baud_rate);
+ 301              		.loc 1 137 3 is_stmt 1 view .LVU59
+ 302              		.loc 1 137 25 is_stmt 0 view .LVU60
+ 303 0038 04EB8404 		add	r4, r4, r4, lsl #2
+ 304              	.LVL38:
+ 305              		.loc 1 137 25 view .LVU61
+ 306 003c 6400     		lsls	r4, r4, #1
+ 307              		.loc 1 137 12 view .LVU62
+ 308 003e B4FBF8F1 		udiv	r1, r4, r8
+ 309              	.LVL39:
+ 138:libraries/drivers/src/at32f403a_407_usart.c ****   if((temp_val % 10) < 5)
+ 310              		.loc 1 138 3 is_stmt 1 view .LVU63
+ 311              		.loc 1 138 16 is_stmt 0 view .LVU64
+ 312 0042 134B     		ldr	r3, .L28+4
+ 313 0044 A3FB0123 		umull	r2, r3, r3, r1
+ 314 0048 DB08     		lsrs	r3, r3, #3
+ 315 004a 03EB8303 		add	r3, r3, r3, lsl #2
+ 316 004e A1EB4303 		sub	r3, r1, r3, lsl #1
+ 317              		.loc 1 138 5 view .LVU65
+ 318 0052 042B     		cmp	r3, #4
+ 319 0054 13D8     		bhi	.L25
+ 139:libraries/drivers/src/at32f403a_407_usart.c ****   {
+ 140:libraries/drivers/src/at32f403a_407_usart.c ****     temp_val = (temp_val / 10);
+ 320              		.loc 1 140 5 is_stmt 1 view .LVU66
+ 321              		.loc 1 140 14 is_stmt 0 view .LVU67
+ 322 0056 0E4B     		ldr	r3, .L28+4
+ 323 0058 A3FB0131 		umull	r3, r1, r3, r1
+ 324              	.LVL40:
+ 325              		.loc 1 140 14 view .LVU68
+ 326 005c C908     		lsrs	r1, r1, #3
+ 327              	.LVL41:
+ 328              	.L26:
+ 141:libraries/drivers/src/at32f403a_407_usart.c ****   }
+ 142:libraries/drivers/src/at32f403a_407_usart.c ****   else
+ 143:libraries/drivers/src/at32f403a_407_usart.c ****   {
+ 144:libraries/drivers/src/at32f403a_407_usart.c ****     temp_val = (temp_val / 10) + 1;
+ 145:libraries/drivers/src/at32f403a_407_usart.c ****   }
+ 146:libraries/drivers/src/at32f403a_407_usart.c ****   usart_x->baudr_bit.div = temp_val;
+ 329              		.loc 1 146 3 is_stmt 1 view .LVU69
+ 330              		.loc 1 146 26 is_stmt 0 view .LVU70
+ 331 005e 89B2     		uxth	r1, r1
+ 332              	.LVL42:
+ 333              		.loc 1 146 26 view .LVU71
+ 334 0060 AB68     		ldr	r3, [r5, #8]
+ 335 0062 61F30F03 		bfi	r3, r1, #0, #16
+ 336 0066 AB60     		str	r3, [r5, #8]
+ 147:libraries/drivers/src/at32f403a_407_usart.c ****   usart_x->ctrl1_bit.dbn = data_bit;
+ 337              		.loc 1 147 3 is_stmt 1 view .LVU72
+ 338              		.loc 1 147 26 is_stmt 0 view .LVU73
+ 339 0068 EB68     		ldr	r3, [r5, #12]
+ 340 006a 67F30C33 		bfi	r3, r7, #12, #1
+ 341 006e EB60     		str	r3, [r5, #12]
+ 148:libraries/drivers/src/at32f403a_407_usart.c ****   usart_x->ctrl2_bit.stopbn = stop_bit;
+ 342              		.loc 1 148 3 is_stmt 1 view .LVU74
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccHzhFIx.s 			page 10
+
+
+ 343              		.loc 1 148 29 is_stmt 0 view .LVU75
+ 344 0070 2B69     		ldr	r3, [r5, #16]
+ 345 0072 66F30D33 		bfi	r3, r6, #12, #2
+ 346 0076 2B61     		str	r3, [r5, #16]
+ 149:libraries/drivers/src/at32f403a_407_usart.c **** }
+ 347              		.loc 1 149 1 view .LVU76
+ 348 0078 06B0     		add	sp, sp, #24
+ 349              	.LCFI3:
+ 350              		.cfi_remember_state
+ 351              		.cfi_def_cfa_offset 24
+ 352              		@ sp needed
+ 353 007a BDE8F081 		pop	{r4, r5, r6, r7, r8, pc}
+ 354              	.LVL43:
+ 355              	.L25:
+ 356              	.LCFI4:
+ 357              		.cfi_restore_state
+ 144:libraries/drivers/src/at32f403a_407_usart.c ****   }
+ 358              		.loc 1 144 5 is_stmt 1 view .LVU77
+ 144:libraries/drivers/src/at32f403a_407_usart.c ****   }
+ 359              		.loc 1 144 26 is_stmt 0 view .LVU78
+ 360 007e 044B     		ldr	r3, .L28+4
+ 361 0080 A3FB0131 		umull	r3, r1, r3, r1
+ 362              	.LVL44:
+ 144:libraries/drivers/src/at32f403a_407_usart.c ****   }
+ 363              		.loc 1 144 26 view .LVU79
+ 364 0084 C908     		lsrs	r1, r1, #3
+ 144:libraries/drivers/src/at32f403a_407_usart.c ****   }
+ 365              		.loc 1 144 14 view .LVU80
+ 366 0086 0131     		adds	r1, r1, #1
+ 367 0088 E9E7     		b	.L26
+ 368              	.L29:
+ 369 008a 00BF     		.align	2
+ 370              	.L28:
+ 371 008c 00380140 		.word	1073821696
+ 372 0090 CDCCCCCC 		.word	-858993459
+ 373              		.cfi_endproc
+ 374              	.LFE135:
+ 376              		.section	.text.usart_parity_selection_config,"ax",%progbits
+ 377              		.align	1
+ 378              		.global	usart_parity_selection_config
+ 379              		.syntax unified
+ 380              		.thumb
+ 381              		.thumb_func
+ 383              	usart_parity_selection_config:
+ 384              	.LVL45:
+ 385              	.LFB136:
+ 150:libraries/drivers/src/at32f403a_407_usart.c **** 
+ 151:libraries/drivers/src/at32f403a_407_usart.c **** /**
+ 152:libraries/drivers/src/at32f403a_407_usart.c ****   * @brief  usart parity selection config.
+ 153:libraries/drivers/src/at32f403a_407_usart.c ****   * @param  usart_x: select the usart or the uart peripheral.
+ 154:libraries/drivers/src/at32f403a_407_usart.c ****   *         this parameter can be one of the following values:
+ 155:libraries/drivers/src/at32f403a_407_usart.c ****   *         USART1, USART2, USART3, UART4 ,UART5, USART6, UART7 or UART8.
+ 156:libraries/drivers/src/at32f403a_407_usart.c ****   * @param  parity: select the none, odd or even parity.
+ 157:libraries/drivers/src/at32f403a_407_usart.c ****   *         this parameter can be one of the following values:
+ 158:libraries/drivers/src/at32f403a_407_usart.c ****   *         - USART_PARITY_NONE
+ 159:libraries/drivers/src/at32f403a_407_usart.c ****   *         - USART_PARITY_EVEN.
+ 160:libraries/drivers/src/at32f403a_407_usart.c ****   *         - USART_PARITY_ODD
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccHzhFIx.s 			page 11
+
+
+ 161:libraries/drivers/src/at32f403a_407_usart.c ****   * @retval none
+ 162:libraries/drivers/src/at32f403a_407_usart.c ****   */
+ 163:libraries/drivers/src/at32f403a_407_usart.c **** void usart_parity_selection_config(usart_type* usart_x, usart_parity_selection_type parity)
+ 164:libraries/drivers/src/at32f403a_407_usart.c **** {
+ 386              		.loc 1 164 1 is_stmt 1 view -0
+ 387              		.cfi_startproc
+ 388              		@ args = 0, pretend = 0, frame = 0
+ 389              		@ frame_needed = 0, uses_anonymous_args = 0
+ 390              		@ link register save eliminated.
+ 165:libraries/drivers/src/at32f403a_407_usart.c ****   if(parity == USART_PARITY_NONE)
+ 391              		.loc 1 165 3 view .LVU82
+ 392              		.loc 1 165 5 is_stmt 0 view .LVU83
+ 393 0000 41B9     		cbnz	r1, .L31
+ 166:libraries/drivers/src/at32f403a_407_usart.c ****   {
+ 167:libraries/drivers/src/at32f403a_407_usart.c ****     usart_x->ctrl1_bit.psel = FALSE;
+ 394              		.loc 1 167 5 is_stmt 1 view .LVU84
+ 395              		.loc 1 167 29 is_stmt 0 view .LVU85
+ 396 0002 C368     		ldr	r3, [r0, #12]
+ 397 0004 23F40073 		bic	r3, r3, #512
+ 398 0008 C360     		str	r3, [r0, #12]
+ 168:libraries/drivers/src/at32f403a_407_usart.c ****     usart_x->ctrl1_bit.pen = FALSE;
+ 399              		.loc 1 168 5 is_stmt 1 view .LVU86
+ 400              		.loc 1 168 28 is_stmt 0 view .LVU87
+ 401 000a C368     		ldr	r3, [r0, #12]
+ 402 000c 23F48063 		bic	r3, r3, #1024
+ 403 0010 C360     		str	r3, [r0, #12]
+ 404 0012 7047     		bx	lr
+ 405              	.L31:
+ 169:libraries/drivers/src/at32f403a_407_usart.c ****   }
+ 170:libraries/drivers/src/at32f403a_407_usart.c ****   else if(parity == USART_PARITY_EVEN)
+ 406              		.loc 1 170 8 is_stmt 1 view .LVU88
+ 407              		.loc 1 170 10 is_stmt 0 view .LVU89
+ 408 0014 0129     		cmp	r1, #1
+ 409 0016 02D0     		beq	.L34
+ 171:libraries/drivers/src/at32f403a_407_usart.c ****   {
+ 172:libraries/drivers/src/at32f403a_407_usart.c ****     usart_x->ctrl1_bit.psel = FALSE;
+ 173:libraries/drivers/src/at32f403a_407_usart.c ****     usart_x->ctrl1_bit.pen = TRUE;
+ 174:libraries/drivers/src/at32f403a_407_usart.c ****   }
+ 175:libraries/drivers/src/at32f403a_407_usart.c ****   else if(parity == USART_PARITY_ODD)
+ 410              		.loc 1 175 8 is_stmt 1 view .LVU90
+ 411              		.loc 1 175 10 is_stmt 0 view .LVU91
+ 412 0018 0229     		cmp	r1, #2
+ 413 001a 09D0     		beq	.L35
+ 414              	.L30:
+ 176:libraries/drivers/src/at32f403a_407_usart.c ****   {
+ 177:libraries/drivers/src/at32f403a_407_usart.c ****     usart_x->ctrl1_bit.psel = TRUE;
+ 178:libraries/drivers/src/at32f403a_407_usart.c ****     usart_x->ctrl1_bit.pen = TRUE;
+ 179:libraries/drivers/src/at32f403a_407_usart.c ****   }
+ 180:libraries/drivers/src/at32f403a_407_usart.c **** }
+ 415              		.loc 1 180 1 view .LVU92
+ 416 001c 7047     		bx	lr
+ 417              	.L34:
+ 172:libraries/drivers/src/at32f403a_407_usart.c ****     usart_x->ctrl1_bit.pen = TRUE;
+ 418              		.loc 1 172 5 is_stmt 1 view .LVU93
+ 172:libraries/drivers/src/at32f403a_407_usart.c ****     usart_x->ctrl1_bit.pen = TRUE;
+ 419              		.loc 1 172 29 is_stmt 0 view .LVU94
+ 420 001e C368     		ldr	r3, [r0, #12]
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccHzhFIx.s 			page 12
+
+
+ 421 0020 23F40073 		bic	r3, r3, #512
+ 422 0024 C360     		str	r3, [r0, #12]
+ 173:libraries/drivers/src/at32f403a_407_usart.c ****   }
+ 423              		.loc 1 173 5 is_stmt 1 view .LVU95
+ 173:libraries/drivers/src/at32f403a_407_usart.c ****   }
+ 424              		.loc 1 173 28 is_stmt 0 view .LVU96
+ 425 0026 C368     		ldr	r3, [r0, #12]
+ 426 0028 43F48063 		orr	r3, r3, #1024
+ 427 002c C360     		str	r3, [r0, #12]
+ 428 002e 7047     		bx	lr
+ 429              	.L35:
+ 177:libraries/drivers/src/at32f403a_407_usart.c ****     usart_x->ctrl1_bit.pen = TRUE;
+ 430              		.loc 1 177 5 is_stmt 1 view .LVU97
+ 177:libraries/drivers/src/at32f403a_407_usart.c ****     usart_x->ctrl1_bit.pen = TRUE;
+ 431              		.loc 1 177 29 is_stmt 0 view .LVU98
+ 432 0030 C368     		ldr	r3, [r0, #12]
+ 433 0032 43F40073 		orr	r3, r3, #512
+ 434 0036 C360     		str	r3, [r0, #12]
+ 178:libraries/drivers/src/at32f403a_407_usart.c ****   }
+ 435              		.loc 1 178 5 is_stmt 1 view .LVU99
+ 178:libraries/drivers/src/at32f403a_407_usart.c ****   }
+ 436              		.loc 1 178 28 is_stmt 0 view .LVU100
+ 437 0038 C368     		ldr	r3, [r0, #12]
+ 438 003a 43F48063 		orr	r3, r3, #1024
+ 439 003e C360     		str	r3, [r0, #12]
+ 440              		.loc 1 180 1 view .LVU101
+ 441 0040 ECE7     		b	.L30
+ 442              		.cfi_endproc
+ 443              	.LFE136:
+ 445              		.section	.text.usart_enable,"ax",%progbits
+ 446              		.align	1
+ 447              		.global	usart_enable
+ 448              		.syntax unified
+ 449              		.thumb
+ 450              		.thumb_func
+ 452              	usart_enable:
+ 453              	.LVL46:
+ 454              	.LFB137:
+ 181:libraries/drivers/src/at32f403a_407_usart.c **** 
+ 182:libraries/drivers/src/at32f403a_407_usart.c **** /**
+ 183:libraries/drivers/src/at32f403a_407_usart.c ****   * @brief  enable or disable the specified usart peripheral.
+ 184:libraries/drivers/src/at32f403a_407_usart.c ****   * @param  usart_x: select the usart or the uart peripheral.
+ 185:libraries/drivers/src/at32f403a_407_usart.c ****   *         this parameter can be one of the following values:
+ 186:libraries/drivers/src/at32f403a_407_usart.c ****   *         USART1, USART2, USART3, UART4, UART5, USART6, UART7 or UART8.
+ 187:libraries/drivers/src/at32f403a_407_usart.c ****   * @param  new_state: new state of the usart peripheral.
+ 188:libraries/drivers/src/at32f403a_407_usart.c ****   *         this parameter can be: TRUE or FALSE.
+ 189:libraries/drivers/src/at32f403a_407_usart.c ****   * @retval none
+ 190:libraries/drivers/src/at32f403a_407_usart.c ****   */
+ 191:libraries/drivers/src/at32f403a_407_usart.c **** void usart_enable(usart_type* usart_x, confirm_state new_state)
+ 192:libraries/drivers/src/at32f403a_407_usart.c **** {
+ 455              		.loc 1 192 1 is_stmt 1 view -0
+ 456              		.cfi_startproc
+ 457              		@ args = 0, pretend = 0, frame = 0
+ 458              		@ frame_needed = 0, uses_anonymous_args = 0
+ 459              		@ link register save eliminated.
+ 193:libraries/drivers/src/at32f403a_407_usart.c ****   usart_x->ctrl1_bit.uen = new_state;
+ 460              		.loc 1 193 3 view .LVU103
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccHzhFIx.s 			page 13
+
+
+ 461              		.loc 1 193 26 is_stmt 0 view .LVU104
+ 462 0000 C368     		ldr	r3, [r0, #12]
+ 463 0002 61F34D33 		bfi	r3, r1, #13, #1
+ 464 0006 C360     		str	r3, [r0, #12]
+ 194:libraries/drivers/src/at32f403a_407_usart.c **** }
+ 465              		.loc 1 194 1 view .LVU105
+ 466 0008 7047     		bx	lr
+ 467              		.cfi_endproc
+ 468              	.LFE137:
+ 470              		.section	.text.usart_transmitter_enable,"ax",%progbits
+ 471              		.align	1
+ 472              		.global	usart_transmitter_enable
+ 473              		.syntax unified
+ 474              		.thumb
+ 475              		.thumb_func
+ 477              	usart_transmitter_enable:
+ 478              	.LVL47:
+ 479              	.LFB138:
+ 195:libraries/drivers/src/at32f403a_407_usart.c **** 
+ 196:libraries/drivers/src/at32f403a_407_usart.c **** /**
+ 197:libraries/drivers/src/at32f403a_407_usart.c ****   * @brief  usart transmitter enable.
+ 198:libraries/drivers/src/at32f403a_407_usart.c ****   * @param  usart_x: select the usart or the uart peripheral.
+ 199:libraries/drivers/src/at32f403a_407_usart.c ****   *         this parameter can be one of the following values:
+ 200:libraries/drivers/src/at32f403a_407_usart.c ****   *         USART1, USART2, USART3, UART4 ,UART5, USART6, UART7 or UART8.
+ 201:libraries/drivers/src/at32f403a_407_usart.c ****   * @param  new_state: TRUE or FALSE.
+ 202:libraries/drivers/src/at32f403a_407_usart.c ****   * @retval none
+ 203:libraries/drivers/src/at32f403a_407_usart.c ****   */
+ 204:libraries/drivers/src/at32f403a_407_usart.c **** void usart_transmitter_enable(usart_type* usart_x, confirm_state new_state)
+ 205:libraries/drivers/src/at32f403a_407_usart.c **** {
+ 480              		.loc 1 205 1 is_stmt 1 view -0
+ 481              		.cfi_startproc
+ 482              		@ args = 0, pretend = 0, frame = 0
+ 483              		@ frame_needed = 0, uses_anonymous_args = 0
+ 484              		@ link register save eliminated.
+ 206:libraries/drivers/src/at32f403a_407_usart.c ****   usart_x->ctrl1_bit.ten = new_state;
+ 485              		.loc 1 206 3 view .LVU107
+ 486              		.loc 1 206 26 is_stmt 0 view .LVU108
+ 487 0000 C368     		ldr	r3, [r0, #12]
+ 488 0002 61F3C303 		bfi	r3, r1, #3, #1
+ 489 0006 C360     		str	r3, [r0, #12]
+ 207:libraries/drivers/src/at32f403a_407_usart.c **** }
+ 490              		.loc 1 207 1 view .LVU109
+ 491 0008 7047     		bx	lr
+ 492              		.cfi_endproc
+ 493              	.LFE138:
+ 495              		.section	.text.usart_receiver_enable,"ax",%progbits
+ 496              		.align	1
+ 497              		.global	usart_receiver_enable
+ 498              		.syntax unified
+ 499              		.thumb
+ 500              		.thumb_func
+ 502              	usart_receiver_enable:
+ 503              	.LVL48:
+ 504              	.LFB139:
+ 208:libraries/drivers/src/at32f403a_407_usart.c **** 
+ 209:libraries/drivers/src/at32f403a_407_usart.c **** /**
+ 210:libraries/drivers/src/at32f403a_407_usart.c ****   * @brief  usart receiver enable.
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccHzhFIx.s 			page 14
+
+
+ 211:libraries/drivers/src/at32f403a_407_usart.c ****   * @param  usart_x: select the usart or the uart peripheral.
+ 212:libraries/drivers/src/at32f403a_407_usart.c ****   *         this parameter can be one of the following values:
+ 213:libraries/drivers/src/at32f403a_407_usart.c ****   *         USART1, USART2, USART3, UART4 ,UART5, USART6, UART7 or UART8.
+ 214:libraries/drivers/src/at32f403a_407_usart.c ****   * @param  new_state: TRUE or FALSE.
+ 215:libraries/drivers/src/at32f403a_407_usart.c ****   * @retval none
+ 216:libraries/drivers/src/at32f403a_407_usart.c ****   */
+ 217:libraries/drivers/src/at32f403a_407_usart.c **** void usart_receiver_enable(usart_type* usart_x, confirm_state new_state)
+ 218:libraries/drivers/src/at32f403a_407_usart.c **** {
+ 505              		.loc 1 218 1 is_stmt 1 view -0
+ 506              		.cfi_startproc
+ 507              		@ args = 0, pretend = 0, frame = 0
+ 508              		@ frame_needed = 0, uses_anonymous_args = 0
+ 509              		@ link register save eliminated.
+ 219:libraries/drivers/src/at32f403a_407_usart.c ****   usart_x->ctrl1_bit.ren = new_state;
+ 510              		.loc 1 219 3 view .LVU111
+ 511              		.loc 1 219 26 is_stmt 0 view .LVU112
+ 512 0000 C368     		ldr	r3, [r0, #12]
+ 513 0002 61F38203 		bfi	r3, r1, #2, #1
+ 514 0006 C360     		str	r3, [r0, #12]
+ 220:libraries/drivers/src/at32f403a_407_usart.c **** }
+ 515              		.loc 1 220 1 view .LVU113
+ 516 0008 7047     		bx	lr
+ 517              		.cfi_endproc
+ 518              	.LFE139:
+ 520              		.section	.text.usart_clock_config,"ax",%progbits
+ 521              		.align	1
+ 522              		.global	usart_clock_config
+ 523              		.syntax unified
+ 524              		.thumb
+ 525              		.thumb_func
+ 527              	usart_clock_config:
+ 528              	.LVL49:
+ 529              	.LFB140:
+ 221:libraries/drivers/src/at32f403a_407_usart.c **** 
+ 222:libraries/drivers/src/at32f403a_407_usart.c **** /**
+ 223:libraries/drivers/src/at32f403a_407_usart.c ****   * @brief  usart clock config.
+ 224:libraries/drivers/src/at32f403a_407_usart.c ****   * @note   clock config are not available for UART4, UART5, UART7 and UART8.
+ 225:libraries/drivers/src/at32f403a_407_usart.c ****   * @param  usart_x: select the usart or the uart peripheral.
+ 226:libraries/drivers/src/at32f403a_407_usart.c ****   *         this parameter can be one of the following values:
+ 227:libraries/drivers/src/at32f403a_407_usart.c ****   *         USART1, USART2, USART3 or USART6.
+ 228:libraries/drivers/src/at32f403a_407_usart.c ****   * @param  clk_pol: polarity of the clock output on the ck pin.
+ 229:libraries/drivers/src/at32f403a_407_usart.c ****   *         this parameter can be one of the following values:
+ 230:libraries/drivers/src/at32f403a_407_usart.c ****   *         - USART_CLOCK_POLARITY_LOW
+ 231:libraries/drivers/src/at32f403a_407_usart.c ****   *         - USART_CLOCK_POLARITY_HIGH
+ 232:libraries/drivers/src/at32f403a_407_usart.c ****   * @param  clk_pha: phase of the clock output on the ck pin.
+ 233:libraries/drivers/src/at32f403a_407_usart.c ****   *         this parameter can be one of the following values:
+ 234:libraries/drivers/src/at32f403a_407_usart.c ****   *         - USART_CLOCK_PHASE_1EDGE
+ 235:libraries/drivers/src/at32f403a_407_usart.c ****   *         - USART_CLOCK_PHASE_2EDGE
+ 236:libraries/drivers/src/at32f403a_407_usart.c ****   * @param  clk_lb: whether the clock pulse of the last data bit transmitted (MSB) is outputted on 
+ 237:libraries/drivers/src/at32f403a_407_usart.c ****   *         this parameter can be one of the following values:
+ 238:libraries/drivers/src/at32f403a_407_usart.c ****   *         - USART_CLOCK_LAST_BIT_NONE
+ 239:libraries/drivers/src/at32f403a_407_usart.c ****   *         - USART_CLOCK_LAST_BIT_OUTPUT
+ 240:libraries/drivers/src/at32f403a_407_usart.c ****   * @retval none
+ 241:libraries/drivers/src/at32f403a_407_usart.c ****   */
+ 242:libraries/drivers/src/at32f403a_407_usart.c **** void usart_clock_config(usart_type* usart_x, usart_clock_polarity_type clk_pol, usart_clock_phase_t
+ 243:libraries/drivers/src/at32f403a_407_usart.c **** {
+ 530              		.loc 1 243 1 is_stmt 1 view -0
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccHzhFIx.s 			page 15
+
+
+ 531              		.cfi_startproc
+ 532              		@ args = 0, pretend = 0, frame = 0
+ 533              		@ frame_needed = 0, uses_anonymous_args = 0
+ 534              		@ link register save eliminated.
+ 535              		.loc 1 243 1 is_stmt 0 view .LVU115
+ 536 0000 10B4     		push	{r4}
+ 537              	.LCFI5:
+ 538              		.cfi_def_cfa_offset 4
+ 539              		.cfi_offset 4, -4
+ 244:libraries/drivers/src/at32f403a_407_usart.c ****   usart_x->ctrl2_bit.clkpol = clk_pol;
+ 540              		.loc 1 244 3 is_stmt 1 view .LVU116
+ 541              		.loc 1 244 29 is_stmt 0 view .LVU117
+ 542 0002 0469     		ldr	r4, [r0, #16]
+ 543 0004 61F38A24 		bfi	r4, r1, #10, #1
+ 544 0008 0461     		str	r4, [r0, #16]
+ 245:libraries/drivers/src/at32f403a_407_usart.c ****   usart_x->ctrl2_bit.clkpha = clk_pha;
+ 545              		.loc 1 245 3 is_stmt 1 view .LVU118
+ 546              		.loc 1 245 29 is_stmt 0 view .LVU119
+ 547 000a 0169     		ldr	r1, [r0, #16]
+ 548              	.LVL50:
+ 549              		.loc 1 245 29 view .LVU120
+ 550 000c 62F34921 		bfi	r1, r2, #9, #1
+ 551 0010 0161     		str	r1, [r0, #16]
+ 246:libraries/drivers/src/at32f403a_407_usart.c ****   usart_x->ctrl2_bit.lbcp = clk_lb;
+ 552              		.loc 1 246 3 is_stmt 1 view .LVU121
+ 553              		.loc 1 246 27 is_stmt 0 view .LVU122
+ 554 0012 0269     		ldr	r2, [r0, #16]
+ 555              	.LVL51:
+ 556              		.loc 1 246 27 view .LVU123
+ 557 0014 63F30822 		bfi	r2, r3, #8, #1
+ 558 0018 0261     		str	r2, [r0, #16]
+ 247:libraries/drivers/src/at32f403a_407_usart.c **** }
+ 559              		.loc 1 247 1 view .LVU124
+ 560 001a 5DF8044B 		ldr	r4, [sp], #4
+ 561              	.LCFI6:
+ 562              		.cfi_restore 4
+ 563              		.cfi_def_cfa_offset 0
+ 564 001e 7047     		bx	lr
+ 565              		.cfi_endproc
+ 566              	.LFE140:
+ 568              		.section	.text.usart_clock_enable,"ax",%progbits
+ 569              		.align	1
+ 570              		.global	usart_clock_enable
+ 571              		.syntax unified
+ 572              		.thumb
+ 573              		.thumb_func
+ 575              	usart_clock_enable:
+ 576              	.LVL52:
+ 577              	.LFB141:
+ 248:libraries/drivers/src/at32f403a_407_usart.c **** 
+ 249:libraries/drivers/src/at32f403a_407_usart.c **** /**
+ 250:libraries/drivers/src/at32f403a_407_usart.c ****   * @brief  usart enable the ck pin.
+ 251:libraries/drivers/src/at32f403a_407_usart.c ****   * @note   clock enable are not available for UART4, UART5, UART7 and UART8.
+ 252:libraries/drivers/src/at32f403a_407_usart.c ****   * @param  usart_x: select the usart or the uart peripheral.
+ 253:libraries/drivers/src/at32f403a_407_usart.c ****   *         this parameter can be one of the following values:
+ 254:libraries/drivers/src/at32f403a_407_usart.c ****   *         USART1, USART2, USART3 or USART6.
+ 255:libraries/drivers/src/at32f403a_407_usart.c ****   * @param  new_state: TRUE or FALSE
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccHzhFIx.s 			page 16
+
+
+ 256:libraries/drivers/src/at32f403a_407_usart.c ****   * @retval none
+ 257:libraries/drivers/src/at32f403a_407_usart.c ****   */
+ 258:libraries/drivers/src/at32f403a_407_usart.c **** void usart_clock_enable(usart_type* usart_x, confirm_state new_state)
+ 259:libraries/drivers/src/at32f403a_407_usart.c **** {
+ 578              		.loc 1 259 1 is_stmt 1 view -0
+ 579              		.cfi_startproc
+ 580              		@ args = 0, pretend = 0, frame = 0
+ 581              		@ frame_needed = 0, uses_anonymous_args = 0
+ 582              		@ link register save eliminated.
+ 260:libraries/drivers/src/at32f403a_407_usart.c ****   usart_x->ctrl2_bit.clken = new_state;
+ 583              		.loc 1 260 3 view .LVU126
+ 584              		.loc 1 260 28 is_stmt 0 view .LVU127
+ 585 0000 0369     		ldr	r3, [r0, #16]
+ 586 0002 61F3CB23 		bfi	r3, r1, #11, #1
+ 587 0006 0361     		str	r3, [r0, #16]
+ 261:libraries/drivers/src/at32f403a_407_usart.c **** }
+ 588              		.loc 1 261 1 view .LVU128
+ 589 0008 7047     		bx	lr
+ 590              		.cfi_endproc
+ 591              	.LFE141:
+ 593              		.section	.text.usart_interrupt_enable,"ax",%progbits
+ 594              		.align	1
+ 595              		.global	usart_interrupt_enable
+ 596              		.syntax unified
+ 597              		.thumb
+ 598              		.thumb_func
+ 600              	usart_interrupt_enable:
+ 601              	.LVL53:
+ 602              	.LFB142:
+ 262:libraries/drivers/src/at32f403a_407_usart.c **** 
+ 263:libraries/drivers/src/at32f403a_407_usart.c **** /**
+ 264:libraries/drivers/src/at32f403a_407_usart.c ****   * @brief  enable or disable the specified usart interrupts.
+ 265:libraries/drivers/src/at32f403a_407_usart.c ****   * @param  usart_x: select the usart or the uart peripheral.
+ 266:libraries/drivers/src/at32f403a_407_usart.c ****   *         this parameter can be one of the following values:
+ 267:libraries/drivers/src/at32f403a_407_usart.c ****   *         USART1, USART2, USART3, UART4, UART5, USART6, UART7 or UART8.
+ 268:libraries/drivers/src/at32f403a_407_usart.c ****   * @param  usart_int: specifies the USART interrupt sources to be enabled or disabled.
+ 269:libraries/drivers/src/at32f403a_407_usart.c ****   *         this parameter can be one of the following values:
+ 270:libraries/drivers/src/at32f403a_407_usart.c ****   *         - USART_IDLE_INT:  idle interrupt
+ 271:libraries/drivers/src/at32f403a_407_usart.c ****   *         - USART_RDBF_INT:  rdbf interrupt
+ 272:libraries/drivers/src/at32f403a_407_usart.c ****   *         - USART_TDC_INT:   tdc interrupt
+ 273:libraries/drivers/src/at32f403a_407_usart.c ****   *         - USART_TDBE_INT:  tdbe interrupt
+ 274:libraries/drivers/src/at32f403a_407_usart.c ****   *         - USART_PERR_INT:  perr interrupt
+ 275:libraries/drivers/src/at32f403a_407_usart.c ****   *         - USART_BF_INT:    break frame interrupt
+ 276:libraries/drivers/src/at32f403a_407_usart.c ****   *         - USART_ERR_INT:   err interrupt
+ 277:libraries/drivers/src/at32f403a_407_usart.c ****   *         - USART_CTSCF_INT: ctscf interrupt
+ 278:libraries/drivers/src/at32f403a_407_usart.c ****   * @param  new_state: new state of the specified usart interrupts.
+ 279:libraries/drivers/src/at32f403a_407_usart.c ****   *         this parameter can be: TRUE or FALSE.
+ 280:libraries/drivers/src/at32f403a_407_usart.c ****   * @retval none
+ 281:libraries/drivers/src/at32f403a_407_usart.c ****   */
+ 282:libraries/drivers/src/at32f403a_407_usart.c **** void usart_interrupt_enable(usart_type* usart_x, uint32_t usart_int, confirm_state new_state)
+ 283:libraries/drivers/src/at32f403a_407_usart.c **** {
+ 603              		.loc 1 283 1 is_stmt 1 view -0
+ 604              		.cfi_startproc
+ 605              		@ args = 0, pretend = 0, frame = 0
+ 606              		@ frame_needed = 0, uses_anonymous_args = 0
+ 607              		@ link register save eliminated.
+ 284:libraries/drivers/src/at32f403a_407_usart.c ****   if(new_state == TRUE)
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccHzhFIx.s 			page 17
+
+
+ 608              		.loc 1 284 3 view .LVU130
+ 609              		.loc 1 284 5 is_stmt 0 view .LVU131
+ 610 0000 012A     		cmp	r2, #1
+ 611 0002 0CD0     		beq	.L45
+ 285:libraries/drivers/src/at32f403a_407_usart.c ****     PERIPH_REG((uint32_t)usart_x, usart_int) |= PERIPH_REG_BIT(usart_int);
+ 286:libraries/drivers/src/at32f403a_407_usart.c ****   else
+ 287:libraries/drivers/src/at32f403a_407_usart.c ****     PERIPH_REG((uint32_t)usart_x, usart_int) &= ~PERIPH_REG_BIT(usart_int);
+ 612              		.loc 1 287 5 is_stmt 1 view .LVU132
+ 613 0004 4FEA114C 		lsr	ip, r1, #16
+ 614 0008 50F80C30 		ldr	r3, [r0, ip]
+ 615              		.loc 1 287 50 is_stmt 0 view .LVU133
+ 616 000c 01F01F01 		and	r1, r1, #31
+ 617              	.LVL54:
+ 618              		.loc 1 287 50 view .LVU134
+ 619 0010 0122     		movs	r2, #1
+ 620              	.LVL55:
+ 621              		.loc 1 287 50 view .LVU135
+ 622 0012 8A40     		lsls	r2, r2, r1
+ 623              		.loc 1 287 46 view .LVU136
+ 624 0014 23EA0203 		bic	r3, r3, r2
+ 625 0018 40F80C30 		str	r3, [r0, ip]
+ 288:libraries/drivers/src/at32f403a_407_usart.c **** }
+ 626              		.loc 1 288 1 view .LVU137
+ 627 001c 7047     		bx	lr
+ 628              	.LVL56:
+ 629              	.L45:
+ 285:libraries/drivers/src/at32f403a_407_usart.c ****     PERIPH_REG((uint32_t)usart_x, usart_int) |= PERIPH_REG_BIT(usart_int);
+ 630              		.loc 1 285 5 is_stmt 1 view .LVU138
+ 631 001e 4FEA114C 		lsr	ip, r1, #16
+ 632 0022 50F80C30 		ldr	r3, [r0, ip]
+ 285:libraries/drivers/src/at32f403a_407_usart.c ****     PERIPH_REG((uint32_t)usart_x, usart_int) |= PERIPH_REG_BIT(usart_int);
+ 633              		.loc 1 285 49 is_stmt 0 view .LVU139
+ 634 0026 01F01F01 		and	r1, r1, #31
+ 635              	.LVL57:
+ 285:libraries/drivers/src/at32f403a_407_usart.c ****     PERIPH_REG((uint32_t)usart_x, usart_int) |= PERIPH_REG_BIT(usart_int);
+ 636              		.loc 1 285 49 view .LVU140
+ 637 002a 8A40     		lsls	r2, r2, r1
+ 638              	.LVL58:
+ 285:libraries/drivers/src/at32f403a_407_usart.c ****     PERIPH_REG((uint32_t)usart_x, usart_int) |= PERIPH_REG_BIT(usart_int);
+ 639              		.loc 1 285 46 view .LVU141
+ 640 002c 1343     		orrs	r3, r3, r2
+ 641 002e 40F80C30 		str	r3, [r0, ip]
+ 642 0032 7047     		bx	lr
+ 643              		.cfi_endproc
+ 644              	.LFE142:
+ 646              		.section	.text.usart_dma_transmitter_enable,"ax",%progbits
+ 647              		.align	1
+ 648              		.global	usart_dma_transmitter_enable
+ 649              		.syntax unified
+ 650              		.thumb
+ 651              		.thumb_func
+ 653              	usart_dma_transmitter_enable:
+ 654              	.LVL59:
+ 655              	.LFB143:
+ 289:libraries/drivers/src/at32f403a_407_usart.c **** 
+ 290:libraries/drivers/src/at32f403a_407_usart.c **** /**
+ 291:libraries/drivers/src/at32f403a_407_usart.c ****   * @brief  enable or disable the usart's dma transmitter interface.
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccHzhFIx.s 			page 18
+
+
+ 292:libraries/drivers/src/at32f403a_407_usart.c ****   * @param  usart_x: select the usart or the uart peripheral.
+ 293:libraries/drivers/src/at32f403a_407_usart.c ****   *         this parameter can be one of the following values:
+ 294:libraries/drivers/src/at32f403a_407_usart.c ****   *         USART1, USART2, USART3, UART4, UART5, USART6, UART7 or UART8.
+ 295:libraries/drivers/src/at32f403a_407_usart.c ****   * @param  new_state: new state of the dma request sources.
+ 296:libraries/drivers/src/at32f403a_407_usart.c ****   *         this parameter can be: TRUE or FALSE.
+ 297:libraries/drivers/src/at32f403a_407_usart.c ****   * @retval none
+ 298:libraries/drivers/src/at32f403a_407_usart.c ****   */
+ 299:libraries/drivers/src/at32f403a_407_usart.c **** void usart_dma_transmitter_enable(usart_type* usart_x, confirm_state new_state)
+ 300:libraries/drivers/src/at32f403a_407_usart.c **** {
+ 656              		.loc 1 300 1 is_stmt 1 view -0
+ 657              		.cfi_startproc
+ 658              		@ args = 0, pretend = 0, frame = 0
+ 659              		@ frame_needed = 0, uses_anonymous_args = 0
+ 660              		@ link register save eliminated.
+ 301:libraries/drivers/src/at32f403a_407_usart.c ****   usart_x->ctrl3_bit.dmaten = new_state;
+ 661              		.loc 1 301 3 view .LVU143
+ 662              		.loc 1 301 29 is_stmt 0 view .LVU144
+ 663 0000 4369     		ldr	r3, [r0, #20]
+ 664 0002 61F3C713 		bfi	r3, r1, #7, #1
+ 665 0006 4361     		str	r3, [r0, #20]
+ 302:libraries/drivers/src/at32f403a_407_usart.c **** }
+ 666              		.loc 1 302 1 view .LVU145
+ 667 0008 7047     		bx	lr
+ 668              		.cfi_endproc
+ 669              	.LFE143:
+ 671              		.section	.text.usart_dma_receiver_enable,"ax",%progbits
+ 672              		.align	1
+ 673              		.global	usart_dma_receiver_enable
+ 674              		.syntax unified
+ 675              		.thumb
+ 676              		.thumb_func
+ 678              	usart_dma_receiver_enable:
+ 679              	.LVL60:
+ 680              	.LFB144:
+ 303:libraries/drivers/src/at32f403a_407_usart.c **** 
+ 304:libraries/drivers/src/at32f403a_407_usart.c **** /**
+ 305:libraries/drivers/src/at32f403a_407_usart.c ****   * @brief  enable or disable the usart's dma receiver interface.
+ 306:libraries/drivers/src/at32f403a_407_usart.c ****   * @param  usart_x: select the usart or the uart peripheral.
+ 307:libraries/drivers/src/at32f403a_407_usart.c ****   *         this parameter can be one of the following values:
+ 308:libraries/drivers/src/at32f403a_407_usart.c ****   *         USART1, USART2, USART3, UART4, UART5, USART6, UART7 or UART8.
+ 309:libraries/drivers/src/at32f403a_407_usart.c ****   * @param  new_state: new state of the dma request sources.
+ 310:libraries/drivers/src/at32f403a_407_usart.c ****   *         this parameter can be: TRUE or FALSE.
+ 311:libraries/drivers/src/at32f403a_407_usart.c ****   * @retval none
+ 312:libraries/drivers/src/at32f403a_407_usart.c ****   */
+ 313:libraries/drivers/src/at32f403a_407_usart.c **** void usart_dma_receiver_enable(usart_type* usart_x, confirm_state new_state)
+ 314:libraries/drivers/src/at32f403a_407_usart.c **** {
+ 681              		.loc 1 314 1 is_stmt 1 view -0
+ 682              		.cfi_startproc
+ 683              		@ args = 0, pretend = 0, frame = 0
+ 684              		@ frame_needed = 0, uses_anonymous_args = 0
+ 685              		@ link register save eliminated.
+ 315:libraries/drivers/src/at32f403a_407_usart.c ****   usart_x->ctrl3_bit.dmaren = new_state;
+ 686              		.loc 1 315 3 view .LVU147
+ 687              		.loc 1 315 29 is_stmt 0 view .LVU148
+ 688 0000 4369     		ldr	r3, [r0, #20]
+ 689 0002 61F38613 		bfi	r3, r1, #6, #1
+ 690 0006 4361     		str	r3, [r0, #20]
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccHzhFIx.s 			page 19
+
+
+ 316:libraries/drivers/src/at32f403a_407_usart.c **** }
+ 691              		.loc 1 316 1 view .LVU149
+ 692 0008 7047     		bx	lr
+ 693              		.cfi_endproc
+ 694              	.LFE144:
+ 696              		.section	.text.usart_wakeup_id_set,"ax",%progbits
+ 697              		.align	1
+ 698              		.global	usart_wakeup_id_set
+ 699              		.syntax unified
+ 700              		.thumb
+ 701              		.thumb_func
+ 703              	usart_wakeup_id_set:
+ 704              	.LVL61:
+ 705              	.LFB145:
+ 317:libraries/drivers/src/at32f403a_407_usart.c **** 
+ 318:libraries/drivers/src/at32f403a_407_usart.c **** /**
+ 319:libraries/drivers/src/at32f403a_407_usart.c ****   * @brief  set the wakeup id of the usart.
+ 320:libraries/drivers/src/at32f403a_407_usart.c ****   * @param  usart_x: select the usart or the uart peripheral.
+ 321:libraries/drivers/src/at32f403a_407_usart.c ****   *         this parameter can be one of the following values:
+ 322:libraries/drivers/src/at32f403a_407_usart.c ****   *         USART1, USART2, USART3, UART4, UART5, USART6, UART7 or UART8.
+ 323:libraries/drivers/src/at32f403a_407_usart.c ****   * @param  usart_id: the matching id(0x0~0xF).
+ 324:libraries/drivers/src/at32f403a_407_usart.c ****   * @retval none
+ 325:libraries/drivers/src/at32f403a_407_usart.c ****   */
+ 326:libraries/drivers/src/at32f403a_407_usart.c **** void usart_wakeup_id_set(usart_type* usart_x, uint8_t usart_id)
+ 327:libraries/drivers/src/at32f403a_407_usart.c **** {
+ 706              		.loc 1 327 1 is_stmt 1 view -0
+ 707              		.cfi_startproc
+ 708              		@ args = 0, pretend = 0, frame = 0
+ 709              		@ frame_needed = 0, uses_anonymous_args = 0
+ 710              		@ link register save eliminated.
+ 328:libraries/drivers/src/at32f403a_407_usart.c ****   usart_x->ctrl2_bit.id = usart_id;
+ 711              		.loc 1 328 3 view .LVU151
+ 712              		.loc 1 328 25 is_stmt 0 view .LVU152
+ 713 0000 0369     		ldr	r3, [r0, #16]
+ 714 0002 61F30303 		bfi	r3, r1, #0, #4
+ 715 0006 0361     		str	r3, [r0, #16]
+ 329:libraries/drivers/src/at32f403a_407_usart.c **** }
+ 716              		.loc 1 329 1 view .LVU153
+ 717 0008 7047     		bx	lr
+ 718              		.cfi_endproc
+ 719              	.LFE145:
+ 721              		.section	.text.usart_wakeup_mode_set,"ax",%progbits
+ 722              		.align	1
+ 723              		.global	usart_wakeup_mode_set
+ 724              		.syntax unified
+ 725              		.thumb
+ 726              		.thumb_func
+ 728              	usart_wakeup_mode_set:
+ 729              	.LVL62:
+ 730              	.LFB146:
+ 330:libraries/drivers/src/at32f403a_407_usart.c **** 
+ 331:libraries/drivers/src/at32f403a_407_usart.c **** /**
+ 332:libraries/drivers/src/at32f403a_407_usart.c ****   * @brief  select the usart wakeup method in multi-processor communication.
+ 333:libraries/drivers/src/at32f403a_407_usart.c ****   * @param  usart_x: select the usart or the uart peripheral.
+ 334:libraries/drivers/src/at32f403a_407_usart.c ****   *         this parameter can be one of the following values:
+ 335:libraries/drivers/src/at32f403a_407_usart.c ****   *         USART1, USART2, USART3, UART4, UART5, USART6, UART7 or UART8.
+ 336:libraries/drivers/src/at32f403a_407_usart.c ****   * @param  wakeup_mode: determines the way to wake up usart method.
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccHzhFIx.s 			page 20
+
+
+ 337:libraries/drivers/src/at32f403a_407_usart.c ****   *         this parameter can be one of the following values:
+ 338:libraries/drivers/src/at32f403a_407_usart.c ****   *         - USART_WAKEUP_BY_IDLE_FRAME
+ 339:libraries/drivers/src/at32f403a_407_usart.c ****   *         - USART_WAKEUP_BY_MATCHING_ID
+ 340:libraries/drivers/src/at32f403a_407_usart.c ****   * @retval none
+ 341:libraries/drivers/src/at32f403a_407_usart.c ****   */
+ 342:libraries/drivers/src/at32f403a_407_usart.c **** void usart_wakeup_mode_set(usart_type* usart_x, usart_wakeup_mode_type wakeup_mode)
+ 343:libraries/drivers/src/at32f403a_407_usart.c **** {
+ 731              		.loc 1 343 1 is_stmt 1 view -0
+ 732              		.cfi_startproc
+ 733              		@ args = 0, pretend = 0, frame = 0
+ 734              		@ frame_needed = 0, uses_anonymous_args = 0
+ 735              		@ link register save eliminated.
+ 344:libraries/drivers/src/at32f403a_407_usart.c ****   usart_x->ctrl1_bit.wum = wakeup_mode;
+ 736              		.loc 1 344 3 view .LVU155
+ 737              		.loc 1 344 26 is_stmt 0 view .LVU156
+ 738 0000 C368     		ldr	r3, [r0, #12]
+ 739 0002 61F3CB23 		bfi	r3, r1, #11, #1
+ 740 0006 C360     		str	r3, [r0, #12]
+ 345:libraries/drivers/src/at32f403a_407_usart.c **** }
+ 741              		.loc 1 345 1 view .LVU157
+ 742 0008 7047     		bx	lr
+ 743              		.cfi_endproc
+ 744              	.LFE146:
+ 746              		.section	.text.usart_receiver_mute_enable,"ax",%progbits
+ 747              		.align	1
+ 748              		.global	usart_receiver_mute_enable
+ 749              		.syntax unified
+ 750              		.thumb
+ 751              		.thumb_func
+ 753              	usart_receiver_mute_enable:
+ 754              	.LVL63:
+ 755              	.LFB147:
+ 346:libraries/drivers/src/at32f403a_407_usart.c **** 
+ 347:libraries/drivers/src/at32f403a_407_usart.c **** /**
+ 348:libraries/drivers/src/at32f403a_407_usart.c ****   * @brief  config the usart in mute mode in multi-processor communication.
+ 349:libraries/drivers/src/at32f403a_407_usart.c ****   * @param  usart_x: select the usart or the uart peripheral.
+ 350:libraries/drivers/src/at32f403a_407_usart.c ****   *         this parameter can be one of the following values:
+ 351:libraries/drivers/src/at32f403a_407_usart.c ****   *         USART1, USART2, USART3, UART4, UART5, USART6, UART7 or UART8.
+ 352:libraries/drivers/src/at32f403a_407_usart.c ****   * @param  new_state: new state of the usart mute mode.
+ 353:libraries/drivers/src/at32f403a_407_usart.c ****   *         this parameter can be: TRUE or FALSE.
+ 354:libraries/drivers/src/at32f403a_407_usart.c ****   * @retval none
+ 355:libraries/drivers/src/at32f403a_407_usart.c ****   */
+ 356:libraries/drivers/src/at32f403a_407_usart.c **** void usart_receiver_mute_enable(usart_type* usart_x, confirm_state new_state)
+ 357:libraries/drivers/src/at32f403a_407_usart.c **** {
+ 756              		.loc 1 357 1 is_stmt 1 view -0
+ 757              		.cfi_startproc
+ 758              		@ args = 0, pretend = 0, frame = 0
+ 759              		@ frame_needed = 0, uses_anonymous_args = 0
+ 760              		@ link register save eliminated.
+ 358:libraries/drivers/src/at32f403a_407_usart.c ****   usart_x->ctrl1_bit.rm = new_state;
+ 761              		.loc 1 358 3 view .LVU159
+ 762              		.loc 1 358 25 is_stmt 0 view .LVU160
+ 763 0000 C368     		ldr	r3, [r0, #12]
+ 764 0002 61F34103 		bfi	r3, r1, #1, #1
+ 765 0006 C360     		str	r3, [r0, #12]
+ 359:libraries/drivers/src/at32f403a_407_usart.c **** }
+ 766              		.loc 1 359 1 view .LVU161
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccHzhFIx.s 			page 21
+
+
+ 767 0008 7047     		bx	lr
+ 768              		.cfi_endproc
+ 769              	.LFE147:
+ 771              		.section	.text.usart_break_bit_num_set,"ax",%progbits
+ 772              		.align	1
+ 773              		.global	usart_break_bit_num_set
+ 774              		.syntax unified
+ 775              		.thumb
+ 776              		.thumb_func
+ 778              	usart_break_bit_num_set:
+ 779              	.LVL64:
+ 780              	.LFB148:
+ 360:libraries/drivers/src/at32f403a_407_usart.c **** 
+ 361:libraries/drivers/src/at32f403a_407_usart.c **** /**
+ 362:libraries/drivers/src/at32f403a_407_usart.c ****   * @brief  set the usart break frame bit num.
+ 363:libraries/drivers/src/at32f403a_407_usart.c ****   * @param  usart_x: select the usart or the uart peripheral.
+ 364:libraries/drivers/src/at32f403a_407_usart.c ****   *         this parameter can be one of the following values:
+ 365:libraries/drivers/src/at32f403a_407_usart.c ****   *         USART1, USART2, USART3, UART4, UART5, USART6, UART7 or UART8.
+ 366:libraries/drivers/src/at32f403a_407_usart.c ****   * @param  break_bit: specifies the break bit num.
+ 367:libraries/drivers/src/at32f403a_407_usart.c ****   *         this parameter can be one of the following values:
+ 368:libraries/drivers/src/at32f403a_407_usart.c ****   *         - USART_BREAK_10BITS
+ 369:libraries/drivers/src/at32f403a_407_usart.c ****   *         - USART_BREAK_11BITS
+ 370:libraries/drivers/src/at32f403a_407_usart.c ****   * @retval none
+ 371:libraries/drivers/src/at32f403a_407_usart.c ****   */
+ 372:libraries/drivers/src/at32f403a_407_usart.c **** void usart_break_bit_num_set(usart_type* usart_x, usart_break_bit_num_type break_bit)
+ 373:libraries/drivers/src/at32f403a_407_usart.c **** {
+ 781              		.loc 1 373 1 is_stmt 1 view -0
+ 782              		.cfi_startproc
+ 783              		@ args = 0, pretend = 0, frame = 0
+ 784              		@ frame_needed = 0, uses_anonymous_args = 0
+ 785              		@ link register save eliminated.
+ 374:libraries/drivers/src/at32f403a_407_usart.c ****   usart_x->ctrl2_bit.bfbn = break_bit;
+ 786              		.loc 1 374 3 view .LVU163
+ 787              		.loc 1 374 27 is_stmt 0 view .LVU164
+ 788 0000 0369     		ldr	r3, [r0, #16]
+ 789 0002 61F34513 		bfi	r3, r1, #5, #1
+ 790 0006 0361     		str	r3, [r0, #16]
+ 375:libraries/drivers/src/at32f403a_407_usart.c **** }
+ 791              		.loc 1 375 1 view .LVU165
+ 792 0008 7047     		bx	lr
+ 793              		.cfi_endproc
+ 794              	.LFE148:
+ 796              		.section	.text.usart_lin_mode_enable,"ax",%progbits
+ 797              		.align	1
+ 798              		.global	usart_lin_mode_enable
+ 799              		.syntax unified
+ 800              		.thumb
+ 801              		.thumb_func
+ 803              	usart_lin_mode_enable:
+ 804              	.LVL65:
+ 805              	.LFB149:
+ 376:libraries/drivers/src/at32f403a_407_usart.c **** 
+ 377:libraries/drivers/src/at32f403a_407_usart.c **** /**
+ 378:libraries/drivers/src/at32f403a_407_usart.c ****   * @brief  enable or disable the usart lin mode.
+ 379:libraries/drivers/src/at32f403a_407_usart.c ****   * @param  usart_x: select the usart or the uart peripheral.
+ 380:libraries/drivers/src/at32f403a_407_usart.c ****   *         this parameter can be one of the following values:
+ 381:libraries/drivers/src/at32f403a_407_usart.c ****   *         USART1, USART2, USART3, UART4, UART5, USART6, UART7 or UART8.
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccHzhFIx.s 			page 22
+
+
+ 382:libraries/drivers/src/at32f403a_407_usart.c ****   * @param  new_state: new state of the usart lin mode.
+ 383:libraries/drivers/src/at32f403a_407_usart.c ****   *         this parameter can be: TRUE or FALSE.
+ 384:libraries/drivers/src/at32f403a_407_usart.c ****   * @retval none
+ 385:libraries/drivers/src/at32f403a_407_usart.c ****   */
+ 386:libraries/drivers/src/at32f403a_407_usart.c **** void usart_lin_mode_enable(usart_type* usart_x, confirm_state new_state)
+ 387:libraries/drivers/src/at32f403a_407_usart.c **** {
+ 806              		.loc 1 387 1 is_stmt 1 view -0
+ 807              		.cfi_startproc
+ 808              		@ args = 0, pretend = 0, frame = 0
+ 809              		@ frame_needed = 0, uses_anonymous_args = 0
+ 810              		@ link register save eliminated.
+ 388:libraries/drivers/src/at32f403a_407_usart.c ****   usart_x->ctrl2_bit.linen = new_state;
+ 811              		.loc 1 388 3 view .LVU167
+ 812              		.loc 1 388 28 is_stmt 0 view .LVU168
+ 813 0000 0369     		ldr	r3, [r0, #16]
+ 814 0002 61F38E33 		bfi	r3, r1, #14, #1
+ 815 0006 0361     		str	r3, [r0, #16]
+ 389:libraries/drivers/src/at32f403a_407_usart.c **** }
+ 816              		.loc 1 389 1 view .LVU169
+ 817 0008 7047     		bx	lr
+ 818              		.cfi_endproc
+ 819              	.LFE149:
+ 821              		.section	.text.usart_data_transmit,"ax",%progbits
+ 822              		.align	1
+ 823              		.global	usart_data_transmit
+ 824              		.syntax unified
+ 825              		.thumb
+ 826              		.thumb_func
+ 828              	usart_data_transmit:
+ 829              	.LVL66:
+ 830              	.LFB150:
+ 390:libraries/drivers/src/at32f403a_407_usart.c **** 
+ 391:libraries/drivers/src/at32f403a_407_usart.c **** /**
+ 392:libraries/drivers/src/at32f403a_407_usart.c ****   * @brief  transmit single data through the usart peripheral.
+ 393:libraries/drivers/src/at32f403a_407_usart.c ****   * @param  usart_x: select the usart or the uart peripheral.
+ 394:libraries/drivers/src/at32f403a_407_usart.c ****   *         this parameter can be one of the following values:
+ 395:libraries/drivers/src/at32f403a_407_usart.c ****   *         USART1, USART2, USART3, UART4, UART5, USART6, UART7 or UART8.
+ 396:libraries/drivers/src/at32f403a_407_usart.c ****   * @param  data: the data to transmit.
+ 397:libraries/drivers/src/at32f403a_407_usart.c ****   * @retval none
+ 398:libraries/drivers/src/at32f403a_407_usart.c ****   */
+ 399:libraries/drivers/src/at32f403a_407_usart.c **** void usart_data_transmit(usart_type* usart_x, uint16_t data)
+ 400:libraries/drivers/src/at32f403a_407_usart.c **** {
+ 831              		.loc 1 400 1 is_stmt 1 view -0
+ 832              		.cfi_startproc
+ 833              		@ args = 0, pretend = 0, frame = 0
+ 834              		@ frame_needed = 0, uses_anonymous_args = 0
+ 835              		@ link register save eliminated.
+ 401:libraries/drivers/src/at32f403a_407_usart.c ****   usart_x->dt = (data & 0x01FF);
+ 836              		.loc 1 401 3 view .LVU171
+ 837              		.loc 1 401 23 is_stmt 0 view .LVU172
+ 838 0000 C1F30801 		ubfx	r1, r1, #0, #9
+ 839              	.LVL67:
+ 840              		.loc 1 401 15 view .LVU173
+ 841 0004 4160     		str	r1, [r0, #4]
+ 402:libraries/drivers/src/at32f403a_407_usart.c **** }
+ 842              		.loc 1 402 1 view .LVU174
+ 843 0006 7047     		bx	lr
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccHzhFIx.s 			page 23
+
+
+ 844              		.cfi_endproc
+ 845              	.LFE150:
+ 847              		.section	.text.usart_data_receive,"ax",%progbits
+ 848              		.align	1
+ 849              		.global	usart_data_receive
+ 850              		.syntax unified
+ 851              		.thumb
+ 852              		.thumb_func
+ 854              	usart_data_receive:
+ 855              	.LVL68:
+ 856              	.LFB151:
+ 403:libraries/drivers/src/at32f403a_407_usart.c **** 
+ 404:libraries/drivers/src/at32f403a_407_usart.c **** /**
+ 405:libraries/drivers/src/at32f403a_407_usart.c ****   * @brief  return the most recent received data by the usart peripheral.
+ 406:libraries/drivers/src/at32f403a_407_usart.c ****   * @param  usart_x: select the usart or the uart peripheral.
+ 407:libraries/drivers/src/at32f403a_407_usart.c ****   *         this parameter can be one of the following values:
+ 408:libraries/drivers/src/at32f403a_407_usart.c ****   *         USART1, USART2, USART3, UART4, UART5, USART6, UART7 or UART8.
+ 409:libraries/drivers/src/at32f403a_407_usart.c ****   * @retval the received data.
+ 410:libraries/drivers/src/at32f403a_407_usart.c ****   */
+ 411:libraries/drivers/src/at32f403a_407_usart.c **** uint16_t usart_data_receive(usart_type* usart_x)
+ 412:libraries/drivers/src/at32f403a_407_usart.c **** {
+ 857              		.loc 1 412 1 is_stmt 1 view -0
+ 858              		.cfi_startproc
+ 859              		@ args = 0, pretend = 0, frame = 0
+ 860              		@ frame_needed = 0, uses_anonymous_args = 0
+ 861              		@ link register save eliminated.
+ 413:libraries/drivers/src/at32f403a_407_usart.c ****   return (uint16_t)(usart_x->dt);
+ 862              		.loc 1 413 3 view .LVU176
+ 863              		.loc 1 413 28 is_stmt 0 view .LVU177
+ 864 0000 4068     		ldr	r0, [r0, #4]
+ 865              	.LVL69:
+ 414:libraries/drivers/src/at32f403a_407_usart.c **** }
+ 866              		.loc 1 414 1 view .LVU178
+ 867 0002 80B2     		uxth	r0, r0
+ 868 0004 7047     		bx	lr
+ 869              		.cfi_endproc
+ 870              	.LFE151:
+ 872              		.section	.text.usart_break_send,"ax",%progbits
+ 873              		.align	1
+ 874              		.global	usart_break_send
+ 875              		.syntax unified
+ 876              		.thumb
+ 877              		.thumb_func
+ 879              	usart_break_send:
+ 880              	.LVL70:
+ 881              	.LFB152:
+ 415:libraries/drivers/src/at32f403a_407_usart.c **** 
+ 416:libraries/drivers/src/at32f403a_407_usart.c **** /**
+ 417:libraries/drivers/src/at32f403a_407_usart.c ****   * @brief  transmit break characters.
+ 418:libraries/drivers/src/at32f403a_407_usart.c ****   * @param  usart_x: select the usart or the uart peripheral.
+ 419:libraries/drivers/src/at32f403a_407_usart.c ****   *         this parameter can be one of the following values:
+ 420:libraries/drivers/src/at32f403a_407_usart.c ****   *         USART1, USART2, USART3, UART4, UART5, USART6, UART7 or UART8.
+ 421:libraries/drivers/src/at32f403a_407_usart.c ****   * @retval none
+ 422:libraries/drivers/src/at32f403a_407_usart.c ****   */
+ 423:libraries/drivers/src/at32f403a_407_usart.c **** void usart_break_send(usart_type* usart_x)
+ 424:libraries/drivers/src/at32f403a_407_usart.c **** {
+ 882              		.loc 1 424 1 is_stmt 1 view -0
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccHzhFIx.s 			page 24
+
+
+ 883              		.cfi_startproc
+ 884              		@ args = 0, pretend = 0, frame = 0
+ 885              		@ frame_needed = 0, uses_anonymous_args = 0
+ 886              		@ link register save eliminated.
+ 425:libraries/drivers/src/at32f403a_407_usart.c ****   usart_x->ctrl1_bit.sbf = TRUE;
+ 887              		.loc 1 425 3 view .LVU180
+ 888              		.loc 1 425 26 is_stmt 0 view .LVU181
+ 889 0000 C368     		ldr	r3, [r0, #12]
+ 890 0002 43F00103 		orr	r3, r3, #1
+ 891 0006 C360     		str	r3, [r0, #12]
+ 426:libraries/drivers/src/at32f403a_407_usart.c **** }
+ 892              		.loc 1 426 1 view .LVU182
+ 893 0008 7047     		bx	lr
+ 894              		.cfi_endproc
+ 895              	.LFE152:
+ 897              		.section	.text.usart_smartcard_guard_time_set,"ax",%progbits
+ 898              		.align	1
+ 899              		.global	usart_smartcard_guard_time_set
+ 900              		.syntax unified
+ 901              		.thumb
+ 902              		.thumb_func
+ 904              	usart_smartcard_guard_time_set:
+ 905              	.LVL71:
+ 906              	.LFB153:
+ 427:libraries/drivers/src/at32f403a_407_usart.c **** 
+ 428:libraries/drivers/src/at32f403a_407_usart.c **** /**
+ 429:libraries/drivers/src/at32f403a_407_usart.c ****   * @brief  config the specified usart smartcard guard time.
+ 430:libraries/drivers/src/at32f403a_407_usart.c ****   * @note   The guard time bits are not available for UART4, UART5, UART7 or UART8.
+ 431:libraries/drivers/src/at32f403a_407_usart.c ****   * @param  usart_x: select the usart or the uart peripheral.
+ 432:libraries/drivers/src/at32f403a_407_usart.c ****   *         this parameter can be one of the following values:
+ 433:libraries/drivers/src/at32f403a_407_usart.c ****   *         USART1, USART2, USART3 or USART6.
+ 434:libraries/drivers/src/at32f403a_407_usart.c ****   * @param  guard_time_val: specifies the guard time (0x00~0xFF).
+ 435:libraries/drivers/src/at32f403a_407_usart.c ****   * @retval none
+ 436:libraries/drivers/src/at32f403a_407_usart.c ****   */
+ 437:libraries/drivers/src/at32f403a_407_usart.c **** void usart_smartcard_guard_time_set(usart_type* usart_x, uint8_t guard_time_val)
+ 438:libraries/drivers/src/at32f403a_407_usart.c **** {
+ 907              		.loc 1 438 1 is_stmt 1 view -0
+ 908              		.cfi_startproc
+ 909              		@ args = 0, pretend = 0, frame = 0
+ 910              		@ frame_needed = 0, uses_anonymous_args = 0
+ 911              		@ link register save eliminated.
+ 439:libraries/drivers/src/at32f403a_407_usart.c ****   usart_x->gdiv_bit.scgt = guard_time_val;
+ 912              		.loc 1 439 3 view .LVU184
+ 913              		.loc 1 439 26 is_stmt 0 view .LVU185
+ 914 0000 8369     		ldr	r3, [r0, #24]
+ 915 0002 61F30F23 		bfi	r3, r1, #8, #8
+ 916 0006 8361     		str	r3, [r0, #24]
+ 440:libraries/drivers/src/at32f403a_407_usart.c **** }
+ 917              		.loc 1 440 1 view .LVU186
+ 918 0008 7047     		bx	lr
+ 919              		.cfi_endproc
+ 920              	.LFE153:
+ 922              		.section	.text.usart_irda_smartcard_division_set,"ax",%progbits
+ 923              		.align	1
+ 924              		.global	usart_irda_smartcard_division_set
+ 925              		.syntax unified
+ 926              		.thumb
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccHzhFIx.s 			page 25
+
+
+ 927              		.thumb_func
+ 929              	usart_irda_smartcard_division_set:
+ 930              	.LVL72:
+ 931              	.LFB154:
+ 441:libraries/drivers/src/at32f403a_407_usart.c **** 
+ 442:libraries/drivers/src/at32f403a_407_usart.c **** /**
+ 443:libraries/drivers/src/at32f403a_407_usart.c ****   * @brief  config the irda/smartcard division.
+ 444:libraries/drivers/src/at32f403a_407_usart.c ****   * @note   the division are not available for UART4, UART5, UART7 or UART8.
+ 445:libraries/drivers/src/at32f403a_407_usart.c ****   * @param  usart_x: select the usart or the uart peripheral.
+ 446:libraries/drivers/src/at32f403a_407_usart.c ****   *         this parameter can be one of the following values:
+ 447:libraries/drivers/src/at32f403a_407_usart.c ****   *         USART1, USART2, USART3 or USART6.
+ 448:libraries/drivers/src/at32f403a_407_usart.c ****   * @param  div_val: specifies the division.
+ 449:libraries/drivers/src/at32f403a_407_usart.c ****   * @retval none
+ 450:libraries/drivers/src/at32f403a_407_usart.c ****   */
+ 451:libraries/drivers/src/at32f403a_407_usart.c **** void usart_irda_smartcard_division_set(usart_type* usart_x, uint8_t div_val)
+ 452:libraries/drivers/src/at32f403a_407_usart.c **** {
+ 932              		.loc 1 452 1 is_stmt 1 view -0
+ 933              		.cfi_startproc
+ 934              		@ args = 0, pretend = 0, frame = 0
+ 935              		@ frame_needed = 0, uses_anonymous_args = 0
+ 936              		@ link register save eliminated.
+ 453:libraries/drivers/src/at32f403a_407_usart.c ****   usart_x->gdiv_bit.isdiv = div_val;
+ 937              		.loc 1 453 3 view .LVU188
+ 938              		.loc 1 453 27 is_stmt 0 view .LVU189
+ 939 0000 8369     		ldr	r3, [r0, #24]
+ 940              	.LVL73:
+ 941              		.loc 1 453 27 view .LVU190
+ 942 0002 61F30703 		bfi	r3, r1, #0, #8
+ 943 0006 8361     		str	r3, [r0, #24]
+ 454:libraries/drivers/src/at32f403a_407_usart.c **** }
+ 944              		.loc 1 454 1 view .LVU191
+ 945 0008 7047     		bx	lr
+ 946              		.cfi_endproc
+ 947              	.LFE154:
+ 949              		.section	.text.usart_smartcard_mode_enable,"ax",%progbits
+ 950              		.align	1
+ 951              		.global	usart_smartcard_mode_enable
+ 952              		.syntax unified
+ 953              		.thumb
+ 954              		.thumb_func
+ 956              	usart_smartcard_mode_enable:
+ 957              	.LVL74:
+ 958              	.LFB155:
+ 455:libraries/drivers/src/at32f403a_407_usart.c **** 
+ 456:libraries/drivers/src/at32f403a_407_usart.c **** /**
+ 457:libraries/drivers/src/at32f403a_407_usart.c ****   * @brief  enable or disable the usart smart card mode.
+ 458:libraries/drivers/src/at32f403a_407_usart.c ****   * @note   the smart card mode are not available for UART4, UART5, UART7 or UART8.
+ 459:libraries/drivers/src/at32f403a_407_usart.c ****   * @param  usart_x: select the usart or the uart peripheral.
+ 460:libraries/drivers/src/at32f403a_407_usart.c ****   *         this parameter can be one of the following values:
+ 461:libraries/drivers/src/at32f403a_407_usart.c ****   *         USART1, USART2, USART3 or USART6.
+ 462:libraries/drivers/src/at32f403a_407_usart.c ****   * @param  new_state: new state of the smart card mode.
+ 463:libraries/drivers/src/at32f403a_407_usart.c ****   *         this parameter can be: TRUE or FALSE.
+ 464:libraries/drivers/src/at32f403a_407_usart.c ****   * @retval none
+ 465:libraries/drivers/src/at32f403a_407_usart.c ****   */
+ 466:libraries/drivers/src/at32f403a_407_usart.c **** void usart_smartcard_mode_enable(usart_type* usart_x, confirm_state new_state)
+ 467:libraries/drivers/src/at32f403a_407_usart.c **** {
+ 959              		.loc 1 467 1 is_stmt 1 view -0
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccHzhFIx.s 			page 26
+
+
+ 960              		.cfi_startproc
+ 961              		@ args = 0, pretend = 0, frame = 0
+ 962              		@ frame_needed = 0, uses_anonymous_args = 0
+ 963              		@ link register save eliminated.
+ 468:libraries/drivers/src/at32f403a_407_usart.c ****   usart_x->ctrl3_bit.scmen = new_state;
+ 964              		.loc 1 468 3 view .LVU193
+ 965              		.loc 1 468 28 is_stmt 0 view .LVU194
+ 966 0000 4369     		ldr	r3, [r0, #20]
+ 967 0002 61F34513 		bfi	r3, r1, #5, #1
+ 968 0006 4361     		str	r3, [r0, #20]
+ 469:libraries/drivers/src/at32f403a_407_usart.c **** }
+ 969              		.loc 1 469 1 view .LVU195
+ 970 0008 7047     		bx	lr
+ 971              		.cfi_endproc
+ 972              	.LFE155:
+ 974              		.section	.text.usart_smartcard_nack_set,"ax",%progbits
+ 975              		.align	1
+ 976              		.global	usart_smartcard_nack_set
+ 977              		.syntax unified
+ 978              		.thumb
+ 979              		.thumb_func
+ 981              	usart_smartcard_nack_set:
+ 982              	.LVL75:
+ 983              	.LFB156:
+ 470:libraries/drivers/src/at32f403a_407_usart.c **** 
+ 471:libraries/drivers/src/at32f403a_407_usart.c **** /**
+ 472:libraries/drivers/src/at32f403a_407_usart.c ****   * @brief  enable or disable nack transmission in smartcard mode.
+ 473:libraries/drivers/src/at32f403a_407_usart.c ****   * @note   the smart card nack are not available for UART4, UART5, UART7 or UART8.
+ 474:libraries/drivers/src/at32f403a_407_usart.c ****   * @param  usart_x: select the usart or the uart peripheral.
+ 475:libraries/drivers/src/at32f403a_407_usart.c ****   *         this parameter can be one of the following values:
+ 476:libraries/drivers/src/at32f403a_407_usart.c ****   *         USART1, USART2, USART3 or USART6.
+ 477:libraries/drivers/src/at32f403a_407_usart.c ****   * @param  new_state: new state of the nack transmission.
+ 478:libraries/drivers/src/at32f403a_407_usart.c ****   *         this parameter can be: TRUE or FALSE.
+ 479:libraries/drivers/src/at32f403a_407_usart.c ****   * @retval none
+ 480:libraries/drivers/src/at32f403a_407_usart.c ****   */
+ 481:libraries/drivers/src/at32f403a_407_usart.c **** void usart_smartcard_nack_set(usart_type* usart_x, confirm_state new_state)
+ 482:libraries/drivers/src/at32f403a_407_usart.c **** {
+ 984              		.loc 1 482 1 is_stmt 1 view -0
+ 985              		.cfi_startproc
+ 986              		@ args = 0, pretend = 0, frame = 0
+ 987              		@ frame_needed = 0, uses_anonymous_args = 0
+ 988              		@ link register save eliminated.
+ 483:libraries/drivers/src/at32f403a_407_usart.c ****   usart_x->ctrl3_bit.scnacken = new_state;
+ 989              		.loc 1 483 3 view .LVU197
+ 990              		.loc 1 483 31 is_stmt 0 view .LVU198
+ 991 0000 4369     		ldr	r3, [r0, #20]
+ 992 0002 61F30413 		bfi	r3, r1, #4, #1
+ 993 0006 4361     		str	r3, [r0, #20]
+ 484:libraries/drivers/src/at32f403a_407_usart.c **** }
+ 994              		.loc 1 484 1 view .LVU199
+ 995 0008 7047     		bx	lr
+ 996              		.cfi_endproc
+ 997              	.LFE156:
+ 999              		.section	.text.usart_single_line_halfduplex_select,"ax",%progbits
+ 1000              		.align	1
+ 1001              		.global	usart_single_line_halfduplex_select
+ 1002              		.syntax unified
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccHzhFIx.s 			page 27
+
+
+ 1003              		.thumb
+ 1004              		.thumb_func
+ 1006              	usart_single_line_halfduplex_select:
+ 1007              	.LVL76:
+ 1008              	.LFB157:
+ 485:libraries/drivers/src/at32f403a_407_usart.c **** 
+ 486:libraries/drivers/src/at32f403a_407_usart.c **** /**
+ 487:libraries/drivers/src/at32f403a_407_usart.c ****   * @brief  enable or disable the usart single line bidirectional half-duplex communication.
+ 488:libraries/drivers/src/at32f403a_407_usart.c ****   * @param  usart_x: select the usart or the uart peripheral.
+ 489:libraries/drivers/src/at32f403a_407_usart.c ****   *         this parameter can be one of the following values:
+ 490:libraries/drivers/src/at32f403a_407_usart.c ****   *         USART1, USART2, USART3, UART4, UART5, USART6, UART7 or UART8.
+ 491:libraries/drivers/src/at32f403a_407_usart.c ****   * @param  new_state: new state of the single line half-duplex select.
+ 492:libraries/drivers/src/at32f403a_407_usart.c ****   *         this parameter can be: TRUE or FALSE.
+ 493:libraries/drivers/src/at32f403a_407_usart.c ****   * @retval none
+ 494:libraries/drivers/src/at32f403a_407_usart.c ****   */
+ 495:libraries/drivers/src/at32f403a_407_usart.c **** void usart_single_line_halfduplex_select(usart_type* usart_x, confirm_state new_state)
+ 496:libraries/drivers/src/at32f403a_407_usart.c **** {
+ 1009              		.loc 1 496 1 is_stmt 1 view -0
+ 1010              		.cfi_startproc
+ 1011              		@ args = 0, pretend = 0, frame = 0
+ 1012              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1013              		@ link register save eliminated.
+ 497:libraries/drivers/src/at32f403a_407_usart.c ****   usart_x->ctrl3_bit.slben = new_state;
+ 1014              		.loc 1 497 3 view .LVU201
+ 1015              		.loc 1 497 28 is_stmt 0 view .LVU202
+ 1016 0000 4369     		ldr	r3, [r0, #20]
+ 1017 0002 61F3C303 		bfi	r3, r1, #3, #1
+ 1018 0006 4361     		str	r3, [r0, #20]
+ 498:libraries/drivers/src/at32f403a_407_usart.c **** }
+ 1019              		.loc 1 498 1 view .LVU203
+ 1020 0008 7047     		bx	lr
+ 1021              		.cfi_endproc
+ 1022              	.LFE157:
+ 1024              		.section	.text.usart_irda_mode_enable,"ax",%progbits
+ 1025              		.align	1
+ 1026              		.global	usart_irda_mode_enable
+ 1027              		.syntax unified
+ 1028              		.thumb
+ 1029              		.thumb_func
+ 1031              	usart_irda_mode_enable:
+ 1032              	.LVL77:
+ 1033              	.LFB158:
+ 499:libraries/drivers/src/at32f403a_407_usart.c **** 
+ 500:libraries/drivers/src/at32f403a_407_usart.c **** /**
+ 501:libraries/drivers/src/at32f403a_407_usart.c ****   * @brief  enable or disable the usart's irda interface.
+ 502:libraries/drivers/src/at32f403a_407_usart.c ****   * @param  usart_x: select the usart or the uart peripheral.
+ 503:libraries/drivers/src/at32f403a_407_usart.c ****   *         this parameter can be one of the following values:
+ 504:libraries/drivers/src/at32f403a_407_usart.c ****   *         USART1, USART2, USART3, UART4, UART5, USART6, UART7 or UART8.
+ 505:libraries/drivers/src/at32f403a_407_usart.c ****   * @param  new_state: new state of the irda mode.
+ 506:libraries/drivers/src/at32f403a_407_usart.c ****   *         this parameter can be: TRUE or FALSE.
+ 507:libraries/drivers/src/at32f403a_407_usart.c ****   * @retval none
+ 508:libraries/drivers/src/at32f403a_407_usart.c ****   */
+ 509:libraries/drivers/src/at32f403a_407_usart.c **** void usart_irda_mode_enable(usart_type* usart_x, confirm_state new_state)
+ 510:libraries/drivers/src/at32f403a_407_usart.c **** {
+ 1034              		.loc 1 510 1 is_stmt 1 view -0
+ 1035              		.cfi_startproc
+ 1036              		@ args = 0, pretend = 0, frame = 0
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccHzhFIx.s 			page 28
+
+
+ 1037              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1038              		@ link register save eliminated.
+ 511:libraries/drivers/src/at32f403a_407_usart.c ****   usart_x->ctrl3_bit.irdaen = new_state;
+ 1039              		.loc 1 511 3 view .LVU205
+ 1040              		.loc 1 511 29 is_stmt 0 view .LVU206
+ 1041 0000 4369     		ldr	r3, [r0, #20]
+ 1042 0002 61F34103 		bfi	r3, r1, #1, #1
+ 1043 0006 4361     		str	r3, [r0, #20]
+ 512:libraries/drivers/src/at32f403a_407_usart.c **** }
+ 1044              		.loc 1 512 1 view .LVU207
+ 1045 0008 7047     		bx	lr
+ 1046              		.cfi_endproc
+ 1047              	.LFE158:
+ 1049              		.section	.text.usart_irda_low_power_enable,"ax",%progbits
+ 1050              		.align	1
+ 1051              		.global	usart_irda_low_power_enable
+ 1052              		.syntax unified
+ 1053              		.thumb
+ 1054              		.thumb_func
+ 1056              	usart_irda_low_power_enable:
+ 1057              	.LVL78:
+ 1058              	.LFB159:
+ 513:libraries/drivers/src/at32f403a_407_usart.c **** 
+ 514:libraries/drivers/src/at32f403a_407_usart.c **** /**
+ 515:libraries/drivers/src/at32f403a_407_usart.c ****   * @brief  configure the usart's irda low power.
+ 516:libraries/drivers/src/at32f403a_407_usart.c ****   * @param  usart_x: select the usart or the uart peripheral.
+ 517:libraries/drivers/src/at32f403a_407_usart.c ****   *         this parameter can be one of the following values:
+ 518:libraries/drivers/src/at32f403a_407_usart.c ****   *         USART1, USART2, USART3, UART4, UART5, USART6, UART7 or UART8.
+ 519:libraries/drivers/src/at32f403a_407_usart.c ****   * @param  new_state: new state of the irda mode.
+ 520:libraries/drivers/src/at32f403a_407_usart.c ****   *         this parameter can be: TRUE or FALSE.
+ 521:libraries/drivers/src/at32f403a_407_usart.c ****   * @retval none
+ 522:libraries/drivers/src/at32f403a_407_usart.c ****   */
+ 523:libraries/drivers/src/at32f403a_407_usart.c **** void usart_irda_low_power_enable(usart_type* usart_x, confirm_state new_state)
+ 524:libraries/drivers/src/at32f403a_407_usart.c **** {
+ 1059              		.loc 1 524 1 is_stmt 1 view -0
+ 1060              		.cfi_startproc
+ 1061              		@ args = 0, pretend = 0, frame = 0
+ 1062              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1063              		@ link register save eliminated.
+ 525:libraries/drivers/src/at32f403a_407_usart.c ****   usart_x->ctrl3_bit.irdalp = new_state;
+ 1064              		.loc 1 525 3 view .LVU209
+ 1065              		.loc 1 525 29 is_stmt 0 view .LVU210
+ 1066 0000 4369     		ldr	r3, [r0, #20]
+ 1067 0002 61F38203 		bfi	r3, r1, #2, #1
+ 1068 0006 4361     		str	r3, [r0, #20]
+ 526:libraries/drivers/src/at32f403a_407_usart.c **** }
+ 1069              		.loc 1 526 1 view .LVU211
+ 1070 0008 7047     		bx	lr
+ 1071              		.cfi_endproc
+ 1072              	.LFE159:
+ 1074              		.section	.text.usart_hardware_flow_control_set,"ax",%progbits
+ 1075              		.align	1
+ 1076              		.global	usart_hardware_flow_control_set
+ 1077              		.syntax unified
+ 1078              		.thumb
+ 1079              		.thumb_func
+ 1081              	usart_hardware_flow_control_set:
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccHzhFIx.s 			page 29
+
+
+ 1082              	.LVL79:
+ 1083              	.LFB160:
+ 527:libraries/drivers/src/at32f403a_407_usart.c **** 
+ 528:libraries/drivers/src/at32f403a_407_usart.c **** /**
+ 529:libraries/drivers/src/at32f403a_407_usart.c ****   * @brief  configure the usart's hardware flow control.
+ 530:libraries/drivers/src/at32f403a_407_usart.c ****   * @param  usart_x: select the usart or the uart peripheral.
+ 531:libraries/drivers/src/at32f403a_407_usart.c ****   *         this parameter can be one of the following values:
+ 532:libraries/drivers/src/at32f403a_407_usart.c ****   *         USART1, USART2, USART3
+ 533:libraries/drivers/src/at32f403a_407_usart.c ****   * @param  flow_state: specifies the hardware flow control.
+ 534:libraries/drivers/src/at32f403a_407_usart.c ****   *         this parameter can be one of the following values:
+ 535:libraries/drivers/src/at32f403a_407_usart.c ****   *         - USART_HARDWARE_FLOW_NONE
+ 536:libraries/drivers/src/at32f403a_407_usart.c ****   *         - USART_HARDWARE_FLOW_RTS,
+ 537:libraries/drivers/src/at32f403a_407_usart.c ****   *         - USART_HARDWARE_FLOW_CTS,
+ 538:libraries/drivers/src/at32f403a_407_usart.c ****   *         - USART_HARDWARE_FLOW_RTS_CTS
+ 539:libraries/drivers/src/at32f403a_407_usart.c ****   * @retval none
+ 540:libraries/drivers/src/at32f403a_407_usart.c ****   */
+ 541:libraries/drivers/src/at32f403a_407_usart.c **** void usart_hardware_flow_control_set(usart_type* usart_x,usart_hardware_flow_control_type flow_stat
+ 542:libraries/drivers/src/at32f403a_407_usart.c **** {
+ 1084              		.loc 1 542 1 is_stmt 1 view -0
+ 1085              		.cfi_startproc
+ 1086              		@ args = 0, pretend = 0, frame = 0
+ 1087              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1088              		@ link register save eliminated.
+ 543:libraries/drivers/src/at32f403a_407_usart.c ****   if(flow_state == USART_HARDWARE_FLOW_NONE)
+ 1089              		.loc 1 543 3 view .LVU213
+ 1090 0000 0329     		cmp	r1, #3
+ 1091 0002 26D8     		bhi	.L63
+ 1092 0004 DFE801F0 		tbb	[pc, r1]
+ 1093              	.L66:
+ 1094 0008 02       		.byte	(.L69-.L66)/2
+ 1095 0009 0B       		.byte	(.L68-.L66)/2
+ 1096 000a 14       		.byte	(.L67-.L66)/2
+ 1097 000b 1D       		.byte	(.L65-.L66)/2
+ 1098              		.p2align 1
+ 1099              	.L69:
+ 544:libraries/drivers/src/at32f403a_407_usart.c ****   {
+ 545:libraries/drivers/src/at32f403a_407_usart.c ****     usart_x->ctrl3_bit.rtsen = FALSE;
+ 1100              		.loc 1 545 5 view .LVU214
+ 1101              		.loc 1 545 30 is_stmt 0 view .LVU215
+ 1102 000c 4369     		ldr	r3, [r0, #20]
+ 1103 000e 23F48073 		bic	r3, r3, #256
+ 1104 0012 4361     		str	r3, [r0, #20]
+ 546:libraries/drivers/src/at32f403a_407_usart.c ****     usart_x->ctrl3_bit.ctsen = FALSE;
+ 1105              		.loc 1 546 5 is_stmt 1 view .LVU216
+ 1106              		.loc 1 546 30 is_stmt 0 view .LVU217
+ 1107 0014 4369     		ldr	r3, [r0, #20]
+ 1108 0016 23F40073 		bic	r3, r3, #512
+ 1109 001a 4361     		str	r3, [r0, #20]
+ 1110 001c 7047     		bx	lr
+ 1111              	.L68:
+ 547:libraries/drivers/src/at32f403a_407_usart.c ****   }
+ 548:libraries/drivers/src/at32f403a_407_usart.c ****   else if(flow_state == USART_HARDWARE_FLOW_RTS)
+ 549:libraries/drivers/src/at32f403a_407_usart.c ****   {
+ 550:libraries/drivers/src/at32f403a_407_usart.c ****     usart_x->ctrl3_bit.rtsen = TRUE;
+ 1112              		.loc 1 550 5 is_stmt 1 view .LVU218
+ 1113              		.loc 1 550 30 is_stmt 0 view .LVU219
+ 1114 001e 4369     		ldr	r3, [r0, #20]
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccHzhFIx.s 			page 30
+
+
+ 1115 0020 43F48073 		orr	r3, r3, #256
+ 1116 0024 4361     		str	r3, [r0, #20]
+ 551:libraries/drivers/src/at32f403a_407_usart.c ****     usart_x->ctrl3_bit.ctsen = FALSE;
+ 1117              		.loc 1 551 5 is_stmt 1 view .LVU220
+ 1118              		.loc 1 551 30 is_stmt 0 view .LVU221
+ 1119 0026 4369     		ldr	r3, [r0, #20]
+ 1120 0028 23F40073 		bic	r3, r3, #512
+ 1121 002c 4361     		str	r3, [r0, #20]
+ 1122 002e 7047     		bx	lr
+ 1123              	.L67:
+ 552:libraries/drivers/src/at32f403a_407_usart.c ****   }
+ 553:libraries/drivers/src/at32f403a_407_usart.c ****   else if(flow_state == USART_HARDWARE_FLOW_CTS)
+ 554:libraries/drivers/src/at32f403a_407_usart.c ****   {
+ 555:libraries/drivers/src/at32f403a_407_usart.c ****     usart_x->ctrl3_bit.rtsen = FALSE;
+ 1124              		.loc 1 555 5 is_stmt 1 view .LVU222
+ 1125              		.loc 1 555 30 is_stmt 0 view .LVU223
+ 1126 0030 4369     		ldr	r3, [r0, #20]
+ 1127 0032 23F48073 		bic	r3, r3, #256
+ 1128 0036 4361     		str	r3, [r0, #20]
+ 556:libraries/drivers/src/at32f403a_407_usart.c ****     usart_x->ctrl3_bit.ctsen = TRUE;
+ 1129              		.loc 1 556 5 is_stmt 1 view .LVU224
+ 1130              		.loc 1 556 30 is_stmt 0 view .LVU225
+ 1131 0038 4369     		ldr	r3, [r0, #20]
+ 1132 003a 43F40073 		orr	r3, r3, #512
+ 1133 003e 4361     		str	r3, [r0, #20]
+ 1134 0040 7047     		bx	lr
+ 1135              	.L65:
+ 557:libraries/drivers/src/at32f403a_407_usart.c ****   }
+ 558:libraries/drivers/src/at32f403a_407_usart.c ****   else if(flow_state == USART_HARDWARE_FLOW_RTS_CTS)
+ 559:libraries/drivers/src/at32f403a_407_usart.c ****   {
+ 560:libraries/drivers/src/at32f403a_407_usart.c ****     usart_x->ctrl3_bit.rtsen = TRUE;
+ 1136              		.loc 1 560 5 is_stmt 1 view .LVU226
+ 1137              		.loc 1 560 30 is_stmt 0 view .LVU227
+ 1138 0042 4369     		ldr	r3, [r0, #20]
+ 1139 0044 43F48073 		orr	r3, r3, #256
+ 1140 0048 4361     		str	r3, [r0, #20]
+ 561:libraries/drivers/src/at32f403a_407_usart.c ****     usart_x->ctrl3_bit.ctsen = TRUE;
+ 1141              		.loc 1 561 5 is_stmt 1 view .LVU228
+ 1142              		.loc 1 561 30 is_stmt 0 view .LVU229
+ 1143 004a 4369     		ldr	r3, [r0, #20]
+ 1144 004c 43F40073 		orr	r3, r3, #512
+ 1145 0050 4361     		str	r3, [r0, #20]
+ 1146              	.L63:
+ 562:libraries/drivers/src/at32f403a_407_usart.c ****   }
+ 563:libraries/drivers/src/at32f403a_407_usart.c **** }
+ 1147              		.loc 1 563 1 view .LVU230
+ 1148 0052 7047     		bx	lr
+ 1149              		.cfi_endproc
+ 1150              	.LFE160:
+ 1152              		.section	.text.usart_flag_get,"ax",%progbits
+ 1153              		.align	1
+ 1154              		.global	usart_flag_get
+ 1155              		.syntax unified
+ 1156              		.thumb
+ 1157              		.thumb_func
+ 1159              	usart_flag_get:
+ 1160              	.LVL80:
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccHzhFIx.s 			page 31
+
+
+ 1161              	.LFB161:
+ 564:libraries/drivers/src/at32f403a_407_usart.c **** 
+ 565:libraries/drivers/src/at32f403a_407_usart.c **** /**
+ 566:libraries/drivers/src/at32f403a_407_usart.c ****   * @brief  check whether the specified usart flag is set or not.
+ 567:libraries/drivers/src/at32f403a_407_usart.c ****   * @param  usart_x: select the usart or the uart peripheral.
+ 568:libraries/drivers/src/at32f403a_407_usart.c ****   *         this parameter can be one of the following values:
+ 569:libraries/drivers/src/at32f403a_407_usart.c ****   *         USART1, USART2, USART3, UART4, UART5, USART6, UART7 or UART8.
+ 570:libraries/drivers/src/at32f403a_407_usart.c ****   * @param  flag: specifies the flag to check.
+ 571:libraries/drivers/src/at32f403a_407_usart.c ****   *         this parameter can be one of the following values:
+ 572:libraries/drivers/src/at32f403a_407_usart.c ****   *         - USART_CTSCF_FLAG: cts change flag (not available for UART4,UART5,USART6,UART7 and UAR
+ 573:libraries/drivers/src/at32f403a_407_usart.c ****   *         - USART_BFF_FLAG:   break frame flag
+ 574:libraries/drivers/src/at32f403a_407_usart.c ****   *         - USART_TDBE_FLAG:  transmit data buffer empty flag
+ 575:libraries/drivers/src/at32f403a_407_usart.c ****   *         - USART_TDC_FLAG:   transmit data complete flag
+ 576:libraries/drivers/src/at32f403a_407_usart.c ****   *         - USART_RDBF_FLAG:  receive data buffer full flag
+ 577:libraries/drivers/src/at32f403a_407_usart.c ****   *         - USART_IDLEF_FLAG: idle flag
+ 578:libraries/drivers/src/at32f403a_407_usart.c ****   *         - USART_ROERR_FLAG: receiver overflow error flag
+ 579:libraries/drivers/src/at32f403a_407_usart.c ****   *         - USART_NERR_FLAG:  noise error flag
+ 580:libraries/drivers/src/at32f403a_407_usart.c ****   *         - USART_FERR_FLAG:  framing error flag
+ 581:libraries/drivers/src/at32f403a_407_usart.c ****   *         - USART_PERR_FLAG:  parity error flag
+ 582:libraries/drivers/src/at32f403a_407_usart.c ****   * @retval the new state of usart_flag (SET or RESET).
+ 583:libraries/drivers/src/at32f403a_407_usart.c ****   */
+ 584:libraries/drivers/src/at32f403a_407_usart.c **** flag_status usart_flag_get(usart_type* usart_x, uint32_t flag)
+ 585:libraries/drivers/src/at32f403a_407_usart.c **** {
+ 1162              		.loc 1 585 1 is_stmt 1 view -0
+ 1163              		.cfi_startproc
+ 1164              		@ args = 0, pretend = 0, frame = 0
+ 1165              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1166              		@ link register save eliminated.
+ 586:libraries/drivers/src/at32f403a_407_usart.c ****   if(usart_x->sts & flag)
+ 1167              		.loc 1 586 3 view .LVU232
+ 1168              		.loc 1 586 13 is_stmt 0 view .LVU233
+ 1169 0000 0368     		ldr	r3, [r0]
+ 1170              		.loc 1 586 5 view .LVU234
+ 1171 0002 0B42     		tst	r3, r1
+ 1172 0004 01D0     		beq	.L73
+ 587:libraries/drivers/src/at32f403a_407_usart.c ****   {
+ 588:libraries/drivers/src/at32f403a_407_usart.c ****     return SET;
+ 1173              		.loc 1 588 12 view .LVU235
+ 1174 0006 0120     		movs	r0, #1
+ 1175              	.LVL81:
+ 1176              		.loc 1 588 12 view .LVU236
+ 1177 0008 7047     		bx	lr
+ 1178              	.LVL82:
+ 1179              	.L73:
+ 589:libraries/drivers/src/at32f403a_407_usart.c ****   }
+ 590:libraries/drivers/src/at32f403a_407_usart.c ****   else
+ 591:libraries/drivers/src/at32f403a_407_usart.c ****   {
+ 592:libraries/drivers/src/at32f403a_407_usart.c ****     return RESET;
+ 1180              		.loc 1 592 12 view .LVU237
+ 1181 000a 0020     		movs	r0, #0
+ 1182              	.LVL83:
+ 593:libraries/drivers/src/at32f403a_407_usart.c ****   }
+ 594:libraries/drivers/src/at32f403a_407_usart.c **** }
+ 1183              		.loc 1 594 1 view .LVU238
+ 1184 000c 7047     		bx	lr
+ 1185              		.cfi_endproc
+ 1186              	.LFE161:
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccHzhFIx.s 			page 32
+
+
+ 1188              		.section	.text.usart_interrupt_flag_get,"ax",%progbits
+ 1189              		.align	1
+ 1190              		.global	usart_interrupt_flag_get
+ 1191              		.syntax unified
+ 1192              		.thumb
+ 1193              		.thumb_func
+ 1195              	usart_interrupt_flag_get:
+ 1196              	.LVL84:
+ 1197              	.LFB162:
+ 595:libraries/drivers/src/at32f403a_407_usart.c **** 
+ 596:libraries/drivers/src/at32f403a_407_usart.c **** /**
+ 597:libraries/drivers/src/at32f403a_407_usart.c ****   * @brief  check whether the specified usart interrupt flag is set or not.
+ 598:libraries/drivers/src/at32f403a_407_usart.c ****   * @param  usart_x: select the usart or the uart peripheral.
+ 599:libraries/drivers/src/at32f403a_407_usart.c ****   *         this parameter can be one of the following values:
+ 600:libraries/drivers/src/at32f403a_407_usart.c ****   *         USART1, USART2, USART3, UART4, UART5, USART6, UART7 or UART8.
+ 601:libraries/drivers/src/at32f403a_407_usart.c ****   * @param  flag: specifies the flag to check.
+ 602:libraries/drivers/src/at32f403a_407_usart.c ****   *         this parameter can be one of the following values:
+ 603:libraries/drivers/src/at32f403a_407_usart.c ****   *         - USART_CTSCF_FLAG: cts change flag (not available for UART4,UART5,USART6,UART7 and UAR
+ 604:libraries/drivers/src/at32f403a_407_usart.c ****   *         - USART_BFF_FLAG:   break frame flag
+ 605:libraries/drivers/src/at32f403a_407_usart.c ****   *         - USART_TDBE_FLAG:  transmit data buffer empty flag
+ 606:libraries/drivers/src/at32f403a_407_usart.c ****   *         - USART_TDC_FLAG:   transmit data complete flag
+ 607:libraries/drivers/src/at32f403a_407_usart.c ****   *         - USART_RDBF_FLAG:  receive data buffer full flag
+ 608:libraries/drivers/src/at32f403a_407_usart.c ****   *         - USART_IDLEF_FLAG: idle flag
+ 609:libraries/drivers/src/at32f403a_407_usart.c ****   *         - USART_ROERR_FLAG: receiver overflow error flag
+ 610:libraries/drivers/src/at32f403a_407_usart.c ****   *         - USART_NERR_FLAG:  noise error flag
+ 611:libraries/drivers/src/at32f403a_407_usart.c ****   *         - USART_FERR_FLAG:  framing error flag
+ 612:libraries/drivers/src/at32f403a_407_usart.c ****   *         - USART_PERR_FLAG:  parity error flag
+ 613:libraries/drivers/src/at32f403a_407_usart.c ****   * @retval the new state of usart_flag (SET or RESET).
+ 614:libraries/drivers/src/at32f403a_407_usart.c ****   */
+ 615:libraries/drivers/src/at32f403a_407_usart.c **** flag_status usart_interrupt_flag_get(usart_type* usart_x, uint32_t flag)
+ 616:libraries/drivers/src/at32f403a_407_usart.c **** {
+ 1198              		.loc 1 616 1 is_stmt 1 view -0
+ 1199              		.cfi_startproc
+ 1200              		@ args = 0, pretend = 0, frame = 0
+ 1201              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1202              		@ link register save eliminated.
+ 617:libraries/drivers/src/at32f403a_407_usart.c ****   flag_status int_status = RESET;
+ 1203              		.loc 1 617 3 view .LVU240
+ 618:libraries/drivers/src/at32f403a_407_usart.c **** 
+ 619:libraries/drivers/src/at32f403a_407_usart.c ****   switch(flag)
+ 1204              		.loc 1 619 3 view .LVU241
+ 1205 0000 2029     		cmp	r1, #32
+ 1206 0002 16D8     		bhi	.L75
+ 1207 0004 0029     		cmp	r1, #0
+ 1208 0006 50D0     		beq	.L89
+ 1209 0008 4B1E     		subs	r3, r1, #1
+ 1210 000a 1F2B     		cmp	r3, #31
+ 1211 000c 4FD8     		bhi	.L90
+ 1212 000e DFE803F0 		tbb	[pc, r3]
+ 1213              	.L78:
+ 1214 0012 48       		.byte	(.L82-.L78)/2
+ 1215 0013 44       		.byte	(.L81-.L78)/2
+ 1216 0014 4E       		.byte	(.L90-.L78)/2
+ 1217 0015 44       		.byte	(.L81-.L78)/2
+ 1218 0016 4E       		.byte	(.L90-.L78)/2
+ 1219 0017 4E       		.byte	(.L90-.L78)/2
+ 1220 0018 4E       		.byte	(.L90-.L78)/2
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccHzhFIx.s 			page 33
+
+
+ 1221 0019 36       		.byte	(.L80-.L78)/2
+ 1222 001a 4E       		.byte	(.L90-.L78)/2
+ 1223 001b 4E       		.byte	(.L90-.L78)/2
+ 1224 001c 4E       		.byte	(.L90-.L78)/2
+ 1225 001d 4E       		.byte	(.L90-.L78)/2
+ 1226 001e 4E       		.byte	(.L90-.L78)/2
+ 1227 001f 4E       		.byte	(.L90-.L78)/2
+ 1228 0020 4E       		.byte	(.L90-.L78)/2
+ 1229 0021 40       		.byte	(.L79-.L78)/2
+ 1230 0022 4E       		.byte	(.L90-.L78)/2
+ 1231 0023 4E       		.byte	(.L90-.L78)/2
+ 1232 0024 4E       		.byte	(.L90-.L78)/2
+ 1233 0025 4E       		.byte	(.L90-.L78)/2
+ 1234 0026 4E       		.byte	(.L90-.L78)/2
+ 1235 0027 4E       		.byte	(.L90-.L78)/2
+ 1236 0028 4E       		.byte	(.L90-.L78)/2
+ 1237 0029 4E       		.byte	(.L90-.L78)/2
+ 1238 002a 4E       		.byte	(.L90-.L78)/2
+ 1239 002b 4E       		.byte	(.L90-.L78)/2
+ 1240 002c 4E       		.byte	(.L90-.L78)/2
+ 1241 002d 4E       		.byte	(.L90-.L78)/2
+ 1242 002e 4E       		.byte	(.L90-.L78)/2
+ 1243 002f 4E       		.byte	(.L90-.L78)/2
+ 1244 0030 4E       		.byte	(.L90-.L78)/2
+ 1245 0031 32       		.byte	(.L77-.L78)/2
+ 1246              		.p2align 1
+ 1247              	.L75:
+ 1248 0032 B1F5807F 		cmp	r1, #256
+ 1249 0036 11D0     		beq	.L83
+ 1250 0038 09D8     		bhi	.L84
+ 1251 003a 4029     		cmp	r1, #64
+ 1252 003c 17D0     		beq	.L85
+ 1253 003e 8029     		cmp	r1, #128
+ 1254 0040 03D1     		bne	.L94
+ 620:libraries/drivers/src/at32f403a_407_usart.c ****   {
+ 621:libraries/drivers/src/at32f403a_407_usart.c ****     case USART_CTSCF_FLAG:
+ 622:libraries/drivers/src/at32f403a_407_usart.c ****       int_status = (flag_status)usart_x->ctrl3_bit.ctscfien;
+ 623:libraries/drivers/src/at32f403a_407_usart.c ****       break;
+ 624:libraries/drivers/src/at32f403a_407_usart.c ****     case USART_BFF_FLAG:
+ 625:libraries/drivers/src/at32f403a_407_usart.c ****       int_status = (flag_status)usart_x->ctrl2_bit.bfien;
+ 626:libraries/drivers/src/at32f403a_407_usart.c ****       break;
+ 627:libraries/drivers/src/at32f403a_407_usart.c ****     case USART_TDBE_FLAG:
+ 628:libraries/drivers/src/at32f403a_407_usart.c ****       int_status = (flag_status)usart_x->ctrl1_bit.tdbeien;
+ 1255              		.loc 1 628 7 view .LVU242
+ 1256              		.loc 1 628 51 is_stmt 0 view .LVU243
+ 1257 0042 C368     		ldr	r3, [r0, #12]
+ 1258 0044 C3F3C013 		ubfx	r3, r3, #7, #1
+ 1259              	.LVL85:
+ 629:libraries/drivers/src/at32f403a_407_usart.c ****       break;
+ 1260              		.loc 1 629 7 is_stmt 1 view .LVU244
+ 1261 0048 0BE0     		b	.L87
+ 1262              	.LVL86:
+ 1263              	.L94:
+ 619:libraries/drivers/src/at32f403a_407_usart.c ****   {
+ 1264              		.loc 1 619 3 is_stmt 0 view .LVU245
+ 1265 004a 0020     		movs	r0, #0
+ 1266              	.LVL87:
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccHzhFIx.s 			page 34
+
+
+ 619:libraries/drivers/src/at32f403a_407_usart.c ****   {
+ 1267              		.loc 1 619 3 view .LVU246
+ 1268 004c 7047     		bx	lr
+ 1269              	.LVL88:
+ 1270              	.L84:
+ 619:libraries/drivers/src/at32f403a_407_usart.c ****   {
+ 1271              		.loc 1 619 3 view .LVU247
+ 1272 004e B1F5007F 		cmp	r1, #512
+ 1273 0052 2ED1     		bne	.L91
+ 622:libraries/drivers/src/at32f403a_407_usart.c ****       break;
+ 1274              		.loc 1 622 7 is_stmt 1 view .LVU248
+ 622:libraries/drivers/src/at32f403a_407_usart.c ****       break;
+ 1275              		.loc 1 622 51 is_stmt 0 view .LVU249
+ 1276 0054 4369     		ldr	r3, [r0, #20]
+ 1277 0056 C3F38023 		ubfx	r3, r3, #10, #1
+ 1278              	.LVL89:
+ 623:libraries/drivers/src/at32f403a_407_usart.c ****     case USART_BFF_FLAG:
+ 1279              		.loc 1 623 7 is_stmt 1 view .LVU250
+ 1280 005a 02E0     		b	.L87
+ 1281              	.LVL90:
+ 1282              	.L83:
+ 625:libraries/drivers/src/at32f403a_407_usart.c ****       break;
+ 1283              		.loc 1 625 7 view .LVU251
+ 625:libraries/drivers/src/at32f403a_407_usart.c ****       break;
+ 1284              		.loc 1 625 51 is_stmt 0 view .LVU252
+ 1285 005c 0369     		ldr	r3, [r0, #16]
+ 1286 005e C3F38013 		ubfx	r3, r3, #6, #1
+ 1287              	.LVL91:
+ 626:libraries/drivers/src/at32f403a_407_usart.c ****     case USART_TDBE_FLAG:
+ 1288              		.loc 1 626 7 is_stmt 1 view .LVU253
+ 1289              	.L87:
+ 630:libraries/drivers/src/at32f403a_407_usart.c ****     case USART_TDC_FLAG:
+ 631:libraries/drivers/src/at32f403a_407_usart.c ****       int_status = (flag_status)usart_x->ctrl1_bit.tdcien;
+ 632:libraries/drivers/src/at32f403a_407_usart.c ****       break;
+ 633:libraries/drivers/src/at32f403a_407_usart.c ****     case USART_RDBF_FLAG:
+ 634:libraries/drivers/src/at32f403a_407_usart.c ****       int_status = (flag_status)usart_x->ctrl1_bit.rdbfien;
+ 635:libraries/drivers/src/at32f403a_407_usart.c ****       break;
+ 636:libraries/drivers/src/at32f403a_407_usart.c ****     case USART_ROERR_FLAG:
+ 637:libraries/drivers/src/at32f403a_407_usart.c ****       int_status = (flag_status)(usart_x->ctrl1_bit.rdbfien || usart_x->ctrl3_bit.errien);
+ 638:libraries/drivers/src/at32f403a_407_usart.c ****       break;
+ 639:libraries/drivers/src/at32f403a_407_usart.c ****     case USART_IDLEF_FLAG:
+ 640:libraries/drivers/src/at32f403a_407_usart.c ****       int_status = (flag_status)usart_x->ctrl1_bit.idleien;
+ 641:libraries/drivers/src/at32f403a_407_usart.c ****       break;  
+ 642:libraries/drivers/src/at32f403a_407_usart.c ****     case USART_NERR_FLAG:
+ 643:libraries/drivers/src/at32f403a_407_usart.c ****     case USART_FERR_FLAG:
+ 644:libraries/drivers/src/at32f403a_407_usart.c ****       int_status = (flag_status)usart_x->ctrl3_bit.errien;
+ 645:libraries/drivers/src/at32f403a_407_usart.c ****       break;
+ 646:libraries/drivers/src/at32f403a_407_usart.c ****     case USART_PERR_FLAG:
+ 647:libraries/drivers/src/at32f403a_407_usart.c ****       int_status = (flag_status)usart_x->ctrl1_bit.perrien;
+ 648:libraries/drivers/src/at32f403a_407_usart.c ****       break;      
+ 649:libraries/drivers/src/at32f403a_407_usart.c ****     default:
+ 650:libraries/drivers/src/at32f403a_407_usart.c ****       int_status = RESET;
+ 651:libraries/drivers/src/at32f403a_407_usart.c ****       break;
+ 652:libraries/drivers/src/at32f403a_407_usart.c ****   }
+ 653:libraries/drivers/src/at32f403a_407_usart.c **** 
+ 654:libraries/drivers/src/at32f403a_407_usart.c ****   if(int_status != SET)
+ 1290              		.loc 1 654 3 view .LVU254
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccHzhFIx.s 			page 35
+
+
+ 1291              		.loc 1 654 5 is_stmt 0 view .LVU255
+ 1292 0062 43B3     		cbz	r3, .L92
+ 1293              	.LVL92:
+ 1294              	.L88:
+ 655:libraries/drivers/src/at32f403a_407_usart.c ****   {
+ 656:libraries/drivers/src/at32f403a_407_usart.c ****     return RESET;
+ 657:libraries/drivers/src/at32f403a_407_usart.c ****   }
+ 658:libraries/drivers/src/at32f403a_407_usart.c **** 
+ 659:libraries/drivers/src/at32f403a_407_usart.c ****   if(usart_x->sts & flag)
+ 1295              		.loc 1 659 3 is_stmt 1 view .LVU256
+ 1296              		.loc 1 659 13 is_stmt 0 view .LVU257
+ 1297 0064 0368     		ldr	r3, [r0]
+ 1298              		.loc 1 659 5 view .LVU258
+ 1299 0066 0B42     		tst	r3, r1
+ 1300 0068 27D0     		beq	.L93
+ 660:libraries/drivers/src/at32f403a_407_usart.c ****   {
+ 661:libraries/drivers/src/at32f403a_407_usart.c ****     return SET;
+ 1301              		.loc 1 661 12 view .LVU259
+ 1302 006a 0120     		movs	r0, #1
+ 1303              	.LVL93:
+ 1304              		.loc 1 661 12 view .LVU260
+ 1305 006c 7047     		bx	lr
+ 1306              	.LVL94:
+ 1307              	.L85:
+ 631:libraries/drivers/src/at32f403a_407_usart.c ****       break;
+ 1308              		.loc 1 631 7 is_stmt 1 view .LVU261
+ 631:libraries/drivers/src/at32f403a_407_usart.c ****       break;
+ 1309              		.loc 1 631 51 is_stmt 0 view .LVU262
+ 1310 006e C368     		ldr	r3, [r0, #12]
+ 1311 0070 C3F38013 		ubfx	r3, r3, #6, #1
+ 1312              	.LVL95:
+ 632:libraries/drivers/src/at32f403a_407_usart.c ****     case USART_RDBF_FLAG:
+ 1313              		.loc 1 632 7 is_stmt 1 view .LVU263
+ 1314 0074 F5E7     		b	.L87
+ 1315              	.LVL96:
+ 1316              	.L77:
+ 634:libraries/drivers/src/at32f403a_407_usart.c ****       break;
+ 1317              		.loc 1 634 7 view .LVU264
+ 634:libraries/drivers/src/at32f403a_407_usart.c ****       break;
+ 1318              		.loc 1 634 51 is_stmt 0 view .LVU265
+ 1319 0076 C368     		ldr	r3, [r0, #12]
+ 1320 0078 C3F34013 		ubfx	r3, r3, #5, #1
+ 1321              	.LVL97:
+ 635:libraries/drivers/src/at32f403a_407_usart.c ****     case USART_ROERR_FLAG:
+ 1322              		.loc 1 635 7 is_stmt 1 view .LVU266
+ 1323 007c F1E7     		b	.L87
+ 1324              	.LVL98:
+ 1325              	.L80:
+ 637:libraries/drivers/src/at32f403a_407_usart.c ****       break;
+ 1326              		.loc 1 637 7 view .LVU267
+ 637:libraries/drivers/src/at32f403a_407_usart.c ****       break;
+ 1327              		.loc 1 637 52 is_stmt 0 view .LVU268
+ 1328 007e C368     		ldr	r3, [r0, #12]
+ 637:libraries/drivers/src/at32f403a_407_usart.c ****       break;
+ 1329              		.loc 1 637 61 view .LVU269
+ 1330 0080 13F0200F 		tst	r3, #32
+ 1331 0084 EED1     		bne	.L88
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccHzhFIx.s 			page 36
+
+
+ 637:libraries/drivers/src/at32f403a_407_usart.c ****       break;
+ 1332              		.loc 1 637 82 discriminator 2 view .LVU270
+ 1333 0086 4369     		ldr	r3, [r0, #20]
+ 637:libraries/drivers/src/at32f403a_407_usart.c ****       break;
+ 1334              		.loc 1 637 61 discriminator 2 view .LVU271
+ 1335 0088 13F0010F 		tst	r3, #1
+ 1336 008c EAD1     		bne	.L88
+ 656:libraries/drivers/src/at32f403a_407_usart.c ****   }
+ 1337              		.loc 1 656 12 view .LVU272
+ 1338 008e 0020     		movs	r0, #0
+ 1339              	.LVL99:
+ 656:libraries/drivers/src/at32f403a_407_usart.c ****   }
+ 1340              		.loc 1 656 12 view .LVU273
+ 1341 0090 7047     		bx	lr
+ 1342              	.LVL100:
+ 1343              	.L79:
+ 640:libraries/drivers/src/at32f403a_407_usart.c ****       break;  
+ 1344              		.loc 1 640 7 is_stmt 1 view .LVU274
+ 640:libraries/drivers/src/at32f403a_407_usart.c ****       break;  
+ 1345              		.loc 1 640 51 is_stmt 0 view .LVU275
+ 1346 0092 C368     		ldr	r3, [r0, #12]
+ 1347 0094 C3F30013 		ubfx	r3, r3, #4, #1
+ 1348              	.LVL101:
+ 641:libraries/drivers/src/at32f403a_407_usart.c ****     case USART_NERR_FLAG:
+ 1349              		.loc 1 641 7 is_stmt 1 view .LVU276
+ 1350 0098 E3E7     		b	.L87
+ 1351              	.LVL102:
+ 1352              	.L81:
+ 644:libraries/drivers/src/at32f403a_407_usart.c ****       break;
+ 1353              		.loc 1 644 7 view .LVU277
+ 644:libraries/drivers/src/at32f403a_407_usart.c ****       break;
+ 1354              		.loc 1 644 51 is_stmt 0 view .LVU278
+ 1355 009a 4369     		ldr	r3, [r0, #20]
+ 1356 009c 03F00103 		and	r3, r3, #1
+ 1357              	.LVL103:
+ 645:libraries/drivers/src/at32f403a_407_usart.c ****     case USART_PERR_FLAG:
+ 1358              		.loc 1 645 7 is_stmt 1 view .LVU279
+ 1359 00a0 DFE7     		b	.L87
+ 1360              	.LVL104:
+ 1361              	.L82:
+ 647:libraries/drivers/src/at32f403a_407_usart.c ****       break;      
+ 1362              		.loc 1 647 7 view .LVU280
+ 647:libraries/drivers/src/at32f403a_407_usart.c ****       break;      
+ 1363              		.loc 1 647 51 is_stmt 0 view .LVU281
+ 1364 00a2 C368     		ldr	r3, [r0, #12]
+ 1365 00a4 C3F30023 		ubfx	r3, r3, #8, #1
+ 1366              	.LVL105:
+ 648:libraries/drivers/src/at32f403a_407_usart.c ****     default:
+ 1367              		.loc 1 648 7 is_stmt 1 view .LVU282
+ 1368 00a8 DBE7     		b	.L87
+ 1369              	.LVL106:
+ 1370              	.L89:
+ 619:libraries/drivers/src/at32f403a_407_usart.c ****   {
+ 1371              		.loc 1 619 3 is_stmt 0 view .LVU283
+ 1372 00aa 0020     		movs	r0, #0
+ 1373              	.LVL107:
+ 619:libraries/drivers/src/at32f403a_407_usart.c ****   {
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccHzhFIx.s 			page 37
+
+
+ 1374              		.loc 1 619 3 view .LVU284
+ 1375 00ac 7047     		bx	lr
+ 1376              	.LVL108:
+ 1377              	.L90:
+ 619:libraries/drivers/src/at32f403a_407_usart.c ****   {
+ 1378              		.loc 1 619 3 view .LVU285
+ 1379 00ae 0020     		movs	r0, #0
+ 1380              	.LVL109:
+ 619:libraries/drivers/src/at32f403a_407_usart.c ****   {
+ 1381              		.loc 1 619 3 view .LVU286
+ 1382 00b0 7047     		bx	lr
+ 1383              	.LVL110:
+ 1384              	.L91:
+ 619:libraries/drivers/src/at32f403a_407_usart.c ****   {
+ 1385              		.loc 1 619 3 view .LVU287
+ 1386 00b2 0020     		movs	r0, #0
+ 1387              	.LVL111:
+ 619:libraries/drivers/src/at32f403a_407_usart.c ****   {
+ 1388              		.loc 1 619 3 view .LVU288
+ 1389 00b4 7047     		bx	lr
+ 1390              	.LVL112:
+ 1391              	.L92:
+ 656:libraries/drivers/src/at32f403a_407_usart.c ****   }
+ 1392              		.loc 1 656 12 view .LVU289
+ 1393 00b6 0020     		movs	r0, #0
+ 1394              	.LVL113:
+ 656:libraries/drivers/src/at32f403a_407_usart.c ****   }
+ 1395              		.loc 1 656 12 view .LVU290
+ 1396 00b8 7047     		bx	lr
+ 1397              	.LVL114:
+ 1398              	.L93:
+ 662:libraries/drivers/src/at32f403a_407_usart.c ****   }
+ 663:libraries/drivers/src/at32f403a_407_usart.c ****   else
+ 664:libraries/drivers/src/at32f403a_407_usart.c ****   {
+ 665:libraries/drivers/src/at32f403a_407_usart.c ****     return RESET;
+ 1399              		.loc 1 665 12 view .LVU291
+ 1400 00ba 0020     		movs	r0, #0
+ 1401              	.LVL115:
+ 666:libraries/drivers/src/at32f403a_407_usart.c ****   }
+ 667:libraries/drivers/src/at32f403a_407_usart.c **** }
+ 1402              		.loc 1 667 1 view .LVU292
+ 1403 00bc 7047     		bx	lr
+ 1404              		.cfi_endproc
+ 1405              	.LFE162:
+ 1407              		.section	.text.usart_flag_clear,"ax",%progbits
+ 1408              		.align	1
+ 1409              		.global	usart_flag_clear
+ 1410              		.syntax unified
+ 1411              		.thumb
+ 1412              		.thumb_func
+ 1414              	usart_flag_clear:
+ 1415              	.LVL116:
+ 1416              	.LFB163:
+ 668:libraries/drivers/src/at32f403a_407_usart.c **** 
+ 669:libraries/drivers/src/at32f403a_407_usart.c **** /**
+ 670:libraries/drivers/src/at32f403a_407_usart.c ****   * @brief  clear the usart's pending flags.
+ 671:libraries/drivers/src/at32f403a_407_usart.c ****   * @param  usart_x: select the usart or the uart peripheral.
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccHzhFIx.s 			page 38
+
+
+ 672:libraries/drivers/src/at32f403a_407_usart.c ****   *         this parameter can be one of the following values:
+ 673:libraries/drivers/src/at32f403a_407_usart.c ****   *         USART1, USART2, USART3, UART4, UART5, USART6, UART7 or UART8.
+ 674:libraries/drivers/src/at32f403a_407_usart.c ****   * @param  flag: specifies the flag to clear.
+ 675:libraries/drivers/src/at32f403a_407_usart.c ****   *         this parameter can be any combination of the following values:
+ 676:libraries/drivers/src/at32f403a_407_usart.c ****   *         - USART_CTSCF_FLAG: (not available for UART4,UART5,USART6,UART7 and UART8).
+ 677:libraries/drivers/src/at32f403a_407_usart.c ****   *         - USART_BFF_FLAG:
+ 678:libraries/drivers/src/at32f403a_407_usart.c ****   *         - USART_TDC_FLAG:
+ 679:libraries/drivers/src/at32f403a_407_usart.c ****   *         - USART_RDBF_FLAG:
+ 680:libraries/drivers/src/at32f403a_407_usart.c ****   *         - USART_PERR_FLAG:
+ 681:libraries/drivers/src/at32f403a_407_usart.c ****   *         - USART_FERR_FLAG:
+ 682:libraries/drivers/src/at32f403a_407_usart.c ****   *         - USART_NERR_FLAG:
+ 683:libraries/drivers/src/at32f403a_407_usart.c ****   *         - USART_ROERR_FLAG:
+ 684:libraries/drivers/src/at32f403a_407_usart.c ****   *         - USART_IDLEF_FLAG:
+ 685:libraries/drivers/src/at32f403a_407_usart.c ****   * @note
+ 686:libraries/drivers/src/at32f403a_407_usart.c ****   *         - USART_PERR_FLAG, USART_FERR_FLAG, USART_NERR_FLAG, USART_ROERR_FLAG and USART_IDLEF_F
+ 687:libraries/drivers/src/at32f403a_407_usart.c ****   *           sequence: a read operation to usart sts register (usart_flag_get())
+ 688:libraries/drivers/src/at32f403a_407_usart.c ****   *           followed by a read operation to usart dt register (usart_data_receive()).
+ 689:libraries/drivers/src/at32f403a_407_usart.c ****   *         - USART_RDBF_FLAG can be also cleared by a read to the usart dt register(usart_data_rec
+ 690:libraries/drivers/src/at32f403a_407_usart.c ****   *         - USART_TDC_FLAG can be also cleared by software sequence: a read operation to usart st
+ 691:libraries/drivers/src/at32f403a_407_usart.c ****   *           followed by a write operation to usart dt register (usart_data_transmit()).
+ 692:libraries/drivers/src/at32f403a_407_usart.c ****   *         - USART_TDBE_FLAG is cleared only by a write to the usart dt register(usart_data_transm
+ 693:libraries/drivers/src/at32f403a_407_usart.c ****   * @retval none
+ 694:libraries/drivers/src/at32f403a_407_usart.c ****   */
+ 695:libraries/drivers/src/at32f403a_407_usart.c **** void usart_flag_clear(usart_type* usart_x, uint32_t flag)
+ 696:libraries/drivers/src/at32f403a_407_usart.c **** {
+ 1417              		.loc 1 696 1 is_stmt 1 view -0
+ 1418              		.cfi_startproc
+ 1419              		@ args = 0, pretend = 0, frame = 0
+ 1420              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1421              		@ link register save eliminated.
+ 697:libraries/drivers/src/at32f403a_407_usart.c ****   if(flag & (USART_PERR_FLAG | USART_FERR_FLAG | USART_NERR_FLAG | USART_ROERR_FLAG | USART_IDLEF_F
+ 1422              		.loc 1 697 3 view .LVU294
+ 1423              		.loc 1 697 5 is_stmt 0 view .LVU295
+ 1424 0000 11F01F0F 		tst	r1, #31
+ 1425 0004 02D0     		beq	.L96
+ 698:libraries/drivers/src/at32f403a_407_usart.c ****   {
+ 699:libraries/drivers/src/at32f403a_407_usart.c ****     UNUSED(usart_x->sts);
+ 1426              		.loc 1 699 5 is_stmt 1 view .LVU296
+ 1427 0006 0368     		ldr	r3, [r0]
+ 700:libraries/drivers/src/at32f403a_407_usart.c ****     UNUSED(usart_x->dt);
+ 1428              		.loc 1 700 5 view .LVU297
+ 1429 0008 4368     		ldr	r3, [r0, #4]
+ 1430 000a 7047     		bx	lr
+ 1431              	.L96:
+ 701:libraries/drivers/src/at32f403a_407_usart.c ****   }
+ 702:libraries/drivers/src/at32f403a_407_usart.c ****   else
+ 703:libraries/drivers/src/at32f403a_407_usart.c ****   {
+ 704:libraries/drivers/src/at32f403a_407_usart.c ****     usart_x->sts = ~flag;
+ 1432              		.loc 1 704 5 view .LVU298
+ 1433              		.loc 1 704 20 is_stmt 0 view .LVU299
+ 1434 000c C943     		mvns	r1, r1
+ 1435              	.LVL117:
+ 1436              		.loc 1 704 18 view .LVU300
+ 1437 000e 0160     		str	r1, [r0]
+ 705:libraries/drivers/src/at32f403a_407_usart.c ****   }
+ 706:libraries/drivers/src/at32f403a_407_usart.c **** }
+ 1438              		.loc 1 706 1 view .LVU301
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccHzhFIx.s 			page 39
+
+
+ 1439 0010 7047     		bx	lr
+ 1440              		.cfi_endproc
+ 1441              	.LFE163:
+ 1443              		.text
+ 1444              	.Letext0:
+ 1445              		.file 2 "D:/gnu_toolchain/arm-none-eabi/include/machine/_default_types.h"
+ 1446              		.file 3 "D:/gnu_toolchain/arm-none-eabi/include/sys/_stdint.h"
+ 1447              		.file 4 "libraries/cmsis/cm4/device_support/at32f403a_407.h"
+ 1448              		.file 5 "libraries/drivers/inc/at32f403a_407_crm.h"
+ 1449              		.file 6 "libraries/drivers/inc/at32f403a_407_usart.h"
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccHzhFIx.s 			page 40
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 at32f403a_407_usart.c
+C:\Users\bians\AppData\Local\Temp\ccHzhFIx.s:21     .text.usart_reset:00000000 $t
+C:\Users\bians\AppData\Local\Temp\ccHzhFIx.s:27     .text.usart_reset:00000000 usart_reset
+C:\Users\bians\AppData\Local\Temp\ccHzhFIx.s:216    .text.usart_reset:000000d4 $d
+C:\Users\bians\AppData\Local\Temp\ccHzhFIx.s:236    .text.usart_init:00000000 $t
+C:\Users\bians\AppData\Local\Temp\ccHzhFIx.s:242    .text.usart_init:00000000 usart_init
+C:\Users\bians\AppData\Local\Temp\ccHzhFIx.s:371    .text.usart_init:0000008c $d
+C:\Users\bians\AppData\Local\Temp\ccHzhFIx.s:377    .text.usart_parity_selection_config:00000000 $t
+C:\Users\bians\AppData\Local\Temp\ccHzhFIx.s:383    .text.usart_parity_selection_config:00000000 usart_parity_selection_config
+C:\Users\bians\AppData\Local\Temp\ccHzhFIx.s:446    .text.usart_enable:00000000 $t
+C:\Users\bians\AppData\Local\Temp\ccHzhFIx.s:452    .text.usart_enable:00000000 usart_enable
+C:\Users\bians\AppData\Local\Temp\ccHzhFIx.s:471    .text.usart_transmitter_enable:00000000 $t
+C:\Users\bians\AppData\Local\Temp\ccHzhFIx.s:477    .text.usart_transmitter_enable:00000000 usart_transmitter_enable
+C:\Users\bians\AppData\Local\Temp\ccHzhFIx.s:496    .text.usart_receiver_enable:00000000 $t
+C:\Users\bians\AppData\Local\Temp\ccHzhFIx.s:502    .text.usart_receiver_enable:00000000 usart_receiver_enable
+C:\Users\bians\AppData\Local\Temp\ccHzhFIx.s:521    .text.usart_clock_config:00000000 $t
+C:\Users\bians\AppData\Local\Temp\ccHzhFIx.s:527    .text.usart_clock_config:00000000 usart_clock_config
+C:\Users\bians\AppData\Local\Temp\ccHzhFIx.s:569    .text.usart_clock_enable:00000000 $t
+C:\Users\bians\AppData\Local\Temp\ccHzhFIx.s:575    .text.usart_clock_enable:00000000 usart_clock_enable
+C:\Users\bians\AppData\Local\Temp\ccHzhFIx.s:594    .text.usart_interrupt_enable:00000000 $t
+C:\Users\bians\AppData\Local\Temp\ccHzhFIx.s:600    .text.usart_interrupt_enable:00000000 usart_interrupt_enable
+C:\Users\bians\AppData\Local\Temp\ccHzhFIx.s:647    .text.usart_dma_transmitter_enable:00000000 $t
+C:\Users\bians\AppData\Local\Temp\ccHzhFIx.s:653    .text.usart_dma_transmitter_enable:00000000 usart_dma_transmitter_enable
+C:\Users\bians\AppData\Local\Temp\ccHzhFIx.s:672    .text.usart_dma_receiver_enable:00000000 $t
+C:\Users\bians\AppData\Local\Temp\ccHzhFIx.s:678    .text.usart_dma_receiver_enable:00000000 usart_dma_receiver_enable
+C:\Users\bians\AppData\Local\Temp\ccHzhFIx.s:697    .text.usart_wakeup_id_set:00000000 $t
+C:\Users\bians\AppData\Local\Temp\ccHzhFIx.s:703    .text.usart_wakeup_id_set:00000000 usart_wakeup_id_set
+C:\Users\bians\AppData\Local\Temp\ccHzhFIx.s:722    .text.usart_wakeup_mode_set:00000000 $t
+C:\Users\bians\AppData\Local\Temp\ccHzhFIx.s:728    .text.usart_wakeup_mode_set:00000000 usart_wakeup_mode_set
+C:\Users\bians\AppData\Local\Temp\ccHzhFIx.s:747    .text.usart_receiver_mute_enable:00000000 $t
+C:\Users\bians\AppData\Local\Temp\ccHzhFIx.s:753    .text.usart_receiver_mute_enable:00000000 usart_receiver_mute_enable
+C:\Users\bians\AppData\Local\Temp\ccHzhFIx.s:772    .text.usart_break_bit_num_set:00000000 $t
+C:\Users\bians\AppData\Local\Temp\ccHzhFIx.s:778    .text.usart_break_bit_num_set:00000000 usart_break_bit_num_set
+C:\Users\bians\AppData\Local\Temp\ccHzhFIx.s:797    .text.usart_lin_mode_enable:00000000 $t
+C:\Users\bians\AppData\Local\Temp\ccHzhFIx.s:803    .text.usart_lin_mode_enable:00000000 usart_lin_mode_enable
+C:\Users\bians\AppData\Local\Temp\ccHzhFIx.s:822    .text.usart_data_transmit:00000000 $t
+C:\Users\bians\AppData\Local\Temp\ccHzhFIx.s:828    .text.usart_data_transmit:00000000 usart_data_transmit
+C:\Users\bians\AppData\Local\Temp\ccHzhFIx.s:848    .text.usart_data_receive:00000000 $t
+C:\Users\bians\AppData\Local\Temp\ccHzhFIx.s:854    .text.usart_data_receive:00000000 usart_data_receive
+C:\Users\bians\AppData\Local\Temp\ccHzhFIx.s:873    .text.usart_break_send:00000000 $t
+C:\Users\bians\AppData\Local\Temp\ccHzhFIx.s:879    .text.usart_break_send:00000000 usart_break_send
+C:\Users\bians\AppData\Local\Temp\ccHzhFIx.s:898    .text.usart_smartcard_guard_time_set:00000000 $t
+C:\Users\bians\AppData\Local\Temp\ccHzhFIx.s:904    .text.usart_smartcard_guard_time_set:00000000 usart_smartcard_guard_time_set
+C:\Users\bians\AppData\Local\Temp\ccHzhFIx.s:923    .text.usart_irda_smartcard_division_set:00000000 $t
+C:\Users\bians\AppData\Local\Temp\ccHzhFIx.s:929    .text.usart_irda_smartcard_division_set:00000000 usart_irda_smartcard_division_set
+C:\Users\bians\AppData\Local\Temp\ccHzhFIx.s:950    .text.usart_smartcard_mode_enable:00000000 $t
+C:\Users\bians\AppData\Local\Temp\ccHzhFIx.s:956    .text.usart_smartcard_mode_enable:00000000 usart_smartcard_mode_enable
+C:\Users\bians\AppData\Local\Temp\ccHzhFIx.s:975    .text.usart_smartcard_nack_set:00000000 $t
+C:\Users\bians\AppData\Local\Temp\ccHzhFIx.s:981    .text.usart_smartcard_nack_set:00000000 usart_smartcard_nack_set
+C:\Users\bians\AppData\Local\Temp\ccHzhFIx.s:1000   .text.usart_single_line_halfduplex_select:00000000 $t
+C:\Users\bians\AppData\Local\Temp\ccHzhFIx.s:1006   .text.usart_single_line_halfduplex_select:00000000 usart_single_line_halfduplex_select
+C:\Users\bians\AppData\Local\Temp\ccHzhFIx.s:1025   .text.usart_irda_mode_enable:00000000 $t
+C:\Users\bians\AppData\Local\Temp\ccHzhFIx.s:1031   .text.usart_irda_mode_enable:00000000 usart_irda_mode_enable
+C:\Users\bians\AppData\Local\Temp\ccHzhFIx.s:1050   .text.usart_irda_low_power_enable:00000000 $t
+C:\Users\bians\AppData\Local\Temp\ccHzhFIx.s:1056   .text.usart_irda_low_power_enable:00000000 usart_irda_low_power_enable
+C:\Users\bians\AppData\Local\Temp\ccHzhFIx.s:1075   .text.usart_hardware_flow_control_set:00000000 $t
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccHzhFIx.s 			page 41
+
+
+C:\Users\bians\AppData\Local\Temp\ccHzhFIx.s:1081   .text.usart_hardware_flow_control_set:00000000 usart_hardware_flow_control_set
+C:\Users\bians\AppData\Local\Temp\ccHzhFIx.s:1094   .text.usart_hardware_flow_control_set:00000008 $d
+C:\Users\bians\AppData\Local\Temp\ccHzhFIx.s:1098   .text.usart_hardware_flow_control_set:0000000c $t
+C:\Users\bians\AppData\Local\Temp\ccHzhFIx.s:1153   .text.usart_flag_get:00000000 $t
+C:\Users\bians\AppData\Local\Temp\ccHzhFIx.s:1159   .text.usart_flag_get:00000000 usart_flag_get
+C:\Users\bians\AppData\Local\Temp\ccHzhFIx.s:1189   .text.usart_interrupt_flag_get:00000000 $t
+C:\Users\bians\AppData\Local\Temp\ccHzhFIx.s:1195   .text.usart_interrupt_flag_get:00000000 usart_interrupt_flag_get
+C:\Users\bians\AppData\Local\Temp\ccHzhFIx.s:1214   .text.usart_interrupt_flag_get:00000012 $d
+C:\Users\bians\AppData\Local\Temp\ccHzhFIx.s:1246   .text.usart_interrupt_flag_get:00000032 $t
+C:\Users\bians\AppData\Local\Temp\ccHzhFIx.s:1408   .text.usart_flag_clear:00000000 $t
+C:\Users\bians\AppData\Local\Temp\ccHzhFIx.s:1414   .text.usart_flag_clear:00000000 usart_flag_clear
+
+UNDEFINED SYMBOLS
+crm_periph_reset
+crm_clocks_freq_get

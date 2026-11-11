@@ -1,0 +1,3060 @@
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccGh0LbN.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.arch armv7e-m
+   3              		.fpu fpv4-sp-d16
+   4              		.eabi_attribute 27, 1
+   5              		.eabi_attribute 28, 1
+   6              		.eabi_attribute 20, 1
+   7              		.eabi_attribute 21, 1
+   8              		.eabi_attribute 23, 3
+   9              		.eabi_attribute 24, 1
+  10              		.eabi_attribute 25, 1
+  11              		.eabi_attribute 26, 1
+  12              		.eabi_attribute 30, 1
+  13              		.eabi_attribute 34, 1
+  14              		.eabi_attribute 18, 4
+  15              		.file	"usmart_str.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.file 1 "project/src/usmart_str.c"
+  20              		.section	.text.usmart_search_nextc,"ax",%progbits
+  21              		.align	1
+  22              		.syntax unified
+  23              		.thumb
+  24              		.thumb_func
+  26              	usmart_search_nextc:
+  27              	.LVL0:
+  28              	.LFB143:
+   1:project/src/usmart_str.c **** #include "usmart_str.h"
+   2:project/src/usmart_str.c **** #include "usmart.h"
+   3:project/src/usmart_str.c **** 
+   4:project/src/usmart_str.c **** #include <string.h>
+   5:project/src/usmart_str.c **** 
+   6:project/src/usmart_str.c **** /**
+   7:project/src/usmart_str.c ****  * @brief       字符串比较
+   8:project/src/usmart_str.c ****  * @param       str1: 字符串1
+   9:project/src/usmart_str.c ****  *              str2: 字符串2
+  10:project/src/usmart_str.c ****  * @retval      0, 相等; 1, 不相等
+  11:project/src/usmart_str.c ****  */
+  12:project/src/usmart_str.c **** uint8_t usmart_strcmp(char *str1, char *str2)
+  13:project/src/usmart_str.c **** {
+  14:project/src/usmart_str.c ****     while (1)
+  15:project/src/usmart_str.c ****     {
+  16:project/src/usmart_str.c ****         if (*str1 != *str2)
+  17:project/src/usmart_str.c ****         {
+  18:project/src/usmart_str.c ****             return 1;               /* 不相等 */
+  19:project/src/usmart_str.c ****         }
+  20:project/src/usmart_str.c **** 
+  21:project/src/usmart_str.c ****         if (*str1 == '\0')
+  22:project/src/usmart_str.c ****         {
+  23:project/src/usmart_str.c ****             break;                  /* 结束 */
+  24:project/src/usmart_str.c ****         }
+  25:project/src/usmart_str.c **** 
+  26:project/src/usmart_str.c ****         str1++;
+  27:project/src/usmart_str.c ****         str2++;
+  28:project/src/usmart_str.c ****     }
+  29:project/src/usmart_str.c **** 
+  30:project/src/usmart_str.c ****     return 0;
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccGh0LbN.s 			page 2
+
+
+  31:project/src/usmart_str.c **** }
+  32:project/src/usmart_str.c **** 
+  33:project/src/usmart_str.c **** /**
+  34:project/src/usmart_str.c ****  * @brief       字符串拷贝(包含结束符)
+  35:project/src/usmart_str.c ****  * @param       str1: 目的字符串
+  36:project/src/usmart_str.c ****  *              str2: 源字符串
+  37:project/src/usmart_str.c ****  * @retval      无
+  38:project/src/usmart_str.c ****  */
+  39:project/src/usmart_str.c **** void usmart_strcopy(char *str1, char *str2)
+  40:project/src/usmart_str.c **** {
+  41:project/src/usmart_str.c ****     while (*str2 != '\0')
+  42:project/src/usmart_str.c ****     {
+  43:project/src/usmart_str.c ****         *str1 = *str2;
+  44:project/src/usmart_str.c ****         str1++;
+  45:project/src/usmart_str.c ****         str2++;
+  46:project/src/usmart_str.c ****     }
+  47:project/src/usmart_str.c **** 
+  48:project/src/usmart_str.c ****     *str1 = '\0';
+  49:project/src/usmart_str.c **** }
+  50:project/src/usmart_str.c **** 
+  51:project/src/usmart_str.c **** /**
+  52:project/src/usmart_str.c ****  * @brief       得到字符串长度(不包括结束符)
+  53:project/src/usmart_str.c ****  * @param       str: 字符串
+  54:project/src/usmart_str.c ****  * @retval      字符串长度
+  55:project/src/usmart_str.c ****  */
+  56:project/src/usmart_str.c **** uint8_t usmart_strlen(const char *str)
+  57:project/src/usmart_str.c **** {
+  58:project/src/usmart_str.c ****     uint8_t len = 0;
+  59:project/src/usmart_str.c **** 
+  60:project/src/usmart_str.c ****     while (*str != '\0')
+  61:project/src/usmart_str.c ****     {
+  62:project/src/usmart_str.c ****         len++;
+  63:project/src/usmart_str.c ****         str++;
+  64:project/src/usmart_str.c ****     }
+  65:project/src/usmart_str.c **** 
+  66:project/src/usmart_str.c ****     return len;
+  67:project/src/usmart_str.c **** }
+  68:project/src/usmart_str.c **** 
+  69:project/src/usmart_str.c **** /**
+  70:project/src/usmart_str.c ****  * @brief       返回a^b的值
+  71:project/src/usmart_str.c ****  * @param       a: 底数
+  72:project/src/usmart_str.c ****  *              b: 指数
+  73:project/src/usmart_str.c ****  * @retval      a^b
+  74:project/src/usmart_str.c ****  */
+  75:project/src/usmart_str.c **** uint32_t usmart_pow(uint8_t a, uint8_t b)
+  76:project/src/usmart_str.c **** {
+  77:project/src/usmart_str.c ****     uint32_t res = 1;
+  78:project/src/usmart_str.c **** 
+  79:project/src/usmart_str.c ****     while (b)
+  80:project/src/usmart_str.c ****     {
+  81:project/src/usmart_str.c ****         res *= a;
+  82:project/src/usmart_str.c ****         b--;
+  83:project/src/usmart_str.c ****     }
+  84:project/src/usmart_str.c **** 
+  85:project/src/usmart_str.c ****     return res;
+  86:project/src/usmart_str.c **** }
+  87:project/src/usmart_str.c **** 
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccGh0LbN.s 			page 3
+
+
+  88:project/src/usmart_str.c **** /**
+  89:project/src/usmart_str.c ****  * @brief       字符串转数字
+  90:project/src/usmart_str.c ****  *   @note      支持10进制、16进制(必须0X开头), 支持正负号
+  91:project/src/usmart_str.c ****  * @param       str: 源字符串
+  92:project/src/usmart_str.c ****  *              res: 转换结果
+  93:project/src/usmart_str.c ****  * @retval      0, 成功;
+  94:project/src/usmart_str.c ****  *              1, 含有非法字符;
+  95:project/src/usmart_str.c ****  *              2, 16进制数据长度不足(0X后无数据);
+  96:project/src/usmart_str.c ****  *              3, 16进制数据未以0X开头;
+  97:project/src/usmart_str.c ****  *              4, 无有效数字
+  98:project/src/usmart_str.c ****  */
+  99:project/src/usmart_str.c **** uint8_t usmart_str2num(char *str, uint32_t *res)
+ 100:project/src/usmart_str.c **** {
+ 101:project/src/usmart_str.c ****     uint32_t t;
+ 102:project/src/usmart_str.c ****     uint8_t bnum = 0;           /* 数字位数 */
+ 103:project/src/usmart_str.c ****     char *p;
+ 104:project/src/usmart_str.c ****     uint8_t hexdec = 10;        /* 默认10进制 */
+ 105:project/src/usmart_str.c ****     uint8_t sign = 0;           /* 负数标志 */
+ 106:project/src/usmart_str.c **** 
+ 107:project/src/usmart_str.c ****     p = str;
+ 108:project/src/usmart_str.c ****     *res = 0;
+ 109:project/src/usmart_str.c **** 
+ 110:project/src/usmart_str.c ****     /* 处理符号 */
+ 111:project/src/usmart_str.c ****     if (*p == '-')
+ 112:project/src/usmart_str.c ****     {
+ 113:project/src/usmart_str.c ****         sign = 1;
+ 114:project/src/usmart_str.c ****         p++;
+ 115:project/src/usmart_str.c ****     }
+ 116:project/src/usmart_str.c ****     else if (*p == '+')
+ 117:project/src/usmart_str.c ****     {
+ 118:project/src/usmart_str.c ****         p++;
+ 119:project/src/usmart_str.c ****     }
+ 120:project/src/usmart_str.c **** 
+ 121:project/src/usmart_str.c ****     /* 检查字符串是否全部为合法数字 */
+ 122:project/src/usmart_str.c ****     while (1)
+ 123:project/src/usmart_str.c ****     {
+ 124:project/src/usmart_str.c ****         if ((*p <= '9' && *p >= '0') || (*p <= 'F' && *p >= 'A') || (*p == 'X' && bnum == 1))
+ 125:project/src/usmart_str.c ****         {
+ 126:project/src/usmart_str.c ****             if (*p >= 'A')
+ 127:project/src/usmart_str.c ****             {
+ 128:project/src/usmart_str.c ****                 hexdec = 16;    /* 存在A~F或者X, 按16进制处理 */
+ 129:project/src/usmart_str.c ****             }
+ 130:project/src/usmart_str.c ****             bnum++;
+ 131:project/src/usmart_str.c ****         }
+ 132:project/src/usmart_str.c ****         else if (*p == '\0')
+ 133:project/src/usmart_str.c ****         {
+ 134:project/src/usmart_str.c ****             break;
+ 135:project/src/usmart_str.c ****         }
+ 136:project/src/usmart_str.c ****         else
+ 137:project/src/usmart_str.c ****         {
+ 138:project/src/usmart_str.c ****             return 1;           /* 非法字符 */
+ 139:project/src/usmart_str.c ****         }
+ 140:project/src/usmart_str.c ****         p++;
+ 141:project/src/usmart_str.c ****     }
+ 142:project/src/usmart_str.c **** 
+ 143:project/src/usmart_str.c ****     p = str;
+ 144:project/src/usmart_str.c ****     if (sign)
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccGh0LbN.s 			page 4
+
+
+ 145:project/src/usmart_str.c ****     {
+ 146:project/src/usmart_str.c ****         p++;
+ 147:project/src/usmart_str.c ****     }
+ 148:project/src/usmart_str.c **** 
+ 149:project/src/usmart_str.c ****     if (hexdec == 16)
+ 150:project/src/usmart_str.c ****     {
+ 151:project/src/usmart_str.c ****         if (bnum < 3)
+ 152:project/src/usmart_str.c ****         {
+ 153:project/src/usmart_str.c ****             return 2;           /* 0X后面没有数据 */
+ 154:project/src/usmart_str.c ****         }
+ 155:project/src/usmart_str.c ****         if (*p == '0' && *(p + 1) == 'X')
+ 156:project/src/usmart_str.c ****         {
+ 157:project/src/usmart_str.c ****             p += 2;
+ 158:project/src/usmart_str.c ****             bnum -= 2;
+ 159:project/src/usmart_str.c ****         }
+ 160:project/src/usmart_str.c ****         else
+ 161:project/src/usmart_str.c ****         {
+ 162:project/src/usmart_str.c ****             return 3;           /* 16进制必须以0X开头 */
+ 163:project/src/usmart_str.c ****         }
+ 164:project/src/usmart_str.c ****     }
+ 165:project/src/usmart_str.c ****     else if (bnum == 0)
+ 166:project/src/usmart_str.c ****     {
+ 167:project/src/usmart_str.c ****         return 4;               /* 没有数字 */
+ 168:project/src/usmart_str.c ****     }
+ 169:project/src/usmart_str.c **** 
+ 170:project/src/usmart_str.c ****     while (1)
+ 171:project/src/usmart_str.c ****     {
+ 172:project/src/usmart_str.c ****         if (bnum)
+ 173:project/src/usmart_str.c ****         {
+ 174:project/src/usmart_str.c ****             bnum--;
+ 175:project/src/usmart_str.c ****         }
+ 176:project/src/usmart_str.c **** 
+ 177:project/src/usmart_str.c ****         if (*p <= '9' && *p >= '0')
+ 178:project/src/usmart_str.c ****         {
+ 179:project/src/usmart_str.c ****             t = *p - '0';
+ 180:project/src/usmart_str.c ****         }
+ 181:project/src/usmart_str.c ****         else
+ 182:project/src/usmart_str.c ****         {
+ 183:project/src/usmart_str.c ****             t = *p - 'A' + 10;
+ 184:project/src/usmart_str.c ****         }
+ 185:project/src/usmart_str.c **** 
+ 186:project/src/usmart_str.c ****         *res += t * usmart_pow(hexdec, bnum);
+ 187:project/src/usmart_str.c ****         p++;
+ 188:project/src/usmart_str.c **** 
+ 189:project/src/usmart_str.c ****         if (*p == '\0')
+ 190:project/src/usmart_str.c ****         {
+ 191:project/src/usmart_str.c ****             break;
+ 192:project/src/usmart_str.c ****         }
+ 193:project/src/usmart_str.c ****     }
+ 194:project/src/usmart_str.c **** 
+ 195:project/src/usmart_str.c ****     if (sign)
+ 196:project/src/usmart_str.c ****     {
+ 197:project/src/usmart_str.c ****         *res = (uint32_t)(0U - *res);    /* 负数取补码 */
+ 198:project/src/usmart_str.c ****     }
+ 199:project/src/usmart_str.c **** 
+ 200:project/src/usmart_str.c ****     return 0;
+ 201:project/src/usmart_str.c **** }
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccGh0LbN.s 			page 5
+
+
+ 202:project/src/usmart_str.c **** 
+ 203:project/src/usmart_str.c **** /**
+ 204:project/src/usmart_str.c ****  * @brief       得到指令名
+ 205:project/src/usmart_str.c ****  * @param       str: 源字符串
+ 206:project/src/usmart_str.c ****  *              cmdname: 指令名缓存
+ 207:project/src/usmart_str.c ****  *              nlen: 指令名长度
+ 208:project/src/usmart_str.c ****  *              maxlen: 缓存最大长度(包含结束符)
+ 209:project/src/usmart_str.c ****  * @retval      0, 成功; 其他, 失败
+ 210:project/src/usmart_str.c ****  */
+ 211:project/src/usmart_str.c **** uint8_t usmart_get_cmdname(char *str, char *cmdname, uint8_t *nlen, uint8_t maxlen)
+ 212:project/src/usmart_str.c **** {
+ 213:project/src/usmart_str.c ****     if (maxlen == 0)
+ 214:project/src/usmart_str.c ****     {
+ 215:project/src/usmart_str.c ****         return 1;
+ 216:project/src/usmart_str.c ****     }
+ 217:project/src/usmart_str.c **** 
+ 218:project/src/usmart_str.c ****     *nlen = 0;
+ 219:project/src/usmart_str.c **** 
+ 220:project/src/usmart_str.c ****     while (*str != ' ' && *str != '\0')
+ 221:project/src/usmart_str.c ****     {
+ 222:project/src/usmart_str.c ****         if (*nlen >= (uint8_t)(maxlen - 1U))
+ 223:project/src/usmart_str.c ****         {
+ 224:project/src/usmart_str.c ****             *cmdname = '\0';
+ 225:project/src/usmart_str.c ****             return 1;           /* 指令太长 */
+ 226:project/src/usmart_str.c ****         }
+ 227:project/src/usmart_str.c **** 
+ 228:project/src/usmart_str.c ****         *cmdname = *str;
+ 229:project/src/usmart_str.c ****         str++;
+ 230:project/src/usmart_str.c ****         cmdname++;
+ 231:project/src/usmart_str.c ****         (*nlen)++;
+ 232:project/src/usmart_str.c ****     }
+ 233:project/src/usmart_str.c **** 
+ 234:project/src/usmart_str.c ****     *cmdname = '\0';
+ 235:project/src/usmart_str.c ****     return 0;
+ 236:project/src/usmart_str.c **** }
+ 237:project/src/usmart_str.c **** 
+ 238:project/src/usmart_str.c **** /**
+ 239:project/src/usmart_str.c ****  * @brief       获取下一个字符(忽略中间的空格)
+ 240:project/src/usmart_str.c ****  * @param       str: 字符串指针
+ 241:project/src/usmart_str.c ****  * @retval      下一个字符
+ 242:project/src/usmart_str.c ****  */
+ 243:project/src/usmart_str.c **** static uint8_t usmart_search_nextc(char *str)
+ 244:project/src/usmart_str.c **** {
+  29              		.loc 1 244 1 view -0
+  30              		.cfi_startproc
+  31              		@ args = 0, pretend = 0, frame = 0
+  32              		@ frame_needed = 0, uses_anonymous_args = 0
+  33              		@ link register save eliminated.
+ 245:project/src/usmart_str.c ****     str++;
+  34              		.loc 1 245 5 view .LVU1
+  35              		.loc 1 245 8 is_stmt 0 view .LVU2
+  36 0000 431C     		adds	r3, r0, #1
+  37              	.LVL1:
+ 246:project/src/usmart_str.c **** 
+ 247:project/src/usmart_str.c ****     while (*str == ' ' && *str != '\0')
+  38              		.loc 1 247 5 is_stmt 1 view .LVU3
+  39              		.loc 1 247 11 is_stmt 0 view .LVU4
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccGh0LbN.s 			page 6
+
+
+  40 0002 00E0     		b	.L2
+  41              	.L3:
+ 248:project/src/usmart_str.c ****     {
+ 249:project/src/usmart_str.c ****         str++;
+  42              		.loc 1 249 9 is_stmt 1 view .LVU5
+  43              		.loc 1 249 12 is_stmt 0 view .LVU6
+  44 0004 0133     		adds	r3, r3, #1
+  45              	.LVL2:
+  46              	.L2:
+ 247:project/src/usmart_str.c ****     {
+  47              		.loc 1 247 24 is_stmt 1 view .LVU7
+ 247:project/src/usmart_str.c ****     {
+  48              		.loc 1 247 12 is_stmt 0 view .LVU8
+  49 0006 1878     		ldrb	r0, [r3]	@ zero_extendqisi2
+ 247:project/src/usmart_str.c ****     {
+  50              		.loc 1 247 24 view .LVU9
+  51 0008 2028     		cmp	r0, #32
+  52 000a FBD0     		beq	.L3
+ 250:project/src/usmart_str.c ****     }
+ 251:project/src/usmart_str.c **** 
+ 252:project/src/usmart_str.c ****     return (uint8_t)*str;
+  53              		.loc 1 252 5 is_stmt 1 view .LVU10
+ 253:project/src/usmart_str.c **** }
+  54              		.loc 1 253 1 is_stmt 0 view .LVU11
+  55 000c 7047     		bx	lr
+  56              		.cfi_endproc
+  57              	.LFE143:
+  59              		.section	.text.usmart_strcmp,"ax",%progbits
+  60              		.align	1
+  61              		.global	usmart_strcmp
+  62              		.syntax unified
+  63              		.thumb
+  64              		.thumb_func
+  66              	usmart_strcmp:
+  67              	.LVL3:
+  68              	.LFB137:
+  13:project/src/usmart_str.c ****     while (1)
+  69              		.loc 1 13 1 is_stmt 1 view -0
+  70              		.cfi_startproc
+  71              		@ args = 0, pretend = 0, frame = 0
+  72              		@ frame_needed = 0, uses_anonymous_args = 0
+  73              		@ link register save eliminated.
+  13:project/src/usmart_str.c ****     while (1)
+  74              		.loc 1 13 1 is_stmt 0 view .LVU13
+  75 0000 0346     		mov	r3, r0
+  76 0002 01E0     		b	.L6
+  77              	.LVL4:
+  78              	.L8:
+  26:project/src/usmart_str.c ****         str2++;
+  79              		.loc 1 26 9 is_stmt 1 view .LVU14
+  26:project/src/usmart_str.c ****         str2++;
+  80              		.loc 1 26 13 is_stmt 0 view .LVU15
+  81 0004 0133     		adds	r3, r3, #1
+  82              	.LVL5:
+  27:project/src/usmart_str.c ****     }
+  83              		.loc 1 27 9 is_stmt 1 view .LVU16
+  27:project/src/usmart_str.c ****     }
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccGh0LbN.s 			page 7
+
+
+  84              		.loc 1 27 13 is_stmt 0 view .LVU17
+  85 0006 0131     		adds	r1, r1, #1
+  86              	.LVL6:
+  14:project/src/usmart_str.c ****     {
+  87              		.loc 1 14 11 is_stmt 1 view .LVU18
+  88              	.L6:
+  14:project/src/usmart_str.c ****     {
+  89              		.loc 1 14 5 view .LVU19
+  16:project/src/usmart_str.c ****         {
+  90              		.loc 1 16 9 view .LVU20
+  16:project/src/usmart_str.c ****         {
+  91              		.loc 1 16 13 is_stmt 0 view .LVU21
+  92 0008 1878     		ldrb	r0, [r3]	@ zero_extendqisi2
+  16:project/src/usmart_str.c ****         {
+  93              		.loc 1 16 22 view .LVU22
+  94 000a 0A78     		ldrb	r2, [r1]	@ zero_extendqisi2
+  16:project/src/usmart_str.c ****         {
+  95              		.loc 1 16 12 view .LVU23
+  96 000c 9042     		cmp	r0, r2
+  97 000e 02D1     		bne	.L7
+  21:project/src/usmart_str.c ****         {
+  98              		.loc 1 21 9 is_stmt 1 view .LVU24
+  21:project/src/usmart_str.c ****         {
+  99              		.loc 1 21 12 is_stmt 0 view .LVU25
+ 100 0010 0028     		cmp	r0, #0
+ 101 0012 F7D1     		bne	.L8
+ 102 0014 00E0     		b	.L5
+ 103              	.L7:
+  18:project/src/usmart_str.c ****         }
+ 104              		.loc 1 18 20 view .LVU26
+ 105 0016 0120     		movs	r0, #1
+ 106              	.L5:
+  31:project/src/usmart_str.c **** 
+ 107              		.loc 1 31 1 view .LVU27
+ 108 0018 7047     		bx	lr
+ 109              		.cfi_endproc
+ 110              	.LFE137:
+ 112              		.section	.text.usmart_strcopy,"ax",%progbits
+ 113              		.align	1
+ 114              		.global	usmart_strcopy
+ 115              		.syntax unified
+ 116              		.thumb
+ 117              		.thumb_func
+ 119              	usmart_strcopy:
+ 120              	.LVL7:
+ 121              	.LFB138:
+  40:project/src/usmart_str.c ****     while (*str2 != '\0')
+ 122              		.loc 1 40 1 is_stmt 1 view -0
+ 123              		.cfi_startproc
+ 124              		@ args = 0, pretend = 0, frame = 0
+ 125              		@ frame_needed = 0, uses_anonymous_args = 0
+ 126              		@ link register save eliminated.
+  41:project/src/usmart_str.c ****     {
+ 127              		.loc 1 41 5 view .LVU29
+  41:project/src/usmart_str.c ****     {
+ 128              		.loc 1 41 11 is_stmt 0 view .LVU30
+ 129 0000 02E0     		b	.L10
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccGh0LbN.s 			page 8
+
+
+ 130              	.L11:
+  43:project/src/usmart_str.c ****         str1++;
+ 131              		.loc 1 43 9 is_stmt 1 view .LVU31
+  43:project/src/usmart_str.c ****         str1++;
+ 132              		.loc 1 43 15 is_stmt 0 view .LVU32
+ 133 0002 00F8013B 		strb	r3, [r0], #1
+ 134              	.LVL8:
+  44:project/src/usmart_str.c ****         str2++;
+ 135              		.loc 1 44 9 is_stmt 1 view .LVU33
+  45:project/src/usmart_str.c ****     }
+ 136              		.loc 1 45 9 view .LVU34
+  45:project/src/usmart_str.c ****     }
+ 137              		.loc 1 45 13 is_stmt 0 view .LVU35
+ 138 0006 0131     		adds	r1, r1, #1
+ 139              	.LVL9:
+ 140              	.L10:
+  41:project/src/usmart_str.c ****     {
+ 141              		.loc 1 41 18 is_stmt 1 view .LVU36
+  41:project/src/usmart_str.c ****     {
+ 142              		.loc 1 41 12 is_stmt 0 view .LVU37
+ 143 0008 0B78     		ldrb	r3, [r1]	@ zero_extendqisi2
+  41:project/src/usmart_str.c ****     {
+ 144              		.loc 1 41 18 view .LVU38
+ 145 000a 002B     		cmp	r3, #0
+ 146 000c F9D1     		bne	.L11
+  48:project/src/usmart_str.c **** }
+ 147              		.loc 1 48 5 is_stmt 1 view .LVU39
+  48:project/src/usmart_str.c **** }
+ 148              		.loc 1 48 11 is_stmt 0 view .LVU40
+ 149 000e 0370     		strb	r3, [r0]
+  49:project/src/usmart_str.c **** 
+ 150              		.loc 1 49 1 view .LVU41
+ 151 0010 7047     		bx	lr
+ 152              		.cfi_endproc
+ 153              	.LFE138:
+ 155              		.section	.text.usmart_strlen,"ax",%progbits
+ 156              		.align	1
+ 157              		.global	usmart_strlen
+ 158              		.syntax unified
+ 159              		.thumb
+ 160              		.thumb_func
+ 162              	usmart_strlen:
+ 163              	.LVL10:
+ 164              	.LFB139:
+  57:project/src/usmart_str.c ****     uint8_t len = 0;
+ 165              		.loc 1 57 1 is_stmt 1 view -0
+ 166              		.cfi_startproc
+ 167              		@ args = 0, pretend = 0, frame = 0
+ 168              		@ frame_needed = 0, uses_anonymous_args = 0
+ 169              		@ link register save eliminated.
+  57:project/src/usmart_str.c ****     uint8_t len = 0;
+ 170              		.loc 1 57 1 is_stmt 0 view .LVU43
+ 171 0000 0346     		mov	r3, r0
+  58:project/src/usmart_str.c **** 
+ 172              		.loc 1 58 5 is_stmt 1 view .LVU44
+ 173              	.LVL11:
+  60:project/src/usmart_str.c ****     {
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccGh0LbN.s 			page 9
+
+
+ 174              		.loc 1 60 5 view .LVU45
+  58:project/src/usmart_str.c **** 
+ 175              		.loc 1 58 13 is_stmt 0 view .LVU46
+ 176 0002 0020     		movs	r0, #0
+ 177              	.LVL12:
+  60:project/src/usmart_str.c ****     {
+ 178              		.loc 1 60 11 view .LVU47
+ 179 0004 02E0     		b	.L13
+ 180              	.LVL13:
+ 181              	.L14:
+  62:project/src/usmart_str.c ****         str++;
+ 182              		.loc 1 62 9 is_stmt 1 view .LVU48
+  62:project/src/usmart_str.c ****         str++;
+ 183              		.loc 1 62 12 is_stmt 0 view .LVU49
+ 184 0006 0130     		adds	r0, r0, #1
+ 185              	.LVL14:
+  62:project/src/usmart_str.c ****         str++;
+ 186              		.loc 1 62 12 view .LVU50
+ 187 0008 C0B2     		uxtb	r0, r0
+ 188              	.LVL15:
+  63:project/src/usmart_str.c ****     }
+ 189              		.loc 1 63 9 is_stmt 1 view .LVU51
+  63:project/src/usmart_str.c ****     }
+ 190              		.loc 1 63 12 is_stmt 0 view .LVU52
+ 191 000a 0133     		adds	r3, r3, #1
+ 192              	.LVL16:
+ 193              	.L13:
+  60:project/src/usmart_str.c ****     {
+ 194              		.loc 1 60 17 is_stmt 1 view .LVU53
+  60:project/src/usmart_str.c ****     {
+ 195              		.loc 1 60 12 is_stmt 0 view .LVU54
+ 196 000c 1A78     		ldrb	r2, [r3]	@ zero_extendqisi2
+  60:project/src/usmart_str.c ****     {
+ 197              		.loc 1 60 17 view .LVU55
+ 198 000e 002A     		cmp	r2, #0
+ 199 0010 F9D1     		bne	.L14
+  66:project/src/usmart_str.c **** }
+ 200              		.loc 1 66 5 is_stmt 1 view .LVU56
+  67:project/src/usmart_str.c **** 
+ 201              		.loc 1 67 1 is_stmt 0 view .LVU57
+ 202 0012 7047     		bx	lr
+ 203              		.cfi_endproc
+ 204              	.LFE139:
+ 206              		.section	.text.usmart_pow,"ax",%progbits
+ 207              		.align	1
+ 208              		.global	usmart_pow
+ 209              		.syntax unified
+ 210              		.thumb
+ 211              		.thumb_func
+ 213              	usmart_pow:
+ 214              	.LVL17:
+ 215              	.LFB140:
+  76:project/src/usmart_str.c ****     uint32_t res = 1;
+ 216              		.loc 1 76 1 is_stmt 1 view -0
+ 217              		.cfi_startproc
+ 218              		@ args = 0, pretend = 0, frame = 0
+ 219              		@ frame_needed = 0, uses_anonymous_args = 0
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccGh0LbN.s 			page 10
+
+
+ 220              		@ link register save eliminated.
+  76:project/src/usmart_str.c ****     uint32_t res = 1;
+ 221              		.loc 1 76 1 is_stmt 0 view .LVU59
+ 222 0000 0346     		mov	r3, r0
+  77:project/src/usmart_str.c **** 
+ 223              		.loc 1 77 5 is_stmt 1 view .LVU60
+ 224              	.LVL18:
+  79:project/src/usmart_str.c ****     {
+ 225              		.loc 1 79 5 view .LVU61
+  77:project/src/usmart_str.c **** 
+ 226              		.loc 1 77 14 is_stmt 0 view .LVU62
+ 227 0002 0120     		movs	r0, #1
+ 228              	.LVL19:
+  79:project/src/usmart_str.c ****     {
+ 229              		.loc 1 79 11 view .LVU63
+ 230 0004 03E0     		b	.L16
+ 231              	.LVL20:
+ 232              	.L17:
+  81:project/src/usmart_str.c ****         b--;
+ 233              		.loc 1 81 9 is_stmt 1 view .LVU64
+  81:project/src/usmart_str.c ****         b--;
+ 234              		.loc 1 81 13 is_stmt 0 view .LVU65
+ 235 0006 03FB00F0 		mul	r0, r3, r0
+ 236              	.LVL21:
+  82:project/src/usmart_str.c ****     }
+ 237              		.loc 1 82 9 is_stmt 1 view .LVU66
+  82:project/src/usmart_str.c ****     }
+ 238              		.loc 1 82 10 is_stmt 0 view .LVU67
+ 239 000a 0139     		subs	r1, r1, #1
+ 240              	.LVL22:
+  82:project/src/usmart_str.c ****     }
+ 241              		.loc 1 82 10 view .LVU68
+ 242 000c C9B2     		uxtb	r1, r1
+ 243              	.LVL23:
+ 244              	.L16:
+  79:project/src/usmart_str.c ****     {
+ 245              		.loc 1 79 12 is_stmt 1 view .LVU69
+ 246 000e 0029     		cmp	r1, #0
+ 247 0010 F9D1     		bne	.L17
+  85:project/src/usmart_str.c **** }
+ 248              		.loc 1 85 5 view .LVU70
+  86:project/src/usmart_str.c **** 
+ 249              		.loc 1 86 1 is_stmt 0 view .LVU71
+ 250 0012 7047     		bx	lr
+ 251              		.cfi_endproc
+ 252              	.LFE140:
+ 254              		.section	.text.usmart_str2num,"ax",%progbits
+ 255              		.align	1
+ 256              		.global	usmart_str2num
+ 257              		.syntax unified
+ 258              		.thumb
+ 259              		.thumb_func
+ 261              	usmart_str2num:
+ 262              	.LVL24:
+ 263              	.LFB141:
+ 100:project/src/usmart_str.c ****     uint32_t t;
+ 264              		.loc 1 100 1 is_stmt 1 view -0
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccGh0LbN.s 			page 11
+
+
+ 265              		.cfi_startproc
+ 266              		@ args = 0, pretend = 0, frame = 0
+ 267              		@ frame_needed = 0, uses_anonymous_args = 0
+ 100:project/src/usmart_str.c ****     uint32_t t;
+ 268              		.loc 1 100 1 is_stmt 0 view .LVU73
+ 269 0000 2DE9F843 		push	{r3, r4, r5, r6, r7, r8, r9, lr}
+ 270              	.LCFI0:
+ 271              		.cfi_def_cfa_offset 32
+ 272              		.cfi_offset 3, -32
+ 273              		.cfi_offset 4, -28
+ 274              		.cfi_offset 5, -24
+ 275              		.cfi_offset 6, -20
+ 276              		.cfi_offset 7, -16
+ 277              		.cfi_offset 8, -12
+ 278              		.cfi_offset 9, -8
+ 279              		.cfi_offset 14, -4
+ 280 0004 0646     		mov	r6, r0
+ 281 0006 0F46     		mov	r7, r1
+ 101:project/src/usmart_str.c ****     uint8_t bnum = 0;           /* 数字位数 */
+ 282              		.loc 1 101 5 is_stmt 1 view .LVU74
+ 102:project/src/usmart_str.c ****     char *p;
+ 283              		.loc 1 102 5 view .LVU75
+ 284              	.LVL25:
+ 103:project/src/usmart_str.c ****     uint8_t hexdec = 10;        /* 默认10进制 */
+ 285              		.loc 1 103 5 view .LVU76
+ 104:project/src/usmart_str.c ****     uint8_t sign = 0;           /* 负数标志 */
+ 286              		.loc 1 104 5 view .LVU77
+ 105:project/src/usmart_str.c **** 
+ 287              		.loc 1 105 5 view .LVU78
+ 107:project/src/usmart_str.c ****     *res = 0;
+ 288              		.loc 1 107 5 view .LVU79
+ 108:project/src/usmart_str.c **** 
+ 289              		.loc 1 108 5 view .LVU80
+ 108:project/src/usmart_str.c **** 
+ 290              		.loc 1 108 10 is_stmt 0 view .LVU81
+ 291 0008 0023     		movs	r3, #0
+ 292 000a 0B60     		str	r3, [r1]
+ 111:project/src/usmart_str.c ****     {
+ 293              		.loc 1 111 5 is_stmt 1 view .LVU82
+ 111:project/src/usmart_str.c ****     {
+ 294              		.loc 1 111 9 is_stmt 0 view .LVU83
+ 295 000c 0378     		ldrb	r3, [r0]	@ zero_extendqisi2
+ 111:project/src/usmart_str.c ****     {
+ 296              		.loc 1 111 8 view .LVU84
+ 297 000e 2D2B     		cmp	r3, #45
+ 298 0010 08D0     		beq	.L41
+ 116:project/src/usmart_str.c ****     {
+ 299              		.loc 1 116 10 is_stmt 1 view .LVU85
+ 116:project/src/usmart_str.c ****     {
+ 300              		.loc 1 116 13 is_stmt 0 view .LVU86
+ 301 0012 2B2B     		cmp	r3, #43
+ 302 0014 0AD1     		bne	.L33
+ 118:project/src/usmart_str.c ****     }
+ 303              		.loc 1 118 9 is_stmt 1 view .LVU87
+ 118:project/src/usmart_str.c ****     }
+ 304              		.loc 1 118 10 is_stmt 0 view .LVU88
+ 305 0016 411C     		adds	r1, r0, #1
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccGh0LbN.s 			page 12
+
+
+ 306              	.LVL26:
+ 105:project/src/usmart_str.c **** 
+ 307              		.loc 1 105 13 view .LVU89
+ 308 0018 4FF00009 		mov	r9, #0
+ 309              	.LVL27:
+ 310              	.L20:
+ 105:project/src/usmart_str.c **** 
+ 311              		.loc 1 105 13 view .LVU90
+ 312 001c 4FF00A08 		mov	r8, #10
+ 313 0020 0024     		movs	r4, #0
+ 314 0022 0EE0     		b	.L24
+ 315              	.LVL28:
+ 316              	.L41:
+ 113:project/src/usmart_str.c ****         p++;
+ 317              		.loc 1 113 9 is_stmt 1 view .LVU91
+ 114:project/src/usmart_str.c ****     }
+ 318              		.loc 1 114 9 view .LVU92
+ 114:project/src/usmart_str.c ****     }
+ 319              		.loc 1 114 10 is_stmt 0 view .LVU93
+ 320 0024 411C     		adds	r1, r0, #1
+ 321              	.LVL29:
+ 113:project/src/usmart_str.c ****         p++;
+ 322              		.loc 1 113 14 view .LVU94
+ 323 0026 4FF00109 		mov	r9, #1
+ 324 002a F7E7     		b	.L20
+ 325              	.LVL30:
+ 326              	.L33:
+ 107:project/src/usmart_str.c ****     *res = 0;
+ 327              		.loc 1 107 7 view .LVU95
+ 328 002c 0146     		mov	r1, r0
+ 329              	.LVL31:
+ 105:project/src/usmart_str.c **** 
+ 330              		.loc 1 105 13 view .LVU96
+ 331 002e 4FF00009 		mov	r9, #0
+ 332 0032 F3E7     		b	.L20
+ 333              	.LVL32:
+ 334              	.L21:
+ 126:project/src/usmart_str.c ****             {
+ 335              		.loc 1 126 13 is_stmt 1 view .LVU97
+ 126:project/src/usmart_str.c ****             {
+ 336              		.loc 1 126 16 is_stmt 0 view .LVU98
+ 337 0034 402A     		cmp	r2, #64
+ 338 0036 01D9     		bls	.L23
+ 128:project/src/usmart_str.c ****             }
+ 339              		.loc 1 128 24 view .LVU99
+ 340 0038 4FF01008 		mov	r8, #16
+ 341              	.LVL33:
+ 342              	.L23:
+ 130:project/src/usmart_str.c ****         }
+ 343              		.loc 1 130 13 is_stmt 1 view .LVU100
+ 130:project/src/usmart_str.c ****         }
+ 344              		.loc 1 130 17 is_stmt 0 view .LVU101
+ 345 003c 0134     		adds	r4, r4, #1
+ 346              	.LVL34:
+ 130:project/src/usmart_str.c ****         }
+ 347              		.loc 1 130 17 view .LVU102
+ 348 003e E4B2     		uxtb	r4, r4
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccGh0LbN.s 			page 13
+
+
+ 349              	.LVL35:
+ 140:project/src/usmart_str.c ****     }
+ 350              		.loc 1 140 9 is_stmt 1 view .LVU103
+ 140:project/src/usmart_str.c ****     }
+ 351              		.loc 1 140 10 is_stmt 0 view .LVU104
+ 352 0040 0131     		adds	r1, r1, #1
+ 353              	.LVL36:
+ 122:project/src/usmart_str.c ****     {
+ 354              		.loc 1 122 11 is_stmt 1 view .LVU105
+ 355              	.L24:
+ 122:project/src/usmart_str.c ****     {
+ 356              		.loc 1 122 5 view .LVU106
+ 124:project/src/usmart_str.c ****         {
+ 357              		.loc 1 124 9 view .LVU107
+ 124:project/src/usmart_str.c ****         {
+ 358              		.loc 1 124 14 is_stmt 0 view .LVU108
+ 359 0042 0A78     		ldrb	r2, [r1]	@ zero_extendqisi2
+ 124:project/src/usmart_str.c ****         {
+ 360              		.loc 1 124 24 view .LVU109
+ 361 0044 A2F13003 		sub	r3, r2, #48
+ 362 0048 DBB2     		uxtb	r3, r3
+ 124:project/src/usmart_str.c ****         {
+ 363              		.loc 1 124 12 view .LVU110
+ 364 004a 092B     		cmp	r3, #9
+ 365 004c F2D9     		bls	.L21
+ 124:project/src/usmart_str.c ****         {
+ 366              		.loc 1 124 52 discriminator 1 view .LVU111
+ 367 004e A2F14103 		sub	r3, r2, #65
+ 368 0052 DBB2     		uxtb	r3, r3
+ 124:project/src/usmart_str.c ****         {
+ 369              		.loc 1 124 38 discriminator 1 view .LVU112
+ 370 0054 052B     		cmp	r3, #5
+ 371 0056 EDD9     		bls	.L21
+ 124:project/src/usmart_str.c ****         {
+ 372              		.loc 1 124 66 discriminator 2 view .LVU113
+ 373 0058 582A     		cmp	r2, #88
+ 374 005a 01D1     		bne	.L22
+ 124:project/src/usmart_str.c ****         {
+ 375              		.loc 1 124 80 discriminator 3 view .LVU114
+ 376 005c 012C     		cmp	r4, #1
+ 377 005e E9D0     		beq	.L21
+ 378              	.L22:
+ 132:project/src/usmart_str.c ****         {
+ 379              		.loc 1 132 14 is_stmt 1 view .LVU115
+ 132:project/src/usmart_str.c ****         {
+ 380              		.loc 1 132 17 is_stmt 0 view .LVU116
+ 381 0060 002A     		cmp	r2, #0
+ 382 0062 36D1     		bne	.L35
+ 143:project/src/usmart_str.c ****     if (sign)
+ 383              		.loc 1 143 5 is_stmt 1 view .LVU117
+ 384              	.LVL37:
+ 144:project/src/usmart_str.c ****     {
+ 385              		.loc 1 144 5 view .LVU118
+ 144:project/src/usmart_str.c ****     {
+ 386              		.loc 1 144 8 is_stmt 0 view .LVU119
+ 387 0064 B9F1000F 		cmp	r9, #0
+ 388 0068 00D0     		beq	.L26
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccGh0LbN.s 			page 14
+
+
+ 146:project/src/usmart_str.c ****     }
+ 389              		.loc 1 146 9 is_stmt 1 view .LVU120
+ 146:project/src/usmart_str.c ****     }
+ 390              		.loc 1 146 10 is_stmt 0 view .LVU121
+ 391 006a 0136     		adds	r6, r6, #1
+ 392              	.L26:
+ 393              	.LVL38:
+ 149:project/src/usmart_str.c ****     {
+ 394              		.loc 1 149 5 is_stmt 1 view .LVU122
+ 149:project/src/usmart_str.c ****     {
+ 395              		.loc 1 149 8 is_stmt 0 view .LVU123
+ 396 006c B8F1100F 		cmp	r8, #16
+ 397 0070 03D0     		beq	.L42
+ 165:project/src/usmart_str.c ****     {
+ 398              		.loc 1 165 10 is_stmt 1 view .LVU124
+ 165:project/src/usmart_str.c ****     {
+ 399              		.loc 1 165 13 is_stmt 0 view .LVU125
+ 400 0072 DCB9     		cbnz	r4, .L32
+ 167:project/src/usmart_str.c ****     }
+ 401              		.loc 1 167 16 view .LVU126
+ 402 0074 4FF00409 		mov	r9, #4
+ 403              	.LVL39:
+ 167:project/src/usmart_str.c ****     }
+ 404              		.loc 1 167 16 view .LVU127
+ 405 0078 2DE0     		b	.L25
+ 406              	.LVL40:
+ 407              	.L42:
+ 151:project/src/usmart_str.c ****         {
+ 408              		.loc 1 151 9 is_stmt 1 view .LVU128
+ 151:project/src/usmart_str.c ****         {
+ 409              		.loc 1 151 12 is_stmt 0 view .LVU129
+ 410 007a 022C     		cmp	r4, #2
+ 411 007c 2ED9     		bls	.L36
+ 155:project/src/usmart_str.c ****         {
+ 412              		.loc 1 155 9 is_stmt 1 view .LVU130
+ 155:project/src/usmart_str.c ****         {
+ 413              		.loc 1 155 13 is_stmt 0 view .LVU131
+ 414 007e 3378     		ldrb	r3, [r6]	@ zero_extendqisi2
+ 155:project/src/usmart_str.c ****         {
+ 415              		.loc 1 155 12 view .LVU132
+ 416 0080 302B     		cmp	r3, #48
+ 417 0082 2ED1     		bne	.L37
+ 155:project/src/usmart_str.c ****         {
+ 418              		.loc 1 155 26 discriminator 1 view .LVU133
+ 419 0084 7378     		ldrb	r3, [r6, #1]	@ zero_extendqisi2
+ 155:project/src/usmart_str.c ****         {
+ 420              		.loc 1 155 23 discriminator 1 view .LVU134
+ 421 0086 582B     		cmp	r3, #88
+ 422 0088 2ED1     		bne	.L38
+ 157:project/src/usmart_str.c ****             bnum -= 2;
+ 423              		.loc 1 157 13 is_stmt 1 view .LVU135
+ 157:project/src/usmart_str.c ****             bnum -= 2;
+ 424              		.loc 1 157 15 is_stmt 0 view .LVU136
+ 425 008a 0236     		adds	r6, r6, #2
+ 426              	.LVL41:
+ 158:project/src/usmart_str.c ****         }
+ 427              		.loc 1 158 13 is_stmt 1 view .LVU137
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccGh0LbN.s 			page 15
+
+
+ 158:project/src/usmart_str.c ****         }
+ 428              		.loc 1 158 18 is_stmt 0 view .LVU138
+ 429 008c 023C     		subs	r4, r4, #2
+ 430              	.LVL42:
+ 158:project/src/usmart_str.c ****         }
+ 431              		.loc 1 158 18 view .LVU139
+ 432 008e E4B2     		uxtb	r4, r4
+ 433              	.LVL43:
+ 158:project/src/usmart_str.c ****         }
+ 434              		.loc 1 158 18 view .LVU140
+ 435 0090 0CE0     		b	.L32
+ 436              	.LVL44:
+ 437              	.L30:
+ 183:project/src/usmart_str.c ****         }
+ 438              		.loc 1 183 13 is_stmt 1 view .LVU141
+ 183:project/src/usmart_str.c ****         }
+ 439              		.loc 1 183 26 is_stmt 0 view .LVU142
+ 440 0092 A3F13705 		sub	r5, r3, #55
+ 441              	.L31:
+ 442              	.LVL45:
+ 186:project/src/usmart_str.c ****         p++;
+ 443              		.loc 1 186 9 is_stmt 1 view .LVU143
+ 186:project/src/usmart_str.c ****         p++;
+ 444              		.loc 1 186 21 is_stmt 0 view .LVU144
+ 445 0096 2146     		mov	r1, r4
+ 446 0098 4046     		mov	r0, r8
+ 447 009a FFF7FEFF 		bl	usmart_pow
+ 448              	.LVL46:
+ 186:project/src/usmart_str.c ****         p++;
+ 449              		.loc 1 186 9 discriminator 1 view .LVU145
+ 450 009e 3B68     		ldr	r3, [r7]
+ 186:project/src/usmart_str.c ****         p++;
+ 451              		.loc 1 186 14 discriminator 1 view .LVU146
+ 452 00a0 05FB0030 		mla	r0, r5, r0, r3
+ 453 00a4 3860     		str	r0, [r7]
+ 187:project/src/usmart_str.c **** 
+ 454              		.loc 1 187 9 is_stmt 1 view .LVU147
+ 455              	.LVL47:
+ 189:project/src/usmart_str.c ****         {
+ 456              		.loc 1 189 9 view .LVU148
+ 189:project/src/usmart_str.c ****         {
+ 457              		.loc 1 189 13 is_stmt 0 view .LVU149
+ 458 00a6 16F8013F 		ldrb	r3, [r6, #1]!	@ zero_extendqisi2
+ 459              	.LVL48:
+ 189:project/src/usmart_str.c ****         {
+ 460              		.loc 1 189 12 view .LVU150
+ 461 00aa 5BB1     		cbz	r3, .L43
+ 462              	.LVL49:
+ 463              	.L32:
+ 170:project/src/usmart_str.c ****     {
+ 464              		.loc 1 170 5 is_stmt 1 view .LVU151
+ 172:project/src/usmart_str.c ****         {
+ 465              		.loc 1 172 9 view .LVU152
+ 172:project/src/usmart_str.c ****         {
+ 466              		.loc 1 172 12 is_stmt 0 view .LVU153
+ 467 00ac 0CB1     		cbz	r4, .L29
+ 174:project/src/usmart_str.c ****         }
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccGh0LbN.s 			page 16
+
+
+ 468              		.loc 1 174 13 is_stmt 1 view .LVU154
+ 174:project/src/usmart_str.c ****         }
+ 469              		.loc 1 174 17 is_stmt 0 view .LVU155
+ 470 00ae 013C     		subs	r4, r4, #1
+ 471              	.LVL50:
+ 174:project/src/usmart_str.c ****         }
+ 472              		.loc 1 174 17 view .LVU156
+ 473 00b0 E4B2     		uxtb	r4, r4
+ 474              	.LVL51:
+ 475              	.L29:
+ 177:project/src/usmart_str.c ****         {
+ 476              		.loc 1 177 9 is_stmt 1 view .LVU157
+ 177:project/src/usmart_str.c ****         {
+ 477              		.loc 1 177 13 is_stmt 0 view .LVU158
+ 478 00b2 3378     		ldrb	r3, [r6]	@ zero_extendqisi2
+ 177:project/src/usmart_str.c ****         {
+ 479              		.loc 1 177 23 view .LVU159
+ 480 00b4 A3F13002 		sub	r2, r3, #48
+ 481 00b8 D2B2     		uxtb	r2, r2
+ 177:project/src/usmart_str.c ****         {
+ 482              		.loc 1 177 12 view .LVU160
+ 483 00ba 092A     		cmp	r2, #9
+ 484 00bc E9D8     		bhi	.L30
+ 179:project/src/usmart_str.c ****         }
+ 485              		.loc 1 179 13 is_stmt 1 view .LVU161
+ 179:project/src/usmart_str.c ****         }
+ 486              		.loc 1 179 20 is_stmt 0 view .LVU162
+ 487 00be A3F13005 		sub	r5, r3, #48
+ 488              	.LVL52:
+ 179:project/src/usmart_str.c ****         }
+ 489              		.loc 1 179 20 view .LVU163
+ 490 00c2 E8E7     		b	.L31
+ 491              	.L43:
+ 195:project/src/usmart_str.c ****     {
+ 492              		.loc 1 195 5 is_stmt 1 view .LVU164
+ 195:project/src/usmart_str.c ****     {
+ 493              		.loc 1 195 8 is_stmt 0 view .LVU165
+ 494 00c4 B9F1000F 		cmp	r9, #0
+ 495 00c8 05D0     		beq	.L25
+ 197:project/src/usmart_str.c ****     }
+ 496              		.loc 1 197 9 is_stmt 1 view .LVU166
+ 197:project/src/usmart_str.c ****     }
+ 497              		.loc 1 197 16 is_stmt 0 view .LVU167
+ 498 00ca 4042     		rsbs	r0, r0, #0
+ 197:project/src/usmart_str.c ****     }
+ 499              		.loc 1 197 14 view .LVU168
+ 500 00cc 3860     		str	r0, [r7]
+ 200:project/src/usmart_str.c **** }
+ 501              		.loc 1 200 12 view .LVU169
+ 502 00ce 9946     		mov	r9, r3
+ 503              	.LVL53:
+ 200:project/src/usmart_str.c **** }
+ 504              		.loc 1 200 12 view .LVU170
+ 505 00d0 01E0     		b	.L25
+ 506              	.LVL54:
+ 507              	.L35:
+ 138:project/src/usmart_str.c ****         }
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccGh0LbN.s 			page 17
+
+
+ 508              		.loc 1 138 20 view .LVU171
+ 509 00d2 4FF00109 		mov	r9, #1
+ 510              	.LVL55:
+ 511              	.L25:
+ 201:project/src/usmart_str.c **** 
+ 512              		.loc 1 201 1 view .LVU172
+ 513 00d6 4846     		mov	r0, r9
+ 514 00d8 BDE8F883 		pop	{r3, r4, r5, r6, r7, r8, r9, pc}
+ 515              	.LVL56:
+ 516              	.L36:
+ 153:project/src/usmart_str.c ****         }
+ 517              		.loc 1 153 20 view .LVU173
+ 518 00dc 4FF00209 		mov	r9, #2
+ 519              	.LVL57:
+ 153:project/src/usmart_str.c ****         }
+ 520              		.loc 1 153 20 view .LVU174
+ 521 00e0 F9E7     		b	.L25
+ 522              	.LVL58:
+ 523              	.L37:
+ 162:project/src/usmart_str.c ****         }
+ 524              		.loc 1 162 20 view .LVU175
+ 525 00e2 4FF00309 		mov	r9, #3
+ 526              	.LVL59:
+ 162:project/src/usmart_str.c ****         }
+ 527              		.loc 1 162 20 view .LVU176
+ 528 00e6 F6E7     		b	.L25
+ 529              	.LVL60:
+ 530              	.L38:
+ 162:project/src/usmart_str.c ****         }
+ 531              		.loc 1 162 20 view .LVU177
+ 532 00e8 4FF00309 		mov	r9, #3
+ 533              	.LVL61:
+ 162:project/src/usmart_str.c ****         }
+ 534              		.loc 1 162 20 view .LVU178
+ 535 00ec F3E7     		b	.L25
+ 536              		.cfi_endproc
+ 537              	.LFE141:
+ 539              		.section	.text.usmart_get_cmdname,"ax",%progbits
+ 540              		.align	1
+ 541              		.global	usmart_get_cmdname
+ 542              		.syntax unified
+ 543              		.thumb
+ 544              		.thumb_func
+ 546              	usmart_get_cmdname:
+ 547              	.LVL62:
+ 548              	.LFB142:
+ 212:project/src/usmart_str.c ****     if (maxlen == 0)
+ 549              		.loc 1 212 1 is_stmt 1 view -0
+ 550              		.cfi_startproc
+ 551              		@ args = 0, pretend = 0, frame = 0
+ 552              		@ frame_needed = 0, uses_anonymous_args = 0
+ 213:project/src/usmart_str.c ****     {
+ 553              		.loc 1 213 5 view .LVU180
+ 213:project/src/usmart_str.c ****     {
+ 554              		.loc 1 213 8 is_stmt 0 view .LVU181
+ 555 0000 EBB1     		cbz	r3, .L50
+ 212:project/src/usmart_str.c ****     if (maxlen == 0)
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccGh0LbN.s 			page 18
+
+
+ 556              		.loc 1 212 1 view .LVU182
+ 557 0002 10B5     		push	{r4, lr}
+ 558              	.LCFI1:
+ 559              		.cfi_def_cfa_offset 8
+ 560              		.cfi_offset 4, -8
+ 561              		.cfi_offset 14, -4
+ 562 0004 1C46     		mov	r4, r3
+ 218:project/src/usmart_str.c **** 
+ 563              		.loc 1 218 5 is_stmt 1 view .LVU183
+ 218:project/src/usmart_str.c **** 
+ 564              		.loc 1 218 11 is_stmt 0 view .LVU184
+ 565 0006 0023     		movs	r3, #0
+ 566              	.LVL63:
+ 218:project/src/usmart_str.c **** 
+ 567              		.loc 1 218 11 view .LVU185
+ 568 0008 1370     		strb	r3, [r2]
+ 220:project/src/usmart_str.c ****     {
+ 569              		.loc 1 220 5 is_stmt 1 view .LVU186
+ 220:project/src/usmart_str.c ****     {
+ 570              		.loc 1 220 11 is_stmt 0 view .LVU187
+ 571 000a 05E0     		b	.L46
+ 572              	.L47:
+ 228:project/src/usmart_str.c ****         str++;
+ 573              		.loc 1 228 9 is_stmt 1 view .LVU188
+ 228:project/src/usmart_str.c ****         str++;
+ 574              		.loc 1 228 18 is_stmt 0 view .LVU189
+ 575 000c 01F8013B 		strb	r3, [r1], #1
+ 576              	.LVL64:
+ 229:project/src/usmart_str.c ****         cmdname++;
+ 577              		.loc 1 229 9 is_stmt 1 view .LVU190
+ 229:project/src/usmart_str.c ****         cmdname++;
+ 578              		.loc 1 229 12 is_stmt 0 view .LVU191
+ 579 0010 0130     		adds	r0, r0, #1
+ 580              	.LVL65:
+ 230:project/src/usmart_str.c ****         (*nlen)++;
+ 581              		.loc 1 230 9 is_stmt 1 view .LVU192
+ 231:project/src/usmart_str.c ****     }
+ 582              		.loc 1 231 9 view .LVU193
+ 231:project/src/usmart_str.c ****     }
+ 583              		.loc 1 231 10 is_stmt 0 view .LVU194
+ 584 0012 1378     		ldrb	r3, [r2]	@ zero_extendqisi2
+ 231:project/src/usmart_str.c ****     }
+ 585              		.loc 1 231 16 view .LVU195
+ 586 0014 0133     		adds	r3, r3, #1
+ 587 0016 1370     		strb	r3, [r2]
+ 588              	.L46:
+ 220:project/src/usmart_str.c ****     {
+ 589              		.loc 1 220 24 is_stmt 1 view .LVU196
+ 220:project/src/usmart_str.c ****     {
+ 590              		.loc 1 220 12 is_stmt 0 view .LVU197
+ 591 0018 0378     		ldrb	r3, [r0]	@ zero_extendqisi2
+ 220:project/src/usmart_str.c ****     {
+ 592              		.loc 1 220 24 view .LVU198
+ 593 001a 202B     		cmp	r3, #32
+ 594 001c 0CD0     		beq	.L48
+ 220:project/src/usmart_str.c ****     {
+ 595              		.loc 1 220 24 discriminator 1 view .LVU199
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccGh0LbN.s 			page 19
+
+
+ 596 001e 5BB1     		cbz	r3, .L48
+ 222:project/src/usmart_str.c ****         {
+ 597              		.loc 1 222 9 is_stmt 1 view .LVU200
+ 222:project/src/usmart_str.c ****         {
+ 598              		.loc 1 222 13 is_stmt 0 view .LVU201
+ 599 0020 92F800E0 		ldrb	lr, [r2]	@ zero_extendqisi2
+ 222:project/src/usmart_str.c ****         {
+ 600              		.loc 1 222 22 view .LVU202
+ 601 0024 04F1FF3C 		add	ip, r4, #-1
+ 602 0028 5FFA8CFC 		uxtb	ip, ip
+ 222:project/src/usmart_str.c ****         {
+ 603              		.loc 1 222 12 view .LVU203
+ 604 002c E645     		cmp	lr, ip
+ 605 002e EDD3     		bcc	.L47
+ 224:project/src/usmart_str.c ****             return 1;           /* 指令太长 */
+ 606              		.loc 1 224 13 is_stmt 1 view .LVU204
+ 224:project/src/usmart_str.c ****             return 1;           /* 指令太长 */
+ 607              		.loc 1 224 22 is_stmt 0 view .LVU205
+ 608 0030 0023     		movs	r3, #0
+ 609 0032 0B70     		strb	r3, [r1]
+ 225:project/src/usmart_str.c ****         }
+ 610              		.loc 1 225 13 is_stmt 1 view .LVU206
+ 225:project/src/usmart_str.c ****         }
+ 611              		.loc 1 225 20 is_stmt 0 view .LVU207
+ 612 0034 0120     		movs	r0, #1
+ 613              	.LVL66:
+ 225:project/src/usmart_str.c ****         }
+ 614              		.loc 1 225 20 view .LVU208
+ 615 0036 01E0     		b	.L45
+ 616              	.LVL67:
+ 617              	.L48:
+ 234:project/src/usmart_str.c ****     return 0;
+ 618              		.loc 1 234 5 is_stmt 1 view .LVU209
+ 234:project/src/usmart_str.c ****     return 0;
+ 619              		.loc 1 234 14 is_stmt 0 view .LVU210
+ 620 0038 0020     		movs	r0, #0
+ 621              	.LVL68:
+ 234:project/src/usmart_str.c ****     return 0;
+ 622              		.loc 1 234 14 view .LVU211
+ 623 003a 0870     		strb	r0, [r1]
+ 235:project/src/usmart_str.c **** }
+ 624              		.loc 1 235 5 is_stmt 1 view .LVU212
+ 625              	.L45:
+ 236:project/src/usmart_str.c **** 
+ 626              		.loc 1 236 1 is_stmt 0 view .LVU213
+ 627 003c 10BD     		pop	{r4, pc}
+ 628              	.LVL69:
+ 629              	.L50:
+ 630              	.LCFI2:
+ 631              		.cfi_def_cfa_offset 0
+ 632              		.cfi_restore 4
+ 633              		.cfi_restore 14
+ 215:project/src/usmart_str.c ****     }
+ 634              		.loc 1 215 16 view .LVU214
+ 635 003e 0120     		movs	r0, #1
+ 636              	.LVL70:
+ 236:project/src/usmart_str.c **** 
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccGh0LbN.s 			page 20
+
+
+ 637              		.loc 1 236 1 view .LVU215
+ 638 0040 7047     		bx	lr
+ 639              		.cfi_endproc
+ 640              	.LFE142:
+ 642              		.section	.rodata.usmart_get_fname.str1.4,"aMS",%progbits,1
+ 643              		.align	2
+ 644              	.LC0:
+ 645 0000 766F6964 		.ascii	"void\000"
+ 645      00
+ 646              		.section	.text.usmart_get_fname,"ax",%progbits
+ 647              		.align	1
+ 648              		.global	usmart_get_fname
+ 649              		.syntax unified
+ 650              		.thumb
+ 651              		.thumb_func
+ 653              	usmart_get_fname:
+ 654              	.LVL71:
+ 655              	.LFB144:
+ 254:project/src/usmart_str.c **** 
+ 255:project/src/usmart_str.c **** /**
+ 256:project/src/usmart_str.c ****  * @brief       从str中得到函数名
+ 257:project/src/usmart_str.c ****  * @param       str: 源字符串指针
+ 258:project/src/usmart_str.c ****  *              fname: 获取到的函数名
+ 259:project/src/usmart_str.c ****  *              pnum: 函数参数个数
+ 260:project/src/usmart_str.c ****  *              rval: 是否需要显示返回值(0,不需要;1,需要)
+ 261:project/src/usmart_str.c ****  * @retval      0, 成功; 其他, 错误代码
+ 262:project/src/usmart_str.c ****  */
+ 263:project/src/usmart_str.c **** uint8_t usmart_get_fname(char *str, char *fname, uint8_t *pnum, uint8_t *rval)
+ 264:project/src/usmart_str.c **** {
+ 656              		.loc 1 264 1 is_stmt 1 view -0
+ 657              		.cfi_startproc
+ 658              		@ args = 0, pretend = 0, frame = 8
+ 659              		@ frame_needed = 0, uses_anonymous_args = 0
+ 660              		.loc 1 264 1 is_stmt 0 view .LVU217
+ 661 0000 2DE9F047 		push	{r4, r5, r6, r7, r8, r9, r10, lr}
+ 662              	.LCFI3:
+ 663              		.cfi_def_cfa_offset 32
+ 664              		.cfi_offset 4, -32
+ 665              		.cfi_offset 5, -28
+ 666              		.cfi_offset 6, -24
+ 667              		.cfi_offset 7, -20
+ 668              		.cfi_offset 8, -16
+ 669              		.cfi_offset 9, -12
+ 670              		.cfi_offset 10, -8
+ 671              		.cfi_offset 14, -4
+ 672 0004 82B0     		sub	sp, sp, #8
+ 673              	.LCFI4:
+ 674              		.cfi_def_cfa_offset 40
+ 675 0006 0546     		mov	r5, r0
+ 676 0008 0F46     		mov	r7, r1
+ 677 000a 9046     		mov	r8, r2
+ 678 000c 9946     		mov	r9, r3
+ 265:project/src/usmart_str.c ****     uint8_t res;
+ 679              		.loc 1 265 5 is_stmt 1 view .LVU218
+ 266:project/src/usmart_str.c ****     uint8_t fover = 0;          /* 括号深度 */
+ 680              		.loc 1 266 5 view .LVU219
+ 681              	.LVL72:
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccGh0LbN.s 			page 21
+
+
+ 267:project/src/usmart_str.c ****     char *strtemp;
+ 682              		.loc 1 267 5 view .LVU220
+ 268:project/src/usmart_str.c ****     uint8_t offset = 0;
+ 683              		.loc 1 268 5 view .LVU221
+ 269:project/src/usmart_str.c ****     uint8_t parmnum = 0;
+ 684              		.loc 1 269 5 view .LVU222
+ 270:project/src/usmart_str.c ****     uint8_t temp = 1;
+ 685              		.loc 1 270 5 view .LVU223
+ 271:project/src/usmart_str.c ****     char fpname[6];             /* void + X + '\0' */
+ 686              		.loc 1 271 5 view .LVU224
+ 272:project/src/usmart_str.c ****     uint8_t fplcnt = 0;         /* 第一个参数的长度计数器 */
+ 687              		.loc 1 272 5 view .LVU225
+ 273:project/src/usmart_str.c ****     uint8_t pcnt = 0;           /* 参数计数器 */
+ 688              		.loc 1 273 5 view .LVU226
+ 274:project/src/usmart_str.c ****     uint8_t nchar;
+ 689              		.loc 1 274 5 view .LVU227
+ 275:project/src/usmart_str.c ****     uint8_t fname_idx = 0;
+ 690              		.loc 1 275 5 view .LVU228
+ 276:project/src/usmart_str.c **** 
+ 277:project/src/usmart_str.c ****     *rval = 0;
+ 691              		.loc 1 277 5 view .LVU229
+ 692              		.loc 1 277 11 is_stmt 0 view .LVU230
+ 693 000e 0024     		movs	r4, #0
+ 694 0010 1C70     		strb	r4, [r3]
+ 278:project/src/usmart_str.c **** 
+ 279:project/src/usmart_str.c ****     /* 判断函数是否有返回值 */
+ 280:project/src/usmart_str.c ****     strtemp = str;
+ 695              		.loc 1 280 5 is_stmt 1 view .LVU231
+ 696              	.LVL73:
+ 281:project/src/usmart_str.c ****     while (*strtemp != '\0')
+ 697              		.loc 1 281 5 view .LVU232
+ 280:project/src/usmart_str.c ****     while (*strtemp != '\0')
+ 698              		.loc 1 280 13 is_stmt 0 view .LVU233
+ 699 0012 0646     		mov	r6, r0
+ 700              		.loc 1 281 11 view .LVU234
+ 701 0014 20E0     		b	.L56
+ 702              	.LVL74:
+ 703              	.L89:
+ 282:project/src/usmart_str.c ****     {
+ 283:project/src/usmart_str.c ****         if (*strtemp != ' ' && (pcnt & 0x7F) < 5)
+ 284:project/src/usmart_str.c ****         {
+ 285:project/src/usmart_str.c ****             if (pcnt == 0)
+ 286:project/src/usmart_str.c ****             {
+ 287:project/src/usmart_str.c ****                 pcnt |= 0x80;   /* 置位最高位,标记开始接收返回值类型 */
+ 288:project/src/usmart_str.c ****             }
+ 289:project/src/usmart_str.c **** 
+ 290:project/src/usmart_str.c ****             if (((pcnt & 0x7F) == 4) && (*strtemp != '*'))
+ 704              		.loc 1 290 38 discriminator 1 view .LVU235
+ 705 0016 2A28     		cmp	r0, #42
+ 706 0018 2FD0     		beq	.L59
+ 707              	.L60:
+ 291:project/src/usmart_str.c ****             {
+ 292:project/src/usmart_str.c ****                 break;          /* 最多记录5个字符, 最后一个字符必须是* */
+ 293:project/src/usmart_str.c ****             }
+ 294:project/src/usmart_str.c **** 
+ 295:project/src/usmart_str.c ****             fpname[pcnt & 0x7F] = *strtemp;
+ 296:project/src/usmart_str.c ****             pcnt++;
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccGh0LbN.s 			page 22
+
+
+ 297:project/src/usmart_str.c ****         }
+ 298:project/src/usmart_str.c ****         else if (pcnt == 0x85)
+ 299:project/src/usmart_str.c ****         {
+ 300:project/src/usmart_str.c ****             break;
+ 301:project/src/usmart_str.c ****         }
+ 302:project/src/usmart_str.c ****         strtemp++;
+ 303:project/src/usmart_str.c ****     }
+ 304:project/src/usmart_str.c **** 
+ 305:project/src/usmart_str.c ****     if (pcnt)
+ 708              		.loc 1 305 5 is_stmt 1 view .LVU236
+ 709              		.loc 1 305 8 is_stmt 0 view .LVU237
+ 710 001a BCBB     		cbnz	r4, .L88
+ 711              	.LVL75:
+ 712              	.L63:
+ 306:project/src/usmart_str.c ****     {
+ 307:project/src/usmart_str.c ****         fpname[pcnt & 0x7F] = '\0';
+ 308:project/src/usmart_str.c **** 
+ 309:project/src/usmart_str.c ****         if (usmart_strcmp(fpname, "void") == 0)
+ 310:project/src/usmart_str.c ****         {
+ 311:project/src/usmart_str.c ****             *rval = 0;          /* 不需要返回值 */
+ 312:project/src/usmart_str.c ****         }
+ 313:project/src/usmart_str.c ****         else
+ 314:project/src/usmart_str.c ****         {
+ 315:project/src/usmart_str.c ****             *rval = 1;          /* 需要返回值 */
+ 316:project/src/usmart_str.c ****         }
+ 317:project/src/usmart_str.c ****         pcnt = 0;
+ 318:project/src/usmart_str.c ****     }
+ 319:project/src/usmart_str.c **** 
+ 320:project/src/usmart_str.c ****     res = 0;
+ 713              		.loc 1 320 5 is_stmt 1 view .LVU238
+ 321:project/src/usmart_str.c ****     strtemp = str;
+ 714              		.loc 1 321 5 view .LVU239
+ 322:project/src/usmart_str.c **** 
+ 323:project/src/usmart_str.c ****     while (*strtemp != '(' && *strtemp != '\0')     /* 找到函数名的真正起始位置 */
+ 715              		.loc 1 323 5 view .LVU240
+ 321:project/src/usmart_str.c ****     strtemp = str;
+ 716              		.loc 1 321 13 is_stmt 0 view .LVU241
+ 717 001c A946     		mov	r9, r5
+ 718              	.LVL76:
+ 268:project/src/usmart_str.c ****     uint8_t parmnum = 0;
+ 719              		.loc 1 268 13 view .LVU242
+ 720 001e 4FF0000A 		mov	r10, #0
+ 320:project/src/usmart_str.c ****     strtemp = str;
+ 721              		.loc 1 320 9 view .LVU243
+ 722 0022 5646     		mov	r6, r10
+ 723              	.LVL77:
+ 724              	.L65:
+ 725              		.loc 1 323 28 is_stmt 1 view .LVU244
+ 726              		.loc 1 323 12 is_stmt 0 view .LVU245
+ 727 0024 99F80030 		ldrb	r3, [r9]	@ zero_extendqisi2
+ 728              		.loc 1 323 28 view .LVU246
+ 729 0028 282B     		cmp	r3, #40
+ 730 002a 45D0     		beq	.L68
+ 731              		.loc 1 323 28 discriminator 1 view .LVU247
+ 732 002c 002B     		cmp	r3, #0
+ 733 002e 43D0     		beq	.L68
+ 324:project/src/usmart_str.c ****     {
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccGh0LbN.s 			page 23
+
+
+ 325:project/src/usmart_str.c ****         strtemp++;
+ 734              		.loc 1 325 9 is_stmt 1 view .LVU248
+ 735              	.LVL78:
+ 326:project/src/usmart_str.c ****         res++;
+ 736              		.loc 1 326 9 view .LVU249
+ 737              		.loc 1 326 12 is_stmt 0 view .LVU250
+ 738 0030 0136     		adds	r6, r6, #1
+ 739              	.LVL79:
+ 740              		.loc 1 326 12 view .LVU251
+ 741 0032 F6B2     		uxtb	r6, r6
+ 742              	.LVL80:
+ 327:project/src/usmart_str.c **** 
+ 328:project/src/usmart_str.c ****         if (*strtemp == ' ' || *strtemp == '*')
+ 743              		.loc 1 328 9 is_stmt 1 view .LVU252
+ 744              		.loc 1 328 13 is_stmt 0 view .LVU253
+ 745 0034 19F8013F 		ldrb	r3, [r9, #1]!	@ zero_extendqisi2
+ 746              	.LVL81:
+ 747              		.loc 1 328 12 view .LVU254
+ 748 0038 202B     		cmp	r3, #32
+ 749 003a 01D0     		beq	.L66
+ 750              		.loc 1 328 29 discriminator 1 view .LVU255
+ 751 003c 2A2B     		cmp	r3, #42
+ 752 003e F1D1     		bne	.L65
+ 753              	.L66:
+ 329:project/src/usmart_str.c ****         {
+ 330:project/src/usmart_str.c ****             nchar = usmart_search_nextc(strtemp);
+ 754              		.loc 1 330 13 is_stmt 1 view .LVU256
+ 755              		.loc 1 330 21 is_stmt 0 view .LVU257
+ 756 0040 4846     		mov	r0, r9
+ 757 0042 FFF7FEFF 		bl	usmart_search_nextc
+ 758              	.LVL82:
+ 331:project/src/usmart_str.c **** 
+ 332:project/src/usmart_str.c ****             if (nchar != '(' && nchar != '*')
+ 759              		.loc 1 332 13 is_stmt 1 view .LVU258
+ 760              		.loc 1 332 16 is_stmt 0 view .LVU259
+ 761 0046 2828     		cmp	r0, #40
+ 762 0048 ECD0     		beq	.L65
+ 763              		.loc 1 332 30 discriminator 1 view .LVU260
+ 764 004a 2A28     		cmp	r0, #42
+ 765 004c EAD0     		beq	.L65
+ 333:project/src/usmart_str.c ****             {
+ 334:project/src/usmart_str.c ****                 offset = res;   /* 跳过空格和*号 */
+ 766              		.loc 1 334 24 view .LVU261
+ 767 004e B246     		mov	r10, r6
+ 768              	.LVL83:
+ 769              		.loc 1 334 24 view .LVU262
+ 770 0050 E8E7     		b	.L65
+ 771              	.LVL84:
+ 772              	.L57:
+ 298:project/src/usmart_str.c ****         {
+ 773              		.loc 1 298 14 is_stmt 1 view .LVU263
+ 298:project/src/usmart_str.c ****         {
+ 774              		.loc 1 298 17 is_stmt 0 view .LVU264
+ 775 0052 852C     		cmp	r4, #133
+ 776 0054 E1D0     		beq	.L60
+ 777              	.L61:
+ 302:project/src/usmart_str.c ****     }
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccGh0LbN.s 			page 24
+
+
+ 778              		.loc 1 302 9 is_stmt 1 view .LVU265
+ 302:project/src/usmart_str.c ****     }
+ 779              		.loc 1 302 16 is_stmt 0 view .LVU266
+ 780 0056 0136     		adds	r6, r6, #1
+ 781              	.LVL85:
+ 782              	.L56:
+ 281:project/src/usmart_str.c ****     {
+ 783              		.loc 1 281 21 is_stmt 1 view .LVU267
+ 281:project/src/usmart_str.c ****     {
+ 784              		.loc 1 281 12 is_stmt 0 view .LVU268
+ 785 0058 3078     		ldrb	r0, [r6]	@ zero_extendqisi2
+ 281:project/src/usmart_str.c ****     {
+ 786              		.loc 1 281 21 view .LVU269
+ 787 005a 0028     		cmp	r0, #0
+ 788 005c DDD0     		beq	.L60
+ 283:project/src/usmart_str.c ****         {
+ 789              		.loc 1 283 9 is_stmt 1 view .LVU270
+ 283:project/src/usmart_str.c ****         {
+ 790              		.loc 1 283 12 is_stmt 0 view .LVU271
+ 791 005e 2028     		cmp	r0, #32
+ 792 0060 F7D0     		beq	.L57
+ 283:project/src/usmart_str.c ****         {
+ 793              		.loc 1 283 29 discriminator 1 view .LVU272
+ 794 0062 04F07F03 		and	r3, r4, #127
+ 795 0066 042B     		cmp	r3, #4
+ 796 0068 F3D8     		bhi	.L57
+ 285:project/src/usmart_str.c ****             {
+ 797              		.loc 1 285 13 is_stmt 1 view .LVU273
+ 285:project/src/usmart_str.c ****             {
+ 798              		.loc 1 285 16 is_stmt 0 view .LVU274
+ 799 006a 14B9     		cbnz	r4, .L58
+ 287:project/src/usmart_str.c ****             }
+ 800              		.loc 1 287 17 is_stmt 1 view .LVU275
+ 287:project/src/usmart_str.c ****             }
+ 801              		.loc 1 287 22 is_stmt 0 view .LVU276
+ 802 006c 64F07F04 		orn	r4, r4, #127
+ 803              	.LVL86:
+ 287:project/src/usmart_str.c ****             }
+ 804              		.loc 1 287 22 view .LVU277
+ 805 0070 E4B2     		uxtb	r4, r4
+ 806              	.L58:
+ 807              	.LVL87:
+ 290:project/src/usmart_str.c ****             {
+ 808              		.loc 1 290 13 is_stmt 1 view .LVU278
+ 809 0072 04F07F02 		and	r2, r4, #127
+ 290:project/src/usmart_str.c ****             {
+ 810              		.loc 1 290 16 is_stmt 0 view .LVU279
+ 811 0076 042A     		cmp	r2, #4
+ 812 0078 CDD0     		beq	.L89
+ 813              	.L59:
+ 295:project/src/usmart_str.c ****             pcnt++;
+ 814              		.loc 1 295 13 is_stmt 1 view .LVU280
+ 295:project/src/usmart_str.c ****             pcnt++;
+ 815              		.loc 1 295 33 is_stmt 0 view .LVU281
+ 816 007a 02F10803 		add	r3, r2, #8
+ 817 007e 0DEB0302 		add	r2, sp, r3
+ 818 0082 02F8080C 		strb	r0, [r2, #-8]
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccGh0LbN.s 			page 25
+
+
+ 296:project/src/usmart_str.c ****         }
+ 819              		.loc 1 296 13 is_stmt 1 view .LVU282
+ 296:project/src/usmart_str.c ****         }
+ 820              		.loc 1 296 17 is_stmt 0 view .LVU283
+ 821 0086 0134     		adds	r4, r4, #1
+ 822              	.LVL88:
+ 296:project/src/usmart_str.c ****         }
+ 823              		.loc 1 296 17 view .LVU284
+ 824 0088 E4B2     		uxtb	r4, r4
+ 825              	.LVL89:
+ 296:project/src/usmart_str.c ****         }
+ 826              		.loc 1 296 17 view .LVU285
+ 827 008a E4E7     		b	.L61
+ 828              	.L88:
+ 307:project/src/usmart_str.c **** 
+ 829              		.loc 1 307 9 is_stmt 1 view .LVU286
+ 307:project/src/usmart_str.c **** 
+ 830              		.loc 1 307 21 is_stmt 0 view .LVU287
+ 831 008c 04F07F03 		and	r3, r4, #127
+ 307:project/src/usmart_str.c **** 
+ 832              		.loc 1 307 29 view .LVU288
+ 833 0090 0833     		adds	r3, r3, #8
+ 834 0092 6B44     		add	r3, sp, r3
+ 835 0094 0022     		movs	r2, #0
+ 836 0096 03F8082C 		strb	r2, [r3, #-8]
+ 309:project/src/usmart_str.c ****         {
+ 837              		.loc 1 309 9 is_stmt 1 view .LVU289
+ 309:project/src/usmart_str.c ****         {
+ 838              		.loc 1 309 13 is_stmt 0 view .LVU290
+ 839 009a 4149     		ldr	r1, .L96
+ 840              	.LVL90:
+ 309:project/src/usmart_str.c ****         {
+ 841              		.loc 1 309 13 view .LVU291
+ 842 009c 6846     		mov	r0, sp
+ 843 009e FFF7FEFF 		bl	usmart_strcmp
+ 844              	.LVL91:
+ 309:project/src/usmart_str.c ****         {
+ 845              		.loc 1 309 12 discriminator 1 view .LVU292
+ 846 00a2 0446     		mov	r4, r0
+ 847              	.LVL92:
+ 309:project/src/usmart_str.c ****         {
+ 848              		.loc 1 309 12 discriminator 1 view .LVU293
+ 849 00a4 18B9     		cbnz	r0, .L64
+ 311:project/src/usmart_str.c ****         }
+ 850              		.loc 1 311 13 is_stmt 1 view .LVU294
+ 311:project/src/usmart_str.c ****         }
+ 851              		.loc 1 311 19 is_stmt 0 view .LVU295
+ 852 00a6 0023     		movs	r3, #0
+ 853 00a8 89F80030 		strb	r3, [r9]
+ 854 00ac B6E7     		b	.L63
+ 855              	.L64:
+ 315:project/src/usmart_str.c ****         }
+ 856              		.loc 1 315 13 is_stmt 1 view .LVU296
+ 315:project/src/usmart_str.c ****         }
+ 857              		.loc 1 315 19 is_stmt 0 view .LVU297
+ 858 00ae 0123     		movs	r3, #1
+ 859 00b0 89F80030 		strb	r3, [r9]
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccGh0LbN.s 			page 26
+
+
+ 317:project/src/usmart_str.c ****     }
+ 860              		.loc 1 317 14 view .LVU298
+ 861 00b4 0024     		movs	r4, #0
+ 862 00b6 B1E7     		b	.L63
+ 863              	.LVL93:
+ 864              	.L68:
+ 335:project/src/usmart_str.c ****             }
+ 336:project/src/usmart_str.c ****         }
+ 337:project/src/usmart_str.c ****     }
+ 338:project/src/usmart_str.c **** 
+ 339:project/src/usmart_str.c ****     strtemp = str;
+ 865              		.loc 1 339 5 is_stmt 1 view .LVU299
+ 340:project/src/usmart_str.c ****     if (offset)
+ 866              		.loc 1 340 5 view .LVU300
+ 867              		.loc 1 340 8 is_stmt 0 view .LVU301
+ 868 00b8 BAF1000F 		cmp	r10, #0
+ 869 00bc 02D0     		beq	.L70
+ 341:project/src/usmart_str.c ****     {
+ 342:project/src/usmart_str.c ****         strtemp += offset + 1;  /* 跳到函数名开始的地方 */
+ 870              		.loc 1 342 9 is_stmt 1 view .LVU302
+ 871              		.loc 1 342 17 is_stmt 0 view .LVU303
+ 872 00be 0AF1010A 		add	r10, r10, #1
+ 873              	.LVL94:
+ 874              		.loc 1 342 17 view .LVU304
+ 875 00c2 5544     		add	r5, r5, r10
+ 876              	.LVL95:
+ 877              	.L70:
+ 320:project/src/usmart_str.c ****     strtemp = str;
+ 878              		.loc 1 320 9 view .LVU305
+ 879 00c4 4FF00009 		mov	r9, #0
+ 880 00c8 4946     		mov	r1, r9
+ 881 00ca 4846     		mov	r0, r9
+ 882 00cc 0122     		movs	r2, #1
+ 883 00ce CA46     		mov	r10, r9
+ 884 00d0 4E46     		mov	r6, r9
+ 885              	.LVL96:
+ 320:project/src/usmart_str.c ****     strtemp = str;
+ 886              		.loc 1 320 9 view .LVU306
+ 887 00d2 26E0     		b	.L80
+ 888              	.LVL97:
+ 889              	.L92:
+ 343:project/src/usmart_str.c ****     }
+ 344:project/src/usmart_str.c **** 
+ 345:project/src/usmart_str.c ****     res = 0;
+ 346:project/src/usmart_str.c ****     nchar = 0;                  /* 是否正在字符串里面的标志 */
+ 347:project/src/usmart_str.c **** 
+ 348:project/src/usmart_str.c ****     while (1)
+ 349:project/src/usmart_str.c ****     {
+ 350:project/src/usmart_str.c ****         if (*strtemp == '\0')
+ 351:project/src/usmart_str.c ****         {
+ 352:project/src/usmart_str.c ****             res = USMART_FUNCERR;   /* 函数错误 */
+ 353:project/src/usmart_str.c ****             break;
+ 354:project/src/usmart_str.c ****         }
+ 355:project/src/usmart_str.c ****         else if (*strtemp == '(' && nchar == 0)
+ 890              		.loc 1 355 34 discriminator 1 view .LVU307
+ 891 00d4 49BB     		cbnz	r1, .L72
+ 356:project/src/usmart_str.c ****         {
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccGh0LbN.s 			page 27
+
+
+ 357:project/src/usmart_str.c ****             fover++;                /* 括号深度增加一级 */
+ 892              		.loc 1 357 13 is_stmt 1 view .LVU308
+ 893              		.loc 1 357 18 is_stmt 0 view .LVU309
+ 894 00d6 0136     		adds	r6, r6, #1
+ 895              	.LVL98:
+ 896              		.loc 1 357 18 view .LVU310
+ 897 00d8 F6B2     		uxtb	r6, r6
+ 898              	.LVL99:
+ 899              		.loc 1 357 18 view .LVU311
+ 900 00da 2AE0     		b	.L73
+ 901              	.L93:
+ 358:project/src/usmart_str.c ****         }
+ 359:project/src/usmart_str.c ****         else if (*strtemp == ')' && nchar == 0)
+ 902              		.loc 1 359 34 discriminator 1 view .LVU312
+ 903 00dc 39BB     		cbnz	r1, .L74
+ 360:project/src/usmart_str.c ****         {
+ 361:project/src/usmart_str.c ****             if (fover)
+ 904              		.loc 1 361 13 is_stmt 1 view .LVU313
+ 905              		.loc 1 361 16 is_stmt 0 view .LVU314
+ 906 00de 002E     		cmp	r6, #0
+ 907 00e0 4BD0     		beq	.L84
+ 362:project/src/usmart_str.c ****             {
+ 363:project/src/usmart_str.c ****                 fover--;
+ 908              		.loc 1 363 17 is_stmt 1 view .LVU315
+ 909              		.loc 1 363 22 is_stmt 0 view .LVU316
+ 910 00e2 013E     		subs	r6, r6, #1
+ 911              	.LVL100:
+ 364:project/src/usmart_str.c ****             }
+ 365:project/src/usmart_str.c ****             else
+ 366:project/src/usmart_str.c ****             {
+ 367:project/src/usmart_str.c ****                 res = USMART_FUNCERR;   /* 错误结束, 没收到'(' */
+ 368:project/src/usmart_str.c ****             }
+ 369:project/src/usmart_str.c **** 
+ 370:project/src/usmart_str.c ****             if (fover == 0)
+ 912              		.loc 1 370 13 is_stmt 1 view .LVU317
+ 913              		.loc 1 370 16 is_stmt 0 view .LVU318
+ 914 00e4 16F0FF06 		ands	r6, r6, #255
+ 915              	.LVL101:
+ 916              		.loc 1 370 16 view .LVU319
+ 917 00e8 3BD0     		beq	.L71
+ 918              	.LVL102:
+ 919              	.L75:
+ 371:project/src/usmart_str.c ****             {
+ 372:project/src/usmart_str.c ****                 break;              /* 到末尾了, 退出 */
+ 373:project/src/usmart_str.c ****             }
+ 374:project/src/usmart_str.c ****         }
+ 375:project/src/usmart_str.c ****         else if (*strtemp == '"')
+ 376:project/src/usmart_str.c ****         {
+ 377:project/src/usmart_str.c ****             nchar = !nchar;
+ 378:project/src/usmart_str.c ****         }
+ 379:project/src/usmart_str.c **** 
+ 380:project/src/usmart_str.c ****         if (fover == 0)         /* 函数名还没接收完 */
+ 381:project/src/usmart_str.c ****         {
+ 382:project/src/usmart_str.c ****             if (*strtemp != ' ')    /* 空格不属于函数名 */
+ 383:project/src/usmart_str.c ****             {
+ 384:project/src/usmart_str.c ****                 if (fname_idx >= (MAX_FNAME_LEN - 1U))
+ 385:project/src/usmart_str.c ****                 {
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccGh0LbN.s 			page 28
+
+
+ 386:project/src/usmart_str.c ****                     res = USMART_FUNCERR;   /* 函数名太长 */
+ 387:project/src/usmart_str.c ****                     break;
+ 388:project/src/usmart_str.c ****                 }
+ 389:project/src/usmart_str.c **** 
+ 390:project/src/usmart_str.c ****                 fname[fname_idx] = *strtemp;
+ 391:project/src/usmart_str.c ****                 fname_idx++;
+ 392:project/src/usmart_str.c ****             }
+ 393:project/src/usmart_str.c ****         }
+ 394:project/src/usmart_str.c ****         else                    /* 已经接收完函数名 */
+ 395:project/src/usmart_str.c ****         {
+ 396:project/src/usmart_str.c ****             if (*strtemp == ',')
+ 920              		.loc 1 396 13 is_stmt 1 view .LVU320
+ 921              		.loc 1 396 16 is_stmt 0 view .LVU321
+ 922 00ea 2C2B     		cmp	r3, #44
+ 923 00ec 13D0     		beq	.L90
+ 397:project/src/usmart_str.c ****             {
+ 398:project/src/usmart_str.c ****                 temp = 1;       /* 使能增加一个参数 */
+ 399:project/src/usmart_str.c ****                 pcnt++;
+ 400:project/src/usmart_str.c ****             }
+ 401:project/src/usmart_str.c ****             else if (*strtemp != ' ' && *strtemp != '(')
+ 924              		.loc 1 401 18 is_stmt 1 view .LVU322
+ 925              		.loc 1 401 21 is_stmt 0 view .LVU323
+ 926 00ee 202B     		cmp	r3, #32
+ 927 00f0 14D0     		beq	.L78
+ 928              		.loc 1 401 38 discriminator 1 view .LVU324
+ 929 00f2 282B     		cmp	r3, #40
+ 930 00f4 12D0     		beq	.L78
+ 402:project/src/usmart_str.c ****             {
+ 403:project/src/usmart_str.c ****                 if (pcnt == 0 && fplcnt < 5)     /* 记录第一个参数的起始字符 */
+ 931              		.loc 1 403 17 is_stmt 1 view .LVU325
+ 932              		.loc 1 403 20 is_stmt 0 view .LVU326
+ 933 00f6 44B9     		cbnz	r4, .L79
+ 934              		.loc 1 403 31 discriminator 1 view .LVU327
+ 935 00f8 0428     		cmp	r0, #4
+ 936 00fa 06D8     		bhi	.L79
+ 404:project/src/usmart_str.c ****                 {
+ 405:project/src/usmart_str.c ****                     fpname[fplcnt] = *strtemp;
+ 937              		.loc 1 405 21 is_stmt 1 view .LVU328
+ 938              		.loc 1 405 36 is_stmt 0 view .LVU329
+ 939 00fc 00F1080C 		add	ip, r0, #8
+ 940 0100 EC44     		add	ip, sp, ip
+ 941 0102 0CF8083C 		strb	r3, [ip, #-8]
+ 406:project/src/usmart_str.c ****                     fplcnt++;
+ 942              		.loc 1 406 21 is_stmt 1 view .LVU330
+ 943              		.loc 1 406 27 is_stmt 0 view .LVU331
+ 944 0106 0130     		adds	r0, r0, #1
+ 945              	.LVL103:
+ 946              		.loc 1 406 27 view .LVU332
+ 947 0108 C0B2     		uxtb	r0, r0
+ 948              	.L79:
+ 949              	.LVL104:
+ 407:project/src/usmart_str.c ****                 }
+ 408:project/src/usmart_str.c ****                 temp++;         /* 得到有效参数(非空格) */
+ 950              		.loc 1 408 17 is_stmt 1 view .LVU333
+ 951              		.loc 1 408 21 is_stmt 0 view .LVU334
+ 952 010a 0132     		adds	r2, r2, #1
+ 953              	.LVL105:
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccGh0LbN.s 			page 29
+
+
+ 954              		.loc 1 408 21 view .LVU335
+ 955 010c D2B2     		uxtb	r2, r2
+ 956 010e 05E0     		b	.L78
+ 957              	.LVL106:
+ 958              	.L94:
+ 377:project/src/usmart_str.c ****         }
+ 959              		.loc 1 377 13 is_stmt 1 view .LVU336
+ 377:project/src/usmart_str.c ****         }
+ 960              		.loc 1 377 21 is_stmt 0 view .LVU337
+ 961 0110 81F00101 		eor	r1, r1, #1
+ 962              	.LVL107:
+ 377:project/src/usmart_str.c ****         }
+ 963              		.loc 1 377 21 view .LVU338
+ 964 0114 0DE0     		b	.L73
+ 965              	.LVL108:
+ 966              	.L90:
+ 398:project/src/usmart_str.c ****                 pcnt++;
+ 967              		.loc 1 398 17 is_stmt 1 view .LVU339
+ 399:project/src/usmart_str.c ****             }
+ 968              		.loc 1 399 17 view .LVU340
+ 399:project/src/usmart_str.c ****             }
+ 969              		.loc 1 399 21 is_stmt 0 view .LVU341
+ 970 0116 0134     		adds	r4, r4, #1
+ 971              	.LVL109:
+ 399:project/src/usmart_str.c ****             }
+ 972              		.loc 1 399 21 view .LVU342
+ 973 0118 E4B2     		uxtb	r4, r4
+ 974              	.LVL110:
+ 398:project/src/usmart_str.c ****                 pcnt++;
+ 975              		.loc 1 398 22 view .LVU343
+ 976 011a 0122     		movs	r2, #1
+ 977              	.LVL111:
+ 978              	.L78:
+ 409:project/src/usmart_str.c ****             }
+ 410:project/src/usmart_str.c **** 
+ 411:project/src/usmart_str.c ****             if (fover == 1 && temp == 2)
+ 979              		.loc 1 411 13 is_stmt 1 view .LVU344
+ 980              		.loc 1 411 16 is_stmt 0 view .LVU345
+ 981 011c 012E     		cmp	r6, #1
+ 982 011e 16D0     		beq	.L91
+ 983              	.LVL112:
+ 984              	.L76:
+ 412:project/src/usmart_str.c ****             {
+ 413:project/src/usmart_str.c ****                 temp++;         /* 防止重复增加 */
+ 414:project/src/usmart_str.c ****                 parmnum++;      /* 参数增加一个 */
+ 415:project/src/usmart_str.c ****             }
+ 416:project/src/usmart_str.c ****         }
+ 417:project/src/usmart_str.c **** 
+ 418:project/src/usmart_str.c ****         strtemp++;
+ 985              		.loc 1 418 9 is_stmt 1 view .LVU346
+ 986              		.loc 1 418 16 is_stmt 0 view .LVU347
+ 987 0120 0135     		adds	r5, r5, #1
+ 988              	.LVL113:
+ 348:project/src/usmart_str.c ****     {
+ 989              		.loc 1 348 11 is_stmt 1 view .LVU348
+ 990              	.L80:
+ 348:project/src/usmart_str.c ****     {
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccGh0LbN.s 			page 30
+
+
+ 991              		.loc 1 348 5 view .LVU349
+ 350:project/src/usmart_str.c ****         {
+ 992              		.loc 1 350 9 view .LVU350
+ 350:project/src/usmart_str.c ****         {
+ 993              		.loc 1 350 13 is_stmt 0 view .LVU351
+ 994 0122 2B78     		ldrb	r3, [r5]	@ zero_extendqisi2
+ 350:project/src/usmart_str.c ****         {
+ 995              		.loc 1 350 12 view .LVU352
+ 996 0124 E3B1     		cbz	r3, .L83
+ 355:project/src/usmart_str.c ****         {
+ 997              		.loc 1 355 14 is_stmt 1 view .LVU353
+ 355:project/src/usmart_str.c ****         {
+ 998              		.loc 1 355 17 is_stmt 0 view .LVU354
+ 999 0126 282B     		cmp	r3, #40
+ 1000 0128 D4D0     		beq	.L92
+ 1001              	.L72:
+ 359:project/src/usmart_str.c ****         {
+ 1002              		.loc 1 359 14 is_stmt 1 view .LVU355
+ 359:project/src/usmart_str.c ****         {
+ 1003              		.loc 1 359 17 is_stmt 0 view .LVU356
+ 1004 012a 292B     		cmp	r3, #41
+ 1005 012c D6D0     		beq	.L93
+ 1006              	.L74:
+ 375:project/src/usmart_str.c ****         {
+ 1007              		.loc 1 375 14 is_stmt 1 view .LVU357
+ 375:project/src/usmart_str.c ****         {
+ 1008              		.loc 1 375 17 is_stmt 0 view .LVU358
+ 1009 012e 222B     		cmp	r3, #34
+ 1010 0130 EED0     		beq	.L94
+ 1011              	.LVL114:
+ 1012              	.L73:
+ 380:project/src/usmart_str.c ****         {
+ 1013              		.loc 1 380 9 is_stmt 1 view .LVU359
+ 380:project/src/usmart_str.c ****         {
+ 1014              		.loc 1 380 12 is_stmt 0 view .LVU360
+ 1015 0132 002E     		cmp	r6, #0
+ 1016 0134 D9D1     		bne	.L75
+ 382:project/src/usmart_str.c ****             {
+ 1017              		.loc 1 382 13 is_stmt 1 view .LVU361
+ 382:project/src/usmart_str.c ****             {
+ 1018              		.loc 1 382 16 is_stmt 0 view .LVU362
+ 1019 0136 202B     		cmp	r3, #32
+ 1020 0138 F2D0     		beq	.L76
+ 384:project/src/usmart_str.c ****                 {
+ 1021              		.loc 1 384 17 is_stmt 1 view .LVU363
+ 384:project/src/usmart_str.c ****                 {
+ 1022              		.loc 1 384 20 is_stmt 0 view .LVU364
+ 1023 013a B9F11C0F 		cmp	r9, #28
+ 1024 013e 1ED8     		bhi	.L85
+ 390:project/src/usmart_str.c ****                 fname_idx++;
+ 1025              		.loc 1 390 17 is_stmt 1 view .LVU365
+ 390:project/src/usmart_str.c ****                 fname_idx++;
+ 1026              		.loc 1 390 34 is_stmt 0 view .LVU366
+ 1027 0140 07F80930 		strb	r3, [r7, r9]
+ 391:project/src/usmart_str.c ****             }
+ 1028              		.loc 1 391 17 is_stmt 1 view .LVU367
+ 391:project/src/usmart_str.c ****             }
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccGh0LbN.s 			page 31
+
+
+ 1029              		.loc 1 391 26 is_stmt 0 view .LVU368
+ 1030 0144 09F10109 		add	r9, r9, #1
+ 1031              	.LVL115:
+ 391:project/src/usmart_str.c ****             }
+ 1032              		.loc 1 391 26 view .LVU369
+ 1033 0148 5FFA89F9 		uxtb	r9, r9
+ 1034              	.LVL116:
+ 391:project/src/usmart_str.c ****             }
+ 1035              		.loc 1 391 26 view .LVU370
+ 1036 014c E8E7     		b	.L76
+ 1037              	.LVL117:
+ 1038              	.L91:
+ 411:project/src/usmart_str.c ****             {
+ 1039              		.loc 1 411 28 discriminator 1 view .LVU371
+ 1040 014e 022A     		cmp	r2, #2
+ 1041 0150 E6D1     		bne	.L76
+ 413:project/src/usmart_str.c ****                 parmnum++;      /* 参数增加一个 */
+ 1042              		.loc 1 413 17 is_stmt 1 view .LVU372
+ 413:project/src/usmart_str.c ****                 parmnum++;      /* 参数增加一个 */
+ 1043              		.loc 1 413 21 is_stmt 0 view .LVU373
+ 1044 0152 0132     		adds	r2, r2, #1
+ 1045              	.LVL118:
+ 413:project/src/usmart_str.c ****                 parmnum++;      /* 参数增加一个 */
+ 1046              		.loc 1 413 21 view .LVU374
+ 1047 0154 D2B2     		uxtb	r2, r2
+ 1048              	.LVL119:
+ 414:project/src/usmart_str.c ****             }
+ 1049              		.loc 1 414 17 is_stmt 1 view .LVU375
+ 414:project/src/usmart_str.c ****             }
+ 1050              		.loc 1 414 24 is_stmt 0 view .LVU376
+ 1051 0156 0AF1010A 		add	r10, r10, #1
+ 1052              	.LVL120:
+ 414:project/src/usmart_str.c ****             }
+ 1053              		.loc 1 414 24 view .LVU377
+ 1054 015a 5FFA8AFA 		uxtb	r10, r10
+ 1055 015e DFE7     		b	.L76
+ 1056              	.LVL121:
+ 1057              	.L83:
+ 352:project/src/usmart_str.c ****             break;
+ 1058              		.loc 1 352 17 view .LVU378
+ 1059 0160 0126     		movs	r6, #1
+ 1060              	.LVL122:
+ 1061              	.L71:
+ 419:project/src/usmart_str.c ****     }
+ 420:project/src/usmart_str.c **** 
+ 421:project/src/usmart_str.c ****     if (parmnum == 1)           /* 只有1个参数 */
+ 1062              		.loc 1 421 5 is_stmt 1 view .LVU379
+ 1063              		.loc 1 421 8 is_stmt 0 view .LVU380
+ 1064 0162 BAF1010F 		cmp	r10, #1
+ 1065 0166 0CD0     		beq	.L95
+ 1066              	.LVL123:
+ 1067              	.L81:
+ 422:project/src/usmart_str.c ****     {
+ 423:project/src/usmart_str.c ****         fpname[fplcnt] = '\0';
+ 424:project/src/usmart_str.c **** 
+ 425:project/src/usmart_str.c ****         if (usmart_strcmp(fpname, "void") == 0)
+ 426:project/src/usmart_str.c ****         {
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccGh0LbN.s 			page 32
+
+
+ 427:project/src/usmart_str.c ****             parmnum = 0;        /* 参数为void, 表示没有参数 */
+ 428:project/src/usmart_str.c ****         }
+ 429:project/src/usmart_str.c ****     }
+ 430:project/src/usmart_str.c **** 
+ 431:project/src/usmart_str.c ****     *pnum = parmnum;            /* 记录参数个数 */
+ 1068              		.loc 1 431 5 is_stmt 1 view .LVU381
+ 1069              		.loc 1 431 11 is_stmt 0 view .LVU382
+ 1070 0168 88F800A0 		strb	r10, [r8]
+ 432:project/src/usmart_str.c ****     fname[fname_idx] = '\0';    /* 加入结束符 */
+ 1071              		.loc 1 432 5 is_stmt 1 view .LVU383
+ 1072              		.loc 1 432 22 is_stmt 0 view .LVU384
+ 1073 016c 0023     		movs	r3, #0
+ 1074 016e 07F80930 		strb	r3, [r7, r9]
+ 433:project/src/usmart_str.c **** 
+ 434:project/src/usmart_str.c ****     return res;
+ 1075              		.loc 1 434 5 is_stmt 1 view .LVU385
+ 435:project/src/usmart_str.c **** }
+ 1076              		.loc 1 435 1 is_stmt 0 view .LVU386
+ 1077 0172 3046     		mov	r0, r6
+ 1078 0174 02B0     		add	sp, sp, #8
+ 1079              	.LCFI5:
+ 1080              		.cfi_remember_state
+ 1081              		.cfi_def_cfa_offset 32
+ 1082              		@ sp needed
+ 1083 0176 BDE8F087 		pop	{r4, r5, r6, r7, r8, r9, r10, pc}
+ 1084              	.LVL124:
+ 1085              	.L84:
+ 1086              	.LCFI6:
+ 1087              		.cfi_restore_state
+ 367:project/src/usmart_str.c ****             }
+ 1088              		.loc 1 367 21 view .LVU387
+ 1089 017a 0126     		movs	r6, #1
+ 1090              	.LVL125:
+ 367:project/src/usmart_str.c ****             }
+ 1091              		.loc 1 367 21 view .LVU388
+ 1092 017c F1E7     		b	.L71
+ 1093              	.LVL126:
+ 1094              	.L85:
+ 386:project/src/usmart_str.c ****                     break;
+ 1095              		.loc 1 386 25 view .LVU389
+ 1096 017e 0126     		movs	r6, #1
+ 1097              	.LVL127:
+ 386:project/src/usmart_str.c ****                     break;
+ 1098              		.loc 1 386 25 view .LVU390
+ 1099 0180 EFE7     		b	.L71
+ 1100              	.LVL128:
+ 1101              	.L95:
+ 423:project/src/usmart_str.c **** 
+ 1102              		.loc 1 423 9 is_stmt 1 view .LVU391
+ 423:project/src/usmart_str.c **** 
+ 1103              		.loc 1 423 24 is_stmt 0 view .LVU392
+ 1104 0182 00F10803 		add	r3, r0, #8
+ 1105 0186 0DEB0300 		add	r0, sp, r3
+ 1106              	.LVL129:
+ 423:project/src/usmart_str.c **** 
+ 1107              		.loc 1 423 24 view .LVU393
+ 1108 018a 0023     		movs	r3, #0
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccGh0LbN.s 			page 33
+
+
+ 1109 018c 00F8083C 		strb	r3, [r0, #-8]
+ 425:project/src/usmart_str.c ****         {
+ 1110              		.loc 1 425 9 is_stmt 1 view .LVU394
+ 425:project/src/usmart_str.c ****         {
+ 1111              		.loc 1 425 13 is_stmt 0 view .LVU395
+ 1112 0190 0349     		ldr	r1, .L96
+ 1113              	.LVL130:
+ 425:project/src/usmart_str.c ****         {
+ 1114              		.loc 1 425 13 view .LVU396
+ 1115 0192 6846     		mov	r0, sp
+ 1116 0194 FFF7FEFF 		bl	usmart_strcmp
+ 1117              	.LVL131:
+ 425:project/src/usmart_str.c ****         {
+ 1118              		.loc 1 425 12 discriminator 1 view .LVU397
+ 1119 0198 0028     		cmp	r0, #0
+ 1120 019a E5D1     		bne	.L81
+ 427:project/src/usmart_str.c ****         }
+ 1121              		.loc 1 427 21 view .LVU398
+ 1122 019c 8246     		mov	r10, r0
+ 1123              	.LVL132:
+ 427:project/src/usmart_str.c ****         }
+ 1124              		.loc 1 427 21 view .LVU399
+ 1125 019e E3E7     		b	.L81
+ 1126              	.L97:
+ 1127              		.align	2
+ 1128              	.L96:
+ 1129 01a0 00000000 		.word	.LC0
+ 1130              		.cfi_endproc
+ 1131              	.LFE144:
+ 1133              		.section	.text.usmart_get_aparm,"ax",%progbits
+ 1134              		.align	1
+ 1135              		.global	usmart_get_aparm
+ 1136              		.syntax unified
+ 1137              		.thumb
+ 1138              		.thumb_func
+ 1140              	usmart_get_aparm:
+ 1141              	.LVL133:
+ 1142              	.LFB145:
+ 436:project/src/usmart_str.c **** 
+ 437:project/src/usmart_str.c **** 
+ 438:project/src/usmart_str.c **** /**
+ 439:project/src/usmart_str.c ****  * @brief       得到一个参数的字符串
+ 440:project/src/usmart_str.c ****  *   @note      支持数字、字符串, 数字支持正负号
+ 441:project/src/usmart_str.c ****  * @param       str: 源字符串
+ 442:project/src/usmart_str.c ****  *              fparm: 参数缓存(至少PARM_LEN+1字节)
+ 443:project/src/usmart_str.c ****  *              ptype: 参数类型(0,数字;1,字符串;0XFF,错误)
+ 444:project/src/usmart_str.c ****  * @retval      源字符串偏移量
+ 445:project/src/usmart_str.c ****  */
+ 446:project/src/usmart_str.c **** uint8_t usmart_get_aparm(char *str, char *fparm, uint8_t *ptype)
+ 447:project/src/usmart_str.c **** {
+ 1143              		.loc 1 447 1 is_stmt 1 view -0
+ 1144              		.cfi_startproc
+ 1145              		@ args = 0, pretend = 0, frame = 0
+ 1146              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1147              		.loc 1 447 1 is_stmt 0 view .LVU401
+ 1148 0000 2DE9F041 		push	{r4, r5, r6, r7, r8, lr}
+ 1149              	.LCFI7:
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccGh0LbN.s 			page 34
+
+
+ 1150              		.cfi_def_cfa_offset 24
+ 1151              		.cfi_offset 4, -24
+ 1152              		.cfi_offset 5, -20
+ 1153              		.cfi_offset 6, -16
+ 1154              		.cfi_offset 7, -12
+ 1155              		.cfi_offset 8, -8
+ 1156              		.cfi_offset 14, -4
+ 1157 0004 8646     		mov	lr, r0
+ 1158 0006 9046     		mov	r8, r2
+ 448:project/src/usmart_str.c ****     uint8_t i = 0;
+ 1159              		.loc 1 448 5 is_stmt 1 view .LVU402
+ 1160              	.LVL134:
+ 449:project/src/usmart_str.c ****     uint8_t enout = 0;
+ 1161              		.loc 1 449 5 view .LVU403
+ 450:project/src/usmart_str.c ****     uint8_t type = 0;           /* 默认是数字 */
+ 1162              		.loc 1 450 5 view .LVU404
+ 451:project/src/usmart_str.c ****     uint8_t string = 0;         /* 标记是否正在读字符串 */
+ 1163              		.loc 1 451 5 view .LVU405
+ 452:project/src/usmart_str.c ****     uint8_t out = 0;            /* 已写入fparm的字节数 */
+ 1164              		.loc 1 452 5 view .LVU406
+ 1165              		.loc 1 452 13 is_stmt 0 view .LVU407
+ 1166 0008 0025     		movs	r5, #0
+ 451:project/src/usmart_str.c ****     uint8_t string = 0;         /* 标记是否正在读字符串 */
+ 1167              		.loc 1 451 13 view .LVU408
+ 1168 000a 2C46     		mov	r4, r5
+ 450:project/src/usmart_str.c ****     uint8_t type = 0;           /* 默认是数字 */
+ 1169              		.loc 1 450 13 view .LVU409
+ 1170 000c 2E46     		mov	r6, r5
+ 449:project/src/usmart_str.c ****     uint8_t type = 0;           /* 默认是数字 */
+ 1171              		.loc 1 449 13 view .LVU410
+ 1172 000e 2A46     		mov	r2, r5
+ 1173              	.LVL135:
+ 448:project/src/usmart_str.c ****     uint8_t enout = 0;
+ 1174              		.loc 1 448 13 view .LVU411
+ 1175 0010 2846     		mov	r0, r5
+ 1176              	.LVL136:
+ 448:project/src/usmart_str.c ****     uint8_t enout = 0;
+ 1177              		.loc 1 448 13 view .LVU412
+ 1178 0012 38E0     		b	.L114
+ 1179              	.LVL137:
+ 1180              	.L124:
+ 453:project/src/usmart_str.c **** 
+ 454:project/src/usmart_str.c ****     while (1)
+ 455:project/src/usmart_str.c ****     {
+ 456:project/src/usmart_str.c ****         if (*str == ',' && string == 0)
+ 1181              		.loc 1 456 25 discriminator 1 view .LVU413
+ 1182 0014 002C     		cmp	r4, #0
+ 1183 0016 3AD1     		bne	.L99
+ 457:project/src/usmart_str.c ****         {
+ 458:project/src/usmart_str.c ****             enout = 1;          /* 暂缓立即退出, 目的是寻找下一个参数的起始地�
+ 1184              		.loc 1 458 19 view .LVU414
+ 1185 0018 0122     		movs	r2, #1
+ 1186              	.LVL138:
+ 1187              		.loc 1 458 19 view .LVU415
+ 1188 001a 38E0     		b	.L99
+ 1189              	.LVL139:
+ 1190              	.L125:
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccGh0LbN.s 			page 35
+
+
+ 459:project/src/usmart_str.c ****         }
+ 460:project/src/usmart_str.c **** 
+ 461:project/src/usmart_str.c ****         if ((*str == ')' || *str == '\0') && string == 0)
+ 462:project/src/usmart_str.c ****         {
+ 463:project/src/usmart_str.c ****             break;              /* 立即退出 */
+ 464:project/src/usmart_str.c ****         }
+ 465:project/src/usmart_str.c **** 
+ 466:project/src/usmart_str.c ****         if (type == 0)          /* 默认是数字 */
+ 1191              		.loc 1 466 12 view .LVU416
+ 1192 001c FF26     		movs	r6, #255
+ 1193              	.LVL140:
+ 1194              		.loc 1 466 12 view .LVU417
+ 1195 001e 63E0     		b	.L102
+ 1196              	.LVL141:
+ 1197              	.L104:
+ 1198              		.loc 1 466 12 view .LVU418
+ 1199 0020 662B     		cmp	r3, #102
+ 1200 0022 17D8     		bhi	.L108
+ 1201 0024 612B     		cmp	r3, #97
+ 1202 0026 03D2     		bcs	.L105
+ 1203 0028 462B     		cmp	r3, #70
+ 1204 002a 0FD8     		bhi	.L109
+ 1205 002c 412B     		cmp	r3, #65
+ 1206 002e 0BD3     		bcc	.L121
+ 1207              	.L105:
+ 467:project/src/usmart_str.c ****         {
+ 468:project/src/usmart_str.c ****             if ((*str >= '0' && *str <= '9') || (*str >= 'a' && *str <= 'f') ||
+ 469:project/src/usmart_str.c ****                 (*str >= 'A' && *str <= 'F') || *str == 'X' || *str == 'x' ||
+ 470:project/src/usmart_str.c ****                 *str == '-' || *str == '+')
+ 471:project/src/usmart_str.c ****             {
+ 472:project/src/usmart_str.c ****                 if (enout)
+ 1208              		.loc 1 472 17 is_stmt 1 view .LVU419
+ 1209              		.loc 1 472 20 is_stmt 0 view .LVU420
+ 1210 0030 002A     		cmp	r2, #0
+ 1211 0032 59D1     		bne	.L102
+ 473:project/src/usmart_str.c ****                 {
+ 474:project/src/usmart_str.c ****                     break;      /* 找到了下一个参数, 直接退出 */
+ 475:project/src/usmart_str.c ****                 }
+ 476:project/src/usmart_str.c **** 
+ 477:project/src/usmart_str.c ****                 if (out < (PARM_LEN - 1U))
+ 1212              		.loc 1 477 17 is_stmt 1 view .LVU421
+ 1213              		.loc 1 477 20 is_stmt 0 view .LVU422
+ 1214 0034 C62D     		cmp	r5, #198
+ 1215 0036 22D8     		bhi	.L106
+ 478:project/src/usmart_str.c ****                 {
+ 479:project/src/usmart_str.c ****                     if (*str >= 'a')
+ 1216              		.loc 1 479 21 is_stmt 1 view .LVU423
+ 1217              		.loc 1 479 24 is_stmt 0 view .LVU424
+ 1218 0038 602B     		cmp	r3, #96
+ 1219 003a 0FD9     		bls	.L110
+ 480:project/src/usmart_str.c ****                     {
+ 481:project/src/usmart_str.c ****                         *fparm = *str - 0x20;    /* 小写转换为大写 */
+ 1220              		.loc 1 481 25 is_stmt 1 view .LVU425
+ 1221              		.loc 1 481 39 is_stmt 0 view .LVU426
+ 1222 003c 203B     		subs	r3, r3, #32
+ 1223              		.loc 1 481 32 view .LVU427
+ 1224 003e 0B70     		strb	r3, [r1]
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccGh0LbN.s 			page 36
+
+
+ 1225              	.L111:
+ 482:project/src/usmart_str.c ****                     }
+ 483:project/src/usmart_str.c ****                     else
+ 484:project/src/usmart_str.c ****                     {
+ 485:project/src/usmart_str.c ****                         *fparm = *str;
+ 486:project/src/usmart_str.c ****                     }
+ 487:project/src/usmart_str.c **** 
+ 488:project/src/usmart_str.c ****                     fparm++;
+ 1226              		.loc 1 488 21 is_stmt 1 view .LVU428
+ 1227              		.loc 1 488 26 is_stmt 0 view .LVU429
+ 1228 0040 0131     		adds	r1, r1, #1
+ 1229              	.LVL142:
+ 489:project/src/usmart_str.c ****                     out++;
+ 1230              		.loc 1 489 21 is_stmt 1 view .LVU430
+ 1231              		.loc 1 489 24 is_stmt 0 view .LVU431
+ 1232 0042 0135     		adds	r5, r5, #1
+ 1233              	.LVL143:
+ 1234              		.loc 1 489 24 view .LVU432
+ 1235 0044 EDB2     		uxtb	r5, r5
+ 1236              	.LVL144:
+ 1237              		.loc 1 489 24 view .LVU433
+ 1238 0046 1AE0     		b	.L106
+ 1239              	.L121:
+ 466:project/src/usmart_str.c ****         {
+ 1240              		.loc 1 466 12 view .LVU434
+ 1241 0048 FF26     		movs	r6, #255
+ 1242              	.LVL145:
+ 466:project/src/usmart_str.c ****         {
+ 1243              		.loc 1 466 12 view .LVU435
+ 1244 004a 4DE0     		b	.L102
+ 1245              	.LVL146:
+ 1246              	.L109:
+ 466:project/src/usmart_str.c ****         {
+ 1247              		.loc 1 466 12 view .LVU436
+ 1248 004c 582B     		cmp	r3, #88
+ 1249 004e EFD0     		beq	.L105
+ 1250 0050 FF26     		movs	r6, #255
+ 1251              	.LVL147:
+ 466:project/src/usmart_str.c ****         {
+ 1252              		.loc 1 466 12 view .LVU437
+ 1253 0052 49E0     		b	.L102
+ 1254              	.LVL148:
+ 1255              	.L108:
+ 466:project/src/usmart_str.c ****         {
+ 1256              		.loc 1 466 12 view .LVU438
+ 1257 0054 782B     		cmp	r3, #120
+ 1258 0056 EBD0     		beq	.L105
+ 1259 0058 FF26     		movs	r6, #255
+ 1260              	.LVL149:
+ 466:project/src/usmart_str.c ****         {
+ 1261              		.loc 1 466 12 view .LVU439
+ 1262 005a 45E0     		b	.L102
+ 1263              	.LVL150:
+ 1264              	.L110:
+ 485:project/src/usmart_str.c ****                     }
+ 1265              		.loc 1 485 25 is_stmt 1 view .LVU440
+ 485:project/src/usmart_str.c ****                     }
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccGh0LbN.s 			page 37
+
+
+ 1266              		.loc 1 485 32 is_stmt 0 view .LVU441
+ 1267 005c 0B70     		strb	r3, [r1]
+ 1268 005e EFE7     		b	.L111
+ 1269              	.L103:
+ 490:project/src/usmart_str.c ****                 }
+ 491:project/src/usmart_str.c ****             }
+ 492:project/src/usmart_str.c ****             else if (*str == '"')    /* 找到字符串的开始标志 */
+ 493:project/src/usmart_str.c ****             {
+ 494:project/src/usmart_str.c ****                 if (enout)
+ 495:project/src/usmart_str.c ****                 {
+ 496:project/src/usmart_str.c ****                     break;
+ 497:project/src/usmart_str.c ****                 }
+ 498:project/src/usmart_str.c **** 
+ 499:project/src/usmart_str.c ****                 type = 1;
+ 500:project/src/usmart_str.c ****                 string = 1;     /* 标记正在读字符串 */
+ 501:project/src/usmart_str.c ****             }
+ 502:project/src/usmart_str.c ****             else if (*str != ' ' && *str != ',')
+ 503:project/src/usmart_str.c ****             {
+ 504:project/src/usmart_str.c ****                 type = 0xFF;    /* 非法字符, 参数错误 */
+ 505:project/src/usmart_str.c ****                 break;
+ 506:project/src/usmart_str.c ****             }
+ 507:project/src/usmart_str.c ****         }
+ 508:project/src/usmart_str.c ****         else                    /* 字符串类 */
+ 509:project/src/usmart_str.c ****         {
+ 510:project/src/usmart_str.c ****             if (*str == '"')
+ 1270              		.loc 1 510 13 is_stmt 1 view .LVU442
+ 1271              		.loc 1 510 16 is_stmt 0 view .LVU443
+ 1272 0060 222B     		cmp	r3, #34
+ 1273 0062 36D0     		beq	.L122
+ 1274              	.LVL151:
+ 1275              	.L112:
+ 511:project/src/usmart_str.c ****             {
+ 512:project/src/usmart_str.c ****                 string = 0;
+ 513:project/src/usmart_str.c ****             }
+ 514:project/src/usmart_str.c **** 
+ 515:project/src/usmart_str.c ****             if (enout)
+ 1276              		.loc 1 515 13 is_stmt 1 view .LVU444
+ 1277              		.loc 1 515 16 is_stmt 0 view .LVU445
+ 1278 0064 002A     		cmp	r2, #0
+ 1279 0066 3FD1     		bne	.L102
+ 516:project/src/usmart_str.c ****             {
+ 517:project/src/usmart_str.c ****                 break;
+ 518:project/src/usmart_str.c ****             }
+ 519:project/src/usmart_str.c **** 
+ 520:project/src/usmart_str.c ****             if (string)         /* 字符串正在读 */
+ 1280              		.loc 1 520 13 is_stmt 1 view .LVU446
+ 1281              		.loc 1 520 16 is_stmt 0 view .LVU447
+ 1282 0068 4CB1     		cbz	r4, .L106
+ 521:project/src/usmart_str.c ****             {
+ 522:project/src/usmart_str.c ****                 if (*str == '\\')   /* 遇到转义符 */
+ 1283              		.loc 1 522 17 is_stmt 1 view .LVU448
+ 1284              		.loc 1 522 20 is_stmt 0 view .LVU449
+ 1285 006a 5C2B     		cmp	r3, #92
+ 1286 006c 33D0     		beq	.L123
+ 1287              	.LVL152:
+ 1288              	.L113:
+ 523:project/src/usmart_str.c ****                 {
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccGh0LbN.s 			page 38
+
+
+ 524:project/src/usmart_str.c ****                     if (*(str + 1) == '\0')
+ 525:project/src/usmart_str.c ****                     {
+ 526:project/src/usmart_str.c ****                         type = 0xFF;    /* 转义符后没有字符 */
+ 527:project/src/usmart_str.c ****                         break;
+ 528:project/src/usmart_str.c ****                     }
+ 529:project/src/usmart_str.c **** 
+ 530:project/src/usmart_str.c ****                     str++;          /* 偏移到转义符后面的字符 */
+ 531:project/src/usmart_str.c ****                     i++;
+ 532:project/src/usmart_str.c ****                 }
+ 533:project/src/usmart_str.c **** 
+ 534:project/src/usmart_str.c ****                 if (out < (PARM_LEN - 1U))
+ 1289              		.loc 1 534 17 is_stmt 1 view .LVU450
+ 1290              		.loc 1 534 20 is_stmt 0 view .LVU451
+ 1291 006e C62D     		cmp	r5, #198
+ 1292 0070 05D8     		bhi	.L106
+ 535:project/src/usmart_str.c ****                 {
+ 536:project/src/usmart_str.c ****                     *fparm = *str;
+ 1293              		.loc 1 536 21 is_stmt 1 view .LVU452
+ 1294              		.loc 1 536 30 is_stmt 0 view .LVU453
+ 1295 0072 9EF80030 		ldrb	r3, [lr]	@ zero_extendqisi2
+ 1296              		.loc 1 536 28 view .LVU454
+ 1297 0076 01F8013B 		strb	r3, [r1], #1
+ 1298              	.LVL153:
+ 537:project/src/usmart_str.c ****                     fparm++;
+ 1299              		.loc 1 537 21 is_stmt 1 view .LVU455
+ 538:project/src/usmart_str.c ****                     out++;
+ 1300              		.loc 1 538 21 view .LVU456
+ 1301              		.loc 1 538 24 is_stmt 0 view .LVU457
+ 1302 007a 0135     		adds	r5, r5, #1
+ 1303              	.LVL154:
+ 1304              		.loc 1 538 24 view .LVU458
+ 1305 007c EDB2     		uxtb	r5, r5
+ 1306              	.LVL155:
+ 1307              	.L106:
+ 539:project/src/usmart_str.c ****                 }
+ 540:project/src/usmart_str.c ****             }
+ 541:project/src/usmart_str.c ****         }
+ 542:project/src/usmart_str.c **** 
+ 543:project/src/usmart_str.c ****         i++;                    /* 偏移量增加 */
+ 1308              		.loc 1 543 9 is_stmt 1 view .LVU459
+ 1309              		.loc 1 543 10 is_stmt 0 view .LVU460
+ 1310 007e 0130     		adds	r0, r0, #1
+ 1311              	.LVL156:
+ 1312              		.loc 1 543 10 view .LVU461
+ 1313 0080 C0B2     		uxtb	r0, r0
+ 1314              	.LVL157:
+ 544:project/src/usmart_str.c ****         str++;
+ 1315              		.loc 1 544 9 is_stmt 1 view .LVU462
+ 1316              		.loc 1 544 12 is_stmt 0 view .LVU463
+ 1317 0082 0EF1010E 		add	lr, lr, #1
+ 1318              	.LVL158:
+ 454:project/src/usmart_str.c ****     {
+ 1319              		.loc 1 454 11 is_stmt 1 view .LVU464
+ 1320              	.L114:
+ 454:project/src/usmart_str.c ****     {
+ 1321              		.loc 1 454 5 view .LVU465
+ 456:project/src/usmart_str.c ****         {
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccGh0LbN.s 			page 39
+
+
+ 1322              		.loc 1 456 9 view .LVU466
+ 456:project/src/usmart_str.c ****         {
+ 1323              		.loc 1 456 13 is_stmt 0 view .LVU467
+ 1324 0086 9EF80030 		ldrb	r3, [lr]	@ zero_extendqisi2
+ 456:project/src/usmart_str.c ****         {
+ 1325              		.loc 1 456 12 view .LVU468
+ 1326 008a 2C2B     		cmp	r3, #44
+ 1327 008c C2D0     		beq	.L124
+ 1328              	.LVL159:
+ 1329              	.L99:
+ 461:project/src/usmart_str.c ****         {
+ 1330              		.loc 1 461 9 is_stmt 1 view .LVU469
+ 461:project/src/usmart_str.c ****         {
+ 1331              		.loc 1 461 12 is_stmt 0 view .LVU470
+ 1332 008e 292B     		cmp	r3, #41
+ 1333 0090 00D0     		beq	.L100
+ 461:project/src/usmart_str.c ****         {
+ 1334              		.loc 1 461 26 discriminator 2 view .LVU471
+ 1335 0092 03B9     		cbnz	r3, .L101
+ 1336              	.L100:
+ 461:project/src/usmart_str.c ****         {
+ 1337              		.loc 1 461 43 discriminator 3 view .LVU472
+ 1338 0094 44B3     		cbz	r4, .L102
+ 1339              	.L101:
+ 466:project/src/usmart_str.c ****         {
+ 1340              		.loc 1 466 9 is_stmt 1 view .LVU473
+ 466:project/src/usmart_str.c ****         {
+ 1341              		.loc 1 466 12 is_stmt 0 view .LVU474
+ 1342 0096 002E     		cmp	r6, #0
+ 1343 0098 E2D1     		bne	.L103
+ 468:project/src/usmart_str.c ****                 (*str >= 'A' && *str <= 'F') || *str == 'X' || *str == 'x' ||
+ 1344              		.loc 1 468 13 is_stmt 1 view .LVU475
+ 1345 009a 392B     		cmp	r3, #57
+ 1346 009c C0D8     		bhi	.L104
+ 1347 009e 202B     		cmp	r3, #32
+ 1348 00a0 21D3     		bcc	.L116
+ 1349 00a2 A3F12007 		sub	r7, r3, #32
+ 1350 00a6 FFB2     		uxtb	r7, r7
+ 1351 00a8 4FF0010C 		mov	ip, #1
+ 1352 00ac 0CFA07FC 		lsl	ip, ip, r7
+ 1353 00b0 114F     		ldr	r7, .L126
+ 1354 00b2 0CEA0707 		and	r7, ip, r7
+ 1355 00b6 002F     		cmp	r7, #0
+ 1356 00b8 BAD1     		bne	.L105
+ 1357 00ba 41F20103 		movw	r3, #4097
+ 1358 00be 1CEA030F 		tst	ip, r3
+ 1359 00c2 DCD1     		bne	.L106
+ 1360 00c4 1CF0040F 		tst	ip, #4
+ 1361 00c8 A8D0     		beq	.L125
+ 494:project/src/usmart_str.c ****                 {
+ 1362              		.loc 1 494 17 view .LVU476
+ 494:project/src/usmart_str.c ****                 {
+ 1363              		.loc 1 494 20 is_stmt 0 view .LVU477
+ 1364 00ca 6AB9     		cbnz	r2, .L102
+ 500:project/src/usmart_str.c ****             }
+ 1365              		.loc 1 500 24 view .LVU478
+ 1366 00cc 0124     		movs	r4, #1
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccGh0LbN.s 			page 40
+
+
+ 1367              	.LVL160:
+ 499:project/src/usmart_str.c ****                 string = 1;     /* 标记正在读字符串 */
+ 1368              		.loc 1 499 22 view .LVU479
+ 1369 00ce 2646     		mov	r6, r4
+ 1370              	.LVL161:
+ 499:project/src/usmart_str.c ****                 string = 1;     /* 标记正在读字符串 */
+ 1371              		.loc 1 499 22 view .LVU480
+ 1372 00d0 D5E7     		b	.L106
+ 1373              	.LVL162:
+ 1374              	.L122:
+ 512:project/src/usmart_str.c ****             }
+ 1375              		.loc 1 512 24 view .LVU481
+ 1376 00d2 0024     		movs	r4, #0
+ 1377              	.LVL163:
+ 512:project/src/usmart_str.c ****             }
+ 1378              		.loc 1 512 24 view .LVU482
+ 1379 00d4 C6E7     		b	.L112
+ 1380              	.LVL164:
+ 1381              	.L123:
+ 524:project/src/usmart_str.c ****                     {
+ 1382              		.loc 1 524 21 is_stmt 1 view .LVU483
+ 524:project/src/usmart_str.c ****                     {
+ 1383              		.loc 1 524 25 is_stmt 0 view .LVU484
+ 1384 00d6 9EF80130 		ldrb	r3, [lr, #1]	@ zero_extendqisi2
+ 524:project/src/usmart_str.c ****                     {
+ 1385              		.loc 1 524 24 view .LVU485
+ 1386 00da 5BB1     		cbz	r3, .L119
+ 530:project/src/usmart_str.c ****                     i++;
+ 1387              		.loc 1 530 21 is_stmt 1 view .LVU486
+ 530:project/src/usmart_str.c ****                     i++;
+ 1388              		.loc 1 530 24 is_stmt 0 view .LVU487
+ 1389 00dc 0EF1010E 		add	lr, lr, #1
+ 1390              	.LVL165:
+ 531:project/src/usmart_str.c ****                 }
+ 1391              		.loc 1 531 21 is_stmt 1 view .LVU488
+ 531:project/src/usmart_str.c ****                 }
+ 1392              		.loc 1 531 22 is_stmt 0 view .LVU489
+ 1393 00e0 0130     		adds	r0, r0, #1
+ 1394              	.LVL166:
+ 531:project/src/usmart_str.c ****                 }
+ 1395              		.loc 1 531 22 view .LVU490
+ 1396 00e2 C0B2     		uxtb	r0, r0
+ 1397 00e4 C3E7     		b	.L113
+ 1398              	.LVL167:
+ 1399              	.L116:
+ 466:project/src/usmart_str.c ****         {
+ 1400              		.loc 1 466 12 view .LVU491
+ 1401 00e6 FF26     		movs	r6, #255
+ 1402              	.LVL168:
+ 1403              	.L102:
+ 545:project/src/usmart_str.c ****     }
+ 546:project/src/usmart_str.c **** 
+ 547:project/src/usmart_str.c ****     *fparm = '\0';              /* 加入结束符 */
+ 1404              		.loc 1 547 5 is_stmt 1 view .LVU492
+ 1405              		.loc 1 547 12 is_stmt 0 view .LVU493
+ 1406 00e8 0023     		movs	r3, #0
+ 1407 00ea 0B70     		strb	r3, [r1]
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccGh0LbN.s 			page 41
+
+
+ 548:project/src/usmart_str.c ****     *ptype = type;              /* 返回参数类型 */
+ 1408              		.loc 1 548 5 is_stmt 1 view .LVU494
+ 1409              		.loc 1 548 12 is_stmt 0 view .LVU495
+ 1410 00ec 88F80060 		strb	r6, [r8]
+ 549:project/src/usmart_str.c ****     return i;                   /* 返回参数长度 */
+ 1411              		.loc 1 549 5 is_stmt 1 view .LVU496
+ 550:project/src/usmart_str.c **** }
+ 1412              		.loc 1 550 1 is_stmt 0 view .LVU497
+ 1413 00f0 BDE8F081 		pop	{r4, r5, r6, r7, r8, pc}
+ 1414              	.LVL169:
+ 1415              	.L119:
+ 526:project/src/usmart_str.c ****                         break;
+ 1416              		.loc 1 526 30 view .LVU498
+ 1417 00f4 FF26     		movs	r6, #255
+ 1418              	.LVL170:
+ 526:project/src/usmart_str.c ****                         break;
+ 1419              		.loc 1 526 30 view .LVU499
+ 1420 00f6 F7E7     		b	.L102
+ 1421              	.L127:
+ 1422              		.align	2
+ 1423              	.L126:
+ 1424 00f8 0028FF03 		.word	67053568
+ 1425              		.cfi_endproc
+ 1426              	.LFE145:
+ 1428              		.section	.text.usmart_get_parmpos,"ax",%progbits
+ 1429              		.align	1
+ 1430              		.global	usmart_get_parmpos
+ 1431              		.syntax unified
+ 1432              		.thumb
+ 1433              		.thumb_func
+ 1435              	usmart_get_parmpos:
+ 1436              	.LVL171:
+ 1437              	.LFB146:
+ 551:project/src/usmart_str.c **** 
+ 552:project/src/usmart_str.c **** 
+ 553:project/src/usmart_str.c **** /**
+ 554:project/src/usmart_str.c ****  * @brief       得到指定参数的起始地址
+ 555:project/src/usmart_str.c ****  * @param       num: 第num个参数, 范围0~9
+ 556:project/src/usmart_str.c ****  * @retval      该参数的起始地址
+ 557:project/src/usmart_str.c ****  */
+ 558:project/src/usmart_str.c **** uint8_t usmart_get_parmpos(uint8_t num)
+ 559:project/src/usmart_str.c **** {
+ 1438              		.loc 1 559 1 is_stmt 1 view -0
+ 1439              		.cfi_startproc
+ 1440              		@ args = 0, pretend = 0, frame = 0
+ 1441              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1442              		@ link register save eliminated.
+ 1443              		.loc 1 559 1 is_stmt 0 view .LVU501
+ 1444 0000 0146     		mov	r1, r0
+ 560:project/src/usmart_str.c ****     uint8_t temp = 0;
+ 1445              		.loc 1 560 5 is_stmt 1 view .LVU502
+ 1446              	.LVL172:
+ 561:project/src/usmart_str.c ****     uint8_t i;
+ 1447              		.loc 1 561 5 view .LVU503
+ 562:project/src/usmart_str.c **** 
+ 563:project/src/usmart_str.c ****     for (i = 0; i < num; i++)
+ 1448              		.loc 1 563 5 view .LVU504
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccGh0LbN.s 			page 42
+
+
+ 1449              		.loc 1 563 12 is_stmt 0 view .LVU505
+ 1450 0002 0023     		movs	r3, #0
+ 560:project/src/usmart_str.c ****     uint8_t i;
+ 1451              		.loc 1 560 13 view .LVU506
+ 1452 0004 1846     		mov	r0, r3
+ 1453              	.LVL173:
+ 1454              		.loc 1 563 5 view .LVU507
+ 1455 0006 06E0     		b	.L129
+ 1456              	.LVL174:
+ 1457              	.L130:
+ 564:project/src/usmart_str.c ****     {
+ 565:project/src/usmart_str.c ****         temp += usmart_dev.plentbl[i];
+ 1458              		.loc 1 565 9 is_stmt 1 view .LVU508
+ 1459              		.loc 1 565 35 is_stmt 0 view .LVU509
+ 1460 0008 044A     		ldr	r2, .L131
+ 1461 000a 1A44     		add	r2, r2, r3
+ 1462 000c 927E     		ldrb	r2, [r2, #26]	@ zero_extendqisi2
+ 1463              		.loc 1 565 14 view .LVU510
+ 1464 000e 1044     		add	r0, r0, r2
+ 1465              	.LVL175:
+ 1466              		.loc 1 565 14 view .LVU511
+ 1467 0010 C0B2     		uxtb	r0, r0
+ 1468              	.LVL176:
+ 563:project/src/usmart_str.c ****     {
+ 1469              		.loc 1 563 27 is_stmt 1 discriminator 3 view .LVU512
+ 1470 0012 0133     		adds	r3, r3, #1
+ 1471              	.LVL177:
+ 563:project/src/usmart_str.c ****     {
+ 1472              		.loc 1 563 27 is_stmt 0 discriminator 3 view .LVU513
+ 1473 0014 DBB2     		uxtb	r3, r3
+ 1474              	.LVL178:
+ 1475              	.L129:
+ 563:project/src/usmart_str.c ****     {
+ 1476              		.loc 1 563 19 is_stmt 1 discriminator 1 view .LVU514
+ 1477 0016 8B42     		cmp	r3, r1
+ 1478 0018 F6D3     		bcc	.L130
+ 566:project/src/usmart_str.c ****     }
+ 567:project/src/usmart_str.c **** 
+ 568:project/src/usmart_str.c ****     return temp;
+ 1479              		.loc 1 568 5 view .LVU515
+ 569:project/src/usmart_str.c **** }
+ 1480              		.loc 1 569 1 is_stmt 0 view .LVU516
+ 1481 001a 7047     		bx	lr
+ 1482              	.L132:
+ 1483              		.align	2
+ 1484              	.L131:
+ 1485 001c 00000000 		.word	usmart_dev
+ 1486              		.cfi_endproc
+ 1487              	.LFE146:
+ 1489              		.section	.text.usmart_get_fparam,"ax",%progbits
+ 1490              		.align	1
+ 1491              		.global	usmart_get_fparam
+ 1492              		.syntax unified
+ 1493              		.thumb
+ 1494              		.thumb_func
+ 1496              	usmart_get_fparam:
+ 1497              	.LVL179:
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccGh0LbN.s 			page 43
+
+
+ 1498              	.LFB147:
+ 570:project/src/usmart_str.c **** 
+ 571:project/src/usmart_str.c **** /**
+ 572:project/src/usmart_str.c ****  * @brief       从str中得到函数参数
+ 573:project/src/usmart_str.c ****  * @param       str: 源字符串
+ 574:project/src/usmart_str.c ****  *              parn: 参数的多少(0表示无参数void类型)
+ 575:project/src/usmart_str.c ****  * @retval      0, 成功; 其他, 错误代码
+ 576:project/src/usmart_str.c ****  */
+ 577:project/src/usmart_str.c **** uint8_t usmart_get_fparam(char *str, uint8_t *parn)
+ 578:project/src/usmart_str.c **** {
+ 1499              		.loc 1 578 1 is_stmt 1 view -0
+ 1500              		.cfi_startproc
+ 1501              		@ args = 0, pretend = 0, frame = 216
+ 1502              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1503              		.loc 1 578 1 is_stmt 0 view .LVU518
+ 1504 0000 2DE9F041 		push	{r4, r5, r6, r7, r8, lr}
+ 1505              	.LCFI8:
+ 1506              		.cfi_def_cfa_offset 24
+ 1507              		.cfi_offset 4, -24
+ 1508              		.cfi_offset 5, -20
+ 1509              		.cfi_offset 6, -16
+ 1510              		.cfi_offset 7, -12
+ 1511              		.cfi_offset 8, -8
+ 1512              		.cfi_offset 14, -4
+ 1513 0004 B6B0     		sub	sp, sp, #216
+ 1514              	.LCFI9:
+ 1515              		.cfi_def_cfa_offset 240
+ 1516 0006 0D46     		mov	r5, r1
+ 579:project/src/usmart_str.c ****     uint8_t i, type;
+ 1517              		.loc 1 579 5 is_stmt 1 view .LVU519
+ 580:project/src/usmart_str.c ****     uint32_t res;
+ 1518              		.loc 1 580 5 view .LVU520
+ 581:project/src/usmart_str.c ****     uint8_t n = 0;
+ 1519              		.loc 1 581 5 view .LVU521
+ 1520              	.LVL180:
+ 582:project/src/usmart_str.c ****     uint16_t len;
+ 1521              		.loc 1 582 5 view .LVU522
+ 583:project/src/usmart_str.c ****     char tstr[PARM_LEN + 1];    /* 最多存放PARM_LEN个字符的字符串 */
+ 1522              		.loc 1 583 5 view .LVU523
+ 584:project/src/usmart_str.c **** 
+ 585:project/src/usmart_str.c ****     for (i = 0; i < MAX_PARM; i++)
+ 1523              		.loc 1 585 5 view .LVU524
+ 1524              		.loc 1 585 12 is_stmt 0 view .LVU525
+ 1525 0008 0023     		movs	r3, #0
+ 1526              		.loc 1 585 5 view .LVU526
+ 1527 000a 05E0     		b	.L134
+ 1528              	.LVL181:
+ 1529              	.L135:
+ 586:project/src/usmart_str.c ****     {
+ 587:project/src/usmart_str.c ****         usmart_dev.plentbl[i] = 0;  /* 清空参数长度表 */
+ 1530              		.loc 1 587 9 is_stmt 1 view .LVU527
+ 1531              		.loc 1 587 31 is_stmt 0 view .LVU528
+ 1532 000c 3F4A     		ldr	r2, .L152
+ 1533 000e 1A44     		add	r2, r2, r3
+ 1534 0010 0024     		movs	r4, #0
+ 1535 0012 9476     		strb	r4, [r2, #26]
+ 585:project/src/usmart_str.c ****     {
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccGh0LbN.s 			page 44
+
+
+ 1536              		.loc 1 585 32 is_stmt 1 discriminator 3 view .LVU529
+ 1537 0014 0133     		adds	r3, r3, #1
+ 1538              	.LVL182:
+ 585:project/src/usmart_str.c ****     {
+ 1539              		.loc 1 585 32 is_stmt 0 discriminator 3 view .LVU530
+ 1540 0016 DBB2     		uxtb	r3, r3
+ 1541              	.LVL183:
+ 1542              	.L134:
+ 585:project/src/usmart_str.c ****     {
+ 1543              		.loc 1 585 19 is_stmt 1 discriminator 1 view .LVU531
+ 1544 0018 092B     		cmp	r3, #9
+ 1545 001a F7D9     		bls	.L135
+ 1546              	.LVL184:
+ 1547              	.L136:
+ 588:project/src/usmart_str.c ****     }
+ 589:project/src/usmart_str.c **** 
+ 590:project/src/usmart_str.c ****     while (*str != '(')         /* 偏移到参数开始的地方 */
+ 1548              		.loc 1 590 17 view .LVU532
+ 1549              		.loc 1 590 12 is_stmt 0 view .LVU533
+ 1550 001c 0378     		ldrb	r3, [r0]	@ zero_extendqisi2
+ 1551              		.loc 1 590 17 view .LVU534
+ 1552 001e 282B     		cmp	r3, #40
+ 1553 0020 07D0     		beq	.L151
+ 591:project/src/usmart_str.c ****     {
+ 592:project/src/usmart_str.c ****         str++;
+ 1554              		.loc 1 592 9 is_stmt 1 view .LVU535
+ 1555              	.LVL185:
+ 593:project/src/usmart_str.c **** 
+ 594:project/src/usmart_str.c ****         if (*str == '\0')
+ 1556              		.loc 1 594 9 view .LVU536
+ 1557              		.loc 1 594 13 is_stmt 0 view .LVU537
+ 1558 0022 10F8013F 		ldrb	r3, [r0, #1]!	@ zero_extendqisi2
+ 1559              	.LVL186:
+ 1560              		.loc 1 594 12 view .LVU538
+ 1561 0026 002B     		cmp	r3, #0
+ 1562 0028 F8D1     		bne	.L136
+ 595:project/src/usmart_str.c ****         {
+ 596:project/src/usmart_str.c ****             return USMART_FUNCERR;
+ 1563              		.loc 1 596 20 view .LVU539
+ 1564 002a 0120     		movs	r0, #1
+ 1565              	.LVL187:
+ 1566              	.L137:
+ 597:project/src/usmart_str.c ****         }
+ 598:project/src/usmart_str.c ****     }
+ 599:project/src/usmart_str.c **** 
+ 600:project/src/usmart_str.c ****     str++;                      /* 偏移到"("之后的第一个字节 */
+ 601:project/src/usmart_str.c **** 
+ 602:project/src/usmart_str.c ****     while (1)
+ 603:project/src/usmart_str.c ****     {
+ 604:project/src/usmart_str.c ****         i = usmart_get_aparm(str, tstr, &type);     /* 得到第一个参数 */
+ 605:project/src/usmart_str.c ****         str += i;                                   /* 偏移 */
+ 606:project/src/usmart_str.c **** 
+ 607:project/src/usmart_str.c ****         switch (type)
+ 608:project/src/usmart_str.c ****         {
+ 609:project/src/usmart_str.c ****             case 0:             /* 数字 */
+ 610:project/src/usmart_str.c ****                 if (tstr[0] != '\0')    /* 接收到的参数有效 */
+ 611:project/src/usmart_str.c ****                 {
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccGh0LbN.s 			page 45
+
+
+ 612:project/src/usmart_str.c ****                     i = usmart_str2num(tstr, &res); /* 记录该参数 */
+ 613:project/src/usmart_str.c **** 
+ 614:project/src/usmart_str.c ****                     if (i)
+ 615:project/src/usmart_str.c ****                     {
+ 616:project/src/usmart_str.c ****                         return USMART_PARMERR;      /* 参数错误 */
+ 617:project/src/usmart_str.c ****                     }
+ 618:project/src/usmart_str.c **** 
+ 619:project/src/usmart_str.c ****                     if (n >= MAX_PARM)
+ 620:project/src/usmart_str.c ****                     {
+ 621:project/src/usmart_str.c ****                         return USMART_PARMOVER;     /* 参数太多 */
+ 622:project/src/usmart_str.c ****                     }
+ 623:project/src/usmart_str.c **** 
+ 624:project/src/usmart_str.c ****                     if ((uint16_t)usmart_get_parmpos(n) + 4U > PARM_LEN)
+ 625:project/src/usmart_str.c ****                     {
+ 626:project/src/usmart_str.c ****                         return USMART_PARMOVER;
+ 627:project/src/usmart_str.c ****                     }
+ 628:project/src/usmart_str.c **** 
+ 629:project/src/usmart_str.c ****                     memcpy(usmart_dev.parm + usmart_get_parmpos(n), &res, sizeof(res));
+ 630:project/src/usmart_str.c ****                     usmart_dev.parmtype &= (uint16_t)~(1U << n);    /* 标记数字 */
+ 631:project/src/usmart_str.c ****                     usmart_dev.plentbl[n] = 4;      /* 该参数的长度为4 */
+ 632:project/src/usmart_str.c ****                     n++;                            /* 参数增加 */
+ 633:project/src/usmart_str.c ****                 }
+ 634:project/src/usmart_str.c ****                 break;
+ 635:project/src/usmart_str.c **** 
+ 636:project/src/usmart_str.c ****             case 1:             /* 字符串 */
+ 637:project/src/usmart_str.c ****                 len = (uint16_t)usmart_strlen(tstr) + 1U;  /* 包含结束符 */
+ 638:project/src/usmart_str.c **** 
+ 639:project/src/usmart_str.c ****                 if (n >= MAX_PARM)
+ 640:project/src/usmart_str.c ****                 {
+ 641:project/src/usmart_str.c ****                     return USMART_PARMOVER;     /* 参数太多 */
+ 642:project/src/usmart_str.c ****                 }
+ 643:project/src/usmart_str.c **** 
+ 644:project/src/usmart_str.c ****                 if ((uint16_t)usmart_get_parmpos(n) + len > PARM_LEN)
+ 645:project/src/usmart_str.c ****                 {
+ 646:project/src/usmart_str.c ****                     return USMART_PARMOVER;     /* 参数缓冲区溢出 */
+ 647:project/src/usmart_str.c ****                 }
+ 648:project/src/usmart_str.c **** 
+ 649:project/src/usmart_str.c ****                 usmart_strcopy((char *)(usmart_dev.parm + usmart_get_parmpos(n)), tstr);
+ 650:project/src/usmart_str.c ****                 usmart_dev.parmtype |= (uint16_t)(1U << n);     /* 标记字符串 */
+ 651:project/src/usmart_str.c ****                 usmart_dev.plentbl[n] = (uint8_t)len;           /* 该参数的长度 */
+ 652:project/src/usmart_str.c ****                 n++;                            /* 参数增加 */
+ 653:project/src/usmart_str.c ****                 break;
+ 654:project/src/usmart_str.c **** 
+ 655:project/src/usmart_str.c ****             case 0xFF:          /* 错误 */
+ 656:project/src/usmart_str.c ****                 return USMART_PARMERR;
+ 657:project/src/usmart_str.c **** 
+ 658:project/src/usmart_str.c ****             default:
+ 659:project/src/usmart_str.c ****                 return USMART_PARMERR;
+ 660:project/src/usmart_str.c ****         }
+ 661:project/src/usmart_str.c **** 
+ 662:project/src/usmart_str.c ****         if (*str == ')' || *str == '\0')
+ 663:project/src/usmart_str.c ****         {
+ 664:project/src/usmart_str.c ****             break;              /* 查到结束标志了 */
+ 665:project/src/usmart_str.c ****         }
+ 666:project/src/usmart_str.c ****     }
+ 667:project/src/usmart_str.c **** 
+ 668:project/src/usmart_str.c ****     *parn = n;                  /* 记录参数的个数 */
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccGh0LbN.s 			page 46
+
+
+ 669:project/src/usmart_str.c ****     return USMART_OK;
+ 670:project/src/usmart_str.c **** }
+ 1567              		.loc 1 670 1 view .LVU540
+ 1568 002c 36B0     		add	sp, sp, #216
+ 1569              	.LCFI10:
+ 1570              		.cfi_remember_state
+ 1571              		.cfi_def_cfa_offset 24
+ 1572              		@ sp needed
+ 1573 002e BDE8F081 		pop	{r4, r5, r6, r7, r8, pc}
+ 1574              	.LVL188:
+ 1575              	.L151:
+ 1576              	.LCFI11:
+ 1577              		.cfi_restore_state
+ 600:project/src/usmart_str.c **** 
+ 1578              		.loc 1 600 5 is_stmt 1 view .LVU541
+ 600:project/src/usmart_str.c **** 
+ 1579              		.loc 1 600 8 is_stmt 0 view .LVU542
+ 1580 0032 441C     		adds	r4, r0, #1
+ 1581              	.LVL189:
+ 581:project/src/usmart_str.c ****     uint16_t len;
+ 1582              		.loc 1 581 13 view .LVU543
+ 1583 0034 0026     		movs	r6, #0
+ 1584 0036 4CE0     		b	.L143
+ 1585              	.LVL190:
+ 1586              	.L139:
+ 610:project/src/usmart_str.c ****                 {
+ 1587              		.loc 1 610 17 is_stmt 1 view .LVU544
+ 610:project/src/usmart_str.c ****                 {
+ 1588              		.loc 1 610 25 is_stmt 0 view .LVU545
+ 1589 0038 9DF80430 		ldrb	r3, [sp, #4]	@ zero_extendqisi2
+ 610:project/src/usmart_str.c ****                 {
+ 1590              		.loc 1 610 20 view .LVU546
+ 1591 003c 002B     		cmp	r3, #0
+ 1592 003e 44D0     		beq	.L141
+ 612:project/src/usmart_str.c **** 
+ 1593              		.loc 1 612 21 is_stmt 1 view .LVU547
+ 612:project/src/usmart_str.c **** 
+ 1594              		.loc 1 612 25 is_stmt 0 view .LVU548
+ 1595 0040 34A9     		add	r1, sp, #208
+ 1596 0042 01A8     		add	r0, sp, #4
+ 1597              	.LVL191:
+ 612:project/src/usmart_str.c **** 
+ 1598              		.loc 1 612 25 view .LVU549
+ 1599 0044 FFF7FEFF 		bl	usmart_str2num
+ 1600              	.LVL192:
+ 614:project/src/usmart_str.c ****                     {
+ 1601              		.loc 1 614 21 is_stmt 1 view .LVU550
+ 614:project/src/usmart_str.c ****                     {
+ 1602              		.loc 1 614 24 is_stmt 0 view .LVU551
+ 1603 0048 0028     		cmp	r0, #0
+ 1604 004a 54D1     		bne	.L145
+ 619:project/src/usmart_str.c ****                     {
+ 1605              		.loc 1 619 21 is_stmt 1 view .LVU552
+ 619:project/src/usmart_str.c ****                     {
+ 1606              		.loc 1 619 24 is_stmt 0 view .LVU553
+ 1607 004c 092E     		cmp	r6, #9
+ 1608 004e 54D8     		bhi	.L146
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccGh0LbN.s 			page 47
+
+
+ 624:project/src/usmart_str.c ****                     {
+ 1609              		.loc 1 624 21 is_stmt 1 view .LVU554
+ 624:project/src/usmart_str.c ****                     {
+ 1610              		.loc 1 624 35 is_stmt 0 view .LVU555
+ 1611 0050 3046     		mov	r0, r6
+ 1612              	.LVL193:
+ 624:project/src/usmart_str.c ****                     {
+ 1613              		.loc 1 624 35 view .LVU556
+ 1614 0052 FFF7FEFF 		bl	usmart_get_parmpos
+ 1615              	.LVL194:
+ 624:project/src/usmart_str.c ****                     {
+ 1616              		.loc 1 624 57 discriminator 1 view .LVU557
+ 1617 0056 031D     		adds	r3, r0, #4
+ 624:project/src/usmart_str.c ****                     {
+ 1618              		.loc 1 624 24 discriminator 1 view .LVU558
+ 1619 0058 C82B     		cmp	r3, #200
+ 1620 005a 50D8     		bhi	.L147
+ 629:project/src/usmart_str.c ****                     usmart_dev.parmtype &= (uint16_t)~(1U << n);    /* 标记数字 */
+ 1621              		.loc 1 629 21 is_stmt 1 view .LVU559
+ 629:project/src/usmart_str.c ****                     usmart_dev.parmtype &= (uint16_t)~(1U << n);    /* 标记数字 */
+ 1622              		.loc 1 629 21 is_stmt 0 discriminator 1 view .LVU560
+ 1623 005c 2C4A     		ldr	r2, .L152+4
+ 1624 005e 349B     		ldr	r3, [sp, #208]
+ 1625 0060 1350     		str	r3, [r2, r0]	@ unaligned
+ 630:project/src/usmart_str.c ****                     usmart_dev.plentbl[n] = 4;      /* 该参数的长度为4 */
+ 1626              		.loc 1 630 21 is_stmt 1 view .LVU561
+ 630:project/src/usmart_str.c ****                     usmart_dev.plentbl[n] = 4;      /* 该参数的长度为4 */
+ 1627              		.loc 1 630 31 is_stmt 0 view .LVU562
+ 1628 0062 A2F12403 		sub	r3, r2, #36
+ 1629 0066 32F80C2C 		ldrh	r2, [r2, #-12]
+ 630:project/src/usmart_str.c ****                     usmart_dev.plentbl[n] = 4;      /* 该参数的长度为4 */
+ 1630              		.loc 1 630 59 view .LVU563
+ 1631 006a 0121     		movs	r1, #1
+ 1632 006c B140     		lsls	r1, r1, r6
+ 630:project/src/usmart_str.c ****                     usmart_dev.plentbl[n] = 4;      /* 该参数的长度为4 */
+ 1633              		.loc 1 630 41 view .LVU564
+ 1634 006e 22EA0102 		bic	r2, r2, r1
+ 1635 0072 1A83     		strh	r2, [r3, #24]	@ movhi
+ 631:project/src/usmart_str.c ****                     n++;                            /* 参数增加 */
+ 1636              		.loc 1 631 21 is_stmt 1 view .LVU565
+ 631:project/src/usmart_str.c ****                     n++;                            /* 参数增加 */
+ 1637              		.loc 1 631 43 is_stmt 0 view .LVU566
+ 1638 0074 3344     		add	r3, r3, r6
+ 1639 0076 0422     		movs	r2, #4
+ 1640 0078 9A76     		strb	r2, [r3, #26]
+ 632:project/src/usmart_str.c ****                 }
+ 1641              		.loc 1 632 21 is_stmt 1 view .LVU567
+ 632:project/src/usmart_str.c ****                 }
+ 1642              		.loc 1 632 22 is_stmt 0 view .LVU568
+ 1643 007a 0136     		adds	r6, r6, #1
+ 1644              	.LVL195:
+ 632:project/src/usmart_str.c ****                 }
+ 1645              		.loc 1 632 22 view .LVU569
+ 1646 007c F6B2     		uxtb	r6, r6
+ 1647              	.LVL196:
+ 632:project/src/usmart_str.c ****                 }
+ 1648              		.loc 1 632 22 view .LVU570
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccGh0LbN.s 			page 48
+
+
+ 1649 007e 24E0     		b	.L141
+ 1650              	.LVL197:
+ 1651              	.L140:
+ 637:project/src/usmart_str.c **** 
+ 1652              		.loc 1 637 17 is_stmt 1 view .LVU571
+ 637:project/src/usmart_str.c **** 
+ 1653              		.loc 1 637 33 is_stmt 0 view .LVU572
+ 1654 0080 01A8     		add	r0, sp, #4
+ 1655              	.LVL198:
+ 637:project/src/usmart_str.c **** 
+ 1656              		.loc 1 637 33 view .LVU573
+ 1657 0082 FFF7FEFF 		bl	usmart_strlen
+ 1658              	.LVL199:
+ 1659 0086 0746     		mov	r7, r0
+ 637:project/src/usmart_str.c **** 
+ 1660              		.loc 1 637 21 discriminator 1 view .LVU574
+ 1661 0088 431C     		adds	r3, r0, #1
+ 1662 008a 1FFA83F8 		uxth	r8, r3
+ 1663              	.LVL200:
+ 639:project/src/usmart_str.c ****                 {
+ 1664              		.loc 1 639 17 is_stmt 1 view .LVU575
+ 639:project/src/usmart_str.c ****                 {
+ 1665              		.loc 1 639 20 is_stmt 0 view .LVU576
+ 1666 008e 092E     		cmp	r6, #9
+ 1667 0090 37D8     		bhi	.L148
+ 644:project/src/usmart_str.c ****                 {
+ 1668              		.loc 1 644 17 is_stmt 1 view .LVU577
+ 644:project/src/usmart_str.c ****                 {
+ 1669              		.loc 1 644 31 is_stmt 0 view .LVU578
+ 1670 0092 3046     		mov	r0, r6
+ 1671 0094 FFF7FEFF 		bl	usmart_get_parmpos
+ 1672              	.LVL201:
+ 644:project/src/usmart_str.c ****                 {
+ 1673              		.loc 1 644 53 discriminator 1 view .LVU579
+ 1674 0098 08EB0003 		add	r3, r8, r0
+ 644:project/src/usmart_str.c ****                 {
+ 1675              		.loc 1 644 20 discriminator 1 view .LVU580
+ 1676 009c C82B     		cmp	r3, #200
+ 1677 009e 32DC     		bgt	.L149
+ 649:project/src/usmart_str.c ****                 usmart_dev.parmtype |= (uint16_t)(1U << n);     /* 标记字符串 */
+ 1678              		.loc 1 649 17 is_stmt 1 view .LVU581
+ 649:project/src/usmart_str.c ****                 usmart_dev.parmtype |= (uint16_t)(1U << n);     /* 标记字符串 */
+ 1679              		.loc 1 649 17 is_stmt 0 discriminator 1 view .LVU582
+ 1680 00a0 DFF86C80 		ldr	r8, .L152+4
+ 1681              	.LVL202:
+ 649:project/src/usmart_str.c ****                 usmart_dev.parmtype |= (uint16_t)(1U << n);     /* 标记字符串 */
+ 1682              		.loc 1 649 17 discriminator 1 view .LVU583
+ 1683 00a4 01A9     		add	r1, sp, #4
+ 1684 00a6 4044     		add	r0, r0, r8
+ 1685 00a8 FFF7FEFF 		bl	usmart_strcopy
+ 1686              	.LVL203:
+ 650:project/src/usmart_str.c ****                 usmart_dev.plentbl[n] = (uint8_t)len;           /* 该参数的长度 */
+ 1687              		.loc 1 650 17 is_stmt 1 view .LVU584
+ 650:project/src/usmart_str.c ****                 usmart_dev.plentbl[n] = (uint8_t)len;           /* 该参数的长度 */
+ 1688              		.loc 1 650 27 is_stmt 0 view .LVU585
+ 1689 00ac A8F12402 		sub	r2, r8, #36
+ 1690 00b0 38F80C1C 		ldrh	r1, [r8, #-12]
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccGh0LbN.s 			page 49
+
+
+ 650:project/src/usmart_str.c ****                 usmart_dev.plentbl[n] = (uint8_t)len;           /* 该参数的长度 */
+ 1691              		.loc 1 650 54 view .LVU586
+ 1692 00b4 0123     		movs	r3, #1
+ 1693 00b6 B340     		lsls	r3, r3, r6
+ 650:project/src/usmart_str.c ****                 usmart_dev.plentbl[n] = (uint8_t)len;           /* 该参数的长度 */
+ 1694              		.loc 1 650 40 view .LVU587
+ 1695 00b8 9BB2     		uxth	r3, r3
+ 650:project/src/usmart_str.c ****                 usmart_dev.plentbl[n] = (uint8_t)len;           /* 该参数的长度 */
+ 1696              		.loc 1 650 37 view .LVU588
+ 1697 00ba 0B43     		orrs	r3, r3, r1
+ 1698 00bc 28F80C3C 		strh	r3, [r8, #-12]	@ movhi
+ 651:project/src/usmart_str.c ****                 n++;                            /* 参数增加 */
+ 1699              		.loc 1 651 17 is_stmt 1 view .LVU589
+ 651:project/src/usmart_str.c ****                 n++;                            /* 参数增加 */
+ 1700              		.loc 1 651 41 is_stmt 0 view .LVU590
+ 1701 00c0 0137     		adds	r7, r7, #1
+ 1702              	.LVL204:
+ 651:project/src/usmart_str.c ****                 n++;                            /* 参数增加 */
+ 1703              		.loc 1 651 39 view .LVU591
+ 1704 00c2 3244     		add	r2, r2, r6
+ 1705 00c4 9776     		strb	r7, [r2, #26]
+ 652:project/src/usmart_str.c ****                 break;
+ 1706              		.loc 1 652 17 is_stmt 1 view .LVU592
+ 652:project/src/usmart_str.c ****                 break;
+ 1707              		.loc 1 652 18 is_stmt 0 view .LVU593
+ 1708 00c6 0136     		adds	r6, r6, #1
+ 1709              	.LVL205:
+ 652:project/src/usmart_str.c ****                 break;
+ 1710              		.loc 1 652 18 view .LVU594
+ 1711 00c8 F6B2     		uxtb	r6, r6
+ 1712              	.LVL206:
+ 653:project/src/usmart_str.c **** 
+ 1713              		.loc 1 653 17 is_stmt 1 view .LVU595
+ 1714              	.L141:
+ 662:project/src/usmart_str.c ****         {
+ 1715              		.loc 1 662 9 view .LVU596
+ 662:project/src/usmart_str.c ****         {
+ 1716              		.loc 1 662 13 is_stmt 0 view .LVU597
+ 1717 00ca 2378     		ldrb	r3, [r4]	@ zero_extendqisi2
+ 662:project/src/usmart_str.c ****         {
+ 1718              		.loc 1 662 12 view .LVU598
+ 1719 00cc 292B     		cmp	r3, #41
+ 1720 00ce 0FD0     		beq	.L142
+ 662:project/src/usmart_str.c ****         {
+ 1721              		.loc 1 662 25 discriminator 1 view .LVU599
+ 1722 00d0 73B1     		cbz	r3, .L142
+ 1723              	.LVL207:
+ 1724              	.L143:
+ 602:project/src/usmart_str.c ****     {
+ 1725              		.loc 1 602 5 is_stmt 1 view .LVU600
+ 604:project/src/usmart_str.c ****         str += i;                                   /* 偏移 */
+ 1726              		.loc 1 604 9 view .LVU601
+ 604:project/src/usmart_str.c ****         str += i;                                   /* 偏移 */
+ 1727              		.loc 1 604 13 is_stmt 0 view .LVU602
+ 1728 00d2 0DF1D702 		add	r2, sp, #215
+ 1729 00d6 01A9     		add	r1, sp, #4
+ 1730 00d8 2046     		mov	r0, r4
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccGh0LbN.s 			page 50
+
+
+ 1731 00da FFF7FEFF 		bl	usmart_get_aparm
+ 1732              	.LVL208:
+ 605:project/src/usmart_str.c **** 
+ 1733              		.loc 1 605 9 is_stmt 1 view .LVU603
+ 605:project/src/usmart_str.c **** 
+ 1734              		.loc 1 605 13 is_stmt 0 view .LVU604
+ 1735 00de 0444     		add	r4, r4, r0
+ 1736              	.LVL209:
+ 607:project/src/usmart_str.c ****         {
+ 1737              		.loc 1 607 9 is_stmt 1 view .LVU605
+ 1738 00e0 9DF8D730 		ldrb	r3, [sp, #215]	@ zero_extendqisi2
+ 1739 00e4 002B     		cmp	r3, #0
+ 1740 00e6 A7D0     		beq	.L139
+ 1741 00e8 012B     		cmp	r3, #1
+ 1742 00ea C9D0     		beq	.L140
+ 1743 00ec 0220     		movs	r0, #2
+ 1744              	.LVL210:
+ 607:project/src/usmart_str.c ****         {
+ 1745              		.loc 1 607 9 is_stmt 0 view .LVU606
+ 1746 00ee 9DE7     		b	.L137
+ 1747              	.LVL211:
+ 1748              	.L142:
+ 668:project/src/usmart_str.c ****     return USMART_OK;
+ 1749              		.loc 1 668 5 is_stmt 1 view .LVU607
+ 668:project/src/usmart_str.c ****     return USMART_OK;
+ 1750              		.loc 1 668 11 is_stmt 0 view .LVU608
+ 1751 00f0 2E70     		strb	r6, [r5]
+ 669:project/src/usmart_str.c **** }
+ 1752              		.loc 1 669 5 is_stmt 1 view .LVU609
+ 669:project/src/usmart_str.c **** }
+ 1753              		.loc 1 669 12 is_stmt 0 view .LVU610
+ 1754 00f2 0020     		movs	r0, #0
+ 1755 00f4 9AE7     		b	.L137
+ 1756              	.LVL212:
+ 1757              	.L145:
+ 616:project/src/usmart_str.c ****                     }
+ 1758              		.loc 1 616 32 view .LVU611
+ 1759 00f6 0220     		movs	r0, #2
+ 1760              	.LVL213:
+ 616:project/src/usmart_str.c ****                     }
+ 1761              		.loc 1 616 32 view .LVU612
+ 1762 00f8 98E7     		b	.L137
+ 1763              	.LVL214:
+ 1764              	.L146:
+ 621:project/src/usmart_str.c ****                     }
+ 1765              		.loc 1 621 32 view .LVU613
+ 1766 00fa 0320     		movs	r0, #3
+ 1767              	.LVL215:
+ 621:project/src/usmart_str.c ****                     }
+ 1768              		.loc 1 621 32 view .LVU614
+ 1769 00fc 96E7     		b	.L137
+ 1770              	.L147:
+ 626:project/src/usmart_str.c ****                     }
+ 1771              		.loc 1 626 32 view .LVU615
+ 1772 00fe 0320     		movs	r0, #3
+ 1773 0100 94E7     		b	.L137
+ 1774              	.LVL216:
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccGh0LbN.s 			page 51
+
+
+ 1775              	.L148:
+ 641:project/src/usmart_str.c ****                 }
+ 1776              		.loc 1 641 28 view .LVU616
+ 1777 0102 0320     		movs	r0, #3
+ 1778 0104 92E7     		b	.L137
+ 1779              	.L149:
+ 646:project/src/usmart_str.c ****                 }
+ 1780              		.loc 1 646 28 view .LVU617
+ 1781 0106 0320     		movs	r0, #3
+ 1782 0108 90E7     		b	.L137
+ 1783              	.L153:
+ 1784 010a 00BF     		.align	2
+ 1785              	.L152:
+ 1786 010c 00000000 		.word	usmart_dev
+ 1787 0110 24000000 		.word	usmart_dev+36
+ 1788              		.cfi_endproc
+ 1789              	.LFE147:
+ 1791              		.text
+ 1792              	.Letext0:
+ 1793              		.file 2 "D:/gnu_toolchain/arm-none-eabi/include/machine/_default_types.h"
+ 1794              		.file 3 "D:/gnu_toolchain/arm-none-eabi/include/sys/_stdint.h"
+ 1795              		.file 4 "project/inc/usmart.h"
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccGh0LbN.s 			page 52
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 usmart_str.c
+C:\Users\bians\AppData\Local\Temp\ccGh0LbN.s:21     .text.usmart_search_nextc:00000000 $t
+C:\Users\bians\AppData\Local\Temp\ccGh0LbN.s:26     .text.usmart_search_nextc:00000000 usmart_search_nextc
+C:\Users\bians\AppData\Local\Temp\ccGh0LbN.s:60     .text.usmart_strcmp:00000000 $t
+C:\Users\bians\AppData\Local\Temp\ccGh0LbN.s:66     .text.usmart_strcmp:00000000 usmart_strcmp
+C:\Users\bians\AppData\Local\Temp\ccGh0LbN.s:113    .text.usmart_strcopy:00000000 $t
+C:\Users\bians\AppData\Local\Temp\ccGh0LbN.s:119    .text.usmart_strcopy:00000000 usmart_strcopy
+C:\Users\bians\AppData\Local\Temp\ccGh0LbN.s:156    .text.usmart_strlen:00000000 $t
+C:\Users\bians\AppData\Local\Temp\ccGh0LbN.s:162    .text.usmart_strlen:00000000 usmart_strlen
+C:\Users\bians\AppData\Local\Temp\ccGh0LbN.s:207    .text.usmart_pow:00000000 $t
+C:\Users\bians\AppData\Local\Temp\ccGh0LbN.s:213    .text.usmart_pow:00000000 usmart_pow
+C:\Users\bians\AppData\Local\Temp\ccGh0LbN.s:255    .text.usmart_str2num:00000000 $t
+C:\Users\bians\AppData\Local\Temp\ccGh0LbN.s:261    .text.usmart_str2num:00000000 usmart_str2num
+C:\Users\bians\AppData\Local\Temp\ccGh0LbN.s:540    .text.usmart_get_cmdname:00000000 $t
+C:\Users\bians\AppData\Local\Temp\ccGh0LbN.s:546    .text.usmart_get_cmdname:00000000 usmart_get_cmdname
+C:\Users\bians\AppData\Local\Temp\ccGh0LbN.s:643    .rodata.usmart_get_fname.str1.4:00000000 $d
+C:\Users\bians\AppData\Local\Temp\ccGh0LbN.s:647    .text.usmart_get_fname:00000000 $t
+C:\Users\bians\AppData\Local\Temp\ccGh0LbN.s:653    .text.usmart_get_fname:00000000 usmart_get_fname
+C:\Users\bians\AppData\Local\Temp\ccGh0LbN.s:1129   .text.usmart_get_fname:000001a0 $d
+C:\Users\bians\AppData\Local\Temp\ccGh0LbN.s:1134   .text.usmart_get_aparm:00000000 $t
+C:\Users\bians\AppData\Local\Temp\ccGh0LbN.s:1140   .text.usmart_get_aparm:00000000 usmart_get_aparm
+C:\Users\bians\AppData\Local\Temp\ccGh0LbN.s:1424   .text.usmart_get_aparm:000000f8 $d
+C:\Users\bians\AppData\Local\Temp\ccGh0LbN.s:1429   .text.usmart_get_parmpos:00000000 $t
+C:\Users\bians\AppData\Local\Temp\ccGh0LbN.s:1435   .text.usmart_get_parmpos:00000000 usmart_get_parmpos
+C:\Users\bians\AppData\Local\Temp\ccGh0LbN.s:1485   .text.usmart_get_parmpos:0000001c $d
+C:\Users\bians\AppData\Local\Temp\ccGh0LbN.s:1490   .text.usmart_get_fparam:00000000 $t
+C:\Users\bians\AppData\Local\Temp\ccGh0LbN.s:1496   .text.usmart_get_fparam:00000000 usmart_get_fparam
+C:\Users\bians\AppData\Local\Temp\ccGh0LbN.s:1786   .text.usmart_get_fparam:0000010c $d
+
+UNDEFINED SYMBOLS
+usmart_dev

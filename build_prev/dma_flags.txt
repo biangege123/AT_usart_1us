@@ -1,0 +1,2 @@
+﻿flag_status dma_flag_get(uint32_t dmax_flag);
+void dma_flag_clear(uint32_t dmax_flag);

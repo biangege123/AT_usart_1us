@@ -1,0 +1,842 @@
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccSv2AUO.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.arch armv7e-m
+   3              		.fpu fpv4-sp-d16
+   4              		.eabi_attribute 27, 1
+   5              		.eabi_attribute 28, 1
+   6              		.eabi_attribute 20, 1
+   7              		.eabi_attribute 21, 1
+   8              		.eabi_attribute 23, 3
+   9              		.eabi_attribute 24, 1
+  10              		.eabi_attribute 25, 1
+  11              		.eabi_attribute 26, 1
+  12              		.eabi_attribute 30, 1
+  13              		.eabi_attribute 34, 1
+  14              		.eabi_attribute 18, 4
+  15              		.file	"at32f403a_407_exint.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.file 1 "libraries/drivers/src/at32f403a_407_exint.c"
+  20              		.section	.text.exint_reset,"ax",%progbits
+  21              		.align	1
+  22              		.global	exint_reset
+  23              		.syntax unified
+  24              		.thumb
+  25              		.thumb_func
+  27              	exint_reset:
+  28              	.LFB134:
+   1:libraries/drivers/src/at32f403a_407_exint.c **** /**
+   2:libraries/drivers/src/at32f403a_407_exint.c ****   **************************************************************************
+   3:libraries/drivers/src/at32f403a_407_exint.c ****   * @file     at32f403a_407_exint.c
+   4:libraries/drivers/src/at32f403a_407_exint.c ****   * @brief    contains all the functions for the exint firmware library
+   5:libraries/drivers/src/at32f403a_407_exint.c ****   **************************************************************************
+   6:libraries/drivers/src/at32f403a_407_exint.c ****   *
+   7:libraries/drivers/src/at32f403a_407_exint.c ****   * Copyright (c) 2025, Artery Technology, All rights reserved.
+   8:libraries/drivers/src/at32f403a_407_exint.c ****   *
+   9:libraries/drivers/src/at32f403a_407_exint.c ****   * The software Board Support Package (BSP) that is made available to
+  10:libraries/drivers/src/at32f403a_407_exint.c ****   * download from Artery official website is the copyrighted work of Artery.
+  11:libraries/drivers/src/at32f403a_407_exint.c ****   * Artery authorizes customers to use, copy, and distribute the BSP
+  12:libraries/drivers/src/at32f403a_407_exint.c ****   * software and its related documentation for the purpose of design and
+  13:libraries/drivers/src/at32f403a_407_exint.c ****   * development in conjunction with Artery microcontrollers. Use of the
+  14:libraries/drivers/src/at32f403a_407_exint.c ****   * software is governed by this copyright notice and the following disclaimer.
+  15:libraries/drivers/src/at32f403a_407_exint.c ****   *
+  16:libraries/drivers/src/at32f403a_407_exint.c ****   * THIS SOFTWARE IS PROVIDED ON "AS IS" BASIS WITHOUT WARRANTIES,
+  17:libraries/drivers/src/at32f403a_407_exint.c ****   * GUARANTEES OR REPRESENTATIONS OF ANY KIND. ARTERY EXPRESSLY DISCLAIMS,
+  18:libraries/drivers/src/at32f403a_407_exint.c ****   * TO THE FULLEST EXTENT PERMITTED BY LAW, ALL EXPRESS, IMPLIED OR
+  19:libraries/drivers/src/at32f403a_407_exint.c ****   * STATUTORY OR OTHER WARRANTIES, GUARANTEES OR REPRESENTATIONS,
+  20:libraries/drivers/src/at32f403a_407_exint.c ****   * INCLUDING BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY,
+  21:libraries/drivers/src/at32f403a_407_exint.c ****   * FITNESS FOR A PARTICULAR PURPOSE, OR NON-INFRINGEMENT.
+  22:libraries/drivers/src/at32f403a_407_exint.c ****   *
+  23:libraries/drivers/src/at32f403a_407_exint.c ****   **************************************************************************
+  24:libraries/drivers/src/at32f403a_407_exint.c ****   */
+  25:libraries/drivers/src/at32f403a_407_exint.c **** 
+  26:libraries/drivers/src/at32f403a_407_exint.c **** #include "at32f403a_407_conf.h"
+  27:libraries/drivers/src/at32f403a_407_exint.c **** 
+  28:libraries/drivers/src/at32f403a_407_exint.c **** /** @addtogroup AT32F403A_407_periph_driver
+  29:libraries/drivers/src/at32f403a_407_exint.c ****   * @{
+  30:libraries/drivers/src/at32f403a_407_exint.c ****   */
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccSv2AUO.s 			page 2
+
+
+  31:libraries/drivers/src/at32f403a_407_exint.c **** 
+  32:libraries/drivers/src/at32f403a_407_exint.c **** /** @defgroup EXINT
+  33:libraries/drivers/src/at32f403a_407_exint.c ****   * @brief EXINT driver modules
+  34:libraries/drivers/src/at32f403a_407_exint.c ****   * @{
+  35:libraries/drivers/src/at32f403a_407_exint.c ****   */
+  36:libraries/drivers/src/at32f403a_407_exint.c **** 
+  37:libraries/drivers/src/at32f403a_407_exint.c **** #ifdef EXINT_MODULE_ENABLED
+  38:libraries/drivers/src/at32f403a_407_exint.c **** 
+  39:libraries/drivers/src/at32f403a_407_exint.c **** /** @defgroup EXINT_private_functions
+  40:libraries/drivers/src/at32f403a_407_exint.c ****   * @{
+  41:libraries/drivers/src/at32f403a_407_exint.c ****   */
+  42:libraries/drivers/src/at32f403a_407_exint.c **** 
+  43:libraries/drivers/src/at32f403a_407_exint.c **** /**
+  44:libraries/drivers/src/at32f403a_407_exint.c ****   * @brief  exint reset
+  45:libraries/drivers/src/at32f403a_407_exint.c ****   * @param  none
+  46:libraries/drivers/src/at32f403a_407_exint.c ****   * @retval none
+  47:libraries/drivers/src/at32f403a_407_exint.c ****   */
+  48:libraries/drivers/src/at32f403a_407_exint.c **** void exint_reset(void)
+  49:libraries/drivers/src/at32f403a_407_exint.c **** {
+  29              		.loc 1 49 1 view -0
+  30              		.cfi_startproc
+  31              		@ args = 0, pretend = 0, frame = 0
+  32              		@ frame_needed = 0, uses_anonymous_args = 0
+  33              		@ link register save eliminated.
+  50:libraries/drivers/src/at32f403a_407_exint.c ****   EXINT->inten = 0x00000000;
+  34              		.loc 1 50 3 view .LVU1
+  35              		.loc 1 50 16 is_stmt 0 view .LVU2
+  36 0000 044B     		ldr	r3, .L2
+  37 0002 0022     		movs	r2, #0
+  38 0004 1A60     		str	r2, [r3]
+  51:libraries/drivers/src/at32f403a_407_exint.c ****   EXINT->polcfg1 = 0x00000000;
+  39              		.loc 1 51 3 is_stmt 1 view .LVU3
+  40              		.loc 1 51 18 is_stmt 0 view .LVU4
+  41 0006 9A60     		str	r2, [r3, #8]
+  52:libraries/drivers/src/at32f403a_407_exint.c ****   EXINT->polcfg2 = 0x00000000;
+  42              		.loc 1 52 3 is_stmt 1 view .LVU5
+  43              		.loc 1 52 18 is_stmt 0 view .LVU6
+  44 0008 DA60     		str	r2, [r3, #12]
+  53:libraries/drivers/src/at32f403a_407_exint.c ****   EXINT->evten = 0x00000000;
+  45              		.loc 1 53 3 is_stmt 1 view .LVU7
+  46              		.loc 1 53 16 is_stmt 0 view .LVU8
+  47 000a 5A60     		str	r2, [r3, #4]
+  54:libraries/drivers/src/at32f403a_407_exint.c ****   EXINT->intsts = 0x000FFFFF;
+  48              		.loc 1 54 3 is_stmt 1 view .LVU9
+  49              		.loc 1 54 17 is_stmt 0 view .LVU10
+  50 000c 024A     		ldr	r2, .L2+4
+  51 000e 5A61     		str	r2, [r3, #20]
+  55:libraries/drivers/src/at32f403a_407_exint.c **** }
+  52              		.loc 1 55 1 view .LVU11
+  53 0010 7047     		bx	lr
+  54              	.L3:
+  55 0012 00BF     		.align	2
+  56              	.L2:
+  57 0014 00040140 		.word	1073808384
+  58 0018 FFFF0F00 		.word	1048575
+  59              		.cfi_endproc
+  60              	.LFE134:
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccSv2AUO.s 			page 3
+
+
+  62              		.section	.text.exint_default_para_init,"ax",%progbits
+  63              		.align	1
+  64              		.global	exint_default_para_init
+  65              		.syntax unified
+  66              		.thumb
+  67              		.thumb_func
+  69              	exint_default_para_init:
+  70              	.LVL0:
+  71              	.LFB135:
+  56:libraries/drivers/src/at32f403a_407_exint.c **** 
+  57:libraries/drivers/src/at32f403a_407_exint.c **** /**
+  58:libraries/drivers/src/at32f403a_407_exint.c ****   * @brief  exint default para init
+  59:libraries/drivers/src/at32f403a_407_exint.c ****   * @param  exint_struct
+  60:libraries/drivers/src/at32f403a_407_exint.c ****   *         - to the structure of exint_init_type
+  61:libraries/drivers/src/at32f403a_407_exint.c ****   * @retval none
+  62:libraries/drivers/src/at32f403a_407_exint.c ****   */
+  63:libraries/drivers/src/at32f403a_407_exint.c **** void exint_default_para_init(exint_init_type *exint_struct)
+  64:libraries/drivers/src/at32f403a_407_exint.c **** {
+  72              		.loc 1 64 1 is_stmt 1 view -0
+  73              		.cfi_startproc
+  74              		@ args = 0, pretend = 0, frame = 0
+  75              		@ frame_needed = 0, uses_anonymous_args = 0
+  76              		@ link register save eliminated.
+  65:libraries/drivers/src/at32f403a_407_exint.c ****   exint_struct->line_enable = FALSE;
+  77              		.loc 1 65 3 view .LVU13
+  78              		.loc 1 65 29 is_stmt 0 view .LVU14
+  79 0000 0023     		movs	r3, #0
+  80 0002 4372     		strb	r3, [r0, #9]
+  66:libraries/drivers/src/at32f403a_407_exint.c ****   exint_struct->line_select = EXINT_LINE_NONE;
+  81              		.loc 1 66 3 is_stmt 1 view .LVU15
+  82              		.loc 1 66 29 is_stmt 0 view .LVU16
+  83 0004 4360     		str	r3, [r0, #4]
+  67:libraries/drivers/src/at32f403a_407_exint.c ****   exint_struct->line_polarity = EXINT_TRIGGER_FALLING_EDGE;
+  84              		.loc 1 67 3 is_stmt 1 view .LVU17
+  85              		.loc 1 67 31 is_stmt 0 view .LVU18
+  86 0006 0123     		movs	r3, #1
+  87 0008 0372     		strb	r3, [r0, #8]
+  68:libraries/drivers/src/at32f403a_407_exint.c ****   exint_struct->line_mode = EXINT_LINE_EVENT;
+  88              		.loc 1 68 3 is_stmt 1 view .LVU19
+  89              		.loc 1 68 27 is_stmt 0 view .LVU20
+  90 000a 0370     		strb	r3, [r0]
+  69:libraries/drivers/src/at32f403a_407_exint.c **** }
+  91              		.loc 1 69 1 view .LVU21
+  92 000c 7047     		bx	lr
+  93              		.cfi_endproc
+  94              	.LFE135:
+  96              		.section	.text.exint_init,"ax",%progbits
+  97              		.align	1
+  98              		.global	exint_init
+  99              		.syntax unified
+ 100              		.thumb
+ 101              		.thumb_func
+ 103              	exint_init:
+ 104              	.LVL1:
+ 105              	.LFB136:
+  70:libraries/drivers/src/at32f403a_407_exint.c **** 
+  71:libraries/drivers/src/at32f403a_407_exint.c **** /**
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccSv2AUO.s 			page 4
+
+
+  72:libraries/drivers/src/at32f403a_407_exint.c ****   * @brief  exint init
+  73:libraries/drivers/src/at32f403a_407_exint.c ****   * @param  exint_struct
+  74:libraries/drivers/src/at32f403a_407_exint.c ****   *         - to the structure of exint_init_type
+  75:libraries/drivers/src/at32f403a_407_exint.c ****   * @retval none
+  76:libraries/drivers/src/at32f403a_407_exint.c ****   */
+  77:libraries/drivers/src/at32f403a_407_exint.c **** void exint_init(exint_init_type *exint_struct)
+  78:libraries/drivers/src/at32f403a_407_exint.c **** {
+ 106              		.loc 1 78 1 is_stmt 1 view -0
+ 107              		.cfi_startproc
+ 108              		@ args = 0, pretend = 0, frame = 0
+ 109              		@ frame_needed = 0, uses_anonymous_args = 0
+ 110              		@ link register save eliminated.
+ 111              		.loc 1 78 1 is_stmt 0 view .LVU23
+ 112 0000 10B4     		push	{r4}
+ 113              	.LCFI0:
+ 114              		.cfi_def_cfa_offset 4
+ 115              		.cfi_offset 4, -4
+  79:libraries/drivers/src/at32f403a_407_exint.c ****   uint32_t line_index = 0;
+ 116              		.loc 1 79 3 is_stmt 1 view .LVU24
+ 117              	.LVL2:
+  80:libraries/drivers/src/at32f403a_407_exint.c ****   line_index = exint_struct->line_select;
+ 118              		.loc 1 80 3 view .LVU25
+ 119              		.loc 1 80 14 is_stmt 0 view .LVU26
+ 120 0002 4468     		ldr	r4, [r0, #4]
+ 121              	.LVL3:
+  81:libraries/drivers/src/at32f403a_407_exint.c **** 
+  82:libraries/drivers/src/at32f403a_407_exint.c ****   EXINT->inten &= ~line_index;
+ 122              		.loc 1 82 3 is_stmt 1 view .LVU27
+ 123              		.loc 1 82 8 is_stmt 0 view .LVU28
+ 124 0004 1A4B     		ldr	r3, .L13
+ 125 0006 1A68     		ldr	r2, [r3]
+ 126              		.loc 1 82 16 view .LVU29
+ 127 0008 22EA0402 		bic	r2, r2, r4
+ 128 000c 1A60     		str	r2, [r3]
+  83:libraries/drivers/src/at32f403a_407_exint.c ****   EXINT->evten &= ~line_index;
+ 129              		.loc 1 83 3 is_stmt 1 view .LVU30
+ 130              		.loc 1 83 8 is_stmt 0 view .LVU31
+ 131 000e 5A68     		ldr	r2, [r3, #4]
+ 132              		.loc 1 83 16 view .LVU32
+ 133 0010 22EA0402 		bic	r2, r2, r4
+ 134 0014 5A60     		str	r2, [r3, #4]
+  84:libraries/drivers/src/at32f403a_407_exint.c **** 
+  85:libraries/drivers/src/at32f403a_407_exint.c ****   if(exint_struct->line_enable != FALSE)
+ 135              		.loc 1 85 3 is_stmt 1 view .LVU33
+ 136              		.loc 1 85 18 is_stmt 0 view .LVU34
+ 137 0016 437A     		ldrb	r3, [r0, #9]	@ zero_extendqisi2
+ 138              		.loc 1 85 5 view .LVU35
+ 139 0018 9BB1     		cbz	r3, .L5
+ 140 001a E143     		mvns	r1, r4
+  86:libraries/drivers/src/at32f403a_407_exint.c ****   {
+  87:libraries/drivers/src/at32f403a_407_exint.c ****     if(exint_struct->line_mode == EXINT_LINE_INTERRUPT)
+ 141              		.loc 1 87 5 is_stmt 1 view .LVU36
+ 142              		.loc 1 87 20 is_stmt 0 view .LVU37
+ 143 001c 0378     		ldrb	r3, [r0]	@ zero_extendqisi2
+ 144              		.loc 1 87 7 view .LVU38
+ 145 001e 9BB9     		cbnz	r3, .L7
+  88:libraries/drivers/src/at32f403a_407_exint.c ****     {
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccSv2AUO.s 			page 5
+
+
+  89:libraries/drivers/src/at32f403a_407_exint.c ****       EXINT->inten |= line_index;
+ 146              		.loc 1 89 7 is_stmt 1 view .LVU39
+ 147              		.loc 1 89 12 is_stmt 0 view .LVU40
+ 148 0020 134A     		ldr	r2, .L13
+ 149 0022 1368     		ldr	r3, [r2]
+ 150              		.loc 1 89 20 view .LVU41
+ 151 0024 2343     		orrs	r3, r3, r4
+ 152 0026 1360     		str	r3, [r2]
+ 153              	.L8:
+  90:libraries/drivers/src/at32f403a_407_exint.c ****     }
+  91:libraries/drivers/src/at32f403a_407_exint.c ****     else
+  92:libraries/drivers/src/at32f403a_407_exint.c ****     {
+  93:libraries/drivers/src/at32f403a_407_exint.c ****       EXINT->evten |= line_index;
+  94:libraries/drivers/src/at32f403a_407_exint.c ****     }
+  95:libraries/drivers/src/at32f403a_407_exint.c **** 
+  96:libraries/drivers/src/at32f403a_407_exint.c ****     EXINT->polcfg1 &= ~line_index;
+ 154              		.loc 1 96 5 is_stmt 1 view .LVU42
+ 155              		.loc 1 96 10 is_stmt 0 view .LVU43
+ 156 0028 114B     		ldr	r3, .L13
+ 157 002a 9A68     		ldr	r2, [r3, #8]
+ 158              		.loc 1 96 20 view .LVU44
+ 159 002c 0A40     		ands	r2, r2, r1
+ 160 002e 9A60     		str	r2, [r3, #8]
+  97:libraries/drivers/src/at32f403a_407_exint.c ****     EXINT->polcfg2 &= ~line_index;
+ 161              		.loc 1 97 5 is_stmt 1 view .LVU45
+ 162              		.loc 1 97 10 is_stmt 0 view .LVU46
+ 163 0030 DA68     		ldr	r2, [r3, #12]
+ 164              		.loc 1 97 20 view .LVU47
+ 165 0032 1140     		ands	r1, r1, r2
+ 166 0034 D960     		str	r1, [r3, #12]
+  98:libraries/drivers/src/at32f403a_407_exint.c ****     if(exint_struct->line_polarity == EXINT_TRIGGER_RISING_EDGE)
+ 167              		.loc 1 98 5 is_stmt 1 view .LVU48
+ 168              		.loc 1 98 20 is_stmt 0 view .LVU49
+ 169 0036 037A     		ldrb	r3, [r0, #8]	@ zero_extendqisi2
+ 170              		.loc 1 98 7 view .LVU50
+ 171 0038 5BB9     		cbnz	r3, .L9
+  99:libraries/drivers/src/at32f403a_407_exint.c ****     {
+ 100:libraries/drivers/src/at32f403a_407_exint.c ****       EXINT->polcfg1 |= line_index;
+ 172              		.loc 1 100 7 is_stmt 1 view .LVU51
+ 173              		.loc 1 100 12 is_stmt 0 view .LVU52
+ 174 003a 0D4A     		ldr	r2, .L13
+ 175 003c 9368     		ldr	r3, [r2, #8]
+ 176              		.loc 1 100 22 view .LVU53
+ 177 003e 2343     		orrs	r3, r3, r4
+ 178 0040 9360     		str	r3, [r2, #8]
+ 179              	.L5:
+ 101:libraries/drivers/src/at32f403a_407_exint.c ****     }
+ 102:libraries/drivers/src/at32f403a_407_exint.c ****     else if(exint_struct->line_polarity == EXINT_TRIGGER_FALLING_EDGE)
+ 103:libraries/drivers/src/at32f403a_407_exint.c ****     {
+ 104:libraries/drivers/src/at32f403a_407_exint.c ****       EXINT->polcfg2 |= line_index;
+ 105:libraries/drivers/src/at32f403a_407_exint.c ****     }
+ 106:libraries/drivers/src/at32f403a_407_exint.c ****     else
+ 107:libraries/drivers/src/at32f403a_407_exint.c ****     {
+ 108:libraries/drivers/src/at32f403a_407_exint.c ****       EXINT->polcfg1 |= line_index;
+ 109:libraries/drivers/src/at32f403a_407_exint.c ****       EXINT->polcfg2 |= line_index;
+ 110:libraries/drivers/src/at32f403a_407_exint.c ****     }
+ 111:libraries/drivers/src/at32f403a_407_exint.c ****   }
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccSv2AUO.s 			page 6
+
+
+ 112:libraries/drivers/src/at32f403a_407_exint.c **** }
+ 180              		.loc 1 112 1 view .LVU54
+ 181 0042 5DF8044B 		ldr	r4, [sp], #4
+ 182              	.LCFI1:
+ 183              		.cfi_remember_state
+ 184              		.cfi_restore 4
+ 185              		.cfi_def_cfa_offset 0
+ 186              	.LVL4:
+ 187              		.loc 1 112 1 view .LVU55
+ 188 0046 7047     		bx	lr
+ 189              	.LVL5:
+ 190              	.L7:
+ 191              	.LCFI2:
+ 192              		.cfi_restore_state
+  93:libraries/drivers/src/at32f403a_407_exint.c ****     }
+ 193              		.loc 1 93 7 is_stmt 1 view .LVU56
+  93:libraries/drivers/src/at32f403a_407_exint.c ****     }
+ 194              		.loc 1 93 12 is_stmt 0 view .LVU57
+ 195 0048 094A     		ldr	r2, .L13
+ 196 004a 5368     		ldr	r3, [r2, #4]
+  93:libraries/drivers/src/at32f403a_407_exint.c ****     }
+ 197              		.loc 1 93 20 view .LVU58
+ 198 004c 2343     		orrs	r3, r3, r4
+ 199 004e 5360     		str	r3, [r2, #4]
+ 200 0050 EAE7     		b	.L8
+ 201              	.L9:
+ 102:libraries/drivers/src/at32f403a_407_exint.c ****     {
+ 202              		.loc 1 102 10 is_stmt 1 view .LVU59
+ 102:libraries/drivers/src/at32f403a_407_exint.c ****     {
+ 203              		.loc 1 102 12 is_stmt 0 view .LVU60
+ 204 0052 012B     		cmp	r3, #1
+ 205 0054 07D0     		beq	.L12
+ 108:libraries/drivers/src/at32f403a_407_exint.c ****       EXINT->polcfg2 |= line_index;
+ 206              		.loc 1 108 7 is_stmt 1 view .LVU61
+ 108:libraries/drivers/src/at32f403a_407_exint.c ****       EXINT->polcfg2 |= line_index;
+ 207              		.loc 1 108 12 is_stmt 0 view .LVU62
+ 208 0056 064B     		ldr	r3, .L13
+ 209 0058 9A68     		ldr	r2, [r3, #8]
+ 108:libraries/drivers/src/at32f403a_407_exint.c ****       EXINT->polcfg2 |= line_index;
+ 210              		.loc 1 108 22 view .LVU63
+ 211 005a 2243     		orrs	r2, r2, r4
+ 212 005c 9A60     		str	r2, [r3, #8]
+ 109:libraries/drivers/src/at32f403a_407_exint.c ****     }
+ 213              		.loc 1 109 7 is_stmt 1 view .LVU64
+ 109:libraries/drivers/src/at32f403a_407_exint.c ****     }
+ 214              		.loc 1 109 12 is_stmt 0 view .LVU65
+ 215 005e DA68     		ldr	r2, [r3, #12]
+ 109:libraries/drivers/src/at32f403a_407_exint.c ****     }
+ 216              		.loc 1 109 22 view .LVU66
+ 217 0060 2243     		orrs	r2, r2, r4
+ 218 0062 DA60     		str	r2, [r3, #12]
+ 219              		.loc 1 112 1 view .LVU67
+ 220 0064 EDE7     		b	.L5
+ 221              	.L12:
+ 104:libraries/drivers/src/at32f403a_407_exint.c ****     }
+ 222              		.loc 1 104 7 is_stmt 1 view .LVU68
+ 104:libraries/drivers/src/at32f403a_407_exint.c ****     }
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccSv2AUO.s 			page 7
+
+
+ 223              		.loc 1 104 12 is_stmt 0 view .LVU69
+ 224 0066 024A     		ldr	r2, .L13
+ 225 0068 D368     		ldr	r3, [r2, #12]
+ 104:libraries/drivers/src/at32f403a_407_exint.c ****     }
+ 226              		.loc 1 104 22 view .LVU70
+ 227 006a 2343     		orrs	r3, r3, r4
+ 228 006c D360     		str	r3, [r2, #12]
+ 229 006e E8E7     		b	.L5
+ 230              	.L14:
+ 231              		.align	2
+ 232              	.L13:
+ 233 0070 00040140 		.word	1073808384
+ 234              		.cfi_endproc
+ 235              	.LFE136:
+ 237              		.section	.text.exint_flag_clear,"ax",%progbits
+ 238              		.align	1
+ 239              		.global	exint_flag_clear
+ 240              		.syntax unified
+ 241              		.thumb
+ 242              		.thumb_func
+ 244              	exint_flag_clear:
+ 245              	.LVL6:
+ 246              	.LFB137:
+ 113:libraries/drivers/src/at32f403a_407_exint.c **** 
+ 114:libraries/drivers/src/at32f403a_407_exint.c **** /**
+ 115:libraries/drivers/src/at32f403a_407_exint.c ****   * @brief  clear exint flag
+ 116:libraries/drivers/src/at32f403a_407_exint.c ****   * @param  exint_line
+ 117:libraries/drivers/src/at32f403a_407_exint.c ****   *         this parameter can be any combination of the following values:
+ 118:libraries/drivers/src/at32f403a_407_exint.c ****   *         - EXINT_LINE_0
+ 119:libraries/drivers/src/at32f403a_407_exint.c ****   *         - EXINT_LINE_1
+ 120:libraries/drivers/src/at32f403a_407_exint.c ****   *         ...
+ 121:libraries/drivers/src/at32f403a_407_exint.c ****   *         - EXINT_LINE_18
+ 122:libraries/drivers/src/at32f403a_407_exint.c ****   *         - EXINT_LINE_19
+ 123:libraries/drivers/src/at32f403a_407_exint.c ****   * @retval none
+ 124:libraries/drivers/src/at32f403a_407_exint.c ****   */
+ 125:libraries/drivers/src/at32f403a_407_exint.c **** void exint_flag_clear(uint32_t exint_line)
+ 126:libraries/drivers/src/at32f403a_407_exint.c **** {
+ 247              		.loc 1 126 1 is_stmt 1 view -0
+ 248              		.cfi_startproc
+ 249              		@ args = 0, pretend = 0, frame = 0
+ 250              		@ frame_needed = 0, uses_anonymous_args = 0
+ 251              		@ link register save eliminated.
+ 127:libraries/drivers/src/at32f403a_407_exint.c ****   if((EXINT->swtrg & exint_line) == exint_line)
+ 252              		.loc 1 127 3 view .LVU72
+ 253              		.loc 1 127 12 is_stmt 0 view .LVU73
+ 254 0000 054B     		ldr	r3, .L19
+ 255 0002 1B69     		ldr	r3, [r3, #16]
+ 256              		.loc 1 127 5 view .LVU74
+ 257 0004 30EA0303 		bics	r3, r0, r3
+ 258 0008 02D0     		beq	.L18
+ 128:libraries/drivers/src/at32f403a_407_exint.c ****   {
+ 129:libraries/drivers/src/at32f403a_407_exint.c ****     EXINT->intsts = exint_line;
+ 130:libraries/drivers/src/at32f403a_407_exint.c ****     EXINT->intsts = exint_line;
+ 131:libraries/drivers/src/at32f403a_407_exint.c ****   }
+ 132:libraries/drivers/src/at32f403a_407_exint.c ****   else
+ 133:libraries/drivers/src/at32f403a_407_exint.c ****   {
+ 134:libraries/drivers/src/at32f403a_407_exint.c ****     EXINT->intsts = exint_line;
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccSv2AUO.s 			page 8
+
+
+ 259              		.loc 1 134 5 is_stmt 1 view .LVU75
+ 260              		.loc 1 134 19 is_stmt 0 view .LVU76
+ 261 000a 034B     		ldr	r3, .L19
+ 262 000c 5861     		str	r0, [r3, #20]
+ 135:libraries/drivers/src/at32f403a_407_exint.c ****   }
+ 136:libraries/drivers/src/at32f403a_407_exint.c **** }
+ 263              		.loc 1 136 1 view .LVU77
+ 264 000e 7047     		bx	lr
+ 265              	.L18:
+ 129:libraries/drivers/src/at32f403a_407_exint.c ****     EXINT->intsts = exint_line;
+ 266              		.loc 1 129 5 is_stmt 1 view .LVU78
+ 129:libraries/drivers/src/at32f403a_407_exint.c ****     EXINT->intsts = exint_line;
+ 267              		.loc 1 129 19 is_stmt 0 view .LVU79
+ 268 0010 014B     		ldr	r3, .L19
+ 269 0012 5861     		str	r0, [r3, #20]
+ 130:libraries/drivers/src/at32f403a_407_exint.c ****   }
+ 270              		.loc 1 130 5 is_stmt 1 view .LVU80
+ 130:libraries/drivers/src/at32f403a_407_exint.c ****   }
+ 271              		.loc 1 130 19 is_stmt 0 view .LVU81
+ 272 0014 5861     		str	r0, [r3, #20]
+ 273 0016 7047     		bx	lr
+ 274              	.L20:
+ 275              		.align	2
+ 276              	.L19:
+ 277 0018 00040140 		.word	1073808384
+ 278              		.cfi_endproc
+ 279              	.LFE137:
+ 281              		.section	.text.exint_flag_get,"ax",%progbits
+ 282              		.align	1
+ 283              		.global	exint_flag_get
+ 284              		.syntax unified
+ 285              		.thumb
+ 286              		.thumb_func
+ 288              	exint_flag_get:
+ 289              	.LVL7:
+ 290              	.LFB138:
+ 137:libraries/drivers/src/at32f403a_407_exint.c **** 
+ 138:libraries/drivers/src/at32f403a_407_exint.c **** /**
+ 139:libraries/drivers/src/at32f403a_407_exint.c ****   * @brief  get exint flag
+ 140:libraries/drivers/src/at32f403a_407_exint.c ****   * @param  exint_line
+ 141:libraries/drivers/src/at32f403a_407_exint.c ****   *         this parameter can be one of the following values:
+ 142:libraries/drivers/src/at32f403a_407_exint.c ****   *         - EXINT_LINE_0
+ 143:libraries/drivers/src/at32f403a_407_exint.c ****   *         - EXINT_LINE_1
+ 144:libraries/drivers/src/at32f403a_407_exint.c ****   *         ...
+ 145:libraries/drivers/src/at32f403a_407_exint.c ****   *         - EXINT_LINE_18
+ 146:libraries/drivers/src/at32f403a_407_exint.c ****   *         - EXINT_LINE_19
+ 147:libraries/drivers/src/at32f403a_407_exint.c ****   * @retval the new state of exint flag(SET or RESET).
+ 148:libraries/drivers/src/at32f403a_407_exint.c ****   */
+ 149:libraries/drivers/src/at32f403a_407_exint.c **** flag_status exint_flag_get(uint32_t exint_line)
+ 150:libraries/drivers/src/at32f403a_407_exint.c **** {
+ 291              		.loc 1 150 1 is_stmt 1 view -0
+ 292              		.cfi_startproc
+ 293              		@ args = 0, pretend = 0, frame = 0
+ 294              		@ frame_needed = 0, uses_anonymous_args = 0
+ 295              		@ link register save eliminated.
+ 151:libraries/drivers/src/at32f403a_407_exint.c ****   flag_status status = RESET;
+ 296              		.loc 1 151 3 view .LVU83
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccSv2AUO.s 			page 9
+
+
+ 152:libraries/drivers/src/at32f403a_407_exint.c ****   uint32_t exint_flag =0;
+ 297              		.loc 1 152 3 view .LVU84
+ 153:libraries/drivers/src/at32f403a_407_exint.c ****   exint_flag = EXINT->intsts & exint_line;
+ 298              		.loc 1 153 3 view .LVU85
+ 299              		.loc 1 153 21 is_stmt 0 view .LVU86
+ 300 0000 034B     		ldr	r3, .L24
+ 301 0002 5B69     		ldr	r3, [r3, #20]
+ 302              	.LVL8:
+ 154:libraries/drivers/src/at32f403a_407_exint.c ****   if((exint_flag != (uint16_t)RESET))
+ 303              		.loc 1 154 3 is_stmt 1 view .LVU87
+ 304              		.loc 1 154 5 is_stmt 0 view .LVU88
+ 305 0004 0342     		tst	r3, r0
+ 306 0006 01D0     		beq	.L23
+ 155:libraries/drivers/src/at32f403a_407_exint.c ****   {
+ 156:libraries/drivers/src/at32f403a_407_exint.c ****     status = SET;
+ 307              		.loc 1 156 12 view .LVU89
+ 308 0008 0120     		movs	r0, #1
+ 309              	.LVL9:
+ 310              		.loc 1 156 12 view .LVU90
+ 311 000a 7047     		bx	lr
+ 312              	.LVL10:
+ 313              	.L23:
+ 157:libraries/drivers/src/at32f403a_407_exint.c ****   }
+ 158:libraries/drivers/src/at32f403a_407_exint.c ****   else
+ 159:libraries/drivers/src/at32f403a_407_exint.c ****   {
+ 160:libraries/drivers/src/at32f403a_407_exint.c ****     status = RESET;
+ 314              		.loc 1 160 12 view .LVU91
+ 315 000c 0020     		movs	r0, #0
+ 316              	.LVL11:
+ 161:libraries/drivers/src/at32f403a_407_exint.c ****   }
+ 162:libraries/drivers/src/at32f403a_407_exint.c ****   return status;
+ 317              		.loc 1 162 3 is_stmt 1 view .LVU92
+ 163:libraries/drivers/src/at32f403a_407_exint.c **** }
+ 318              		.loc 1 163 1 is_stmt 0 view .LVU93
+ 319 000e 7047     		bx	lr
+ 320              	.L25:
+ 321              		.align	2
+ 322              	.L24:
+ 323 0010 00040140 		.word	1073808384
+ 324              		.cfi_endproc
+ 325              	.LFE138:
+ 327              		.section	.text.exint_interrupt_flag_get,"ax",%progbits
+ 328              		.align	1
+ 329              		.global	exint_interrupt_flag_get
+ 330              		.syntax unified
+ 331              		.thumb
+ 332              		.thumb_func
+ 334              	exint_interrupt_flag_get:
+ 335              	.LVL12:
+ 336              	.LFB139:
+ 164:libraries/drivers/src/at32f403a_407_exint.c **** 
+ 165:libraries/drivers/src/at32f403a_407_exint.c **** /**
+ 166:libraries/drivers/src/at32f403a_407_exint.c ****   * @brief  get exint interrupt flag
+ 167:libraries/drivers/src/at32f403a_407_exint.c ****   * @param  exint_line
+ 168:libraries/drivers/src/at32f403a_407_exint.c ****   *         this parameter can be one of the following values:
+ 169:libraries/drivers/src/at32f403a_407_exint.c ****   *         - EXINT_LINE_0
+ 170:libraries/drivers/src/at32f403a_407_exint.c ****   *         - EXINT_LINE_1
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccSv2AUO.s 			page 10
+
+
+ 171:libraries/drivers/src/at32f403a_407_exint.c ****   *         ...
+ 172:libraries/drivers/src/at32f403a_407_exint.c ****   *         - EXINT_LINE_18
+ 173:libraries/drivers/src/at32f403a_407_exint.c ****   *         - EXINT_LINE_19
+ 174:libraries/drivers/src/at32f403a_407_exint.c ****   * @retval the new state of exint flag(SET or RESET).
+ 175:libraries/drivers/src/at32f403a_407_exint.c ****   */
+ 176:libraries/drivers/src/at32f403a_407_exint.c **** flag_status exint_interrupt_flag_get(uint32_t exint_line)
+ 177:libraries/drivers/src/at32f403a_407_exint.c **** {
+ 337              		.loc 1 177 1 is_stmt 1 view -0
+ 338              		.cfi_startproc
+ 339              		@ args = 0, pretend = 0, frame = 0
+ 340              		@ frame_needed = 0, uses_anonymous_args = 0
+ 341              		@ link register save eliminated.
+ 178:libraries/drivers/src/at32f403a_407_exint.c ****   flag_status status = RESET;
+ 342              		.loc 1 178 3 view .LVU95
+ 179:libraries/drivers/src/at32f403a_407_exint.c ****   uint32_t exint_flag = 0;
+ 343              		.loc 1 179 3 view .LVU96
+ 180:libraries/drivers/src/at32f403a_407_exint.c ****   exint_flag = EXINT->intsts & exint_line;
+ 344              		.loc 1 180 3 view .LVU97
+ 345              		.loc 1 180 21 is_stmt 0 view .LVU98
+ 346 0000 044A     		ldr	r2, .L29
+ 347 0002 5369     		ldr	r3, [r2, #20]
+ 348              		.loc 1 180 14 view .LVU99
+ 349 0004 0340     		ands	r3, r3, r0
+ 350              	.LVL13:
+ 181:libraries/drivers/src/at32f403a_407_exint.c ****   exint_flag = exint_flag & EXINT->inten;
+ 351              		.loc 1 181 3 is_stmt 1 view .LVU100
+ 352              		.loc 1 181 34 is_stmt 0 view .LVU101
+ 353 0006 1268     		ldr	r2, [r2]
+ 354              	.LVL14:
+ 182:libraries/drivers/src/at32f403a_407_exint.c **** 
+ 183:libraries/drivers/src/at32f403a_407_exint.c ****   if((exint_flag != (uint16_t)RESET))
+ 355              		.loc 1 183 3 is_stmt 1 view .LVU102
+ 356              		.loc 1 183 5 is_stmt 0 view .LVU103
+ 357 0008 1A42     		tst	r2, r3
+ 358 000a 01D0     		beq	.L28
+ 184:libraries/drivers/src/at32f403a_407_exint.c ****   {
+ 185:libraries/drivers/src/at32f403a_407_exint.c ****     status = SET;
+ 359              		.loc 1 185 12 view .LVU104
+ 360 000c 0120     		movs	r0, #1
+ 361              	.LVL15:
+ 362              		.loc 1 185 12 view .LVU105
+ 363 000e 7047     		bx	lr
+ 364              	.LVL16:
+ 365              	.L28:
+ 186:libraries/drivers/src/at32f403a_407_exint.c ****   }
+ 187:libraries/drivers/src/at32f403a_407_exint.c ****   else
+ 188:libraries/drivers/src/at32f403a_407_exint.c ****   {
+ 189:libraries/drivers/src/at32f403a_407_exint.c ****     status = RESET;
+ 366              		.loc 1 189 12 view .LVU106
+ 367 0010 0020     		movs	r0, #0
+ 368              	.LVL17:
+ 190:libraries/drivers/src/at32f403a_407_exint.c ****   }
+ 191:libraries/drivers/src/at32f403a_407_exint.c ****   return status;
+ 369              		.loc 1 191 3 is_stmt 1 view .LVU107
+ 192:libraries/drivers/src/at32f403a_407_exint.c **** }
+ 370              		.loc 1 192 1 is_stmt 0 view .LVU108
+ 371 0012 7047     		bx	lr
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccSv2AUO.s 			page 11
+
+
+ 372              	.L30:
+ 373              		.align	2
+ 374              	.L29:
+ 375 0014 00040140 		.word	1073808384
+ 376              		.cfi_endproc
+ 377              	.LFE139:
+ 379              		.section	.text.exint_software_interrupt_event_generate,"ax",%progbits
+ 380              		.align	1
+ 381              		.global	exint_software_interrupt_event_generate
+ 382              		.syntax unified
+ 383              		.thumb
+ 384              		.thumb_func
+ 386              	exint_software_interrupt_event_generate:
+ 387              	.LVL18:
+ 388              	.LFB140:
+ 193:libraries/drivers/src/at32f403a_407_exint.c **** 
+ 194:libraries/drivers/src/at32f403a_407_exint.c **** /**
+ 195:libraries/drivers/src/at32f403a_407_exint.c ****   * @brief  generate exint software interrupt event
+ 196:libraries/drivers/src/at32f403a_407_exint.c ****   * @param  exint_line
+ 197:libraries/drivers/src/at32f403a_407_exint.c ****   *         this parameter can be one of the following values:
+ 198:libraries/drivers/src/at32f403a_407_exint.c ****   *         - EXINT_LINE_0
+ 199:libraries/drivers/src/at32f403a_407_exint.c ****   *         - EXINT_LINE_1
+ 200:libraries/drivers/src/at32f403a_407_exint.c ****   *         ...
+ 201:libraries/drivers/src/at32f403a_407_exint.c ****   *         - EXINT_LINE_18
+ 202:libraries/drivers/src/at32f403a_407_exint.c ****   *         - EXINT_LINE_19
+ 203:libraries/drivers/src/at32f403a_407_exint.c ****   * @retval none
+ 204:libraries/drivers/src/at32f403a_407_exint.c ****   */
+ 205:libraries/drivers/src/at32f403a_407_exint.c **** void exint_software_interrupt_event_generate(uint32_t exint_line)
+ 206:libraries/drivers/src/at32f403a_407_exint.c **** {
+ 389              		.loc 1 206 1 is_stmt 1 view -0
+ 390              		.cfi_startproc
+ 391              		@ args = 0, pretend = 0, frame = 0
+ 392              		@ frame_needed = 0, uses_anonymous_args = 0
+ 393              		@ link register save eliminated.
+ 207:libraries/drivers/src/at32f403a_407_exint.c ****   EXINT->swtrg |= exint_line;
+ 394              		.loc 1 207 3 view .LVU110
+ 395              		.loc 1 207 8 is_stmt 0 view .LVU111
+ 396 0000 024A     		ldr	r2, .L32
+ 397 0002 1369     		ldr	r3, [r2, #16]
+ 398              		.loc 1 207 16 view .LVU112
+ 399 0004 0343     		orrs	r3, r3, r0
+ 400 0006 1361     		str	r3, [r2, #16]
+ 208:libraries/drivers/src/at32f403a_407_exint.c **** }
+ 401              		.loc 1 208 1 view .LVU113
+ 402 0008 7047     		bx	lr
+ 403              	.L33:
+ 404 000a 00BF     		.align	2
+ 405              	.L32:
+ 406 000c 00040140 		.word	1073808384
+ 407              		.cfi_endproc
+ 408              	.LFE140:
+ 410              		.section	.text.exint_interrupt_enable,"ax",%progbits
+ 411              		.align	1
+ 412              		.global	exint_interrupt_enable
+ 413              		.syntax unified
+ 414              		.thumb
+ 415              		.thumb_func
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccSv2AUO.s 			page 12
+
+
+ 417              	exint_interrupt_enable:
+ 418              	.LVL19:
+ 419              	.LFB141:
+ 209:libraries/drivers/src/at32f403a_407_exint.c **** 
+ 210:libraries/drivers/src/at32f403a_407_exint.c **** /**
+ 211:libraries/drivers/src/at32f403a_407_exint.c ****   * @brief  enable or disable exint interrupt
+ 212:libraries/drivers/src/at32f403a_407_exint.c ****   * @param  exint_line
+ 213:libraries/drivers/src/at32f403a_407_exint.c ****   *         this parameter can be any combination of the following values:
+ 214:libraries/drivers/src/at32f403a_407_exint.c ****   *         - EXINT_LINE_0
+ 215:libraries/drivers/src/at32f403a_407_exint.c ****   *         - EXINT_LINE_1
+ 216:libraries/drivers/src/at32f403a_407_exint.c ****   *         ...
+ 217:libraries/drivers/src/at32f403a_407_exint.c ****   *         - EXINT_LINE_18
+ 218:libraries/drivers/src/at32f403a_407_exint.c ****   *         - EXINT_LINE_19
+ 219:libraries/drivers/src/at32f403a_407_exint.c ****   * @param  new_state: new state of exint interrupt.
+ 220:libraries/drivers/src/at32f403a_407_exint.c ****   *         this parameter can be: TRUE or FALSE.
+ 221:libraries/drivers/src/at32f403a_407_exint.c ****   * @retval none
+ 222:libraries/drivers/src/at32f403a_407_exint.c ****   */
+ 223:libraries/drivers/src/at32f403a_407_exint.c **** void exint_interrupt_enable(uint32_t exint_line, confirm_state new_state)
+ 224:libraries/drivers/src/at32f403a_407_exint.c **** {
+ 420              		.loc 1 224 1 is_stmt 1 view -0
+ 421              		.cfi_startproc
+ 422              		@ args = 0, pretend = 0, frame = 0
+ 423              		@ frame_needed = 0, uses_anonymous_args = 0
+ 424              		@ link register save eliminated.
+ 225:libraries/drivers/src/at32f403a_407_exint.c ****   if(new_state == TRUE)
+ 425              		.loc 1 225 3 view .LVU115
+ 426              		.loc 1 225 5 is_stmt 0 view .LVU116
+ 427 0000 0129     		cmp	r1, #1
+ 428 0002 05D0     		beq	.L37
+ 226:libraries/drivers/src/at32f403a_407_exint.c ****   {
+ 227:libraries/drivers/src/at32f403a_407_exint.c ****     EXINT->inten |= exint_line;
+ 228:libraries/drivers/src/at32f403a_407_exint.c ****   }
+ 229:libraries/drivers/src/at32f403a_407_exint.c ****   else
+ 230:libraries/drivers/src/at32f403a_407_exint.c ****   {
+ 231:libraries/drivers/src/at32f403a_407_exint.c ****     EXINT->inten &= ~exint_line;
+ 429              		.loc 1 231 5 is_stmt 1 view .LVU117
+ 430              		.loc 1 231 10 is_stmt 0 view .LVU118
+ 431 0004 054A     		ldr	r2, .L38
+ 432 0006 1368     		ldr	r3, [r2]
+ 433              		.loc 1 231 18 view .LVU119
+ 434 0008 23EA0003 		bic	r3, r3, r0
+ 435 000c 1360     		str	r3, [r2]
+ 232:libraries/drivers/src/at32f403a_407_exint.c ****   }
+ 233:libraries/drivers/src/at32f403a_407_exint.c **** }
+ 436              		.loc 1 233 1 view .LVU120
+ 437 000e 7047     		bx	lr
+ 438              	.L37:
+ 227:libraries/drivers/src/at32f403a_407_exint.c ****   }
+ 439              		.loc 1 227 5 is_stmt 1 view .LVU121
+ 227:libraries/drivers/src/at32f403a_407_exint.c ****   }
+ 440              		.loc 1 227 10 is_stmt 0 view .LVU122
+ 441 0010 024A     		ldr	r2, .L38
+ 442 0012 1368     		ldr	r3, [r2]
+ 227:libraries/drivers/src/at32f403a_407_exint.c ****   }
+ 443              		.loc 1 227 18 view .LVU123
+ 444 0014 0343     		orrs	r3, r3, r0
+ 445 0016 1360     		str	r3, [r2]
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccSv2AUO.s 			page 13
+
+
+ 446 0018 7047     		bx	lr
+ 447              	.L39:
+ 448 001a 00BF     		.align	2
+ 449              	.L38:
+ 450 001c 00040140 		.word	1073808384
+ 451              		.cfi_endproc
+ 452              	.LFE141:
+ 454              		.section	.text.exint_event_enable,"ax",%progbits
+ 455              		.align	1
+ 456              		.global	exint_event_enable
+ 457              		.syntax unified
+ 458              		.thumb
+ 459              		.thumb_func
+ 461              	exint_event_enable:
+ 462              	.LVL20:
+ 463              	.LFB142:
+ 234:libraries/drivers/src/at32f403a_407_exint.c **** 
+ 235:libraries/drivers/src/at32f403a_407_exint.c **** /**
+ 236:libraries/drivers/src/at32f403a_407_exint.c ****   * @brief  enable or disable exint event
+ 237:libraries/drivers/src/at32f403a_407_exint.c ****   * @param  exint_line
+ 238:libraries/drivers/src/at32f403a_407_exint.c ****   *         this parameter can be any combination of the following values:
+ 239:libraries/drivers/src/at32f403a_407_exint.c ****   *         - EXINT_LINE_0
+ 240:libraries/drivers/src/at32f403a_407_exint.c ****   *         - EXINT_LINE_1
+ 241:libraries/drivers/src/at32f403a_407_exint.c ****   *         ...
+ 242:libraries/drivers/src/at32f403a_407_exint.c ****   *         - EXINT_LINE_18
+ 243:libraries/drivers/src/at32f403a_407_exint.c ****   *         - EXINT_LINE_19
+ 244:libraries/drivers/src/at32f403a_407_exint.c ****   * @param  new_state: new state of exint event.
+ 245:libraries/drivers/src/at32f403a_407_exint.c ****   *         this parameter can be: TRUE or FALSE.
+ 246:libraries/drivers/src/at32f403a_407_exint.c ****   * @retval none
+ 247:libraries/drivers/src/at32f403a_407_exint.c ****   */
+ 248:libraries/drivers/src/at32f403a_407_exint.c **** void exint_event_enable(uint32_t exint_line, confirm_state new_state)
+ 249:libraries/drivers/src/at32f403a_407_exint.c **** {
+ 464              		.loc 1 249 1 is_stmt 1 view -0
+ 465              		.cfi_startproc
+ 466              		@ args = 0, pretend = 0, frame = 0
+ 467              		@ frame_needed = 0, uses_anonymous_args = 0
+ 468              		@ link register save eliminated.
+ 250:libraries/drivers/src/at32f403a_407_exint.c ****   if(new_state == TRUE)
+ 469              		.loc 1 250 3 view .LVU125
+ 470              		.loc 1 250 5 is_stmt 0 view .LVU126
+ 471 0000 0129     		cmp	r1, #1
+ 472 0002 05D0     		beq	.L43
+ 251:libraries/drivers/src/at32f403a_407_exint.c ****   {
+ 252:libraries/drivers/src/at32f403a_407_exint.c ****     EXINT->evten |= exint_line;
+ 253:libraries/drivers/src/at32f403a_407_exint.c ****   }
+ 254:libraries/drivers/src/at32f403a_407_exint.c ****   else
+ 255:libraries/drivers/src/at32f403a_407_exint.c ****   {
+ 256:libraries/drivers/src/at32f403a_407_exint.c ****     EXINT->evten &= ~exint_line;
+ 473              		.loc 1 256 5 is_stmt 1 view .LVU127
+ 474              		.loc 1 256 10 is_stmt 0 view .LVU128
+ 475 0004 054A     		ldr	r2, .L44
+ 476 0006 5368     		ldr	r3, [r2, #4]
+ 477              		.loc 1 256 18 view .LVU129
+ 478 0008 23EA0003 		bic	r3, r3, r0
+ 479 000c 5360     		str	r3, [r2, #4]
+ 257:libraries/drivers/src/at32f403a_407_exint.c ****   }
+ 258:libraries/drivers/src/at32f403a_407_exint.c **** }
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccSv2AUO.s 			page 14
+
+
+ 480              		.loc 1 258 1 view .LVU130
+ 481 000e 7047     		bx	lr
+ 482              	.L43:
+ 252:libraries/drivers/src/at32f403a_407_exint.c ****   }
+ 483              		.loc 1 252 5 is_stmt 1 view .LVU131
+ 252:libraries/drivers/src/at32f403a_407_exint.c ****   }
+ 484              		.loc 1 252 10 is_stmt 0 view .LVU132
+ 485 0010 024A     		ldr	r2, .L44
+ 486 0012 5368     		ldr	r3, [r2, #4]
+ 252:libraries/drivers/src/at32f403a_407_exint.c ****   }
+ 487              		.loc 1 252 18 view .LVU133
+ 488 0014 0343     		orrs	r3, r3, r0
+ 489 0016 5360     		str	r3, [r2, #4]
+ 490 0018 7047     		bx	lr
+ 491              	.L45:
+ 492 001a 00BF     		.align	2
+ 493              	.L44:
+ 494 001c 00040140 		.word	1073808384
+ 495              		.cfi_endproc
+ 496              	.LFE142:
+ 498              		.text
+ 499              	.Letext0:
+ 500              		.file 2 "D:/gnu_toolchain/arm-none-eabi/include/machine/_default_types.h"
+ 501              		.file 3 "D:/gnu_toolchain/arm-none-eabi/include/sys/_stdint.h"
+ 502              		.file 4 "libraries/cmsis/cm4/device_support/at32f403a_407.h"
+ 503              		.file 5 "libraries/drivers/inc/at32f403a_407_exint.h"
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccSv2AUO.s 			page 15
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 at32f403a_407_exint.c
+C:\Users\bians\AppData\Local\Temp\ccSv2AUO.s:21     .text.exint_reset:00000000 $t
+C:\Users\bians\AppData\Local\Temp\ccSv2AUO.s:27     .text.exint_reset:00000000 exint_reset
+C:\Users\bians\AppData\Local\Temp\ccSv2AUO.s:57     .text.exint_reset:00000014 $d
+C:\Users\bians\AppData\Local\Temp\ccSv2AUO.s:63     .text.exint_default_para_init:00000000 $t
+C:\Users\bians\AppData\Local\Temp\ccSv2AUO.s:69     .text.exint_default_para_init:00000000 exint_default_para_init
+C:\Users\bians\AppData\Local\Temp\ccSv2AUO.s:97     .text.exint_init:00000000 $t
+C:\Users\bians\AppData\Local\Temp\ccSv2AUO.s:103    .text.exint_init:00000000 exint_init
+C:\Users\bians\AppData\Local\Temp\ccSv2AUO.s:233    .text.exint_init:00000070 $d
+C:\Users\bians\AppData\Local\Temp\ccSv2AUO.s:238    .text.exint_flag_clear:00000000 $t
+C:\Users\bians\AppData\Local\Temp\ccSv2AUO.s:244    .text.exint_flag_clear:00000000 exint_flag_clear
+C:\Users\bians\AppData\Local\Temp\ccSv2AUO.s:277    .text.exint_flag_clear:00000018 $d
+C:\Users\bians\AppData\Local\Temp\ccSv2AUO.s:282    .text.exint_flag_get:00000000 $t
+C:\Users\bians\AppData\Local\Temp\ccSv2AUO.s:288    .text.exint_flag_get:00000000 exint_flag_get
+C:\Users\bians\AppData\Local\Temp\ccSv2AUO.s:323    .text.exint_flag_get:00000010 $d
+C:\Users\bians\AppData\Local\Temp\ccSv2AUO.s:328    .text.exint_interrupt_flag_get:00000000 $t
+C:\Users\bians\AppData\Local\Temp\ccSv2AUO.s:334    .text.exint_interrupt_flag_get:00000000 exint_interrupt_flag_get
+C:\Users\bians\AppData\Local\Temp\ccSv2AUO.s:375    .text.exint_interrupt_flag_get:00000014 $d
+C:\Users\bians\AppData\Local\Temp\ccSv2AUO.s:380    .text.exint_software_interrupt_event_generate:00000000 $t
+C:\Users\bians\AppData\Local\Temp\ccSv2AUO.s:386    .text.exint_software_interrupt_event_generate:00000000 exint_software_interrupt_event_generate
+C:\Users\bians\AppData\Local\Temp\ccSv2AUO.s:406    .text.exint_software_interrupt_event_generate:0000000c $d
+C:\Users\bians\AppData\Local\Temp\ccSv2AUO.s:411    .text.exint_interrupt_enable:00000000 $t
+C:\Users\bians\AppData\Local\Temp\ccSv2AUO.s:417    .text.exint_interrupt_enable:00000000 exint_interrupt_enable
+C:\Users\bians\AppData\Local\Temp\ccSv2AUO.s:450    .text.exint_interrupt_enable:0000001c $d
+C:\Users\bians\AppData\Local\Temp\ccSv2AUO.s:455    .text.exint_event_enable:00000000 $t
+C:\Users\bians\AppData\Local\Temp\ccSv2AUO.s:461    .text.exint_event_enable:00000000 exint_event_enable
+C:\Users\bians\AppData\Local\Temp\ccSv2AUO.s:494    .text.exint_event_enable:0000001c $d
+
+NO UNDEFINED SYMBOLS

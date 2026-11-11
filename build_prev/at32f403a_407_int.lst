@@ -1,0 +1,465 @@
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccUtXgFI.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.arch armv7e-m
+   3              		.fpu fpv4-sp-d16
+   4              		.eabi_attribute 27, 1
+   5              		.eabi_attribute 28, 1
+   6              		.eabi_attribute 20, 1
+   7              		.eabi_attribute 21, 1
+   8              		.eabi_attribute 23, 3
+   9              		.eabi_attribute 24, 1
+  10              		.eabi_attribute 25, 1
+  11              		.eabi_attribute 26, 1
+  12              		.eabi_attribute 30, 1
+  13              		.eabi_attribute 34, 1
+  14              		.eabi_attribute 18, 4
+  15              		.file	"at32f403a_407_int.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.file 1 "project/src/at32f403a_407_int.c"
+  20              		.section	.text.NMI_Handler,"ax",%progbits
+  21              		.align	1
+  22              		.global	NMI_Handler
+  23              		.syntax unified
+  24              		.thumb
+  25              		.thumb_func
+  27              	NMI_Handler:
+  28              	.LFB134:
+   1:project/src/at32f403a_407_int.c **** /* add user code begin Header */
+   2:project/src/at32f403a_407_int.c **** /**
+   3:project/src/at32f403a_407_int.c ****   **************************************************************************
+   4:project/src/at32f403a_407_int.c ****   * @file     at32f403a_407_int.c
+   5:project/src/at32f403a_407_int.c ****   * @brief    main interrupt service routines.
+   6:project/src/at32f403a_407_int.c ****   **************************************************************************
+   7:project/src/at32f403a_407_int.c ****   * Copyright (c) 2025, Artery Technology, All rights reserved.
+   8:project/src/at32f403a_407_int.c ****   *
+   9:project/src/at32f403a_407_int.c ****   * The software Board Support Package (BSP) that is made available to
+  10:project/src/at32f403a_407_int.c ****   * download from Artery official website is the copyrighted work of Artery.
+  11:project/src/at32f403a_407_int.c ****   * Artery authorizes customers to use, copy, and distribute the BSP
+  12:project/src/at32f403a_407_int.c ****   * software and its related documentation for the purpose of design and
+  13:project/src/at32f403a_407_int.c ****   * development in conjunction with Artery microcontrollers. Use of the
+  14:project/src/at32f403a_407_int.c ****   * software is governed by this copyright notice and the following disclaimer.
+  15:project/src/at32f403a_407_int.c ****   *
+  16:project/src/at32f403a_407_int.c ****   * THIS SOFTWARE IS PROVIDED ON "AS IS" BASIS WITHOUT WARRANTIES,
+  17:project/src/at32f403a_407_int.c ****   * GUARANTEES OR REPRESENTATIONS OF ANY KIND. ARTERY EXPRESSLY DISCLAIMS,
+  18:project/src/at32f403a_407_int.c ****   * TO THE FULLEST EXTENT PERMITTED BY LAW, ALL EXPRESS, IMPLIED OR
+  19:project/src/at32f403a_407_int.c ****   * STATUTORY OR OTHER WARRANTIES, GUARANTEES OR REPRESENTATIONS,
+  20:project/src/at32f403a_407_int.c ****   * INCLUDING BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY,
+  21:project/src/at32f403a_407_int.c ****   * FITNESS FOR A PARTICULAR PURPOSE, OR NON-INFRINGEMENT.
+  22:project/src/at32f403a_407_int.c ****   *
+  23:project/src/at32f403a_407_int.c ****   **************************************************************************
+  24:project/src/at32f403a_407_int.c ****   */
+  25:project/src/at32f403a_407_int.c **** /* add user code end Header */
+  26:project/src/at32f403a_407_int.c **** 
+  27:project/src/at32f403a_407_int.c **** /* includes ------------------------------------------------------------------*/
+  28:project/src/at32f403a_407_int.c **** #include "at32f403a_407_int.h"
+  29:project/src/at32f403a_407_int.c **** /* private includes ----------------------------------------------------------*/
+  30:project/src/at32f403a_407_int.c **** /* add user code begin private includes */
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccUtXgFI.s 			page 2
+
+
+  31:project/src/at32f403a_407_int.c **** 
+  32:project/src/at32f403a_407_int.c **** /* add user code end private includes */
+  33:project/src/at32f403a_407_int.c **** 
+  34:project/src/at32f403a_407_int.c **** /* private typedef -----------------------------------------------------------*/
+  35:project/src/at32f403a_407_int.c **** /* add user code begin private typedef */
+  36:project/src/at32f403a_407_int.c **** 
+  37:project/src/at32f403a_407_int.c **** /* add user code end private typedef */
+  38:project/src/at32f403a_407_int.c **** 
+  39:project/src/at32f403a_407_int.c **** /* private define ------------------------------------------------------------*/
+  40:project/src/at32f403a_407_int.c **** /* add user code begin private define */
+  41:project/src/at32f403a_407_int.c **** 
+  42:project/src/at32f403a_407_int.c **** /* add user code end private define */
+  43:project/src/at32f403a_407_int.c **** 
+  44:project/src/at32f403a_407_int.c **** /* private macro -------------------------------------------------------------*/
+  45:project/src/at32f403a_407_int.c **** /* add user code begin private macro */
+  46:project/src/at32f403a_407_int.c **** 
+  47:project/src/at32f403a_407_int.c **** /* add user code end private macro */
+  48:project/src/at32f403a_407_int.c **** 
+  49:project/src/at32f403a_407_int.c **** /* private variables ---------------------------------------------------------*/
+  50:project/src/at32f403a_407_int.c **** /* add user code begin private variables */
+  51:project/src/at32f403a_407_int.c **** 
+  52:project/src/at32f403a_407_int.c **** /* add user code end private variables */
+  53:project/src/at32f403a_407_int.c **** 
+  54:project/src/at32f403a_407_int.c **** /* private function prototypes --------------------------------------------*/
+  55:project/src/at32f403a_407_int.c **** /* add user code begin function prototypes */
+  56:project/src/at32f403a_407_int.c **** 
+  57:project/src/at32f403a_407_int.c **** /* add user code end function prototypes */
+  58:project/src/at32f403a_407_int.c **** 
+  59:project/src/at32f403a_407_int.c **** /* private user code ---------------------------------------------------------*/
+  60:project/src/at32f403a_407_int.c **** /* add user code begin 0 */
+  61:project/src/at32f403a_407_int.c **** 
+  62:project/src/at32f403a_407_int.c **** /* add user code end 0 */
+  63:project/src/at32f403a_407_int.c **** 
+  64:project/src/at32f403a_407_int.c **** /* external variables ---------------------------------------------------------*/
+  65:project/src/at32f403a_407_int.c **** /* add user code begin external variables */
+  66:project/src/at32f403a_407_int.c **** 
+  67:project/src/at32f403a_407_int.c **** /* add user code end external variables */
+  68:project/src/at32f403a_407_int.c **** 
+  69:project/src/at32f403a_407_int.c **** /**
+  70:project/src/at32f403a_407_int.c ****   * @brief  this function handles nmi exception.
+  71:project/src/at32f403a_407_int.c ****   * @param  none
+  72:project/src/at32f403a_407_int.c ****   * @retval none
+  73:project/src/at32f403a_407_int.c ****   */
+  74:project/src/at32f403a_407_int.c **** void NMI_Handler(void)
+  75:project/src/at32f403a_407_int.c **** {
+  29              		.loc 1 75 1 view -0
+  30              		.cfi_startproc
+  31              		@ args = 0, pretend = 0, frame = 0
+  32              		@ frame_needed = 0, uses_anonymous_args = 0
+  33              		@ link register save eliminated.
+  76:project/src/at32f403a_407_int.c ****   /* add user code begin NonMaskableInt_IRQ 0 */
+  77:project/src/at32f403a_407_int.c **** 
+  78:project/src/at32f403a_407_int.c ****   /* add user code end NonMaskableInt_IRQ 0 */
+  79:project/src/at32f403a_407_int.c **** 
+  80:project/src/at32f403a_407_int.c ****   /* add user code begin NonMaskableInt_IRQ 1 */
+  81:project/src/at32f403a_407_int.c **** 
+  82:project/src/at32f403a_407_int.c ****   /* add user code end NonMaskableInt_IRQ 1 */
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccUtXgFI.s 			page 3
+
+
+  83:project/src/at32f403a_407_int.c **** }
+  34              		.loc 1 83 1 view .LVU1
+  35 0000 7047     		bx	lr
+  36              		.cfi_endproc
+  37              	.LFE134:
+  39              		.section	.text.HardFault_Handler,"ax",%progbits
+  40              		.align	1
+  41              		.global	HardFault_Handler
+  42              		.syntax unified
+  43              		.thumb
+  44              		.thumb_func
+  46              	HardFault_Handler:
+  47              	.LFB135:
+  84:project/src/at32f403a_407_int.c **** 
+  85:project/src/at32f403a_407_int.c **** /**
+  86:project/src/at32f403a_407_int.c ****   * @brief  this function handles hard fault exception.
+  87:project/src/at32f403a_407_int.c ****   * @param  none
+  88:project/src/at32f403a_407_int.c ****   * @retval none
+  89:project/src/at32f403a_407_int.c ****   */
+  90:project/src/at32f403a_407_int.c **** void HardFault_Handler(void)
+  91:project/src/at32f403a_407_int.c **** {
+  48              		.loc 1 91 1 view -0
+  49              		.cfi_startproc
+  50              		@ Volatile: function does not return.
+  51              		@ args = 0, pretend = 0, frame = 0
+  52              		@ frame_needed = 0, uses_anonymous_args = 0
+  53              		@ link register save eliminated.
+  54              	.L3:
+  92:project/src/at32f403a_407_int.c ****   /* add user code begin HardFault_IRQ 0 */
+  93:project/src/at32f403a_407_int.c **** 
+  94:project/src/at32f403a_407_int.c ****   /* add user code end HardFault_IRQ 0 */
+  95:project/src/at32f403a_407_int.c ****   /* go to infinite loop when hard fault exception occurs */
+  96:project/src/at32f403a_407_int.c ****   while (1)
+  55              		.loc 1 96 3 view .LVU3
+  97:project/src/at32f403a_407_int.c ****   {
+  98:project/src/at32f403a_407_int.c ****     /* add user code begin W1_HardFault_IRQ 0 */
+  99:project/src/at32f403a_407_int.c **** 
+ 100:project/src/at32f403a_407_int.c ****     /* add user code end W1_HardFault_IRQ 0 */
+ 101:project/src/at32f403a_407_int.c ****   }
+  56              		.loc 1 101 3 view .LVU4
+  96:project/src/at32f403a_407_int.c ****   {
+  57              		.loc 1 96 9 view .LVU5
+  58 0000 FEE7     		b	.L3
+  59              		.cfi_endproc
+  60              	.LFE135:
+  62              		.section	.text.MemManage_Handler,"ax",%progbits
+  63              		.align	1
+  64              		.global	MemManage_Handler
+  65              		.syntax unified
+  66              		.thumb
+  67              		.thumb_func
+  69              	MemManage_Handler:
+  70              	.LFB136:
+ 102:project/src/at32f403a_407_int.c **** }
+ 103:project/src/at32f403a_407_int.c **** 
+ 104:project/src/at32f403a_407_int.c **** 
+ 105:project/src/at32f403a_407_int.c **** /**
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccUtXgFI.s 			page 4
+
+
+ 106:project/src/at32f403a_407_int.c ****   * @brief  this function handles memory manage exception.
+ 107:project/src/at32f403a_407_int.c ****   * @param  none
+ 108:project/src/at32f403a_407_int.c ****   * @retval none
+ 109:project/src/at32f403a_407_int.c ****   */
+ 110:project/src/at32f403a_407_int.c **** void MemManage_Handler(void)
+ 111:project/src/at32f403a_407_int.c **** {
+  71              		.loc 1 111 1 view -0
+  72              		.cfi_startproc
+  73              		@ Volatile: function does not return.
+  74              		@ args = 0, pretend = 0, frame = 0
+  75              		@ frame_needed = 0, uses_anonymous_args = 0
+  76              		@ link register save eliminated.
+  77              	.L5:
+ 112:project/src/at32f403a_407_int.c ****   /* add user code begin MemoryManagement_IRQ 0 */
+ 113:project/src/at32f403a_407_int.c **** 
+ 114:project/src/at32f403a_407_int.c ****   /* add user code end MemoryManagement_IRQ 0 */
+ 115:project/src/at32f403a_407_int.c ****   /* go to infinite loop when memory manage exception occurs */
+ 116:project/src/at32f403a_407_int.c ****   while (1)
+  78              		.loc 1 116 3 view .LVU7
+ 117:project/src/at32f403a_407_int.c ****   {
+ 118:project/src/at32f403a_407_int.c ****     /* add user code begin W1_MemoryManagement_IRQ 0 */
+ 119:project/src/at32f403a_407_int.c **** 
+ 120:project/src/at32f403a_407_int.c ****     /* add user code end W1_MemoryManagement_IRQ 0 */
+ 121:project/src/at32f403a_407_int.c ****   }
+  79              		.loc 1 121 3 view .LVU8
+ 116:project/src/at32f403a_407_int.c ****   {
+  80              		.loc 1 116 9 view .LVU9
+  81 0000 FEE7     		b	.L5
+  82              		.cfi_endproc
+  83              	.LFE136:
+  85              		.section	.text.BusFault_Handler,"ax",%progbits
+  86              		.align	1
+  87              		.global	BusFault_Handler
+  88              		.syntax unified
+  89              		.thumb
+  90              		.thumb_func
+  92              	BusFault_Handler:
+  93              	.LFB137:
+ 122:project/src/at32f403a_407_int.c **** }
+ 123:project/src/at32f403a_407_int.c **** 
+ 124:project/src/at32f403a_407_int.c **** /**
+ 125:project/src/at32f403a_407_int.c ****   * @brief  this function handles bus fault exception.
+ 126:project/src/at32f403a_407_int.c ****   * @param  none
+ 127:project/src/at32f403a_407_int.c ****   * @retval none
+ 128:project/src/at32f403a_407_int.c ****   */
+ 129:project/src/at32f403a_407_int.c **** void BusFault_Handler(void)
+ 130:project/src/at32f403a_407_int.c **** {
+  94              		.loc 1 130 1 view -0
+  95              		.cfi_startproc
+  96              		@ Volatile: function does not return.
+  97              		@ args = 0, pretend = 0, frame = 0
+  98              		@ frame_needed = 0, uses_anonymous_args = 0
+  99              		@ link register save eliminated.
+ 100              	.L7:
+ 131:project/src/at32f403a_407_int.c ****   /* add user code begin BusFault_IRQ 0 */
+ 132:project/src/at32f403a_407_int.c **** 
+ 133:project/src/at32f403a_407_int.c ****   /* add user code end BusFault_IRQ 0 */
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccUtXgFI.s 			page 5
+
+
+ 134:project/src/at32f403a_407_int.c ****   /* go to infinite loop when bus fault exception occurs */
+ 135:project/src/at32f403a_407_int.c ****   while (1)
+ 101              		.loc 1 135 3 view .LVU11
+ 136:project/src/at32f403a_407_int.c ****   {
+ 137:project/src/at32f403a_407_int.c ****     /* add user code begin W1_BusFault_IRQ 0 */
+ 138:project/src/at32f403a_407_int.c **** 
+ 139:project/src/at32f403a_407_int.c ****     /* add user code end W1_BusFault_IRQ 0 */
+ 140:project/src/at32f403a_407_int.c ****   }
+ 102              		.loc 1 140 3 view .LVU12
+ 135:project/src/at32f403a_407_int.c ****   {
+ 103              		.loc 1 135 9 view .LVU13
+ 104 0000 FEE7     		b	.L7
+ 105              		.cfi_endproc
+ 106              	.LFE137:
+ 108              		.section	.text.UsageFault_Handler,"ax",%progbits
+ 109              		.align	1
+ 110              		.global	UsageFault_Handler
+ 111              		.syntax unified
+ 112              		.thumb
+ 113              		.thumb_func
+ 115              	UsageFault_Handler:
+ 116              	.LFB138:
+ 141:project/src/at32f403a_407_int.c **** }
+ 142:project/src/at32f403a_407_int.c **** 
+ 143:project/src/at32f403a_407_int.c **** /**
+ 144:project/src/at32f403a_407_int.c ****   * @brief  this function handles usage fault exception.
+ 145:project/src/at32f403a_407_int.c ****   * @param  none
+ 146:project/src/at32f403a_407_int.c ****   * @retval none
+ 147:project/src/at32f403a_407_int.c ****   */
+ 148:project/src/at32f403a_407_int.c **** void UsageFault_Handler(void)
+ 149:project/src/at32f403a_407_int.c **** {
+ 117              		.loc 1 149 1 view -0
+ 118              		.cfi_startproc
+ 119              		@ Volatile: function does not return.
+ 120              		@ args = 0, pretend = 0, frame = 0
+ 121              		@ frame_needed = 0, uses_anonymous_args = 0
+ 122              		@ link register save eliminated.
+ 123              	.L9:
+ 150:project/src/at32f403a_407_int.c ****   /* add user code begin UsageFault_IRQ 0 */
+ 151:project/src/at32f403a_407_int.c **** 
+ 152:project/src/at32f403a_407_int.c ****   /* add user code end UsageFault_IRQ 0 */
+ 153:project/src/at32f403a_407_int.c ****   /* go to infinite loop when usage fault exception occurs */
+ 154:project/src/at32f403a_407_int.c ****   while (1)
+ 124              		.loc 1 154 3 view .LVU15
+ 155:project/src/at32f403a_407_int.c ****   {
+ 156:project/src/at32f403a_407_int.c ****     /* add user code begin W1_UsageFault_IRQ 0 */
+ 157:project/src/at32f403a_407_int.c **** 
+ 158:project/src/at32f403a_407_int.c ****     /* add user code end W1_UsageFault_IRQ 0 */
+ 159:project/src/at32f403a_407_int.c ****   }
+ 125              		.loc 1 159 3 view .LVU16
+ 154:project/src/at32f403a_407_int.c ****   {
+ 126              		.loc 1 154 9 view .LVU17
+ 127 0000 FEE7     		b	.L9
+ 128              		.cfi_endproc
+ 129              	.LFE138:
+ 131              		.section	.text.SVC_Handler,"ax",%progbits
+ 132              		.align	1
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccUtXgFI.s 			page 6
+
+
+ 133              		.global	SVC_Handler
+ 134              		.syntax unified
+ 135              		.thumb
+ 136              		.thumb_func
+ 138              	SVC_Handler:
+ 139              	.LFB139:
+ 160:project/src/at32f403a_407_int.c **** }
+ 161:project/src/at32f403a_407_int.c **** 
+ 162:project/src/at32f403a_407_int.c **** /**
+ 163:project/src/at32f403a_407_int.c ****   * @brief  this function handles svcall exception.
+ 164:project/src/at32f403a_407_int.c ****   * @param  none
+ 165:project/src/at32f403a_407_int.c ****   * @retval none
+ 166:project/src/at32f403a_407_int.c ****   */
+ 167:project/src/at32f403a_407_int.c **** void SVC_Handler(void)
+ 168:project/src/at32f403a_407_int.c **** {
+ 140              		.loc 1 168 1 view -0
+ 141              		.cfi_startproc
+ 142              		@ args = 0, pretend = 0, frame = 0
+ 143              		@ frame_needed = 0, uses_anonymous_args = 0
+ 144              		@ link register save eliminated.
+ 169:project/src/at32f403a_407_int.c ****   /* add user code begin SVCall_IRQ 0 */
+ 170:project/src/at32f403a_407_int.c **** 
+ 171:project/src/at32f403a_407_int.c ****   /* add user code end SVCall_IRQ 0 */
+ 172:project/src/at32f403a_407_int.c ****   /* add user code begin SVCall_IRQ 1 */
+ 173:project/src/at32f403a_407_int.c **** 
+ 174:project/src/at32f403a_407_int.c ****   /* add user code end SVCall_IRQ 1 */
+ 175:project/src/at32f403a_407_int.c **** }
+ 145              		.loc 1 175 1 view .LVU19
+ 146 0000 7047     		bx	lr
+ 147              		.cfi_endproc
+ 148              	.LFE139:
+ 150              		.section	.text.DebugMon_Handler,"ax",%progbits
+ 151              		.align	1
+ 152              		.global	DebugMon_Handler
+ 153              		.syntax unified
+ 154              		.thumb
+ 155              		.thumb_func
+ 157              	DebugMon_Handler:
+ 158              	.LFB140:
+ 176:project/src/at32f403a_407_int.c **** 
+ 177:project/src/at32f403a_407_int.c **** /**
+ 178:project/src/at32f403a_407_int.c ****   * @brief  this function handles debug monitor exception.
+ 179:project/src/at32f403a_407_int.c ****   * @param  none
+ 180:project/src/at32f403a_407_int.c ****   * @retval none
+ 181:project/src/at32f403a_407_int.c ****   */
+ 182:project/src/at32f403a_407_int.c **** void DebugMon_Handler(void)
+ 183:project/src/at32f403a_407_int.c **** {
+ 159              		.loc 1 183 1 view -0
+ 160              		.cfi_startproc
+ 161              		@ args = 0, pretend = 0, frame = 0
+ 162              		@ frame_needed = 0, uses_anonymous_args = 0
+ 163              		@ link register save eliminated.
+ 184:project/src/at32f403a_407_int.c ****   /* add user code begin DebugMonitor_IRQ 0 */
+ 185:project/src/at32f403a_407_int.c **** 
+ 186:project/src/at32f403a_407_int.c ****   /* add user code end DebugMonitor_IRQ 0 */
+ 187:project/src/at32f403a_407_int.c ****   /* add user code begin DebugMonitor_IRQ 1 */
+ 188:project/src/at32f403a_407_int.c **** 
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccUtXgFI.s 			page 7
+
+
+ 189:project/src/at32f403a_407_int.c ****   /* add user code end DebugMonitor_IRQ 1 */
+ 190:project/src/at32f403a_407_int.c **** }
+ 164              		.loc 1 190 1 view .LVU21
+ 165 0000 7047     		bx	lr
+ 166              		.cfi_endproc
+ 167              	.LFE140:
+ 169              		.section	.text.PendSV_Handler,"ax",%progbits
+ 170              		.align	1
+ 171              		.global	PendSV_Handler
+ 172              		.syntax unified
+ 173              		.thumb
+ 174              		.thumb_func
+ 176              	PendSV_Handler:
+ 177              	.LFB141:
+ 191:project/src/at32f403a_407_int.c **** 
+ 192:project/src/at32f403a_407_int.c **** /**
+ 193:project/src/at32f403a_407_int.c ****   * @brief  this function handles pendsv_handler exception.
+ 194:project/src/at32f403a_407_int.c ****   * @param  none
+ 195:project/src/at32f403a_407_int.c ****   * @retval none
+ 196:project/src/at32f403a_407_int.c ****   */
+ 197:project/src/at32f403a_407_int.c **** void PendSV_Handler(void)
+ 198:project/src/at32f403a_407_int.c **** {
+ 178              		.loc 1 198 1 view -0
+ 179              		.cfi_startproc
+ 180              		@ args = 0, pretend = 0, frame = 0
+ 181              		@ frame_needed = 0, uses_anonymous_args = 0
+ 182              		@ link register save eliminated.
+ 199:project/src/at32f403a_407_int.c ****   /* add user code begin PendSV_IRQ 0 */
+ 200:project/src/at32f403a_407_int.c **** 
+ 201:project/src/at32f403a_407_int.c ****   /* add user code end PendSV_IRQ 0 */
+ 202:project/src/at32f403a_407_int.c ****   /* add user code begin PendSV_IRQ 1 */
+ 203:project/src/at32f403a_407_int.c **** 
+ 204:project/src/at32f403a_407_int.c ****   /* add user code end PendSV_IRQ 1 */
+ 205:project/src/at32f403a_407_int.c **** }
+ 183              		.loc 1 205 1 view .LVU23
+ 184 0000 7047     		bx	lr
+ 185              		.cfi_endproc
+ 186              	.LFE141:
+ 188              		.section	.text.SysTick_Handler,"ax",%progbits
+ 189              		.align	1
+ 190              		.global	SysTick_Handler
+ 191              		.syntax unified
+ 192              		.thumb
+ 193              		.thumb_func
+ 195              	SysTick_Handler:
+ 196              	.LFB142:
+ 206:project/src/at32f403a_407_int.c **** 
+ 207:project/src/at32f403a_407_int.c **** 
+ 208:project/src/at32f403a_407_int.c **** /**
+ 209:project/src/at32f403a_407_int.c ****   * @brief  this function handles systick handler.
+ 210:project/src/at32f403a_407_int.c ****   * @param  none
+ 211:project/src/at32f403a_407_int.c ****   * @retval none
+ 212:project/src/at32f403a_407_int.c ****   */
+ 213:project/src/at32f403a_407_int.c **** void SysTick_Handler(void)
+ 214:project/src/at32f403a_407_int.c **** {
+ 197              		.loc 1 214 1 view -0
+ 198              		.cfi_startproc
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccUtXgFI.s 			page 8
+
+
+ 199              		@ args = 0, pretend = 0, frame = 0
+ 200              		@ frame_needed = 0, uses_anonymous_args = 0
+ 201              		@ link register save eliminated.
+ 215:project/src/at32f403a_407_int.c ****   /* add user code begin SysTick_IRQ 0 */
+ 216:project/src/at32f403a_407_int.c **** 
+ 217:project/src/at32f403a_407_int.c ****   /* add user code end SysTick_IRQ 0 */
+ 218:project/src/at32f403a_407_int.c **** 
+ 219:project/src/at32f403a_407_int.c ****   /* add user code begin SysTick_IRQ 1 */
+ 220:project/src/at32f403a_407_int.c **** 
+ 221:project/src/at32f403a_407_int.c ****   /* add user code end SysTick_IRQ 1 */
+ 222:project/src/at32f403a_407_int.c **** }
+ 202              		.loc 1 222 1 view .LVU25
+ 203 0000 7047     		bx	lr
+ 204              		.cfi_endproc
+ 205              	.LFE142:
+ 207              		.text
+ 208              	.Letext0:
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccUtXgFI.s 			page 9
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 at32f403a_407_int.c
+C:\Users\bians\AppData\Local\Temp\ccUtXgFI.s:21     .text.NMI_Handler:00000000 $t
+C:\Users\bians\AppData\Local\Temp\ccUtXgFI.s:27     .text.NMI_Handler:00000000 NMI_Handler
+C:\Users\bians\AppData\Local\Temp\ccUtXgFI.s:40     .text.HardFault_Handler:00000000 $t
+C:\Users\bians\AppData\Local\Temp\ccUtXgFI.s:46     .text.HardFault_Handler:00000000 HardFault_Handler
+C:\Users\bians\AppData\Local\Temp\ccUtXgFI.s:63     .text.MemManage_Handler:00000000 $t
+C:\Users\bians\AppData\Local\Temp\ccUtXgFI.s:69     .text.MemManage_Handler:00000000 MemManage_Handler
+C:\Users\bians\AppData\Local\Temp\ccUtXgFI.s:86     .text.BusFault_Handler:00000000 $t
+C:\Users\bians\AppData\Local\Temp\ccUtXgFI.s:92     .text.BusFault_Handler:00000000 BusFault_Handler
+C:\Users\bians\AppData\Local\Temp\ccUtXgFI.s:109    .text.UsageFault_Handler:00000000 $t
+C:\Users\bians\AppData\Local\Temp\ccUtXgFI.s:115    .text.UsageFault_Handler:00000000 UsageFault_Handler
+C:\Users\bians\AppData\Local\Temp\ccUtXgFI.s:132    .text.SVC_Handler:00000000 $t
+C:\Users\bians\AppData\Local\Temp\ccUtXgFI.s:138    .text.SVC_Handler:00000000 SVC_Handler
+C:\Users\bians\AppData\Local\Temp\ccUtXgFI.s:151    .text.DebugMon_Handler:00000000 $t
+C:\Users\bians\AppData\Local\Temp\ccUtXgFI.s:157    .text.DebugMon_Handler:00000000 DebugMon_Handler
+C:\Users\bians\AppData\Local\Temp\ccUtXgFI.s:170    .text.PendSV_Handler:00000000 $t
+C:\Users\bians\AppData\Local\Temp\ccUtXgFI.s:176    .text.PendSV_Handler:00000000 PendSV_Handler
+C:\Users\bians\AppData\Local\Temp\ccUtXgFI.s:189    .text.SysTick_Handler:00000000 $t
+C:\Users\bians\AppData\Local\Temp\ccUtXgFI.s:195    .text.SysTick_Handler:00000000 SysTick_Handler
+
+NO UNDEFINED SYMBOLS

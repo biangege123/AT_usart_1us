@@ -1,0 +1,129 @@
+ARM GAS  C:\Users\bians\AppData\Local\Temp\cc8b4ypN.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.arch armv7e-m
+   3              		.fpu fpv4-sp-d16
+   4              		.eabi_attribute 27, 1
+   5              		.eabi_attribute 28, 1
+   6              		.eabi_attribute 20, 1
+   7              		.eabi_attribute 21, 1
+   8              		.eabi_attribute 23, 3
+   9              		.eabi_attribute 24, 1
+  10              		.eabi_attribute 25, 1
+  11              		.eabi_attribute 26, 1
+  12              		.eabi_attribute 30, 1
+  13              		.eabi_attribute 34, 1
+  14              		.eabi_attribute 18, 4
+  15              		.file	"usmart_config.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.file 1 "project/src/usmart_config.c"
+  20              		.global	usmart_dev
+  21              		.section	.data.usmart_dev,"aw"
+  22              		.align	2
+  25              	usmart_dev:
+  26 0000 00000000 		.word	usmart_nametab
+  27 0004 00000000 		.word	usmart_init
+  28 0008 00000000 		.word	usmart_cmd_rec
+  29 000c 00000000 		.word	usmart_exe
+  30 0010 00000000 		.word	usmart_scan
+  31 0014 05       		.byte	5
+  32 0015 00       		.byte	0
+  33 0016 00       		.byte	0
+  34 0017 01       		.byte	1
+  35 0018 0000     		.short	0
+  36 001a 0000     		.ascii	"\000\000"
+  37 001c 00000000 		.space	8
+  37      00000000 
+  38 0024 0000     		.ascii	"\000\000"
+  39 0026 00000000 		.space	198
+  39      00000000 
+  39      00000000 
+  39      00000000 
+  39      00000000 
+  40 00ec 00       		.byte	0
+  41 00ed 000000   		.space	3
+  42 00f0 00000000 		.word	0
+  43              		.global	usmart_nametab
+  44              		.section	.rodata.str1.4,"aMS",%progbits,1
+  45              		.align	2
+  46              	.LC0:
+  47 0000 75696E74 		.ascii	"uint32_t read_addr(uint32_t addr);\000"
+  47      33325F74 
+  47      20726561 
+  47      645F6164 
+  47      64722875 
+  48 0023 00       		.align	2
+  49              	.LC1:
+  50 0024 766F6964 		.ascii	"void write_addr(uint32_t addr,uint32_t val);\000"
+ARM GAS  C:\Users\bians\AppData\Local\Temp\cc8b4ypN.s 			page 2
+
+
+  50      20777269 
+  50      74655F61 
+  50      64647228 
+  50      75696E74 
+  51 0051 000000   		.align	2
+  52              	.LC2:
+  53 0054 766F6964 		.ascii	"void at32_led_on(led_type led);\000"
+  53      20617433 
+  53      325F6C65 
+  53      645F6F6E 
+  53      286C6564 
+  54              		.align	2
+  55              	.LC3:
+  56 0074 766F6964 		.ascii	"void at32_led_off(led_type led);\000"
+  56      20617433 
+  56      325F6C65 
+  56      645F6F66 
+  56      66286C65 
+  57 0095 000000   		.align	2
+  58              	.LC4:
+  59 0098 766F6964 		.ascii	"void at32_led_toggle(led_type led);\000"
+  59      20617433 
+  59      325F6C65 
+  59      645F746F 
+  59      67676C65 
+  60              		.section	.data.usmart_nametab,"aw"
+  61              		.align	2
+  64              	usmart_nametab:
+  65 0000 00000000 		.word	.LC0
+  66 0004 00000000 		.word	read_addr
+  67 0008 24000000 		.word	.LC1
+  68 000c 00000000 		.word	write_addr
+  69 0010 54000000 		.word	.LC2
+  70 0014 00000000 		.word	at32_led_on
+  71 0018 74000000 		.word	.LC3
+  72 001c 00000000 		.word	at32_led_off
+  73 0020 98000000 		.word	.LC4
+  74 0024 00000000 		.word	at32_led_toggle
+  75              		.text
+  76              	.Letext0:
+  77              		.file 2 "D:/gnu_toolchain/arm-none-eabi/include/machine/_default_types.h"
+  78              		.file 3 "D:/gnu_toolchain/arm-none-eabi/include/sys/_stdint.h"
+  79              		.file 4 "libraries/drivers/inc/at32f403a_407_tmr.h"
+  80              		.file 5 "project/inc/usmart.h"
+  81              		.file 6 "project/inc/led.h"
+ARM GAS  C:\Users\bians\AppData\Local\Temp\cc8b4ypN.s 			page 3
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 usmart_config.c
+C:\Users\bians\AppData\Local\Temp\cc8b4ypN.s:25     .data.usmart_dev:00000000 usmart_dev
+C:\Users\bians\AppData\Local\Temp\cc8b4ypN.s:22     .data.usmart_dev:00000000 $d
+C:\Users\bians\AppData\Local\Temp\cc8b4ypN.s:64     .data.usmart_nametab:00000000 usmart_nametab
+C:\Users\bians\AppData\Local\Temp\cc8b4ypN.s:45     .rodata.str1.4:00000000 $d
+C:\Users\bians\AppData\Local\Temp\cc8b4ypN.s:61     .data.usmart_nametab:00000000 $d
+
+UNDEFINED SYMBOLS
+usmart_init
+usmart_cmd_rec
+usmart_exe
+usmart_scan
+read_addr
+write_addr
+at32_led_on
+at32_led_off
+at32_led_toggle

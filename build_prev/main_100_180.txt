@@ -1,0 +1,82 @@
+﻿ 100: 
+ 101: 
+ 102: 
+ 103: void send_data(u8 *buf,u16 len)
+ 104: {
+ 105:     memcpy(uart_tx_buf,buf,len);
+ 106:     while (usart_flag_get(USART1,USART_TDBE_FLAG) == RESET);
+ 107:     dma_channel_enable(DMA1_CHANNEL2,FALSE);
+ 108:     dma_data_number_set(DMA1_CHANNEL2,len);
+ 109:     dma_channel_enable(DMA1_CHANNEL2,TRUE);
+ 110: 
+ 111: }
+ 112: 
+ 113: 
+ 114: 
+ 115: 
+ 116: 
+ 117: /* add user code end 0 */
+ 118: 
+ 119: /**
+ 120:   * @brief main function.
+ 121:   * @param  none
+ 122:   * @retval none
+ 123:   */
+ 124: int main(void)
+ 125: {
+ 126:   /* add user code begin 1 */
+ 127:   button_type key_num;
+ 128:   uint8_t rx_data;
+ 129:   /* add user code end 1 */
+ 130: 
+ 131:   /* system clock config. */
+ 132:   wk_system_clock_config();
+ 133: 
+ 134:   /* config periph clock. */
+ 135:   wk_periph_clock_config();
+ 136: 
+ 137:   /* nvic config. */
+ 138:   wk_nvic_config();
+ 139: 
+ 140:   /* timebase config for
+ 141:      void wk_delay_us(uint32_t delay);
+ 142:      void wk_delay_ms(uint32_t delay); */
+ 143:   wk_timebase_init();
+ 144: 
+ 145:   /* init usart1 function. */
+ 146:   wk_usart1_init();
+ 147: 
+ 148:   /* init i2c1 function. */
+ 149:   wk_i2c1_init();
+ 150: 
+ 151:   /* init i2c app function. */
+ 152:   wk_i2c_app_init();
+ 153: 
+ 154:   /* init dma1 channel1 (usart1 rx) */
+ 155:   wk_dma1_channel1_init();
+ 156:   /* USART1 RX DMA: 鏁版嵁鐩存帴瀛樺叆 uart_rx_buf, 绌洪棽涓柇鏃朵氦缁?USMART 澶勭悊 */
+ 157:   wk_dma_channel_config(DMA1_CHANNEL1, 
+ 158:                         (uint32_t)&USART1->dt, 
+ 159:                         (uint32_t)uart_rx_buf, 
+ 160:                         sizeof(uart_rx_buf));
+ 161:   dma_channel_enable(DMA1_CHANNEL1, TRUE);
+ 162: 
+ 163:   /* init dma1 channel2 (usart1 tx) */
+ 164:   wk_dma1_channel2_init();
+ 165:   /* USART1 TX DMA: 浠?uart_tx_buf 鍙戦€佹暟鎹?*/
+ 166:   wk_dma_channel_config(DMA1_CHANNEL2, 
+ 167:                         (uint32_t)&USART1->dt, 
+ 168:                         (uint32_t)uart_tx_buf, 
+ 169:                         sizeof(uart_tx_buf));
+ 170:   dma_channel_enable(DMA1_CHANNEL2, TRUE);
+ 171: 
+ 172:   /* init tmr1 function. */
+ 173:   wk_tmr1_init();
+ 174: 
+ 175:   /* add user code begin 2 */
+ 176:   OLED_Init();
+ 177:   at32_board_init();
+ 178:   at32_button_init();
+ 179: 
+ 180:   //鑴夊啿鍙戠敓鍣ㄨ缃?
+ 181:   tmr_counter_enable(TMR1, FALSE);

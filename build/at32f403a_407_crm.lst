@@ -1,0 +1,3286 @@
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccmAcxDa.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.arch armv7e-m
+   3              		.fpu fpv4-sp-d16
+   4              		.eabi_attribute 27, 1
+   5              		.eabi_attribute 28, 1
+   6              		.eabi_attribute 20, 1
+   7              		.eabi_attribute 21, 1
+   8              		.eabi_attribute 23, 3
+   9              		.eabi_attribute 24, 1
+  10              		.eabi_attribute 25, 1
+  11              		.eabi_attribute 26, 1
+  12              		.eabi_attribute 30, 1
+  13              		.eabi_attribute 34, 1
+  14              		.eabi_attribute 18, 4
+  15              		.file	"at32f403a_407_crm.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.file 1 "libraries/drivers/src/at32f403a_407_crm.c"
+  20              		.section	.text.crm_reset,"ax",%progbits
+  21              		.align	1
+  22              		.global	crm_reset
+  23              		.syntax unified
+  24              		.thumb
+  25              		.thumb_func
+  27              	crm_reset:
+  28              	.LFB134:
+   1:libraries/drivers/src/at32f403a_407_crm.c **** /**
+   2:libraries/drivers/src/at32f403a_407_crm.c ****   **************************************************************************
+   3:libraries/drivers/src/at32f403a_407_crm.c ****   * @file     at32f403a_407_crm.c
+   4:libraries/drivers/src/at32f403a_407_crm.c ****   * @brief    contains all the functions for the crm firmware library
+   5:libraries/drivers/src/at32f403a_407_crm.c ****   **************************************************************************
+   6:libraries/drivers/src/at32f403a_407_crm.c ****   *
+   7:libraries/drivers/src/at32f403a_407_crm.c ****   * Copyright (c) 2025, Artery Technology, All rights reserved.
+   8:libraries/drivers/src/at32f403a_407_crm.c ****   *
+   9:libraries/drivers/src/at32f403a_407_crm.c ****   * The software Board Support Package (BSP) that is made available to
+  10:libraries/drivers/src/at32f403a_407_crm.c ****   * download from Artery official website is the copyrighted work of Artery.
+  11:libraries/drivers/src/at32f403a_407_crm.c ****   * Artery authorizes customers to use, copy, and distribute the BSP
+  12:libraries/drivers/src/at32f403a_407_crm.c ****   * software and its related documentation for the purpose of design and
+  13:libraries/drivers/src/at32f403a_407_crm.c ****   * development in conjunction with Artery microcontrollers. Use of the
+  14:libraries/drivers/src/at32f403a_407_crm.c ****   * software is governed by this copyright notice and the following disclaimer.
+  15:libraries/drivers/src/at32f403a_407_crm.c ****   *
+  16:libraries/drivers/src/at32f403a_407_crm.c ****   * THIS SOFTWARE IS PROVIDED ON "AS IS" BASIS WITHOUT WARRANTIES,
+  17:libraries/drivers/src/at32f403a_407_crm.c ****   * GUARANTEES OR REPRESENTATIONS OF ANY KIND. ARTERY EXPRESSLY DISCLAIMS,
+  18:libraries/drivers/src/at32f403a_407_crm.c ****   * TO THE FULLEST EXTENT PERMITTED BY LAW, ALL EXPRESS, IMPLIED OR
+  19:libraries/drivers/src/at32f403a_407_crm.c ****   * STATUTORY OR OTHER WARRANTIES, GUARANTEES OR REPRESENTATIONS,
+  20:libraries/drivers/src/at32f403a_407_crm.c ****   * INCLUDING BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY,
+  21:libraries/drivers/src/at32f403a_407_crm.c ****   * FITNESS FOR A PARTICULAR PURPOSE, OR NON-INFRINGEMENT.
+  22:libraries/drivers/src/at32f403a_407_crm.c ****   *
+  23:libraries/drivers/src/at32f403a_407_crm.c ****   **************************************************************************
+  24:libraries/drivers/src/at32f403a_407_crm.c ****   */
+  25:libraries/drivers/src/at32f403a_407_crm.c **** 
+  26:libraries/drivers/src/at32f403a_407_crm.c **** #include "at32f403a_407_conf.h"
+  27:libraries/drivers/src/at32f403a_407_crm.c **** 
+  28:libraries/drivers/src/at32f403a_407_crm.c **** /** @addtogroup AT32F403A_407_periph_driver
+  29:libraries/drivers/src/at32f403a_407_crm.c ****   * @{
+  30:libraries/drivers/src/at32f403a_407_crm.c ****   */
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccmAcxDa.s 			page 2
+
+
+  31:libraries/drivers/src/at32f403a_407_crm.c **** 
+  32:libraries/drivers/src/at32f403a_407_crm.c **** /** @defgroup CRM
+  33:libraries/drivers/src/at32f403a_407_crm.c ****   * @brief CRM driver modules
+  34:libraries/drivers/src/at32f403a_407_crm.c ****   * @{
+  35:libraries/drivers/src/at32f403a_407_crm.c ****   */
+  36:libraries/drivers/src/at32f403a_407_crm.c **** 
+  37:libraries/drivers/src/at32f403a_407_crm.c **** #ifdef CRM_MODULE_ENABLED
+  38:libraries/drivers/src/at32f403a_407_crm.c **** 
+  39:libraries/drivers/src/at32f403a_407_crm.c **** /** @defgroup CRM_private_functions
+  40:libraries/drivers/src/at32f403a_407_crm.c ****   * @{
+  41:libraries/drivers/src/at32f403a_407_crm.c ****   */
+  42:libraries/drivers/src/at32f403a_407_crm.c **** 
+  43:libraries/drivers/src/at32f403a_407_crm.c **** /**
+  44:libraries/drivers/src/at32f403a_407_crm.c ****   * @brief  reset the crm register
+  45:libraries/drivers/src/at32f403a_407_crm.c ****   * @param  none
+  46:libraries/drivers/src/at32f403a_407_crm.c ****   * @retval none
+  47:libraries/drivers/src/at32f403a_407_crm.c ****   */
+  48:libraries/drivers/src/at32f403a_407_crm.c **** void crm_reset(void)
+  49:libraries/drivers/src/at32f403a_407_crm.c **** {
+  29              		.loc 1 49 1 view -0
+  30              		.cfi_startproc
+  31              		@ args = 0, pretend = 0, frame = 0
+  32              		@ frame_needed = 0, uses_anonymous_args = 0
+  33              		@ link register save eliminated.
+  50:libraries/drivers/src/at32f403a_407_crm.c ****   /* reset the crm clock configuration to the default reset state(for debug purpose) */
+  51:libraries/drivers/src/at32f403a_407_crm.c ****   /* set hicken bit */
+  52:libraries/drivers/src/at32f403a_407_crm.c ****   CRM->ctrl_bit.hicken = TRUE;
+  34              		.loc 1 52 3 view .LVU1
+  35              		.loc 1 52 24 is_stmt 0 view .LVU2
+  36 0000 104A     		ldr	r2, .L4
+  37 0002 1368     		ldr	r3, [r2]
+  38 0004 43F00103 		orr	r3, r3, #1
+  39 0008 1360     		str	r3, [r2]
+  53:libraries/drivers/src/at32f403a_407_crm.c **** 
+  54:libraries/drivers/src/at32f403a_407_crm.c ****   /* wait hick stable */
+  55:libraries/drivers/src/at32f403a_407_crm.c ****   while(CRM->ctrl_bit.hickstbl != SET);
+  40              		.loc 1 55 3 is_stmt 1 view .LVU3
+  41              	.L2:
+  42              		.loc 1 55 32 discriminator 1 view .LVU4
+  43              		.loc 1 55 22 is_stmt 0 discriminator 1 view .LVU5
+  44 000a 0E4B     		ldr	r3, .L4
+  45 000c 1B68     		ldr	r3, [r3]
+  46              		.loc 1 55 32 discriminator 1 view .LVU6
+  47 000e 13F0020F 		tst	r3, #2
+  48 0012 FAD0     		beq	.L2
+  56:libraries/drivers/src/at32f403a_407_crm.c **** 
+  57:libraries/drivers/src/at32f403a_407_crm.c ****   /* hick used as system clock */
+  58:libraries/drivers/src/at32f403a_407_crm.c ****   CRM->cfg_bit.sclksel = CRM_SCLK_HICK;
+  49              		.loc 1 58 3 is_stmt 1 view .LVU7
+  50              		.loc 1 58 24 is_stmt 0 view .LVU8
+  51 0014 0B4A     		ldr	r2, .L4
+  52 0016 5368     		ldr	r3, [r2, #4]
+  53 0018 23F00303 		bic	r3, r3, #3
+  54 001c 5360     		str	r3, [r2, #4]
+  59:libraries/drivers/src/at32f403a_407_crm.c **** 
+  60:libraries/drivers/src/at32f403a_407_crm.c ****   /* wait sclk switch status */
+  61:libraries/drivers/src/at32f403a_407_crm.c ****   while(CRM->cfg_bit.sclksts != CRM_SCLK_HICK);
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccmAcxDa.s 			page 3
+
+
+  55              		.loc 1 61 3 is_stmt 1 view .LVU9
+  56              	.L3:
+  57              		.loc 1 61 30 discriminator 1 view .LVU10
+  58              		.loc 1 61 21 is_stmt 0 discriminator 1 view .LVU11
+  59 001e 094B     		ldr	r3, .L4
+  60 0020 5B68     		ldr	r3, [r3, #4]
+  61              		.loc 1 61 30 discriminator 1 view .LVU12
+  62 0022 13F00C0F 		tst	r3, #12
+  63 0026 FAD1     		bne	.L3
+  62:libraries/drivers/src/at32f403a_407_crm.c **** 
+  63:libraries/drivers/src/at32f403a_407_crm.c ****   /* reset hexten, hextbyps, cfden and pllen bits */
+  64:libraries/drivers/src/at32f403a_407_crm.c ****   CRM->ctrl &= ~(0x010D0000U);
+  64              		.loc 1 64 3 is_stmt 1 view .LVU13
+  65              		.loc 1 64 6 is_stmt 0 view .LVU14
+  66 0028 064B     		ldr	r3, .L4
+  67 002a 1A68     		ldr	r2, [r3]
+  68              		.loc 1 64 13 view .LVU15
+  69 002c 22F08672 		bic	r2, r2, #17563648
+  70 0030 22F48032 		bic	r2, r2, #65536
+  71 0034 1A60     		str	r2, [r3]
+  65:libraries/drivers/src/at32f403a_407_crm.c **** 
+  66:libraries/drivers/src/at32f403a_407_crm.c ****   /* reset cfg register, include sclk switch, ahbdiv, apb1div, apb2div, adcdiv,
+  67:libraries/drivers/src/at32f403a_407_crm.c ****      clkout pllrcs, pllhextdiv, pllmult, usbdiv and pllrange bits */
+  68:libraries/drivers/src/at32f403a_407_crm.c ****   CRM->cfg = 0;
+  72              		.loc 1 68 3 is_stmt 1 view .LVU16
+  73              		.loc 1 68 12 is_stmt 0 view .LVU17
+  74 0036 0022     		movs	r2, #0
+  75 0038 5A60     		str	r2, [r3, #4]
+  69:libraries/drivers/src/at32f403a_407_crm.c **** 
+  70:libraries/drivers/src/at32f403a_407_crm.c ****   /* reset clkout[3], usbbufs, hickdiv, clkoutdiv */
+  71:libraries/drivers/src/at32f403a_407_crm.c ****   CRM->misc1 = 0;
+  76              		.loc 1 71 3 is_stmt 1 view .LVU18
+  77              		.loc 1 71 14 is_stmt 0 view .LVU19
+  78 003a 1A63     		str	r2, [r3, #48]
+  72:libraries/drivers/src/at32f403a_407_crm.c **** 
+  73:libraries/drivers/src/at32f403a_407_crm.c ****   /* disable all interrupts enable and clear pending bits  */
+  74:libraries/drivers/src/at32f403a_407_crm.c ****   CRM->clkint = 0x009F0000;
+  79              		.loc 1 74 3 is_stmt 1 view .LVU20
+  80              		.loc 1 74 15 is_stmt 0 view .LVU21
+  81 003c 4FF41F02 		mov	r2, #10420224
+  82 0040 9A60     		str	r2, [r3, #8]
+  75:libraries/drivers/src/at32f403a_407_crm.c **** }
+  83              		.loc 1 75 1 view .LVU22
+  84 0042 7047     		bx	lr
+  85              	.L5:
+  86              		.align	2
+  87              	.L4:
+  88 0044 00100240 		.word	1073876992
+  89              		.cfi_endproc
+  90              	.LFE134:
+  92              		.section	.text.crm_lext_bypass,"ax",%progbits
+  93              		.align	1
+  94              		.global	crm_lext_bypass
+  95              		.syntax unified
+  96              		.thumb
+  97              		.thumb_func
+  99              	crm_lext_bypass:
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccmAcxDa.s 			page 4
+
+
+ 100              	.LVL0:
+ 101              	.LFB135:
+  76:libraries/drivers/src/at32f403a_407_crm.c **** 
+  77:libraries/drivers/src/at32f403a_407_crm.c **** /**
+  78:libraries/drivers/src/at32f403a_407_crm.c ****   * @brief  enable or disable crm low speed external crystal bypass
+  79:libraries/drivers/src/at32f403a_407_crm.c ****   * @param  new_state (TRUE or FALSE)
+  80:libraries/drivers/src/at32f403a_407_crm.c ****   * @retval none
+  81:libraries/drivers/src/at32f403a_407_crm.c ****   */
+  82:libraries/drivers/src/at32f403a_407_crm.c **** void crm_lext_bypass(confirm_state new_state)
+  83:libraries/drivers/src/at32f403a_407_crm.c **** {
+ 102              		.loc 1 83 1 is_stmt 1 view -0
+ 103              		.cfi_startproc
+ 104              		@ args = 0, pretend = 0, frame = 0
+ 105              		@ frame_needed = 0, uses_anonymous_args = 0
+ 106              		@ link register save eliminated.
+  84:libraries/drivers/src/at32f403a_407_crm.c ****   CRM->bpdc_bit.lextbyps = new_state;
+ 107              		.loc 1 84 3 view .LVU24
+ 108              		.loc 1 84 26 is_stmt 0 view .LVU25
+ 109 0000 024B     		ldr	r3, .L7
+ 110 0002 1A6A     		ldr	r2, [r3, #32]
+ 111 0004 60F38202 		bfi	r2, r0, #2, #1
+ 112 0008 1A62     		str	r2, [r3, #32]
+  85:libraries/drivers/src/at32f403a_407_crm.c **** }
+ 113              		.loc 1 85 1 view .LVU26
+ 114 000a 7047     		bx	lr
+ 115              	.L8:
+ 116              		.align	2
+ 117              	.L7:
+ 118 000c 00100240 		.word	1073876992
+ 119              		.cfi_endproc
+ 120              	.LFE135:
+ 122              		.section	.text.crm_hext_bypass,"ax",%progbits
+ 123              		.align	1
+ 124              		.global	crm_hext_bypass
+ 125              		.syntax unified
+ 126              		.thumb
+ 127              		.thumb_func
+ 129              	crm_hext_bypass:
+ 130              	.LVL1:
+ 131              	.LFB136:
+  86:libraries/drivers/src/at32f403a_407_crm.c **** 
+  87:libraries/drivers/src/at32f403a_407_crm.c **** /**
+  88:libraries/drivers/src/at32f403a_407_crm.c ****   * @brief  enable or disable crm high speed external crystal bypass
+  89:libraries/drivers/src/at32f403a_407_crm.c ****   * @param  new_state (TRUE or FALSE)
+  90:libraries/drivers/src/at32f403a_407_crm.c ****   * @retval none
+  91:libraries/drivers/src/at32f403a_407_crm.c ****   */
+  92:libraries/drivers/src/at32f403a_407_crm.c **** void crm_hext_bypass(confirm_state new_state)
+  93:libraries/drivers/src/at32f403a_407_crm.c **** {
+ 132              		.loc 1 93 1 is_stmt 1 view -0
+ 133              		.cfi_startproc
+ 134              		@ args = 0, pretend = 0, frame = 0
+ 135              		@ frame_needed = 0, uses_anonymous_args = 0
+ 136              		@ link register save eliminated.
+  94:libraries/drivers/src/at32f403a_407_crm.c ****   CRM->ctrl_bit.hextbyps = new_state;
+ 137              		.loc 1 94 3 view .LVU28
+ 138              		.loc 1 94 26 is_stmt 0 view .LVU29
+ 139 0000 024B     		ldr	r3, .L10
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccmAcxDa.s 			page 5
+
+
+ 140 0002 1A68     		ldr	r2, [r3]
+ 141 0004 60F39242 		bfi	r2, r0, #18, #1
+ 142 0008 1A60     		str	r2, [r3]
+  95:libraries/drivers/src/at32f403a_407_crm.c **** }
+ 143              		.loc 1 95 1 view .LVU30
+ 144 000a 7047     		bx	lr
+ 145              	.L11:
+ 146              		.align	2
+ 147              	.L10:
+ 148 000c 00100240 		.word	1073876992
+ 149              		.cfi_endproc
+ 150              	.LFE136:
+ 152              		.section	.text.crm_flag_get,"ax",%progbits
+ 153              		.align	1
+ 154              		.global	crm_flag_get
+ 155              		.syntax unified
+ 156              		.thumb
+ 157              		.thumb_func
+ 159              	crm_flag_get:
+ 160              	.LVL2:
+ 161              	.LFB137:
+  96:libraries/drivers/src/at32f403a_407_crm.c **** 
+  97:libraries/drivers/src/at32f403a_407_crm.c **** /**
+  98:libraries/drivers/src/at32f403a_407_crm.c ****   * @brief  get crm flag status
+  99:libraries/drivers/src/at32f403a_407_crm.c ****   * @param  flag
+ 100:libraries/drivers/src/at32f403a_407_crm.c ****   *         this parameter can be one of the following values:
+ 101:libraries/drivers/src/at32f403a_407_crm.c ****   *         - CRM_HICK_STABLE_FLAG
+ 102:libraries/drivers/src/at32f403a_407_crm.c ****   *         - CRM_HEXT_STABLE_FLAG
+ 103:libraries/drivers/src/at32f403a_407_crm.c ****   *         - CRM_PLL_STABLE_FLAG
+ 104:libraries/drivers/src/at32f403a_407_crm.c ****   *         - CRM_LEXT_STABLE_FLAG
+ 105:libraries/drivers/src/at32f403a_407_crm.c ****   *         - CRM_LICK_STABLE_FLAG
+ 106:libraries/drivers/src/at32f403a_407_crm.c ****   *         - CRM_NRST_RESET_FLAG
+ 107:libraries/drivers/src/at32f403a_407_crm.c ****   *         - CRM_POR_RESET_FLAG
+ 108:libraries/drivers/src/at32f403a_407_crm.c ****   *         - CRM_SW_RESET_FLAG
+ 109:libraries/drivers/src/at32f403a_407_crm.c ****   *         - CRM_WDT_RESET_FLAG
+ 110:libraries/drivers/src/at32f403a_407_crm.c ****   *         - CRM_WWDT_RESET_FLAG
+ 111:libraries/drivers/src/at32f403a_407_crm.c ****   *         - CRM_LOWPOWER_RESET_FLAG
+ 112:libraries/drivers/src/at32f403a_407_crm.c ****   *         interrupt flag:
+ 113:libraries/drivers/src/at32f403a_407_crm.c ****   *         - CRM_LICK_READY_INT_FLAG
+ 114:libraries/drivers/src/at32f403a_407_crm.c ****   *         - CRM_LEXT_READY_INT_FLAG
+ 115:libraries/drivers/src/at32f403a_407_crm.c ****   *         - CRM_HICK_READY_INT_FLAG
+ 116:libraries/drivers/src/at32f403a_407_crm.c ****   *         - CRM_HEXT_READY_INT_FLAG
+ 117:libraries/drivers/src/at32f403a_407_crm.c ****   *         - CRM_PLL_READY_INT_FLAG
+ 118:libraries/drivers/src/at32f403a_407_crm.c ****   *         - CRM_CLOCK_FAILURE_INT_FLAG
+ 119:libraries/drivers/src/at32f403a_407_crm.c ****   * @retval flag_status (SET or RESET)
+ 120:libraries/drivers/src/at32f403a_407_crm.c ****   */
+ 121:libraries/drivers/src/at32f403a_407_crm.c **** flag_status crm_flag_get(uint32_t flag)
+ 122:libraries/drivers/src/at32f403a_407_crm.c **** {
+ 162              		.loc 1 122 1 is_stmt 1 view -0
+ 163              		.cfi_startproc
+ 164              		@ args = 0, pretend = 0, frame = 0
+ 165              		@ frame_needed = 0, uses_anonymous_args = 0
+ 166              		@ link register save eliminated.
+ 123:libraries/drivers/src/at32f403a_407_crm.c ****   flag_status status = RESET;
+ 167              		.loc 1 123 3 view .LVU32
+ 124:libraries/drivers/src/at32f403a_407_crm.c ****   if((CRM_REG(flag) & CRM_REG_BIT(flag)) != CRM_REG_BIT(flag))
+ 168              		.loc 1 124 3 view .LVU33
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccmAcxDa.s 			page 6
+
+
+ 169              		.loc 1 124 7 is_stmt 0 view .LVU34
+ 170 0000 030C     		lsrs	r3, r0, #16
+ 171 0002 03F18043 		add	r3, r3, #1073741824
+ 172 0006 03F50433 		add	r3, r3, #135168
+ 173 000a 1A68     		ldr	r2, [r3]
+ 174              		.loc 1 124 23 view .LVU35
+ 175 000c 00F01F00 		and	r0, r0, #31
+ 176              	.LVL3:
+ 177              		.loc 1 124 23 view .LVU36
+ 178 0010 0123     		movs	r3, #1
+ 179 0012 8340     		lsls	r3, r3, r0
+ 180              		.loc 1 124 5 view .LVU37
+ 181 0014 9343     		bics	r3, r3, r2
+ 182 0016 01D0     		beq	.L14
+ 125:libraries/drivers/src/at32f403a_407_crm.c ****   {
+ 126:libraries/drivers/src/at32f403a_407_crm.c ****     status = RESET;
+ 183              		.loc 1 126 12 view .LVU38
+ 184 0018 0020     		movs	r0, #0
+ 185 001a 7047     		bx	lr
+ 186              	.L14:
+ 127:libraries/drivers/src/at32f403a_407_crm.c ****   }
+ 128:libraries/drivers/src/at32f403a_407_crm.c ****   else
+ 129:libraries/drivers/src/at32f403a_407_crm.c ****   {
+ 130:libraries/drivers/src/at32f403a_407_crm.c ****     status = SET;
+ 187              		.loc 1 130 12 view .LVU39
+ 188 001c 0120     		movs	r0, #1
+ 189              	.LVL4:
+ 131:libraries/drivers/src/at32f403a_407_crm.c ****   }
+ 132:libraries/drivers/src/at32f403a_407_crm.c ****   return status;
+ 190              		.loc 1 132 3 is_stmt 1 view .LVU40
+ 133:libraries/drivers/src/at32f403a_407_crm.c **** }
+ 191              		.loc 1 133 1 is_stmt 0 view .LVU41
+ 192 001e 7047     		bx	lr
+ 193              		.cfi_endproc
+ 194              	.LFE137:
+ 196              		.section	.text.crm_interrupt_flag_get,"ax",%progbits
+ 197              		.align	1
+ 198              		.global	crm_interrupt_flag_get
+ 199              		.syntax unified
+ 200              		.thumb
+ 201              		.thumb_func
+ 203              	crm_interrupt_flag_get:
+ 204              	.LVL5:
+ 205              	.LFB138:
+ 134:libraries/drivers/src/at32f403a_407_crm.c **** 
+ 135:libraries/drivers/src/at32f403a_407_crm.c **** /**
+ 136:libraries/drivers/src/at32f403a_407_crm.c ****   * @brief  get crm interrupt flag status
+ 137:libraries/drivers/src/at32f403a_407_crm.c ****   * @param  flag
+ 138:libraries/drivers/src/at32f403a_407_crm.c ****   *         this parameter can be one of the following values:
+ 139:libraries/drivers/src/at32f403a_407_crm.c ****   *         - CRM_LICK_READY_INT_FLAG
+ 140:libraries/drivers/src/at32f403a_407_crm.c ****   *         - CRM_LEXT_READY_INT_FLAG
+ 141:libraries/drivers/src/at32f403a_407_crm.c ****   *         - CRM_HICK_READY_INT_FLAG
+ 142:libraries/drivers/src/at32f403a_407_crm.c ****   *         - CRM_HEXT_READY_INT_FLAG
+ 143:libraries/drivers/src/at32f403a_407_crm.c ****   *         - CRM_PLL_READY_INT_FLAG
+ 144:libraries/drivers/src/at32f403a_407_crm.c ****   *         - CRM_CLOCK_FAILURE_INT_FLAG
+ 145:libraries/drivers/src/at32f403a_407_crm.c ****   * @retval flag_status (SET or RESET)
+ 146:libraries/drivers/src/at32f403a_407_crm.c ****   */
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccmAcxDa.s 			page 7
+
+
+ 147:libraries/drivers/src/at32f403a_407_crm.c **** flag_status crm_interrupt_flag_get(uint32_t flag)
+ 148:libraries/drivers/src/at32f403a_407_crm.c **** {
+ 206              		.loc 1 148 1 is_stmt 1 view -0
+ 207              		.cfi_startproc
+ 208              		@ args = 0, pretend = 0, frame = 0
+ 209              		@ frame_needed = 0, uses_anonymous_args = 0
+ 210              		@ link register save eliminated.
+ 149:libraries/drivers/src/at32f403a_407_crm.c ****   flag_status status = RESET;
+ 211              		.loc 1 149 3 view .LVU43
+ 150:libraries/drivers/src/at32f403a_407_crm.c ****   switch(flag)
+ 212              		.loc 1 150 3 view .LVU44
+ 213 0000 A0F50020 		sub	r0, r0, #524288
+ 214              	.LVL6:
+ 215              		.loc 1 150 3 is_stmt 0 view .LVU45
+ 216 0004 0728     		cmp	r0, #7
+ 217 0006 4DD8     		bhi	.L24
+ 218 0008 DFE800F0 		tbb	[pc, r0]
+ 219              	.L18:
+ 220 000c 04       		.byte	(.L23-.L18)/2
+ 221 000d 10       		.byte	(.L22-.L18)/2
+ 222 000e 1C       		.byte	(.L21-.L18)/2
+ 223 000f 28       		.byte	(.L20-.L18)/2
+ 224 0010 34       		.byte	(.L19-.L18)/2
+ 225 0011 4C       		.byte	(.L24-.L18)/2
+ 226 0012 4C       		.byte	(.L24-.L18)/2
+ 227 0013 40       		.byte	(.L17-.L18)/2
+ 228              		.p2align 1
+ 229              	.L23:
+ 151:libraries/drivers/src/at32f403a_407_crm.c ****   {
+ 152:libraries/drivers/src/at32f403a_407_crm.c ****     case CRM_LICK_READY_INT_FLAG:
+ 153:libraries/drivers/src/at32f403a_407_crm.c ****       if(CRM->clkint_bit.lickstblf && CRM->clkint_bit.lickstblien)
+ 230              		.loc 1 153 7 is_stmt 1 view .LVU46
+ 231              		.loc 1 153 25 is_stmt 0 view .LVU47
+ 232 0014 304B     		ldr	r3, .L37
+ 233 0016 9B68     		ldr	r3, [r3, #8]
+ 234              		.loc 1 153 9 view .LVU48
+ 235 0018 13F0010F 		tst	r3, #1
+ 236 001c 44D0     		beq	.L25
+ 237              		.loc 1 153 54 discriminator 1 view .LVU49
+ 238 001e 2E4B     		ldr	r3, .L37
+ 239 0020 9B68     		ldr	r3, [r3, #8]
+ 240              		.loc 1 153 36 discriminator 1 view .LVU50
+ 241 0022 13F4807F 		tst	r3, #256
+ 242 0026 41D1     		bne	.L26
+ 149:libraries/drivers/src/at32f403a_407_crm.c ****   switch(flag)
+ 243              		.loc 1 149 15 view .LVU51
+ 244 0028 0020     		movs	r0, #0
+ 245              	.LVL7:
+ 149:libraries/drivers/src/at32f403a_407_crm.c ****   switch(flag)
+ 246              		.loc 1 149 15 view .LVU52
+ 247 002a 7047     		bx	lr
+ 248              	.L22:
+ 154:libraries/drivers/src/at32f403a_407_crm.c ****       {
+ 155:libraries/drivers/src/at32f403a_407_crm.c ****         status = SET;
+ 156:libraries/drivers/src/at32f403a_407_crm.c ****       }
+ 157:libraries/drivers/src/at32f403a_407_crm.c ****       break;
+ 158:libraries/drivers/src/at32f403a_407_crm.c ****     case CRM_LEXT_READY_INT_FLAG:
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccmAcxDa.s 			page 8
+
+
+ 159:libraries/drivers/src/at32f403a_407_crm.c ****       if(CRM->clkint_bit.lextstblf && CRM->clkint_bit.lextstblien)
+ 249              		.loc 1 159 7 is_stmt 1 view .LVU53
+ 250              		.loc 1 159 25 is_stmt 0 view .LVU54
+ 251 002c 2A4B     		ldr	r3, .L37
+ 252 002e 9B68     		ldr	r3, [r3, #8]
+ 253              		.loc 1 159 9 view .LVU55
+ 254 0030 13F0020F 		tst	r3, #2
+ 255 0034 3CD0     		beq	.L27
+ 256              		.loc 1 159 54 discriminator 1 view .LVU56
+ 257 0036 284B     		ldr	r3, .L37
+ 258 0038 9B68     		ldr	r3, [r3, #8]
+ 259              		.loc 1 159 36 discriminator 1 view .LVU57
+ 260 003a 13F4007F 		tst	r3, #512
+ 261 003e 39D1     		bne	.L28
+ 149:libraries/drivers/src/at32f403a_407_crm.c ****   switch(flag)
+ 262              		.loc 1 149 15 view .LVU58
+ 263 0040 0020     		movs	r0, #0
+ 264 0042 7047     		bx	lr
+ 265              	.L21:
+ 160:libraries/drivers/src/at32f403a_407_crm.c ****       {
+ 161:libraries/drivers/src/at32f403a_407_crm.c ****         status = SET;
+ 162:libraries/drivers/src/at32f403a_407_crm.c ****       }
+ 163:libraries/drivers/src/at32f403a_407_crm.c ****       break;
+ 164:libraries/drivers/src/at32f403a_407_crm.c ****     case CRM_HICK_READY_INT_FLAG:
+ 165:libraries/drivers/src/at32f403a_407_crm.c ****       if(CRM->clkint_bit.hickstblf && CRM->clkint_bit.hickstblien)
+ 266              		.loc 1 165 7 is_stmt 1 view .LVU59
+ 267              		.loc 1 165 25 is_stmt 0 view .LVU60
+ 268 0044 244B     		ldr	r3, .L37
+ 269 0046 9B68     		ldr	r3, [r3, #8]
+ 270              		.loc 1 165 9 view .LVU61
+ 271 0048 13F0040F 		tst	r3, #4
+ 272 004c 34D0     		beq	.L29
+ 273              		.loc 1 165 54 discriminator 1 view .LVU62
+ 274 004e 224B     		ldr	r3, .L37
+ 275 0050 9B68     		ldr	r3, [r3, #8]
+ 276              		.loc 1 165 36 discriminator 1 view .LVU63
+ 277 0052 13F4806F 		tst	r3, #1024
+ 278 0056 31D1     		bne	.L30
+ 149:libraries/drivers/src/at32f403a_407_crm.c ****   switch(flag)
+ 279              		.loc 1 149 15 view .LVU64
+ 280 0058 0020     		movs	r0, #0
+ 281 005a 7047     		bx	lr
+ 282              	.L20:
+ 166:libraries/drivers/src/at32f403a_407_crm.c ****       {
+ 167:libraries/drivers/src/at32f403a_407_crm.c ****         status = SET;
+ 168:libraries/drivers/src/at32f403a_407_crm.c ****       }
+ 169:libraries/drivers/src/at32f403a_407_crm.c ****       break;
+ 170:libraries/drivers/src/at32f403a_407_crm.c ****     case CRM_HEXT_READY_INT_FLAG:
+ 171:libraries/drivers/src/at32f403a_407_crm.c ****       if(CRM->clkint_bit.hextstblf && CRM->clkint_bit.hextstblien)
+ 283              		.loc 1 171 7 is_stmt 1 view .LVU65
+ 284              		.loc 1 171 25 is_stmt 0 view .LVU66
+ 285 005c 1E4B     		ldr	r3, .L37
+ 286 005e 9B68     		ldr	r3, [r3, #8]
+ 287              		.loc 1 171 9 view .LVU67
+ 288 0060 13F0080F 		tst	r3, #8
+ 289 0064 2CD0     		beq	.L31
+ 290              		.loc 1 171 54 discriminator 1 view .LVU68
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccmAcxDa.s 			page 9
+
+
+ 291 0066 1C4B     		ldr	r3, .L37
+ 292 0068 9B68     		ldr	r3, [r3, #8]
+ 293              		.loc 1 171 36 discriminator 1 view .LVU69
+ 294 006a 13F4006F 		tst	r3, #2048
+ 295 006e 29D1     		bne	.L32
+ 149:libraries/drivers/src/at32f403a_407_crm.c ****   switch(flag)
+ 296              		.loc 1 149 15 view .LVU70
+ 297 0070 0020     		movs	r0, #0
+ 298 0072 7047     		bx	lr
+ 299              	.L19:
+ 172:libraries/drivers/src/at32f403a_407_crm.c ****       {
+ 173:libraries/drivers/src/at32f403a_407_crm.c ****         status = SET;
+ 174:libraries/drivers/src/at32f403a_407_crm.c ****       }
+ 175:libraries/drivers/src/at32f403a_407_crm.c ****       break;
+ 176:libraries/drivers/src/at32f403a_407_crm.c ****     case CRM_PLL_READY_INT_FLAG:
+ 177:libraries/drivers/src/at32f403a_407_crm.c ****       if(CRM->clkint_bit.pllstblf && CRM->clkint_bit.pllstblien)
+ 300              		.loc 1 177 7 is_stmt 1 view .LVU71
+ 301              		.loc 1 177 25 is_stmt 0 view .LVU72
+ 302 0074 184B     		ldr	r3, .L37
+ 303 0076 9B68     		ldr	r3, [r3, #8]
+ 304              		.loc 1 177 9 view .LVU73
+ 305 0078 13F0100F 		tst	r3, #16
+ 306 007c 24D0     		beq	.L33
+ 307              		.loc 1 177 53 discriminator 1 view .LVU74
+ 308 007e 164B     		ldr	r3, .L37
+ 309 0080 9B68     		ldr	r3, [r3, #8]
+ 310              		.loc 1 177 35 discriminator 1 view .LVU75
+ 311 0082 13F4805F 		tst	r3, #4096
+ 312 0086 21D1     		bne	.L34
+ 149:libraries/drivers/src/at32f403a_407_crm.c ****   switch(flag)
+ 313              		.loc 1 149 15 view .LVU76
+ 314 0088 0020     		movs	r0, #0
+ 315 008a 7047     		bx	lr
+ 316              	.L17:
+ 178:libraries/drivers/src/at32f403a_407_crm.c ****       {
+ 179:libraries/drivers/src/at32f403a_407_crm.c ****         status = SET;
+ 180:libraries/drivers/src/at32f403a_407_crm.c ****       }
+ 181:libraries/drivers/src/at32f403a_407_crm.c ****       break;
+ 182:libraries/drivers/src/at32f403a_407_crm.c ****     case CRM_CLOCK_FAILURE_INT_FLAG:
+ 183:libraries/drivers/src/at32f403a_407_crm.c ****       if(CRM->clkint_bit.cfdf && CRM->ctrl_bit.cfden)
+ 317              		.loc 1 183 7 is_stmt 1 view .LVU77
+ 318              		.loc 1 183 25 is_stmt 0 view .LVU78
+ 319 008c 124B     		ldr	r3, .L37
+ 320 008e 9B68     		ldr	r3, [r3, #8]
+ 321              		.loc 1 183 9 view .LVU79
+ 322 0090 13F0800F 		tst	r3, #128
+ 323 0094 1CD0     		beq	.L35
+ 324              		.loc 1 183 47 discriminator 1 view .LVU80
+ 325 0096 104B     		ldr	r3, .L37
+ 326 0098 1B68     		ldr	r3, [r3]
+ 327              		.loc 1 183 31 discriminator 1 view .LVU81
+ 328 009a 13F4002F 		tst	r3, #524288
+ 329 009e 19D1     		bne	.L36
+ 149:libraries/drivers/src/at32f403a_407_crm.c ****   switch(flag)
+ 330              		.loc 1 149 15 view .LVU82
+ 331 00a0 0020     		movs	r0, #0
+ 332 00a2 7047     		bx	lr
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccmAcxDa.s 			page 10
+
+
+ 333              	.L24:
+ 150:libraries/drivers/src/at32f403a_407_crm.c ****   {
+ 334              		.loc 1 150 3 view .LVU83
+ 335 00a4 0020     		movs	r0, #0
+ 336 00a6 7047     		bx	lr
+ 337              	.L25:
+ 149:libraries/drivers/src/at32f403a_407_crm.c ****   switch(flag)
+ 338              		.loc 1 149 15 view .LVU84
+ 339 00a8 0020     		movs	r0, #0
+ 340 00aa 7047     		bx	lr
+ 341              	.L26:
+ 155:libraries/drivers/src/at32f403a_407_crm.c ****       }
+ 342              		.loc 1 155 16 view .LVU85
+ 343 00ac 0120     		movs	r0, #1
+ 344 00ae 7047     		bx	lr
+ 345              	.L27:
+ 149:libraries/drivers/src/at32f403a_407_crm.c ****   switch(flag)
+ 346              		.loc 1 149 15 view .LVU86
+ 347 00b0 0020     		movs	r0, #0
+ 348 00b2 7047     		bx	lr
+ 349              	.L28:
+ 161:libraries/drivers/src/at32f403a_407_crm.c ****       }
+ 350              		.loc 1 161 16 view .LVU87
+ 351 00b4 0120     		movs	r0, #1
+ 352 00b6 7047     		bx	lr
+ 353              	.L29:
+ 149:libraries/drivers/src/at32f403a_407_crm.c ****   switch(flag)
+ 354              		.loc 1 149 15 view .LVU88
+ 355 00b8 0020     		movs	r0, #0
+ 356 00ba 7047     		bx	lr
+ 357              	.L30:
+ 167:libraries/drivers/src/at32f403a_407_crm.c ****       }
+ 358              		.loc 1 167 16 view .LVU89
+ 359 00bc 0120     		movs	r0, #1
+ 360 00be 7047     		bx	lr
+ 361              	.L31:
+ 149:libraries/drivers/src/at32f403a_407_crm.c ****   switch(flag)
+ 362              		.loc 1 149 15 view .LVU90
+ 363 00c0 0020     		movs	r0, #0
+ 364 00c2 7047     		bx	lr
+ 365              	.L32:
+ 173:libraries/drivers/src/at32f403a_407_crm.c ****       }
+ 366              		.loc 1 173 16 view .LVU91
+ 367 00c4 0120     		movs	r0, #1
+ 368 00c6 7047     		bx	lr
+ 369              	.L33:
+ 149:libraries/drivers/src/at32f403a_407_crm.c ****   switch(flag)
+ 370              		.loc 1 149 15 view .LVU92
+ 371 00c8 0020     		movs	r0, #0
+ 372 00ca 7047     		bx	lr
+ 373              	.L34:
+ 179:libraries/drivers/src/at32f403a_407_crm.c ****       }
+ 374              		.loc 1 179 16 view .LVU93
+ 375 00cc 0120     		movs	r0, #1
+ 376 00ce 7047     		bx	lr
+ 377              	.L35:
+ 149:libraries/drivers/src/at32f403a_407_crm.c ****   switch(flag)
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccmAcxDa.s 			page 11
+
+
+ 378              		.loc 1 149 15 view .LVU94
+ 379 00d0 0020     		movs	r0, #0
+ 380 00d2 7047     		bx	lr
+ 381              	.L36:
+ 184:libraries/drivers/src/at32f403a_407_crm.c ****       {
+ 185:libraries/drivers/src/at32f403a_407_crm.c ****         status = SET;
+ 382              		.loc 1 185 16 view .LVU95
+ 383 00d4 0120     		movs	r0, #1
+ 384              	.LVL8:
+ 186:libraries/drivers/src/at32f403a_407_crm.c ****       }
+ 187:libraries/drivers/src/at32f403a_407_crm.c ****       break;
+ 188:libraries/drivers/src/at32f403a_407_crm.c ****   }
+ 189:libraries/drivers/src/at32f403a_407_crm.c **** 
+ 190:libraries/drivers/src/at32f403a_407_crm.c ****   return status;
+ 385              		.loc 1 190 3 is_stmt 1 view .LVU96
+ 191:libraries/drivers/src/at32f403a_407_crm.c **** }
+ 386              		.loc 1 191 1 is_stmt 0 view .LVU97
+ 387 00d6 7047     		bx	lr
+ 388              	.L38:
+ 389              		.align	2
+ 390              	.L37:
+ 391 00d8 00100240 		.word	1073876992
+ 392              		.cfi_endproc
+ 393              	.LFE138:
+ 395              		.section	.text.crm_hext_stable_wait,"ax",%progbits
+ 396              		.align	1
+ 397              		.global	crm_hext_stable_wait
+ 398              		.syntax unified
+ 399              		.thumb
+ 400              		.thumb_func
+ 402              	crm_hext_stable_wait:
+ 403              	.LFB139:
+ 192:libraries/drivers/src/at32f403a_407_crm.c **** 
+ 193:libraries/drivers/src/at32f403a_407_crm.c **** /**
+ 194:libraries/drivers/src/at32f403a_407_crm.c ****   * @brief  wait for hext stable
+ 195:libraries/drivers/src/at32f403a_407_crm.c ****   * @param  none
+ 196:libraries/drivers/src/at32f403a_407_crm.c ****   * @retval error_status (ERROR or SUCCESS)
+ 197:libraries/drivers/src/at32f403a_407_crm.c ****   */
+ 198:libraries/drivers/src/at32f403a_407_crm.c **** error_status crm_hext_stable_wait(void)
+ 199:libraries/drivers/src/at32f403a_407_crm.c **** {
+ 404              		.loc 1 199 1 is_stmt 1 view -0
+ 405              		.cfi_startproc
+ 406              		@ args = 0, pretend = 0, frame = 0
+ 407              		@ frame_needed = 0, uses_anonymous_args = 0
+ 408 0000 10B5     		push	{r4, lr}
+ 409              	.LCFI0:
+ 410              		.cfi_def_cfa_offset 8
+ 411              		.cfi_offset 4, -8
+ 412              		.cfi_offset 14, -4
+ 200:libraries/drivers/src/at32f403a_407_crm.c ****   uint32_t stable_cnt = 0;
+ 413              		.loc 1 200 3 view .LVU99
+ 414              	.LVL9:
+ 201:libraries/drivers/src/at32f403a_407_crm.c ****   error_status status = ERROR;
+ 415              		.loc 1 201 3 view .LVU100
+ 202:libraries/drivers/src/at32f403a_407_crm.c **** 
+ 203:libraries/drivers/src/at32f403a_407_crm.c ****   while((crm_flag_get(CRM_HEXT_STABLE_FLAG) != SET) && (stable_cnt < HEXT_STARTUP_TIMEOUT))
+ 416              		.loc 1 203 3 view .LVU101
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccmAcxDa.s 			page 12
+
+
+ 200:libraries/drivers/src/at32f403a_407_crm.c ****   error_status status = ERROR;
+ 417              		.loc 1 200 12 is_stmt 0 view .LVU102
+ 418 0002 0024     		movs	r4, #0
+ 419              	.LVL10:
+ 420              	.L40:
+ 421              		.loc 1 203 53 is_stmt 1 view .LVU103
+ 422              		.loc 1 203 10 is_stmt 0 view .LVU104
+ 423 0004 1120     		movs	r0, #17
+ 424 0006 FFF7FEFF 		bl	crm_flag_get
+ 425              	.LVL11:
+ 426              		.loc 1 203 53 discriminator 1 view .LVU105
+ 427 000a 0128     		cmp	r0, #1
+ 428 000c 04D0     		beq	.L41
+ 429 000e B4F5405F 		cmp	r4, #12288
+ 430 0012 01D2     		bcs	.L41
+ 204:libraries/drivers/src/at32f403a_407_crm.c ****   {
+ 205:libraries/drivers/src/at32f403a_407_crm.c ****     stable_cnt ++;
+ 431              		.loc 1 205 5 is_stmt 1 view .LVU106
+ 432              		.loc 1 205 16 is_stmt 0 view .LVU107
+ 433 0014 0134     		adds	r4, r4, #1
+ 434              	.LVL12:
+ 435              		.loc 1 205 16 view .LVU108
+ 436 0016 F5E7     		b	.L40
+ 437              	.LVL13:
+ 438              	.L41:
+ 206:libraries/drivers/src/at32f403a_407_crm.c ****   }
+ 207:libraries/drivers/src/at32f403a_407_crm.c **** 
+ 208:libraries/drivers/src/at32f403a_407_crm.c ****   if(crm_flag_get(CRM_HEXT_STABLE_FLAG) != SET)
+ 439              		.loc 1 208 3 is_stmt 1 view .LVU109
+ 440              		.loc 1 208 6 is_stmt 0 view .LVU110
+ 441 0018 1120     		movs	r0, #17
+ 442 001a FFF7FEFF 		bl	crm_flag_get
+ 443              	.LVL14:
+ 444              		.loc 1 208 5 discriminator 1 view .LVU111
+ 445 001e 0128     		cmp	r0, #1
+ 446 0020 00D0     		beq	.L43
+ 209:libraries/drivers/src/at32f403a_407_crm.c ****   {
+ 210:libraries/drivers/src/at32f403a_407_crm.c ****     status = ERROR;
+ 447              		.loc 1 210 12 view .LVU112
+ 448 0022 0020     		movs	r0, #0
+ 449              	.L43:
+ 450              	.LVL15:
+ 211:libraries/drivers/src/at32f403a_407_crm.c ****   }
+ 212:libraries/drivers/src/at32f403a_407_crm.c ****   else
+ 213:libraries/drivers/src/at32f403a_407_crm.c ****   {
+ 214:libraries/drivers/src/at32f403a_407_crm.c ****     status = SUCCESS;
+ 215:libraries/drivers/src/at32f403a_407_crm.c ****   }
+ 216:libraries/drivers/src/at32f403a_407_crm.c **** 
+ 217:libraries/drivers/src/at32f403a_407_crm.c ****   return status;
+ 451              		.loc 1 217 3 is_stmt 1 view .LVU113
+ 218:libraries/drivers/src/at32f403a_407_crm.c **** }
+ 452              		.loc 1 218 1 is_stmt 0 view .LVU114
+ 453 0024 10BD     		pop	{r4, pc}
+ 454              		.loc 1 218 1 view .LVU115
+ 455              		.cfi_endproc
+ 456              	.LFE139:
+ 458              		.section	.text.crm_hick_clock_trimming_set,"ax",%progbits
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccmAcxDa.s 			page 13
+
+
+ 459              		.align	1
+ 460              		.global	crm_hick_clock_trimming_set
+ 461              		.syntax unified
+ 462              		.thumb
+ 463              		.thumb_func
+ 465              	crm_hick_clock_trimming_set:
+ 466              	.LVL16:
+ 467              	.LFB140:
+ 219:libraries/drivers/src/at32f403a_407_crm.c **** 
+ 220:libraries/drivers/src/at32f403a_407_crm.c **** /**
+ 221:libraries/drivers/src/at32f403a_407_crm.c ****   * @brief  set the hick trimming value
+ 222:libraries/drivers/src/at32f403a_407_crm.c ****   * @param  trim_value (0x00~0x3F)
+ 223:libraries/drivers/src/at32f403a_407_crm.c ****   * @retval none
+ 224:libraries/drivers/src/at32f403a_407_crm.c ****   */
+ 225:libraries/drivers/src/at32f403a_407_crm.c **** void crm_hick_clock_trimming_set(uint8_t trim_value)
+ 226:libraries/drivers/src/at32f403a_407_crm.c **** {
+ 468              		.loc 1 226 1 is_stmt 1 view -0
+ 469              		.cfi_startproc
+ 470              		@ args = 0, pretend = 0, frame = 0
+ 471              		@ frame_needed = 0, uses_anonymous_args = 0
+ 472              		@ link register save eliminated.
+ 227:libraries/drivers/src/at32f403a_407_crm.c ****   CRM->ctrl_bit.hicktrim = trim_value;
+ 473              		.loc 1 227 3 view .LVU117
+ 474              		.loc 1 227 26 is_stmt 0 view .LVU118
+ 475 0000 024B     		ldr	r3, .L46
+ 476 0002 1A68     		ldr	r2, [r3]
+ 477 0004 60F38702 		bfi	r2, r0, #2, #6
+ 478 0008 1A60     		str	r2, [r3]
+ 228:libraries/drivers/src/at32f403a_407_crm.c **** }
+ 479              		.loc 1 228 1 view .LVU119
+ 480 000a 7047     		bx	lr
+ 481              	.L47:
+ 482              		.align	2
+ 483              	.L46:
+ 484 000c 00100240 		.word	1073876992
+ 485              		.cfi_endproc
+ 486              	.LFE140:
+ 488              		.section	.text.crm_hick_clock_calibration_set,"ax",%progbits
+ 489              		.align	1
+ 490              		.global	crm_hick_clock_calibration_set
+ 491              		.syntax unified
+ 492              		.thumb
+ 493              		.thumb_func
+ 495              	crm_hick_clock_calibration_set:
+ 496              	.LVL17:
+ 497              	.LFB141:
+ 229:libraries/drivers/src/at32f403a_407_crm.c **** 
+ 230:libraries/drivers/src/at32f403a_407_crm.c **** /**
+ 231:libraries/drivers/src/at32f403a_407_crm.c ****   * @brief  set the crm calibration value
+ 232:libraries/drivers/src/at32f403a_407_crm.c ****   * @param  cali_value (0x00~0xFF)
+ 233:libraries/drivers/src/at32f403a_407_crm.c ****   * @retval none
+ 234:libraries/drivers/src/at32f403a_407_crm.c ****   */
+ 235:libraries/drivers/src/at32f403a_407_crm.c **** void crm_hick_clock_calibration_set(uint8_t cali_value)
+ 236:libraries/drivers/src/at32f403a_407_crm.c **** {
+ 498              		.loc 1 236 1 is_stmt 1 view -0
+ 499              		.cfi_startproc
+ 500              		@ args = 0, pretend = 0, frame = 0
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccmAcxDa.s 			page 14
+
+
+ 501              		@ frame_needed = 0, uses_anonymous_args = 0
+ 502              		@ link register save eliminated.
+ 237:libraries/drivers/src/at32f403a_407_crm.c ****   /* enable write hick calibration */
+ 238:libraries/drivers/src/at32f403a_407_crm.c ****   CRM->misc1_bit.hickcal_key = 0x5A;
+ 503              		.loc 1 238 3 view .LVU121
+ 504              		.loc 1 238 30 is_stmt 0 view .LVU122
+ 505 0000 074B     		ldr	r3, .L49
+ 506 0002 1A6B     		ldr	r2, [r3, #48]
+ 507 0004 5A21     		movs	r1, #90
+ 508 0006 61F30702 		bfi	r2, r1, #0, #8
+ 509 000a 1A63     		str	r2, [r3, #48]
+ 239:libraries/drivers/src/at32f403a_407_crm.c **** 
+ 240:libraries/drivers/src/at32f403a_407_crm.c ****   /* write hick calibration value */
+ 241:libraries/drivers/src/at32f403a_407_crm.c ****   CRM->ctrl_bit.hickcal = cali_value;
+ 510              		.loc 1 241 3 is_stmt 1 view .LVU123
+ 511              		.loc 1 241 25 is_stmt 0 view .LVU124
+ 512 000c 1A68     		ldr	r2, [r3]
+ 513 000e 60F30F22 		bfi	r2, r0, #8, #8
+ 514 0012 1A60     		str	r2, [r3]
+ 242:libraries/drivers/src/at32f403a_407_crm.c **** 
+ 243:libraries/drivers/src/at32f403a_407_crm.c ****   /* disable write hick calibration */
+ 244:libraries/drivers/src/at32f403a_407_crm.c ****   CRM->misc1_bit.hickcal_key = 0x0;
+ 515              		.loc 1 244 3 is_stmt 1 view .LVU125
+ 516              		.loc 1 244 30 is_stmt 0 view .LVU126
+ 517 0014 1A6B     		ldr	r2, [r3, #48]
+ 518 0016 22F0FF02 		bic	r2, r2, #255
+ 519 001a 1A63     		str	r2, [r3, #48]
+ 245:libraries/drivers/src/at32f403a_407_crm.c **** }
+ 520              		.loc 1 245 1 view .LVU127
+ 521 001c 7047     		bx	lr
+ 522              	.L50:
+ 523 001e 00BF     		.align	2
+ 524              	.L49:
+ 525 0020 00100240 		.word	1073876992
+ 526              		.cfi_endproc
+ 527              	.LFE141:
+ 529              		.section	.text.crm_periph_clock_enable,"ax",%progbits
+ 530              		.align	1
+ 531              		.global	crm_periph_clock_enable
+ 532              		.syntax unified
+ 533              		.thumb
+ 534              		.thumb_func
+ 536              	crm_periph_clock_enable:
+ 537              	.LVL18:
+ 538              	.LFB142:
+ 246:libraries/drivers/src/at32f403a_407_crm.c **** 
+ 247:libraries/drivers/src/at32f403a_407_crm.c **** /**
+ 248:libraries/drivers/src/at32f403a_407_crm.c ****   * @brief  enable or disable the peripheral clock
+ 249:libraries/drivers/src/at32f403a_407_crm.c ****   * @param  value
+ 250:libraries/drivers/src/at32f403a_407_crm.c ****   *         this parameter can be one of the following values:
+ 251:libraries/drivers/src/at32f403a_407_crm.c ****   *         - CRM_DMA1_PERIPH_CLOCK         - CRM_DMA2_PERIPH_CLOCK         - CRM_CRC_PERIPH_CLOCK 
+ 252:libraries/drivers/src/at32f403a_407_crm.c ****   *         - CRM_SDIO1_PERIPH_CLOCK        - CRM_SDIO2_PERIPH_CLOCK        - CRM_EMAC_PERIPH_CLOCK
+ 253:libraries/drivers/src/at32f403a_407_crm.c ****   *         - CRM_EMACRX_PERIPH_CLOCK       - CRM_EMACPTP_PERIPH_CLOCK      - CRM_IOMUX_PERIPH_CLOC
+ 254:libraries/drivers/src/at32f403a_407_crm.c ****   *         - CRM_GPIOB_PERIPH_CLOCK        - CRM_GPIOC_PERIPH_CLOCK        - CRM_GPIOD_PERIPH_CLOC
+ 255:libraries/drivers/src/at32f403a_407_crm.c ****   *         - CRM_ADC1_PERIPH_CLOCK         - CRM_ADC2_PERIPH_CLOCK         - CRM_TMR1_PERIPH_CLOCK
+ 256:libraries/drivers/src/at32f403a_407_crm.c ****   *         - CRM_TMR8_PERIPH_CLOCK         - CRM_USART1_PERIPH_CLOCK       - CRM_ADC3_PERIPH_CLOCK
+ 257:libraries/drivers/src/at32f403a_407_crm.c ****   *         - CRM_TMR10_PERIPH_CLOCK        - CRM_TMR11_PERIPH_CLOCK        - CRM_ACC_PERIPH_CLOCK 
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccmAcxDa.s 			page 15
+
+
+ 258:libraries/drivers/src/at32f403a_407_crm.c ****   *         - CRM_USART6_PERIPH_CLOCK       - CRM_UART7_PERIPH_CLOCK        - CRM_UART8_PERIPH_CLOC
+ 259:libraries/drivers/src/at32f403a_407_crm.c ****   *         - CRM_TMR3_PERIPH_CLOCK         - CRM_TMR4_PERIPH_CLOCK         - CRM_TMR5_PERIPH_CLOCK
+ 260:libraries/drivers/src/at32f403a_407_crm.c ****   *         - CRM_TMR7_PERIPH_CLOCK         - CRM_TMR12_PERIPH_CLOCK        - CRM_TMR13_PERIPH_CLOC
+ 261:libraries/drivers/src/at32f403a_407_crm.c ****   *         - CRM_WWDT_PERIPH_CLOCK         - CRM_SPI2_PERIPH_CLOCK         - CRM_SPI3_PERIPH_CLOCK
+ 262:libraries/drivers/src/at32f403a_407_crm.c ****   *         - CRM_USART2_PERIPH_CLOCK       - CRM_USART3_PERIPH_CLOCK       - CRM_UART4_PERIPH_CLOC
+ 263:libraries/drivers/src/at32f403a_407_crm.c ****   *         - CRM_I2C1_PERIPH_CLOCK         - CRM_I2C2_PERIPH_CLOCK         - CRM_USB_PERIPH_CLOCK 
+ 264:libraries/drivers/src/at32f403a_407_crm.c ****   *         - CRM_CAN2_PERIPH_CLOCK         - CRM_BPR_PERIPH_CLOCK          - CRM_PWC_PERIPH_CLOCK 
+ 265:libraries/drivers/src/at32f403a_407_crm.c ****   * @param  new_state (TRUE or FALSE)
+ 266:libraries/drivers/src/at32f403a_407_crm.c ****   * @retval none
+ 267:libraries/drivers/src/at32f403a_407_crm.c ****   */
+ 268:libraries/drivers/src/at32f403a_407_crm.c **** void crm_periph_clock_enable(crm_periph_clock_type value, confirm_state new_state)
+ 269:libraries/drivers/src/at32f403a_407_crm.c **** {
+ 539              		.loc 1 269 1 is_stmt 1 view -0
+ 540              		.cfi_startproc
+ 541              		@ args = 0, pretend = 0, frame = 0
+ 542              		@ frame_needed = 0, uses_anonymous_args = 0
+ 543              		@ link register save eliminated.
+ 270:libraries/drivers/src/at32f403a_407_crm.c ****   /* enable periph clock */
+ 271:libraries/drivers/src/at32f403a_407_crm.c ****   if(TRUE == new_state)
+ 544              		.loc 1 271 3 view .LVU129
+ 545              		.loc 1 271 5 is_stmt 0 view .LVU130
+ 546 0000 0129     		cmp	r1, #1
+ 547 0002 0DD0     		beq	.L54
+ 272:libraries/drivers/src/at32f403a_407_crm.c ****   {
+ 273:libraries/drivers/src/at32f403a_407_crm.c ****     CRM_REG(value) |= CRM_REG_BIT(value);
+ 274:libraries/drivers/src/at32f403a_407_crm.c ****   }
+ 275:libraries/drivers/src/at32f403a_407_crm.c ****   /* disable periph clock */
+ 276:libraries/drivers/src/at32f403a_407_crm.c ****   else
+ 277:libraries/drivers/src/at32f403a_407_crm.c ****   {
+ 278:libraries/drivers/src/at32f403a_407_crm.c ****     CRM_REG(value) &= ~(CRM_REG_BIT(value));
+ 548              		.loc 1 278 5 is_stmt 1 view .LVU131
+ 549 0004 030C     		lsrs	r3, r0, #16
+ 550 0006 03F18043 		add	r3, r3, #1073741824
+ 551 000a 03F50433 		add	r3, r3, #135168
+ 552 000e 1A68     		ldr	r2, [r3]
+ 553              		.loc 1 278 25 is_stmt 0 view .LVU132
+ 554 0010 00F01F00 		and	r0, r0, #31
+ 555              	.LVL19:
+ 556              		.loc 1 278 25 view .LVU133
+ 557 0014 0121     		movs	r1, #1
+ 558              	.LVL20:
+ 559              		.loc 1 278 25 view .LVU134
+ 560 0016 8140     		lsls	r1, r1, r0
+ 561              		.loc 1 278 20 view .LVU135
+ 562 0018 22EA0102 		bic	r2, r2, r1
+ 563 001c 1A60     		str	r2, [r3]
+ 279:libraries/drivers/src/at32f403a_407_crm.c ****   }
+ 280:libraries/drivers/src/at32f403a_407_crm.c **** }
+ 564              		.loc 1 280 1 view .LVU136
+ 565 001e 7047     		bx	lr
+ 566              	.LVL21:
+ 567              	.L54:
+ 273:libraries/drivers/src/at32f403a_407_crm.c ****   }
+ 568              		.loc 1 273 5 is_stmt 1 view .LVU137
+ 569 0020 030C     		lsrs	r3, r0, #16
+ 570 0022 03F18043 		add	r3, r3, #1073741824
+ 571 0026 03F50433 		add	r3, r3, #135168
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccmAcxDa.s 			page 16
+
+
+ 572 002a 1A68     		ldr	r2, [r3]
+ 273:libraries/drivers/src/at32f403a_407_crm.c ****   }
+ 573              		.loc 1 273 23 is_stmt 0 view .LVU138
+ 574 002c 00F01F00 		and	r0, r0, #31
+ 575              	.LVL22:
+ 273:libraries/drivers/src/at32f403a_407_crm.c ****   }
+ 576              		.loc 1 273 23 view .LVU139
+ 577 0030 8140     		lsls	r1, r1, r0
+ 578              	.LVL23:
+ 273:libraries/drivers/src/at32f403a_407_crm.c ****   }
+ 579              		.loc 1 273 20 view .LVU140
+ 580 0032 0A43     		orrs	r2, r2, r1
+ 581 0034 1A60     		str	r2, [r3]
+ 582 0036 7047     		bx	lr
+ 583              		.cfi_endproc
+ 584              	.LFE142:
+ 586              		.section	.text.crm_periph_reset,"ax",%progbits
+ 587              		.align	1
+ 588              		.global	crm_periph_reset
+ 589              		.syntax unified
+ 590              		.thumb
+ 591              		.thumb_func
+ 593              	crm_periph_reset:
+ 594              	.LVL24:
+ 595              	.LFB143:
+ 281:libraries/drivers/src/at32f403a_407_crm.c **** 
+ 282:libraries/drivers/src/at32f403a_407_crm.c **** /**
+ 283:libraries/drivers/src/at32f403a_407_crm.c ****   * @brief  enable or disable the peripheral reset
+ 284:libraries/drivers/src/at32f403a_407_crm.c ****   * @param  value
+ 285:libraries/drivers/src/at32f403a_407_crm.c ****   *         this parameter can be one of the following values:
+ 286:libraries/drivers/src/at32f403a_407_crm.c ****   *         - CRM_EMAC_PERIPH_RESET         - CRM_IOMUX_PERIPH_RESET        - CRM_EXINT_PERIPH_RESE
+ 287:libraries/drivers/src/at32f403a_407_crm.c ****   *         - CRM_GPIOB_PERIPH_RESET        - CRM_GPIOC_PERIPH_RESET        - CRM_GPIOD_PERIPH_RESE
+ 288:libraries/drivers/src/at32f403a_407_crm.c ****   *         - CRM_ADC1_PERIPH_RESET         - CRM_ADC2_PERIPH_RESET         - CRM_TMR1_PERIPH_RESET
+ 289:libraries/drivers/src/at32f403a_407_crm.c ****   *         - CRM_TMR8_PERIPH_RESET         - CRM_USART1_PERIPH_RESET       - CRM_ADC3_PERIPH_RESET
+ 290:libraries/drivers/src/at32f403a_407_crm.c ****   *         - CRM_TMR10_PERIPH_RESET        - CRM_TMR11_PERIPH_RESET        - CRM_ACC_PERIPH_RESET 
+ 291:libraries/drivers/src/at32f403a_407_crm.c ****   *         - CRM_USART6_PERIPH_RESET       - CRM_UART7_PERIPH_RESET        - CRM_UART8_PERIPH_RESE
+ 292:libraries/drivers/src/at32f403a_407_crm.c ****   *         - CRM_TMR3_PERIPH_RESET         - CRM_TMR4_PERIPH_RESET         - CRM_TMR5_PERIPH_RESET
+ 293:libraries/drivers/src/at32f403a_407_crm.c ****   *         - CRM_TMR7_PERIPH_RESET         - CRM_TMR12_PERIPH_RESET        - CRM_TMR13_PERIPH_RESE
+ 294:libraries/drivers/src/at32f403a_407_crm.c ****   *         - CRM_WWDT_PERIPH_RESET         - CRM_SPI2_PERIPH_RESET         - CRM_SPI3_PERIPH_RESET
+ 295:libraries/drivers/src/at32f403a_407_crm.c ****   *         - CRM_USART2_PERIPH_RESET       - CRM_USART3_PERIPH_RESET       - CRM_UART4_PERIPH_RESE
+ 296:libraries/drivers/src/at32f403a_407_crm.c ****   *         - CRM_I2C1_PERIPH_RESET         - CRM_I2C2_PERIPH_RESET         - CRM_USB_PERIPH_RESET 
+ 297:libraries/drivers/src/at32f403a_407_crm.c ****   *         - CRM_CAN2_PERIPH_RESET         - CRM_BPR_PERIPH_RESET          - CRM_PWC_PERIPH_RESET 
+ 298:libraries/drivers/src/at32f403a_407_crm.c ****   * @param  new_state (TRUE or FALSE)
+ 299:libraries/drivers/src/at32f403a_407_crm.c ****   * @retval none
+ 300:libraries/drivers/src/at32f403a_407_crm.c ****   */
+ 301:libraries/drivers/src/at32f403a_407_crm.c **** void crm_periph_reset(crm_periph_reset_type value, confirm_state new_state)
+ 302:libraries/drivers/src/at32f403a_407_crm.c **** {
+ 596              		.loc 1 302 1 is_stmt 1 view -0
+ 597              		.cfi_startproc
+ 598              		@ args = 0, pretend = 0, frame = 0
+ 599              		@ frame_needed = 0, uses_anonymous_args = 0
+ 600              		@ link register save eliminated.
+ 303:libraries/drivers/src/at32f403a_407_crm.c ****   /* enable periph reset */
+ 304:libraries/drivers/src/at32f403a_407_crm.c ****   if(new_state == TRUE)
+ 601              		.loc 1 304 3 view .LVU142
+ 602              		.loc 1 304 5 is_stmt 0 view .LVU143
+ 603 0000 0129     		cmp	r1, #1
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccmAcxDa.s 			page 17
+
+
+ 604 0002 0DD0     		beq	.L58
+ 305:libraries/drivers/src/at32f403a_407_crm.c ****   {
+ 306:libraries/drivers/src/at32f403a_407_crm.c ****     CRM_REG(value) |= (CRM_REG_BIT(value));
+ 307:libraries/drivers/src/at32f403a_407_crm.c ****   }
+ 308:libraries/drivers/src/at32f403a_407_crm.c ****   /* disable periph reset */
+ 309:libraries/drivers/src/at32f403a_407_crm.c ****   else
+ 310:libraries/drivers/src/at32f403a_407_crm.c ****   {
+ 311:libraries/drivers/src/at32f403a_407_crm.c ****     CRM_REG(value) &= ~(CRM_REG_BIT(value));
+ 605              		.loc 1 311 5 is_stmt 1 view .LVU144
+ 606 0004 030C     		lsrs	r3, r0, #16
+ 607 0006 03F18043 		add	r3, r3, #1073741824
+ 608 000a 03F50433 		add	r3, r3, #135168
+ 609 000e 1A68     		ldr	r2, [r3]
+ 610              		.loc 1 311 25 is_stmt 0 view .LVU145
+ 611 0010 00F01F00 		and	r0, r0, #31
+ 612              	.LVL25:
+ 613              		.loc 1 311 25 view .LVU146
+ 614 0014 0121     		movs	r1, #1
+ 615              	.LVL26:
+ 616              		.loc 1 311 25 view .LVU147
+ 617 0016 8140     		lsls	r1, r1, r0
+ 618              		.loc 1 311 20 view .LVU148
+ 619 0018 22EA0102 		bic	r2, r2, r1
+ 620 001c 1A60     		str	r2, [r3]
+ 312:libraries/drivers/src/at32f403a_407_crm.c ****   }
+ 313:libraries/drivers/src/at32f403a_407_crm.c **** }
+ 621              		.loc 1 313 1 view .LVU149
+ 622 001e 7047     		bx	lr
+ 623              	.LVL27:
+ 624              	.L58:
+ 306:libraries/drivers/src/at32f403a_407_crm.c ****   }
+ 625              		.loc 1 306 5 is_stmt 1 view .LVU150
+ 626 0020 030C     		lsrs	r3, r0, #16
+ 627 0022 03F18043 		add	r3, r3, #1073741824
+ 628 0026 03F50433 		add	r3, r3, #135168
+ 629 002a 1A68     		ldr	r2, [r3]
+ 306:libraries/drivers/src/at32f403a_407_crm.c ****   }
+ 630              		.loc 1 306 24 is_stmt 0 view .LVU151
+ 631 002c 00F01F00 		and	r0, r0, #31
+ 632              	.LVL28:
+ 306:libraries/drivers/src/at32f403a_407_crm.c ****   }
+ 633              		.loc 1 306 24 view .LVU152
+ 634 0030 8140     		lsls	r1, r1, r0
+ 635              	.LVL29:
+ 306:libraries/drivers/src/at32f403a_407_crm.c ****   }
+ 636              		.loc 1 306 20 view .LVU153
+ 637 0032 0A43     		orrs	r2, r2, r1
+ 638 0034 1A60     		str	r2, [r3]
+ 639 0036 7047     		bx	lr
+ 640              		.cfi_endproc
+ 641              	.LFE143:
+ 643              		.section	.text.crm_periph_sleep_mode_clock_enable,"ax",%progbits
+ 644              		.align	1
+ 645              		.global	crm_periph_sleep_mode_clock_enable
+ 646              		.syntax unified
+ 647              		.thumb
+ 648              		.thumb_func
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccmAcxDa.s 			page 18
+
+
+ 650              	crm_periph_sleep_mode_clock_enable:
+ 651              	.LVL30:
+ 652              	.LFB144:
+ 314:libraries/drivers/src/at32f403a_407_crm.c **** 
+ 315:libraries/drivers/src/at32f403a_407_crm.c **** /**
+ 316:libraries/drivers/src/at32f403a_407_crm.c ****   * @brief  enable or disable the peripheral clock in sleep mode
+ 317:libraries/drivers/src/at32f403a_407_crm.c ****   * @param  value
+ 318:libraries/drivers/src/at32f403a_407_crm.c ****   *         this parameter can be one of the following values:
+ 319:libraries/drivers/src/at32f403a_407_crm.c ****   *         - CRM_SRAM_PERIPH_CLOCK_SLEEP_MODE
+ 320:libraries/drivers/src/at32f403a_407_crm.c ****   *         - CRM_FLASH_PERIPH_CLOCK_SLEEP_MODE
+ 321:libraries/drivers/src/at32f403a_407_crm.c ****   * @param  new_state (TRUE or FALSE)
+ 322:libraries/drivers/src/at32f403a_407_crm.c ****   * @retval none
+ 323:libraries/drivers/src/at32f403a_407_crm.c ****   */
+ 324:libraries/drivers/src/at32f403a_407_crm.c **** void crm_periph_sleep_mode_clock_enable(crm_periph_clock_sleepmd_type value, confirm_state new_stat
+ 325:libraries/drivers/src/at32f403a_407_crm.c **** {
+ 653              		.loc 1 325 1 is_stmt 1 view -0
+ 654              		.cfi_startproc
+ 655              		@ args = 0, pretend = 0, frame = 0
+ 656              		@ frame_needed = 0, uses_anonymous_args = 0
+ 657              		@ link register save eliminated.
+ 326:libraries/drivers/src/at32f403a_407_crm.c ****   /* enable periph clock in sleep mode */
+ 327:libraries/drivers/src/at32f403a_407_crm.c ****   if(new_state == TRUE)
+ 658              		.loc 1 327 3 view .LVU155
+ 659              		.loc 1 327 5 is_stmt 0 view .LVU156
+ 660 0000 0129     		cmp	r1, #1
+ 661 0002 0DD0     		beq	.L62
+ 328:libraries/drivers/src/at32f403a_407_crm.c ****   {
+ 329:libraries/drivers/src/at32f403a_407_crm.c ****     CRM_REG(value) |= (CRM_REG_BIT(value));
+ 330:libraries/drivers/src/at32f403a_407_crm.c ****   }
+ 331:libraries/drivers/src/at32f403a_407_crm.c ****   /* disable perph clock in sleep mode */
+ 332:libraries/drivers/src/at32f403a_407_crm.c ****   else
+ 333:libraries/drivers/src/at32f403a_407_crm.c ****   {
+ 334:libraries/drivers/src/at32f403a_407_crm.c ****     CRM_REG(value) &= ~(CRM_REG_BIT(value));
+ 662              		.loc 1 334 5 is_stmt 1 view .LVU157
+ 663 0004 030C     		lsrs	r3, r0, #16
+ 664 0006 03F18043 		add	r3, r3, #1073741824
+ 665 000a 03F50433 		add	r3, r3, #135168
+ 666 000e 1A68     		ldr	r2, [r3]
+ 667              		.loc 1 334 25 is_stmt 0 view .LVU158
+ 668 0010 00F01F00 		and	r0, r0, #31
+ 669              	.LVL31:
+ 670              		.loc 1 334 25 view .LVU159
+ 671 0014 0121     		movs	r1, #1
+ 672              	.LVL32:
+ 673              		.loc 1 334 25 view .LVU160
+ 674 0016 8140     		lsls	r1, r1, r0
+ 675              		.loc 1 334 20 view .LVU161
+ 676 0018 22EA0102 		bic	r2, r2, r1
+ 677 001c 1A60     		str	r2, [r3]
+ 335:libraries/drivers/src/at32f403a_407_crm.c ****   }
+ 336:libraries/drivers/src/at32f403a_407_crm.c **** 
+ 337:libraries/drivers/src/at32f403a_407_crm.c **** }
+ 678              		.loc 1 337 1 view .LVU162
+ 679 001e 7047     		bx	lr
+ 680              	.LVL33:
+ 681              	.L62:
+ 329:libraries/drivers/src/at32f403a_407_crm.c ****   }
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccmAcxDa.s 			page 19
+
+
+ 682              		.loc 1 329 5 is_stmt 1 view .LVU163
+ 683 0020 030C     		lsrs	r3, r0, #16
+ 684 0022 03F18043 		add	r3, r3, #1073741824
+ 685 0026 03F50433 		add	r3, r3, #135168
+ 686 002a 1A68     		ldr	r2, [r3]
+ 329:libraries/drivers/src/at32f403a_407_crm.c ****   }
+ 687              		.loc 1 329 24 is_stmt 0 view .LVU164
+ 688 002c 00F01F00 		and	r0, r0, #31
+ 689              	.LVL34:
+ 329:libraries/drivers/src/at32f403a_407_crm.c ****   }
+ 690              		.loc 1 329 24 view .LVU165
+ 691 0030 8140     		lsls	r1, r1, r0
+ 692              	.LVL35:
+ 329:libraries/drivers/src/at32f403a_407_crm.c ****   }
+ 693              		.loc 1 329 20 view .LVU166
+ 694 0032 0A43     		orrs	r2, r2, r1
+ 695 0034 1A60     		str	r2, [r3]
+ 696 0036 7047     		bx	lr
+ 697              		.cfi_endproc
+ 698              	.LFE144:
+ 700              		.section	.text.crm_clock_source_enable,"ax",%progbits
+ 701              		.align	1
+ 702              		.global	crm_clock_source_enable
+ 703              		.syntax unified
+ 704              		.thumb
+ 705              		.thumb_func
+ 707              	crm_clock_source_enable:
+ 708              	.LVL36:
+ 709              	.LFB145:
+ 338:libraries/drivers/src/at32f403a_407_crm.c **** 
+ 339:libraries/drivers/src/at32f403a_407_crm.c **** /**
+ 340:libraries/drivers/src/at32f403a_407_crm.c ****   * @brief  enable or disable the crm clock source
+ 341:libraries/drivers/src/at32f403a_407_crm.c ****   * @param  source
+ 342:libraries/drivers/src/at32f403a_407_crm.c ****   *         this parameter can be one of the following values:
+ 343:libraries/drivers/src/at32f403a_407_crm.c ****   *         - CRM_CLOCK_SOURCE_HICK
+ 344:libraries/drivers/src/at32f403a_407_crm.c ****   *         - CRM_CLOCK_SOURCE_HEXT
+ 345:libraries/drivers/src/at32f403a_407_crm.c ****   *         - CRM_CLOCK_SOURCE_PLL
+ 346:libraries/drivers/src/at32f403a_407_crm.c ****   *         - CRM_CLOCK_SOURCE_LEXT
+ 347:libraries/drivers/src/at32f403a_407_crm.c ****   *         - CRM_CLOCK_SOURCE_LICK
+ 348:libraries/drivers/src/at32f403a_407_crm.c ****   * @param  new_state (TRUE or FALSE)
+ 349:libraries/drivers/src/at32f403a_407_crm.c ****   * @retval none
+ 350:libraries/drivers/src/at32f403a_407_crm.c ****   */
+ 351:libraries/drivers/src/at32f403a_407_crm.c **** void crm_clock_source_enable(crm_clock_source_type source, confirm_state new_state)
+ 352:libraries/drivers/src/at32f403a_407_crm.c **** {
+ 710              		.loc 1 352 1 is_stmt 1 view -0
+ 711              		.cfi_startproc
+ 712              		@ args = 0, pretend = 0, frame = 0
+ 713              		@ frame_needed = 0, uses_anonymous_args = 0
+ 714              		@ link register save eliminated.
+ 353:libraries/drivers/src/at32f403a_407_crm.c ****   switch(source)
+ 715              		.loc 1 353 3 view .LVU168
+ 716 0000 0428     		cmp	r0, #4
+ 717 0002 21D8     		bhi	.L63
+ 718 0004 DFE800F0 		tbb	[pc, r0]
+ 719              	.L66:
+ 720 0008 03       		.byte	(.L70-.L66)/2
+ 721 0009 09       		.byte	(.L69-.L66)/2
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccmAcxDa.s 			page 20
+
+
+ 722 000a 0F       		.byte	(.L68-.L66)/2
+ 723 000b 15       		.byte	(.L67-.L66)/2
+ 724 000c 1B       		.byte	(.L65-.L66)/2
+ 725 000d 00       		.p2align 1
+ 726              	.L70:
+ 354:libraries/drivers/src/at32f403a_407_crm.c ****   {
+ 355:libraries/drivers/src/at32f403a_407_crm.c ****     case CRM_CLOCK_SOURCE_HICK:
+ 356:libraries/drivers/src/at32f403a_407_crm.c ****       CRM->ctrl_bit.hicken = new_state;
+ 727              		.loc 1 356 7 view .LVU169
+ 728              		.loc 1 356 28 is_stmt 0 view .LVU170
+ 729 000e 0F4B     		ldr	r3, .L72
+ 730 0010 1A68     		ldr	r2, [r3]
+ 731 0012 61F30002 		bfi	r2, r1, #0, #1
+ 732 0016 1A60     		str	r2, [r3]
+ 357:libraries/drivers/src/at32f403a_407_crm.c ****       break;
+ 733              		.loc 1 357 7 is_stmt 1 view .LVU171
+ 734 0018 7047     		bx	lr
+ 735              	.L69:
+ 358:libraries/drivers/src/at32f403a_407_crm.c ****     case CRM_CLOCK_SOURCE_HEXT:
+ 359:libraries/drivers/src/at32f403a_407_crm.c ****       CRM->ctrl_bit.hexten = new_state;
+ 736              		.loc 1 359 7 view .LVU172
+ 737              		.loc 1 359 28 is_stmt 0 view .LVU173
+ 738 001a 0C4B     		ldr	r3, .L72
+ 739 001c 1A68     		ldr	r2, [r3]
+ 740 001e 61F31042 		bfi	r2, r1, #16, #1
+ 741 0022 1A60     		str	r2, [r3]
+ 360:libraries/drivers/src/at32f403a_407_crm.c ****       break;
+ 742              		.loc 1 360 7 is_stmt 1 view .LVU174
+ 743 0024 7047     		bx	lr
+ 744              	.L68:
+ 361:libraries/drivers/src/at32f403a_407_crm.c ****     case CRM_CLOCK_SOURCE_PLL:
+ 362:libraries/drivers/src/at32f403a_407_crm.c ****       CRM->ctrl_bit.pllen = new_state;
+ 745              		.loc 1 362 7 view .LVU175
+ 746              		.loc 1 362 27 is_stmt 0 view .LVU176
+ 747 0026 094B     		ldr	r3, .L72
+ 748 0028 1A68     		ldr	r2, [r3]
+ 749 002a 61F31862 		bfi	r2, r1, #24, #1
+ 750 002e 1A60     		str	r2, [r3]
+ 363:libraries/drivers/src/at32f403a_407_crm.c ****       break;
+ 751              		.loc 1 363 7 is_stmt 1 view .LVU177
+ 752 0030 7047     		bx	lr
+ 753              	.L67:
+ 364:libraries/drivers/src/at32f403a_407_crm.c ****     case CRM_CLOCK_SOURCE_LEXT:
+ 365:libraries/drivers/src/at32f403a_407_crm.c ****       CRM->bpdc_bit.lexten = new_state;
+ 754              		.loc 1 365 7 view .LVU178
+ 755              		.loc 1 365 28 is_stmt 0 view .LVU179
+ 756 0032 064B     		ldr	r3, .L72
+ 757 0034 1A6A     		ldr	r2, [r3, #32]
+ 758 0036 61F30002 		bfi	r2, r1, #0, #1
+ 759 003a 1A62     		str	r2, [r3, #32]
+ 366:libraries/drivers/src/at32f403a_407_crm.c ****       break;
+ 760              		.loc 1 366 7 is_stmt 1 view .LVU180
+ 761 003c 7047     		bx	lr
+ 762              	.L65:
+ 367:libraries/drivers/src/at32f403a_407_crm.c ****     case CRM_CLOCK_SOURCE_LICK:
+ 368:libraries/drivers/src/at32f403a_407_crm.c ****       CRM->ctrlsts_bit.licken = new_state;
+ 763              		.loc 1 368 7 view .LVU181
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccmAcxDa.s 			page 21
+
+
+ 764              		.loc 1 368 31 is_stmt 0 view .LVU182
+ 765 003e 034B     		ldr	r3, .L72
+ 766 0040 5A6A     		ldr	r2, [r3, #36]
+ 767 0042 61F30002 		bfi	r2, r1, #0, #1
+ 768 0046 5A62     		str	r2, [r3, #36]
+ 369:libraries/drivers/src/at32f403a_407_crm.c ****       break;
+ 769              		.loc 1 369 7 is_stmt 1 view .LVU183
+ 770              	.L63:
+ 370:libraries/drivers/src/at32f403a_407_crm.c ****     default:
+ 371:libraries/drivers/src/at32f403a_407_crm.c ****       break;
+ 372:libraries/drivers/src/at32f403a_407_crm.c ****   }
+ 373:libraries/drivers/src/at32f403a_407_crm.c **** }
+ 771              		.loc 1 373 1 is_stmt 0 view .LVU184
+ 772 0048 7047     		bx	lr
+ 773              	.L73:
+ 774 004a 00BF     		.align	2
+ 775              	.L72:
+ 776 004c 00100240 		.word	1073876992
+ 777              		.cfi_endproc
+ 778              	.LFE145:
+ 780              		.section	.text.crm_flag_clear,"ax",%progbits
+ 781              		.align	1
+ 782              		.global	crm_flag_clear
+ 783              		.syntax unified
+ 784              		.thumb
+ 785              		.thumb_func
+ 787              	crm_flag_clear:
+ 788              	.LVL37:
+ 789              	.LFB146:
+ 374:libraries/drivers/src/at32f403a_407_crm.c **** 
+ 375:libraries/drivers/src/at32f403a_407_crm.c **** /**
+ 376:libraries/drivers/src/at32f403a_407_crm.c ****   * @brief  clear the crm reset flags
+ 377:libraries/drivers/src/at32f403a_407_crm.c ****   * @param  flag
+ 378:libraries/drivers/src/at32f403a_407_crm.c ****   *         this parameter can be one of the following values:
+ 379:libraries/drivers/src/at32f403a_407_crm.c ****   *         reset flag:
+ 380:libraries/drivers/src/at32f403a_407_crm.c ****   *         - CRM_NRST_RESET_FLAG
+ 381:libraries/drivers/src/at32f403a_407_crm.c ****   *         - CRM_POR_RESET_FLAG
+ 382:libraries/drivers/src/at32f403a_407_crm.c ****   *         - CRM_SW_RESET_FLAG
+ 383:libraries/drivers/src/at32f403a_407_crm.c ****   *         - CRM_WDT_RESET_FLAG
+ 384:libraries/drivers/src/at32f403a_407_crm.c ****   *         - CRM_WWDT_RESET_FLAG
+ 385:libraries/drivers/src/at32f403a_407_crm.c ****   *         - CRM_LOWPOWER_RESET_FLAG
+ 386:libraries/drivers/src/at32f403a_407_crm.c ****   *         - CRM_ALL_RESET_FLAG
+ 387:libraries/drivers/src/at32f403a_407_crm.c ****   *         interrupt flag:
+ 388:libraries/drivers/src/at32f403a_407_crm.c ****   *         - CRM_LICK_READY_INT_FLAG
+ 389:libraries/drivers/src/at32f403a_407_crm.c ****   *         - CRM_LEXT_READY_INT_FLAG
+ 390:libraries/drivers/src/at32f403a_407_crm.c ****   *         - CRM_HICK_READY_INT_FLAG
+ 391:libraries/drivers/src/at32f403a_407_crm.c ****   *         - CRM_HEXT_READY_INT_FLAG
+ 392:libraries/drivers/src/at32f403a_407_crm.c ****   *         - CRM_PLL_READY_INT_FLAG
+ 393:libraries/drivers/src/at32f403a_407_crm.c ****   *         - CRM_CLOCK_FAILURE_INT_FLAG
+ 394:libraries/drivers/src/at32f403a_407_crm.c ****   * @retval none
+ 395:libraries/drivers/src/at32f403a_407_crm.c ****   */
+ 396:libraries/drivers/src/at32f403a_407_crm.c **** void crm_flag_clear(uint32_t flag)
+ 397:libraries/drivers/src/at32f403a_407_crm.c **** {
+ 790              		.loc 1 397 1 is_stmt 1 view -0
+ 791              		.cfi_startproc
+ 792              		@ args = 0, pretend = 0, frame = 0
+ 793              		@ frame_needed = 0, uses_anonymous_args = 0
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccmAcxDa.s 			page 22
+
+
+ 794              		@ link register save eliminated.
+ 398:libraries/drivers/src/at32f403a_407_crm.c ****   switch(flag)
+ 795              		.loc 1 398 3 view .LVU186
+ 796 0000 B0F1081F 		cmp	r0, #524296
+ 797 0004 0CD2     		bcs	.L75
+ 798 0006 B0F5002F 		cmp	r0, #524288
+ 799 000a 40D3     		bcc	.L74
+ 800 000c A0F50020 		sub	r0, r0, #524288
+ 801              	.LVL38:
+ 802              		.loc 1 398 3 is_stmt 0 view .LVU187
+ 803 0010 0728     		cmp	r0, #7
+ 804 0012 3CD8     		bhi	.L74
+ 805 0014 DFE800F0 		tbb	[pc, r0]
+ 806              	.L78:
+ 807 0018 18       		.byte	(.L83-.L78)/2
+ 808 0019 1E       		.byte	(.L82-.L78)/2
+ 809 001a 24       		.byte	(.L81-.L78)/2
+ 810 001b 2A       		.byte	(.L80-.L78)/2
+ 811 001c 30       		.byte	(.L79-.L78)/2
+ 812 001d 3B       		.byte	(.L74-.L78)/2
+ 813 001e 3B       		.byte	(.L74-.L78)/2
+ 814 001f 36       		.byte	(.L77-.L78)/2
+ 815              	.LVL39:
+ 816              		.p2align 1
+ 817              	.L75:
+ 818              		.loc 1 398 3 view .LVU188
+ 819 0020 1B4B     		ldr	r3, .L87
+ 820 0022 9842     		cmp	r0, r3
+ 821 0024 05D0     		beq	.L84
+ 822 0026 32D3     		bcc	.L74
+ 823 0028 A0F51010 		sub	r0, r0, #2359296
+ 824              	.LVL40:
+ 825              		.loc 1 398 3 view .LVU189
+ 826 002c 1A38     		subs	r0, r0, #26
+ 827              	.LVL41:
+ 828              		.loc 1 398 3 view .LVU190
+ 829 002e 0528     		cmp	r0, #5
+ 830 0030 2DD8     		bhi	.L74
+ 831              	.LVL42:
+ 832              	.L84:
+ 399:libraries/drivers/src/at32f403a_407_crm.c ****   {
+ 400:libraries/drivers/src/at32f403a_407_crm.c ****     case CRM_NRST_RESET_FLAG:
+ 401:libraries/drivers/src/at32f403a_407_crm.c ****     case CRM_POR_RESET_FLAG:
+ 402:libraries/drivers/src/at32f403a_407_crm.c ****     case CRM_SW_RESET_FLAG:
+ 403:libraries/drivers/src/at32f403a_407_crm.c ****     case CRM_WDT_RESET_FLAG:
+ 404:libraries/drivers/src/at32f403a_407_crm.c ****     case CRM_WWDT_RESET_FLAG:
+ 405:libraries/drivers/src/at32f403a_407_crm.c ****     case CRM_LOWPOWER_RESET_FLAG:
+ 406:libraries/drivers/src/at32f403a_407_crm.c ****     case CRM_ALL_RESET_FLAG:
+ 407:libraries/drivers/src/at32f403a_407_crm.c ****       CRM->ctrlsts_bit.rstfc = TRUE;
+ 833              		.loc 1 407 7 is_stmt 1 view .LVU191
+ 834              		.loc 1 407 30 is_stmt 0 view .LVU192
+ 835 0032 184A     		ldr	r2, .L87+4
+ 836 0034 536A     		ldr	r3, [r2, #36]
+ 837 0036 43F08073 		orr	r3, r3, #16777216
+ 838 003a 5362     		str	r3, [r2, #36]
+ 408:libraries/drivers/src/at32f403a_407_crm.c ****       while(CRM->ctrlsts_bit.rstfc == TRUE);
+ 839              		.loc 1 408 7 is_stmt 1 view .LVU193
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccmAcxDa.s 			page 23
+
+
+ 840              	.L85:
+ 841              		.loc 1 408 36 discriminator 1 view .LVU194
+ 842              		.loc 1 408 29 is_stmt 0 discriminator 1 view .LVU195
+ 843 003c 154B     		ldr	r3, .L87+4
+ 844 003e 5B6A     		ldr	r3, [r3, #36]
+ 845              		.loc 1 408 36 discriminator 1 view .LVU196
+ 846 0040 13F0807F 		tst	r3, #16777216
+ 847 0044 FAD1     		bne	.L85
+ 848 0046 7047     		bx	lr
+ 849              	.LVL43:
+ 850              	.L83:
+ 409:libraries/drivers/src/at32f403a_407_crm.c ****       break;
+ 410:libraries/drivers/src/at32f403a_407_crm.c ****     case CRM_LICK_READY_INT_FLAG:
+ 411:libraries/drivers/src/at32f403a_407_crm.c ****       CRM->clkint_bit.lickstblfc = TRUE;
+ 851              		.loc 1 411 7 is_stmt 1 view .LVU197
+ 852              		.loc 1 411 34 is_stmt 0 view .LVU198
+ 853 0048 124A     		ldr	r2, .L87+4
+ 854 004a 9368     		ldr	r3, [r2, #8]
+ 855 004c 43F48033 		orr	r3, r3, #65536
+ 856 0050 9360     		str	r3, [r2, #8]
+ 412:libraries/drivers/src/at32f403a_407_crm.c ****       break;
+ 857              		.loc 1 412 7 is_stmt 1 view .LVU199
+ 858 0052 7047     		bx	lr
+ 859              	.L82:
+ 413:libraries/drivers/src/at32f403a_407_crm.c ****     case CRM_LEXT_READY_INT_FLAG:
+ 414:libraries/drivers/src/at32f403a_407_crm.c ****       CRM->clkint_bit.lextstblfc = TRUE;
+ 860              		.loc 1 414 7 view .LVU200
+ 861              		.loc 1 414 34 is_stmt 0 view .LVU201
+ 862 0054 0F4A     		ldr	r2, .L87+4
+ 863 0056 9368     		ldr	r3, [r2, #8]
+ 864 0058 43F40033 		orr	r3, r3, #131072
+ 865 005c 9360     		str	r3, [r2, #8]
+ 415:libraries/drivers/src/at32f403a_407_crm.c ****       break;
+ 866              		.loc 1 415 7 is_stmt 1 view .LVU202
+ 867 005e 7047     		bx	lr
+ 868              	.L81:
+ 416:libraries/drivers/src/at32f403a_407_crm.c ****     case CRM_HICK_READY_INT_FLAG:
+ 417:libraries/drivers/src/at32f403a_407_crm.c ****       CRM->clkint_bit.hickstblfc = TRUE;
+ 869              		.loc 1 417 7 view .LVU203
+ 870              		.loc 1 417 34 is_stmt 0 view .LVU204
+ 871 0060 0C4A     		ldr	r2, .L87+4
+ 872 0062 9368     		ldr	r3, [r2, #8]
+ 873 0064 43F48023 		orr	r3, r3, #262144
+ 874 0068 9360     		str	r3, [r2, #8]
+ 418:libraries/drivers/src/at32f403a_407_crm.c ****       break;
+ 875              		.loc 1 418 7 is_stmt 1 view .LVU205
+ 876 006a 7047     		bx	lr
+ 877              	.L80:
+ 419:libraries/drivers/src/at32f403a_407_crm.c ****     case CRM_HEXT_READY_INT_FLAG:
+ 420:libraries/drivers/src/at32f403a_407_crm.c ****       CRM->clkint_bit.hextstblfc = TRUE;
+ 878              		.loc 1 420 7 view .LVU206
+ 879              		.loc 1 420 34 is_stmt 0 view .LVU207
+ 880 006c 094A     		ldr	r2, .L87+4
+ 881 006e 9368     		ldr	r3, [r2, #8]
+ 882 0070 43F40023 		orr	r3, r3, #524288
+ 883 0074 9360     		str	r3, [r2, #8]
+ 421:libraries/drivers/src/at32f403a_407_crm.c ****       break;
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccmAcxDa.s 			page 24
+
+
+ 884              		.loc 1 421 7 is_stmt 1 view .LVU208
+ 885 0076 7047     		bx	lr
+ 886              	.L79:
+ 422:libraries/drivers/src/at32f403a_407_crm.c ****     case CRM_PLL_READY_INT_FLAG:
+ 423:libraries/drivers/src/at32f403a_407_crm.c ****       CRM->clkint_bit.pllstblfc = TRUE;
+ 887              		.loc 1 423 7 view .LVU209
+ 888              		.loc 1 423 33 is_stmt 0 view .LVU210
+ 889 0078 064A     		ldr	r2, .L87+4
+ 890 007a 9368     		ldr	r3, [r2, #8]
+ 891 007c 43F48013 		orr	r3, r3, #1048576
+ 892 0080 9360     		str	r3, [r2, #8]
+ 424:libraries/drivers/src/at32f403a_407_crm.c ****       break;
+ 893              		.loc 1 424 7 is_stmt 1 view .LVU211
+ 894 0082 7047     		bx	lr
+ 895              	.L77:
+ 425:libraries/drivers/src/at32f403a_407_crm.c ****     case CRM_CLOCK_FAILURE_INT_FLAG:
+ 426:libraries/drivers/src/at32f403a_407_crm.c ****       CRM->clkint_bit.cfdfc = TRUE;
+ 896              		.loc 1 426 7 view .LVU212
+ 897              		.loc 1 426 29 is_stmt 0 view .LVU213
+ 898 0084 034A     		ldr	r2, .L87+4
+ 899 0086 9368     		ldr	r3, [r2, #8]
+ 900 0088 43F40003 		orr	r3, r3, #8388608
+ 901 008c 9360     		str	r3, [r2, #8]
+ 427:libraries/drivers/src/at32f403a_407_crm.c ****       break;
+ 902              		.loc 1 427 7 is_stmt 1 view .LVU214
+ 903              	.LVL44:
+ 904              	.L74:
+ 428:libraries/drivers/src/at32f403a_407_crm.c ****     default:
+ 429:libraries/drivers/src/at32f403a_407_crm.c ****       break;
+ 430:libraries/drivers/src/at32f403a_407_crm.c ****   }
+ 431:libraries/drivers/src/at32f403a_407_crm.c **** }
+ 905              		.loc 1 431 1 is_stmt 0 view .LVU215
+ 906 008e 7047     		bx	lr
+ 907              	.L88:
+ 908              		.align	2
+ 909              	.L87:
+ 910 0090 18002400 		.word	2359320
+ 911 0094 00100240 		.word	1073876992
+ 912              		.cfi_endproc
+ 913              	.LFE146:
+ 915              		.section	.text.crm_rtc_clock_select,"ax",%progbits
+ 916              		.align	1
+ 917              		.global	crm_rtc_clock_select
+ 918              		.syntax unified
+ 919              		.thumb
+ 920              		.thumb_func
+ 922              	crm_rtc_clock_select:
+ 923              	.LVL45:
+ 924              	.LFB147:
+ 432:libraries/drivers/src/at32f403a_407_crm.c **** 
+ 433:libraries/drivers/src/at32f403a_407_crm.c **** /**
+ 434:libraries/drivers/src/at32f403a_407_crm.c ****   * @brief  select rtc clock
+ 435:libraries/drivers/src/at32f403a_407_crm.c ****   * @param  value
+ 436:libraries/drivers/src/at32f403a_407_crm.c ****   *         this parameter can be one of the following values:
+ 437:libraries/drivers/src/at32f403a_407_crm.c ****   *         - CRM_RTC_CLOCK_LEXT
+ 438:libraries/drivers/src/at32f403a_407_crm.c ****   *         - CRM_RTC_CLOCK_LICK
+ 439:libraries/drivers/src/at32f403a_407_crm.c ****   *         - CRM_RTC_CLOCK_HEXT_DIV
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccmAcxDa.s 			page 25
+
+
+ 440:libraries/drivers/src/at32f403a_407_crm.c ****   * @retval none
+ 441:libraries/drivers/src/at32f403a_407_crm.c ****   */
+ 442:libraries/drivers/src/at32f403a_407_crm.c **** void crm_rtc_clock_select(crm_rtc_clock_type value)
+ 443:libraries/drivers/src/at32f403a_407_crm.c **** {
+ 925              		.loc 1 443 1 is_stmt 1 view -0
+ 926              		.cfi_startproc
+ 927              		@ args = 0, pretend = 0, frame = 0
+ 928              		@ frame_needed = 0, uses_anonymous_args = 0
+ 929              		@ link register save eliminated.
+ 444:libraries/drivers/src/at32f403a_407_crm.c ****   CRM->bpdc_bit.rtcsel = value;
+ 930              		.loc 1 444 3 view .LVU217
+ 931              		.loc 1 444 24 is_stmt 0 view .LVU218
+ 932 0000 024B     		ldr	r3, .L90
+ 933 0002 1A6A     		ldr	r2, [r3, #32]
+ 934 0004 60F30922 		bfi	r2, r0, #8, #2
+ 935 0008 1A62     		str	r2, [r3, #32]
+ 445:libraries/drivers/src/at32f403a_407_crm.c **** }
+ 936              		.loc 1 445 1 view .LVU219
+ 937 000a 7047     		bx	lr
+ 938              	.L91:
+ 939              		.align	2
+ 940              	.L90:
+ 941 000c 00100240 		.word	1073876992
+ 942              		.cfi_endproc
+ 943              	.LFE147:
+ 945              		.section	.text.crm_rtc_clock_enable,"ax",%progbits
+ 946              		.align	1
+ 947              		.global	crm_rtc_clock_enable
+ 948              		.syntax unified
+ 949              		.thumb
+ 950              		.thumb_func
+ 952              	crm_rtc_clock_enable:
+ 953              	.LVL46:
+ 954              	.LFB148:
+ 446:libraries/drivers/src/at32f403a_407_crm.c **** 
+ 447:libraries/drivers/src/at32f403a_407_crm.c **** /**
+ 448:libraries/drivers/src/at32f403a_407_crm.c ****   * @brief  enable or disable rtc
+ 449:libraries/drivers/src/at32f403a_407_crm.c ****   * @param  new_state (TRUE or FALSE)
+ 450:libraries/drivers/src/at32f403a_407_crm.c ****   * @retval none
+ 451:libraries/drivers/src/at32f403a_407_crm.c ****   */
+ 452:libraries/drivers/src/at32f403a_407_crm.c **** void crm_rtc_clock_enable(confirm_state new_state)
+ 453:libraries/drivers/src/at32f403a_407_crm.c **** {
+ 955              		.loc 1 453 1 is_stmt 1 view -0
+ 956              		.cfi_startproc
+ 957              		@ args = 0, pretend = 0, frame = 0
+ 958              		@ frame_needed = 0, uses_anonymous_args = 0
+ 959              		@ link register save eliminated.
+ 454:libraries/drivers/src/at32f403a_407_crm.c ****   CRM->bpdc_bit.rtcen = new_state;
+ 960              		.loc 1 454 3 view .LVU221
+ 961              		.loc 1 454 23 is_stmt 0 view .LVU222
+ 962 0000 024B     		ldr	r3, .L93
+ 963 0002 1A6A     		ldr	r2, [r3, #32]
+ 964 0004 60F3CF32 		bfi	r2, r0, #15, #1
+ 965 0008 1A62     		str	r2, [r3, #32]
+ 455:libraries/drivers/src/at32f403a_407_crm.c **** }
+ 966              		.loc 1 455 1 view .LVU223
+ 967 000a 7047     		bx	lr
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccmAcxDa.s 			page 26
+
+
+ 968              	.L94:
+ 969              		.align	2
+ 970              	.L93:
+ 971 000c 00100240 		.word	1073876992
+ 972              		.cfi_endproc
+ 973              	.LFE148:
+ 975              		.section	.text.crm_ahb_div_set,"ax",%progbits
+ 976              		.align	1
+ 977              		.global	crm_ahb_div_set
+ 978              		.syntax unified
+ 979              		.thumb
+ 980              		.thumb_func
+ 982              	crm_ahb_div_set:
+ 983              	.LVL47:
+ 984              	.LFB149:
+ 456:libraries/drivers/src/at32f403a_407_crm.c **** 
+ 457:libraries/drivers/src/at32f403a_407_crm.c **** /**
+ 458:libraries/drivers/src/at32f403a_407_crm.c ****   * @brief  set crm ahb division
+ 459:libraries/drivers/src/at32f403a_407_crm.c ****   * @param  value
+ 460:libraries/drivers/src/at32f403a_407_crm.c ****   *         this parameter can be one of the following values:
+ 461:libraries/drivers/src/at32f403a_407_crm.c ****   *         - CRM_AHB_DIV_1
+ 462:libraries/drivers/src/at32f403a_407_crm.c ****   *         - CRM_AHB_DIV_2
+ 463:libraries/drivers/src/at32f403a_407_crm.c ****   *         - CRM_AHB_DIV_4
+ 464:libraries/drivers/src/at32f403a_407_crm.c ****   *         - CRM_AHB_DIV_8
+ 465:libraries/drivers/src/at32f403a_407_crm.c ****   *         - CRM_AHB_DIV_16
+ 466:libraries/drivers/src/at32f403a_407_crm.c ****   *         - CRM_AHB_DIV_64
+ 467:libraries/drivers/src/at32f403a_407_crm.c ****   *         - CRM_AHB_DIV_128
+ 468:libraries/drivers/src/at32f403a_407_crm.c ****   *         - CRM_AHB_DIV_256
+ 469:libraries/drivers/src/at32f403a_407_crm.c ****   *         - CRM_AHB_DIV_512
+ 470:libraries/drivers/src/at32f403a_407_crm.c ****   * @retval none
+ 471:libraries/drivers/src/at32f403a_407_crm.c ****   */
+ 472:libraries/drivers/src/at32f403a_407_crm.c **** void crm_ahb_div_set(crm_ahb_div_type value)
+ 473:libraries/drivers/src/at32f403a_407_crm.c **** {
+ 985              		.loc 1 473 1 is_stmt 1 view -0
+ 986              		.cfi_startproc
+ 987              		@ args = 0, pretend = 0, frame = 0
+ 988              		@ frame_needed = 0, uses_anonymous_args = 0
+ 989              		@ link register save eliminated.
+ 474:libraries/drivers/src/at32f403a_407_crm.c ****   CRM->cfg_bit.ahbdiv = value;
+ 990              		.loc 1 474 3 view .LVU225
+ 991              		.loc 1 474 23 is_stmt 0 view .LVU226
+ 992 0000 024B     		ldr	r3, .L96
+ 993 0002 5A68     		ldr	r2, [r3, #4]
+ 994 0004 60F30712 		bfi	r2, r0, #4, #4
+ 995 0008 5A60     		str	r2, [r3, #4]
+ 475:libraries/drivers/src/at32f403a_407_crm.c **** }
+ 996              		.loc 1 475 1 view .LVU227
+ 997 000a 7047     		bx	lr
+ 998              	.L97:
+ 999              		.align	2
+ 1000              	.L96:
+ 1001 000c 00100240 		.word	1073876992
+ 1002              		.cfi_endproc
+ 1003              	.LFE149:
+ 1005              		.section	.text.crm_apb1_div_set,"ax",%progbits
+ 1006              		.align	1
+ 1007              		.global	crm_apb1_div_set
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccmAcxDa.s 			page 27
+
+
+ 1008              		.syntax unified
+ 1009              		.thumb
+ 1010              		.thumb_func
+ 1012              	crm_apb1_div_set:
+ 1013              	.LVL48:
+ 1014              	.LFB150:
+ 476:libraries/drivers/src/at32f403a_407_crm.c **** 
+ 477:libraries/drivers/src/at32f403a_407_crm.c **** /**
+ 478:libraries/drivers/src/at32f403a_407_crm.c ****   * @brief  set crm apb1 division
+ 479:libraries/drivers/src/at32f403a_407_crm.c ****   * @note   the maximum frequency of APB1/APB2 clock is 120 MHz
+ 480:libraries/drivers/src/at32f403a_407_crm.c ****   * @param  value
+ 481:libraries/drivers/src/at32f403a_407_crm.c ****   *         this parameter can be one of the following values:
+ 482:libraries/drivers/src/at32f403a_407_crm.c ****   *         - CRM_APB1_DIV_1
+ 483:libraries/drivers/src/at32f403a_407_crm.c ****   *         - CRM_APB1_DIV_2
+ 484:libraries/drivers/src/at32f403a_407_crm.c ****   *         - CRM_APB1_DIV_4
+ 485:libraries/drivers/src/at32f403a_407_crm.c ****   *         - CRM_APB1_DIV_8
+ 486:libraries/drivers/src/at32f403a_407_crm.c ****   *         - CRM_APB1_DIV_16
+ 487:libraries/drivers/src/at32f403a_407_crm.c ****   * @retval none
+ 488:libraries/drivers/src/at32f403a_407_crm.c ****   */
+ 489:libraries/drivers/src/at32f403a_407_crm.c **** void crm_apb1_div_set(crm_apb1_div_type value)
+ 490:libraries/drivers/src/at32f403a_407_crm.c **** {
+ 1015              		.loc 1 490 1 is_stmt 1 view -0
+ 1016              		.cfi_startproc
+ 1017              		@ args = 0, pretend = 0, frame = 0
+ 1018              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1019              		@ link register save eliminated.
+ 491:libraries/drivers/src/at32f403a_407_crm.c ****   CRM->cfg_bit.apb1div = value;
+ 1020              		.loc 1 491 3 view .LVU229
+ 1021              		.loc 1 491 24 is_stmt 0 view .LVU230
+ 1022 0000 024B     		ldr	r3, .L99
+ 1023 0002 5A68     		ldr	r2, [r3, #4]
+ 1024 0004 60F30A22 		bfi	r2, r0, #8, #3
+ 1025 0008 5A60     		str	r2, [r3, #4]
+ 492:libraries/drivers/src/at32f403a_407_crm.c **** }
+ 1026              		.loc 1 492 1 view .LVU231
+ 1027 000a 7047     		bx	lr
+ 1028              	.L100:
+ 1029              		.align	2
+ 1030              	.L99:
+ 1031 000c 00100240 		.word	1073876992
+ 1032              		.cfi_endproc
+ 1033              	.LFE150:
+ 1035              		.section	.text.crm_apb2_div_set,"ax",%progbits
+ 1036              		.align	1
+ 1037              		.global	crm_apb2_div_set
+ 1038              		.syntax unified
+ 1039              		.thumb
+ 1040              		.thumb_func
+ 1042              	crm_apb2_div_set:
+ 1043              	.LVL49:
+ 1044              	.LFB151:
+ 493:libraries/drivers/src/at32f403a_407_crm.c **** 
+ 494:libraries/drivers/src/at32f403a_407_crm.c **** /**
+ 495:libraries/drivers/src/at32f403a_407_crm.c ****   * @brief  set crm apb2 division
+ 496:libraries/drivers/src/at32f403a_407_crm.c ****   * @note   the maximum frequency of APB1/APB2 clock is 120 MHz
+ 497:libraries/drivers/src/at32f403a_407_crm.c ****   * @param  value
+ 498:libraries/drivers/src/at32f403a_407_crm.c ****   *         this parameter can be one of the following values:
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccmAcxDa.s 			page 28
+
+
+ 499:libraries/drivers/src/at32f403a_407_crm.c ****   *         - CRM_APB2_DIV_1
+ 500:libraries/drivers/src/at32f403a_407_crm.c ****   *         - CRM_APB2_DIV_2
+ 501:libraries/drivers/src/at32f403a_407_crm.c ****   *         - CRM_APB2_DIV_4
+ 502:libraries/drivers/src/at32f403a_407_crm.c ****   *         - CRM_APB2_DIV_8
+ 503:libraries/drivers/src/at32f403a_407_crm.c ****   *         - CRM_APB2_DIV_16
+ 504:libraries/drivers/src/at32f403a_407_crm.c ****   * @retval none
+ 505:libraries/drivers/src/at32f403a_407_crm.c ****   */
+ 506:libraries/drivers/src/at32f403a_407_crm.c **** void crm_apb2_div_set(crm_apb2_div_type value)
+ 507:libraries/drivers/src/at32f403a_407_crm.c **** {
+ 1045              		.loc 1 507 1 is_stmt 1 view -0
+ 1046              		.cfi_startproc
+ 1047              		@ args = 0, pretend = 0, frame = 0
+ 1048              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1049              		@ link register save eliminated.
+ 508:libraries/drivers/src/at32f403a_407_crm.c ****   CRM->cfg_bit.apb2div = value;
+ 1050              		.loc 1 508 3 view .LVU233
+ 1051              		.loc 1 508 24 is_stmt 0 view .LVU234
+ 1052 0000 024B     		ldr	r3, .L102
+ 1053 0002 5A68     		ldr	r2, [r3, #4]
+ 1054 0004 60F3CD22 		bfi	r2, r0, #11, #3
+ 1055 0008 5A60     		str	r2, [r3, #4]
+ 509:libraries/drivers/src/at32f403a_407_crm.c **** }
+ 1056              		.loc 1 509 1 view .LVU235
+ 1057 000a 7047     		bx	lr
+ 1058              	.L103:
+ 1059              		.align	2
+ 1060              	.L102:
+ 1061 000c 00100240 		.word	1073876992
+ 1062              		.cfi_endproc
+ 1063              	.LFE151:
+ 1065              		.section	.text.crm_adc_clock_div_set,"ax",%progbits
+ 1066              		.align	1
+ 1067              		.global	crm_adc_clock_div_set
+ 1068              		.syntax unified
+ 1069              		.thumb
+ 1070              		.thumb_func
+ 1072              	crm_adc_clock_div_set:
+ 1073              	.LVL50:
+ 1074              	.LFB152:
+ 510:libraries/drivers/src/at32f403a_407_crm.c **** 
+ 511:libraries/drivers/src/at32f403a_407_crm.c **** /**
+ 512:libraries/drivers/src/at32f403a_407_crm.c ****   * @brief  set crm adc division
+ 513:libraries/drivers/src/at32f403a_407_crm.c ****   * @param  value
+ 514:libraries/drivers/src/at32f403a_407_crm.c ****   *         this parameter can be one of the following values:
+ 515:libraries/drivers/src/at32f403a_407_crm.c ****   *         - CRM_ADC_DIV_2
+ 516:libraries/drivers/src/at32f403a_407_crm.c ****   *         - CRM_ADC_DIV_4
+ 517:libraries/drivers/src/at32f403a_407_crm.c ****   *         - CRM_ADC_DIV_6
+ 518:libraries/drivers/src/at32f403a_407_crm.c ****   *         - CRM_ADC_DIV_8
+ 519:libraries/drivers/src/at32f403a_407_crm.c ****   *         - CRM_ADC_DIV_12
+ 520:libraries/drivers/src/at32f403a_407_crm.c ****   *         - CRM_ADC_DIV_16
+ 521:libraries/drivers/src/at32f403a_407_crm.c ****   * @retval none
+ 522:libraries/drivers/src/at32f403a_407_crm.c ****   */
+ 523:libraries/drivers/src/at32f403a_407_crm.c **** void crm_adc_clock_div_set(crm_adc_div_type div_value)
+ 524:libraries/drivers/src/at32f403a_407_crm.c **** {
+ 1075              		.loc 1 524 1 is_stmt 1 view -0
+ 1076              		.cfi_startproc
+ 1077              		@ args = 0, pretend = 0, frame = 0
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccmAcxDa.s 			page 29
+
+
+ 1078              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1079              		@ link register save eliminated.
+ 525:libraries/drivers/src/at32f403a_407_crm.c ****   CRM->cfg_bit.adcdiv_l = div_value & 0x03;
+ 1080              		.loc 1 525 3 view .LVU237
+ 1081              		.loc 1 525 25 is_stmt 0 view .LVU238
+ 1082 0000 054B     		ldr	r3, .L105
+ 1083 0002 5A68     		ldr	r2, [r3, #4]
+ 1084 0004 60F38F32 		bfi	r2, r0, #14, #2
+ 1085 0008 5A60     		str	r2, [r3, #4]
+ 526:libraries/drivers/src/at32f403a_407_crm.c ****   CRM->cfg_bit.adcdiv_h = (div_value >> 2) & 0x01;
+ 1086              		.loc 1 526 3 is_stmt 1 view .LVU239
+ 1087              		.loc 1 526 44 is_stmt 0 view .LVU240
+ 1088 000a C0F38000 		ubfx	r0, r0, #2, #1
+ 1089              	.LVL51:
+ 1090              		.loc 1 526 25 view .LVU241
+ 1091 000e 5A68     		ldr	r2, [r3, #4]
+ 1092 0010 60F31C72 		bfi	r2, r0, #28, #1
+ 1093 0014 5A60     		str	r2, [r3, #4]
+ 527:libraries/drivers/src/at32f403a_407_crm.c **** }
+ 1094              		.loc 1 527 1 view .LVU242
+ 1095 0016 7047     		bx	lr
+ 1096              	.L106:
+ 1097              		.align	2
+ 1098              	.L105:
+ 1099 0018 00100240 		.word	1073876992
+ 1100              		.cfi_endproc
+ 1101              	.LFE152:
+ 1103              		.section	.text.crm_usb_clock_div_set,"ax",%progbits
+ 1104              		.align	1
+ 1105              		.global	crm_usb_clock_div_set
+ 1106              		.syntax unified
+ 1107              		.thumb
+ 1108              		.thumb_func
+ 1110              	crm_usb_clock_div_set:
+ 1111              	.LVL52:
+ 1112              	.LFB153:
+ 528:libraries/drivers/src/at32f403a_407_crm.c **** 
+ 529:libraries/drivers/src/at32f403a_407_crm.c **** /**
+ 530:libraries/drivers/src/at32f403a_407_crm.c ****   * @brief  set crm usb division
+ 531:libraries/drivers/src/at32f403a_407_crm.c ****   * @param  value
+ 532:libraries/drivers/src/at32f403a_407_crm.c ****   *         this parameter can be one of the following values:
+ 533:libraries/drivers/src/at32f403a_407_crm.c ****   *         - CRM_USB_DIV_1_5
+ 534:libraries/drivers/src/at32f403a_407_crm.c ****   *         - CRM_USB_DIV_1
+ 535:libraries/drivers/src/at32f403a_407_crm.c ****   *         - CRM_USB_DIV_2_5
+ 536:libraries/drivers/src/at32f403a_407_crm.c ****   *         - CRM_USB_DIV_2
+ 537:libraries/drivers/src/at32f403a_407_crm.c ****   *         - CRM_USB_DIV_3_5
+ 538:libraries/drivers/src/at32f403a_407_crm.c ****   *         - CRM_USB_DIV_3
+ 539:libraries/drivers/src/at32f403a_407_crm.c ****   *         - CRM_USB_DIV_4
+ 540:libraries/drivers/src/at32f403a_407_crm.c ****   * @retval none
+ 541:libraries/drivers/src/at32f403a_407_crm.c ****   */
+ 542:libraries/drivers/src/at32f403a_407_crm.c **** void crm_usb_clock_div_set(crm_usb_div_type div_value)
+ 543:libraries/drivers/src/at32f403a_407_crm.c **** {
+ 1113              		.loc 1 543 1 is_stmt 1 view -0
+ 1114              		.cfi_startproc
+ 1115              		@ args = 0, pretend = 0, frame = 0
+ 1116              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1117              		@ link register save eliminated.
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccmAcxDa.s 			page 30
+
+
+ 544:libraries/drivers/src/at32f403a_407_crm.c ****   CRM->cfg_bit.usbdiv_l = div_value & 0x03;
+ 1118              		.loc 1 544 3 view .LVU244
+ 1119              		.loc 1 544 25 is_stmt 0 view .LVU245
+ 1120 0000 054B     		ldr	r3, .L108
+ 1121 0002 5A68     		ldr	r2, [r3, #4]
+ 1122 0004 60F39752 		bfi	r2, r0, #22, #2
+ 1123 0008 5A60     		str	r2, [r3, #4]
+ 545:libraries/drivers/src/at32f403a_407_crm.c ****   CRM->cfg_bit.usbdiv_h = (div_value >> 2) & 0x01;
+ 1124              		.loc 1 545 3 is_stmt 1 view .LVU246
+ 1125              		.loc 1 545 44 is_stmt 0 view .LVU247
+ 1126 000a C0F38000 		ubfx	r0, r0, #2, #1
+ 1127              	.LVL53:
+ 1128              		.loc 1 545 25 view .LVU248
+ 1129 000e 5A68     		ldr	r2, [r3, #4]
+ 1130 0010 60F3DB62 		bfi	r2, r0, #27, #1
+ 1131 0014 5A60     		str	r2, [r3, #4]
+ 546:libraries/drivers/src/at32f403a_407_crm.c **** }
+ 1132              		.loc 1 546 1 view .LVU249
+ 1133 0016 7047     		bx	lr
+ 1134              	.L109:
+ 1135              		.align	2
+ 1136              	.L108:
+ 1137 0018 00100240 		.word	1073876992
+ 1138              		.cfi_endproc
+ 1139              	.LFE153:
+ 1141              		.section	.text.crm_clock_failure_detection_enable,"ax",%progbits
+ 1142              		.align	1
+ 1143              		.global	crm_clock_failure_detection_enable
+ 1144              		.syntax unified
+ 1145              		.thumb
+ 1146              		.thumb_func
+ 1148              	crm_clock_failure_detection_enable:
+ 1149              	.LVL54:
+ 1150              	.LFB154:
+ 547:libraries/drivers/src/at32f403a_407_crm.c **** 
+ 548:libraries/drivers/src/at32f403a_407_crm.c **** /**
+ 549:libraries/drivers/src/at32f403a_407_crm.c ****   * @brief  enable or disable clock failure detection
+ 550:libraries/drivers/src/at32f403a_407_crm.c ****   * @param  new_state (TRUE or FALSE)
+ 551:libraries/drivers/src/at32f403a_407_crm.c ****   * @retval none
+ 552:libraries/drivers/src/at32f403a_407_crm.c ****   */
+ 553:libraries/drivers/src/at32f403a_407_crm.c **** void crm_clock_failure_detection_enable(confirm_state new_state)
+ 554:libraries/drivers/src/at32f403a_407_crm.c **** {
+ 1151              		.loc 1 554 1 is_stmt 1 view -0
+ 1152              		.cfi_startproc
+ 1153              		@ args = 0, pretend = 0, frame = 0
+ 1154              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1155              		@ link register save eliminated.
+ 555:libraries/drivers/src/at32f403a_407_crm.c ****   CRM->ctrl_bit.cfden = new_state;
+ 1156              		.loc 1 555 3 view .LVU251
+ 1157              		.loc 1 555 23 is_stmt 0 view .LVU252
+ 1158 0000 024B     		ldr	r3, .L111
+ 1159 0002 1A68     		ldr	r2, [r3]
+ 1160 0004 60F3D342 		bfi	r2, r0, #19, #1
+ 1161 0008 1A60     		str	r2, [r3]
+ 556:libraries/drivers/src/at32f403a_407_crm.c **** }
+ 1162              		.loc 1 556 1 view .LVU253
+ 1163 000a 7047     		bx	lr
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccmAcxDa.s 			page 31
+
+
+ 1164              	.L112:
+ 1165              		.align	2
+ 1166              	.L111:
+ 1167 000c 00100240 		.word	1073876992
+ 1168              		.cfi_endproc
+ 1169              	.LFE154:
+ 1171              		.section	.text.crm_battery_powered_domain_reset,"ax",%progbits
+ 1172              		.align	1
+ 1173              		.global	crm_battery_powered_domain_reset
+ 1174              		.syntax unified
+ 1175              		.thumb
+ 1176              		.thumb_func
+ 1178              	crm_battery_powered_domain_reset:
+ 1179              	.LVL55:
+ 1180              	.LFB155:
+ 557:libraries/drivers/src/at32f403a_407_crm.c **** 
+ 558:libraries/drivers/src/at32f403a_407_crm.c **** /**
+ 559:libraries/drivers/src/at32f403a_407_crm.c ****   * @brief  battery powered domain software reset
+ 560:libraries/drivers/src/at32f403a_407_crm.c ****   * @param  new_state (TRUE or FALSE)
+ 561:libraries/drivers/src/at32f403a_407_crm.c ****   * @retval none
+ 562:libraries/drivers/src/at32f403a_407_crm.c ****   */
+ 563:libraries/drivers/src/at32f403a_407_crm.c **** void crm_battery_powered_domain_reset(confirm_state new_state)
+ 564:libraries/drivers/src/at32f403a_407_crm.c **** {
+ 1181              		.loc 1 564 1 is_stmt 1 view -0
+ 1182              		.cfi_startproc
+ 1183              		@ args = 0, pretend = 0, frame = 0
+ 1184              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1185              		@ link register save eliminated.
+ 565:libraries/drivers/src/at32f403a_407_crm.c ****   CRM->bpdc_bit.bpdrst = new_state;
+ 1186              		.loc 1 565 3 view .LVU255
+ 1187              		.loc 1 565 24 is_stmt 0 view .LVU256
+ 1188 0000 024B     		ldr	r3, .L114
+ 1189 0002 1A6A     		ldr	r2, [r3, #32]
+ 1190 0004 60F31042 		bfi	r2, r0, #16, #1
+ 1191 0008 1A62     		str	r2, [r3, #32]
+ 566:libraries/drivers/src/at32f403a_407_crm.c **** }
+ 1192              		.loc 1 566 1 view .LVU257
+ 1193 000a 7047     		bx	lr
+ 1194              	.L115:
+ 1195              		.align	2
+ 1196              	.L114:
+ 1197 000c 00100240 		.word	1073876992
+ 1198              		.cfi_endproc
+ 1199              	.LFE155:
+ 1201              		.section	.text.crm_pll_config,"ax",%progbits
+ 1202              		.align	1
+ 1203              		.global	crm_pll_config
+ 1204              		.syntax unified
+ 1205              		.thumb
+ 1206              		.thumb_func
+ 1208              	crm_pll_config:
+ 1209              	.LVL56:
+ 1210              	.LFB156:
+ 567:libraries/drivers/src/at32f403a_407_crm.c **** 
+ 568:libraries/drivers/src/at32f403a_407_crm.c **** /**
+ 569:libraries/drivers/src/at32f403a_407_crm.c ****   * @brief  config crm pll
+ 570:libraries/drivers/src/at32f403a_407_crm.c ****   * @param  clock_source
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccmAcxDa.s 			page 32
+
+
+ 571:libraries/drivers/src/at32f403a_407_crm.c ****   *         this parameter can be one of the following values:
+ 572:libraries/drivers/src/at32f403a_407_crm.c ****   *         - CRM_PLL_SOURCE_HICK
+ 573:libraries/drivers/src/at32f403a_407_crm.c ****   *         - CRM_PLL_SOURCE_HEXT
+ 574:libraries/drivers/src/at32f403a_407_crm.c ****   *         - CRM_PLL_SOURCE_HEXT_DIV
+ 575:libraries/drivers/src/at32f403a_407_crm.c ****   * @param  mult_value (CRM_PLL_MULT_2~64)
+ 576:libraries/drivers/src/at32f403a_407_crm.c ****   * @param  pll_range
+ 577:libraries/drivers/src/at32f403a_407_crm.c ****   *         this parameter can be one of the following values:
+ 578:libraries/drivers/src/at32f403a_407_crm.c ****   *         - CRM_PLL_OUTPUT_RANGE_LE72MHZ
+ 579:libraries/drivers/src/at32f403a_407_crm.c ****   *         - CRM_PLL_OUTPUT_RANGE_GT72MHZ
+ 580:libraries/drivers/src/at32f403a_407_crm.c ****   * @retval none
+ 581:libraries/drivers/src/at32f403a_407_crm.c ****   */
+ 582:libraries/drivers/src/at32f403a_407_crm.c **** void crm_pll_config(crm_pll_clock_source_type clock_source, crm_pll_mult_type mult_value, crm_pll_o
+ 583:libraries/drivers/src/at32f403a_407_crm.c **** {
+ 1211              		.loc 1 583 1 is_stmt 1 view -0
+ 1212              		.cfi_startproc
+ 1213              		@ args = 0, pretend = 0, frame = 0
+ 1214              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1215              		@ link register save eliminated.
+ 584:libraries/drivers/src/at32f403a_407_crm.c ****   /* config pll clock source */
+ 585:libraries/drivers/src/at32f403a_407_crm.c ****   if(clock_source == CRM_PLL_SOURCE_HICK)
+ 1216              		.loc 1 585 3 view .LVU259
+ 1217              		.loc 1 585 5 is_stmt 0 view .LVU260
+ 1218 0000 8446     		mov	ip, r0
+ 1219 0002 C0B9     		cbnz	r0, .L117
+ 586:libraries/drivers/src/at32f403a_407_crm.c ****   {
+ 587:libraries/drivers/src/at32f403a_407_crm.c ****     CRM->cfg_bit.pllrcs = FALSE;
+ 1220              		.loc 1 587 5 is_stmt 1 view .LVU261
+ 1221              		.loc 1 587 25 is_stmt 0 view .LVU262
+ 1222 0004 154B     		ldr	r3, .L121
+ 1223 0006 5868     		ldr	r0, [r3, #4]
+ 1224              	.LVL57:
+ 1225              		.loc 1 587 25 view .LVU263
+ 1226 0008 20F48030 		bic	r0, r0, #65536
+ 1227 000c 5860     		str	r0, [r3, #4]
+ 588:libraries/drivers/src/at32f403a_407_crm.c ****     CRM->misc1_bit.hickdiv = CRM_HICK48_NODIV;
+ 1228              		.loc 1 588 5 is_stmt 1 view .LVU264
+ 1229              		.loc 1 588 28 is_stmt 0 view .LVU265
+ 1230 000e 186B     		ldr	r0, [r3, #48]
+ 1231 0010 40F00070 		orr	r0, r0, #33554432
+ 1232 0014 1863     		str	r0, [r3, #48]
+ 1233              	.L118:
+ 589:libraries/drivers/src/at32f403a_407_crm.c ****   }
+ 590:libraries/drivers/src/at32f403a_407_crm.c ****   else
+ 591:libraries/drivers/src/at32f403a_407_crm.c ****   {
+ 592:libraries/drivers/src/at32f403a_407_crm.c ****     CRM->cfg_bit.pllrcs = TRUE;
+ 593:libraries/drivers/src/at32f403a_407_crm.c ****     if(CRM_PLL_SOURCE_HEXT == clock_source)
+ 594:libraries/drivers/src/at32f403a_407_crm.c ****     {
+ 595:libraries/drivers/src/at32f403a_407_crm.c ****       CRM->cfg_bit.pllhextdiv = FALSE;
+ 596:libraries/drivers/src/at32f403a_407_crm.c ****     }
+ 597:libraries/drivers/src/at32f403a_407_crm.c ****     else
+ 598:libraries/drivers/src/at32f403a_407_crm.c ****     {
+ 599:libraries/drivers/src/at32f403a_407_crm.c ****       CRM->cfg_bit.pllhextdiv = TRUE;
+ 600:libraries/drivers/src/at32f403a_407_crm.c ****     }
+ 601:libraries/drivers/src/at32f403a_407_crm.c ****   }
+ 602:libraries/drivers/src/at32f403a_407_crm.c **** 
+ 603:libraries/drivers/src/at32f403a_407_crm.c ****   /* config pll multiplication factor */
+ 604:libraries/drivers/src/at32f403a_407_crm.c ****   CRM->cfg_bit.pllmult_l = (mult_value & 0x0F);
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccmAcxDa.s 			page 33
+
+
+ 1234              		.loc 1 604 3 is_stmt 1 view .LVU266
+ 1235              		.loc 1 604 26 is_stmt 0 view .LVU267
+ 1236 0016 114B     		ldr	r3, .L121
+ 1237 0018 5868     		ldr	r0, [r3, #4]
+ 1238 001a 61F39540 		bfi	r0, r1, #18, #4
+ 1239 001e 5860     		str	r0, [r3, #4]
+ 605:libraries/drivers/src/at32f403a_407_crm.c ****   CRM->cfg_bit.pllmult_h = ((mult_value & 0x30) >> 4);
+ 1240              		.loc 1 605 3 is_stmt 1 view .LVU268
+ 1241              		.loc 1 605 49 is_stmt 0 view .LVU269
+ 1242 0020 C1F30111 		ubfx	r1, r1, #4, #2
+ 1243              	.LVL58:
+ 1244              		.loc 1 605 26 view .LVU270
+ 1245 0024 5868     		ldr	r0, [r3, #4]
+ 1246 0026 61F35E70 		bfi	r0, r1, #29, #2
+ 1247 002a 5860     		str	r0, [r3, #4]
+ 606:libraries/drivers/src/at32f403a_407_crm.c **** 
+ 607:libraries/drivers/src/at32f403a_407_crm.c ****   /* config pll output range */
+ 608:libraries/drivers/src/at32f403a_407_crm.c ****   CRM->cfg_bit.pllrange = pll_range;
+ 1248              		.loc 1 608 3 is_stmt 1 view .LVU271
+ 1249              		.loc 1 608 25 is_stmt 0 view .LVU272
+ 1250 002c 5968     		ldr	r1, [r3, #4]
+ 1251 002e 62F3DF71 		bfi	r1, r2, #31, #1
+ 1252 0032 5960     		str	r1, [r3, #4]
+ 609:libraries/drivers/src/at32f403a_407_crm.c **** }
+ 1253              		.loc 1 609 1 view .LVU273
+ 1254 0034 7047     		bx	lr
+ 1255              	.LVL59:
+ 1256              	.L117:
+ 592:libraries/drivers/src/at32f403a_407_crm.c ****     if(CRM_PLL_SOURCE_HEXT == clock_source)
+ 1257              		.loc 1 592 5 is_stmt 1 view .LVU274
+ 592:libraries/drivers/src/at32f403a_407_crm.c ****     if(CRM_PLL_SOURCE_HEXT == clock_source)
+ 1258              		.loc 1 592 25 is_stmt 0 view .LVU275
+ 1259 0036 0948     		ldr	r0, .L121
+ 1260              	.LVL60:
+ 592:libraries/drivers/src/at32f403a_407_crm.c ****     if(CRM_PLL_SOURCE_HEXT == clock_source)
+ 1261              		.loc 1 592 25 view .LVU276
+ 1262 0038 4368     		ldr	r3, [r0, #4]
+ 1263 003a 43F48033 		orr	r3, r3, #65536
+ 1264 003e 4360     		str	r3, [r0, #4]
+ 593:libraries/drivers/src/at32f403a_407_crm.c ****     {
+ 1265              		.loc 1 593 5 is_stmt 1 view .LVU277
+ 593:libraries/drivers/src/at32f403a_407_crm.c ****     {
+ 1266              		.loc 1 593 7 is_stmt 0 view .LVU278
+ 1267 0040 BCF1010F 		cmp	ip, #1
+ 1268 0044 05D0     		beq	.L120
+ 599:libraries/drivers/src/at32f403a_407_crm.c ****     }
+ 1269              		.loc 1 599 7 is_stmt 1 view .LVU279
+ 599:libraries/drivers/src/at32f403a_407_crm.c ****     }
+ 1270              		.loc 1 599 31 is_stmt 0 view .LVU280
+ 1271 0046 0548     		ldr	r0, .L121
+ 1272 0048 4368     		ldr	r3, [r0, #4]
+ 1273 004a 43F40033 		orr	r3, r3, #131072
+ 1274 004e 4360     		str	r3, [r0, #4]
+ 1275 0050 E1E7     		b	.L118
+ 1276              	.L120:
+ 595:libraries/drivers/src/at32f403a_407_crm.c ****     }
+ 1277              		.loc 1 595 7 is_stmt 1 view .LVU281
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccmAcxDa.s 			page 34
+
+
+ 595:libraries/drivers/src/at32f403a_407_crm.c ****     }
+ 1278              		.loc 1 595 31 is_stmt 0 view .LVU282
+ 1279 0052 4368     		ldr	r3, [r0, #4]
+ 1280 0054 23F40033 		bic	r3, r3, #131072
+ 1281 0058 4360     		str	r3, [r0, #4]
+ 1282 005a DCE7     		b	.L118
+ 1283              	.L122:
+ 1284              		.align	2
+ 1285              	.L121:
+ 1286 005c 00100240 		.word	1073876992
+ 1287              		.cfi_endproc
+ 1288              	.LFE156:
+ 1290              		.section	.text.crm_sysclk_switch,"ax",%progbits
+ 1291              		.align	1
+ 1292              		.global	crm_sysclk_switch
+ 1293              		.syntax unified
+ 1294              		.thumb
+ 1295              		.thumb_func
+ 1297              	crm_sysclk_switch:
+ 1298              	.LVL61:
+ 1299              	.LFB157:
+ 610:libraries/drivers/src/at32f403a_407_crm.c **** 
+ 611:libraries/drivers/src/at32f403a_407_crm.c **** /**
+ 612:libraries/drivers/src/at32f403a_407_crm.c ****   * @brief  select system clock source
+ 613:libraries/drivers/src/at32f403a_407_crm.c ****   * @param  value
+ 614:libraries/drivers/src/at32f403a_407_crm.c ****   *         this parameter can be one of the following values:
+ 615:libraries/drivers/src/at32f403a_407_crm.c ****   *         - CRM_SCLK_HICK
+ 616:libraries/drivers/src/at32f403a_407_crm.c ****   *         - CRM_SCLK_HEXT
+ 617:libraries/drivers/src/at32f403a_407_crm.c ****   *         - CRM_SCLK_PLL
+ 618:libraries/drivers/src/at32f403a_407_crm.c ****   * @retval none
+ 619:libraries/drivers/src/at32f403a_407_crm.c ****   */
+ 620:libraries/drivers/src/at32f403a_407_crm.c **** void crm_sysclk_switch(crm_sclk_type value)
+ 621:libraries/drivers/src/at32f403a_407_crm.c **** {
+ 1300              		.loc 1 621 1 is_stmt 1 view -0
+ 1301              		.cfi_startproc
+ 1302              		@ args = 0, pretend = 0, frame = 0
+ 1303              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1304              		@ link register save eliminated.
+ 622:libraries/drivers/src/at32f403a_407_crm.c ****   CRM->cfg_bit.sclksel = value;
+ 1305              		.loc 1 622 3 view .LVU284
+ 1306              		.loc 1 622 24 is_stmt 0 view .LVU285
+ 1307 0000 0C4B     		ldr	r3, .L124
+ 1308 0002 5A68     		ldr	r2, [r3, #4]
+ 1309 0004 60F30102 		bfi	r2, r0, #0, #2
+ 1310 0008 5A60     		str	r2, [r3, #4]
+ 623:libraries/drivers/src/at32f403a_407_crm.c ****   DUMMY_NOP();
+ 1311              		.loc 1 623 3 is_stmt 1 view .LVU286
+ 1312              		.syntax unified
+ 1313              	@ 623 "libraries/drivers/src/at32f403a_407_crm.c" 1
+ 1314 000a 00BF     		nop
+ 1315              	@ 0 "" 2
+ 1316              		.loc 1 623 3 view .LVU287
+ 1317              	@ 623 "libraries/drivers/src/at32f403a_407_crm.c" 1
+ 1318 000c 00BF     		nop
+ 1319              	@ 0 "" 2
+ 1320              		.loc 1 623 3 view .LVU288
+ 1321              	@ 623 "libraries/drivers/src/at32f403a_407_crm.c" 1
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccmAcxDa.s 			page 35
+
+
+ 1322 000e 00BF     		nop
+ 1323              	@ 0 "" 2
+ 1324              		.loc 1 623 3 view .LVU289
+ 1325              	@ 623 "libraries/drivers/src/at32f403a_407_crm.c" 1
+ 1326 0010 00BF     		nop
+ 1327              	@ 0 "" 2
+ 1328              		.loc 1 623 3 view .LVU290
+ 1329              	@ 623 "libraries/drivers/src/at32f403a_407_crm.c" 1
+ 1330 0012 00BF     		nop
+ 1331              	@ 0 "" 2
+ 1332              		.loc 1 623 3 view .LVU291
+ 1333              	@ 623 "libraries/drivers/src/at32f403a_407_crm.c" 1
+ 1334 0014 00BF     		nop
+ 1335              	@ 0 "" 2
+ 1336              		.loc 1 623 3 view .LVU292
+ 1337              	@ 623 "libraries/drivers/src/at32f403a_407_crm.c" 1
+ 1338 0016 00BF     		nop
+ 1339              	@ 0 "" 2
+ 1340              		.loc 1 623 3 view .LVU293
+ 1341              	@ 623 "libraries/drivers/src/at32f403a_407_crm.c" 1
+ 1342 0018 00BF     		nop
+ 1343              	@ 0 "" 2
+ 1344              		.loc 1 623 3 view .LVU294
+ 1345              	@ 623 "libraries/drivers/src/at32f403a_407_crm.c" 1
+ 1346 001a 00BF     		nop
+ 1347              	@ 0 "" 2
+ 1348              		.loc 1 623 3 view .LVU295
+ 1349              	@ 623 "libraries/drivers/src/at32f403a_407_crm.c" 1
+ 1350 001c 00BF     		nop
+ 1351              	@ 0 "" 2
+ 1352              		.loc 1 623 3 view .LVU296
+ 1353              	@ 623 "libraries/drivers/src/at32f403a_407_crm.c" 1
+ 1354 001e 00BF     		nop
+ 1355              	@ 0 "" 2
+ 1356              		.loc 1 623 3 view .LVU297
+ 1357              	@ 623 "libraries/drivers/src/at32f403a_407_crm.c" 1
+ 1358 0020 00BF     		nop
+ 1359              	@ 0 "" 2
+ 1360              		.loc 1 623 3 view .LVU298
+ 1361              	@ 623 "libraries/drivers/src/at32f403a_407_crm.c" 1
+ 1362 0022 00BF     		nop
+ 1363              	@ 0 "" 2
+ 1364              		.loc 1 623 3 view .LVU299
+ 1365              	@ 623 "libraries/drivers/src/at32f403a_407_crm.c" 1
+ 1366 0024 00BF     		nop
+ 1367              	@ 0 "" 2
+ 1368              		.loc 1 623 3 view .LVU300
+ 1369              	@ 623 "libraries/drivers/src/at32f403a_407_crm.c" 1
+ 1370 0026 00BF     		nop
+ 1371              	@ 0 "" 2
+ 1372              		.loc 1 623 3 view .LVU301
+ 1373              	@ 623 "libraries/drivers/src/at32f403a_407_crm.c" 1
+ 1374 0028 00BF     		nop
+ 1375              	@ 0 "" 2
+ 1376              		.loc 1 623 3 view .LVU302
+ 1377              	@ 623 "libraries/drivers/src/at32f403a_407_crm.c" 1
+ 1378 002a 00BF     		nop
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccmAcxDa.s 			page 36
+
+
+ 1379              	@ 0 "" 2
+ 1380              		.loc 1 623 3 view .LVU303
+ 1381              	@ 623 "libraries/drivers/src/at32f403a_407_crm.c" 1
+ 1382 002c 00BF     		nop
+ 1383              	@ 0 "" 2
+ 1384              		.loc 1 623 3 view .LVU304
+ 1385              	@ 623 "libraries/drivers/src/at32f403a_407_crm.c" 1
+ 1386 002e 00BF     		nop
+ 1387              	@ 0 "" 2
+ 1388              		.loc 1 623 3 view .LVU305
+ 1389              	@ 623 "libraries/drivers/src/at32f403a_407_crm.c" 1
+ 1390 0030 00BF     		nop
+ 1391              	@ 0 "" 2
+ 1392              		.loc 1 623 14 view .LVU306
+ 624:libraries/drivers/src/at32f403a_407_crm.c **** }
+ 1393              		.loc 1 624 1 is_stmt 0 view .LVU307
+ 1394              		.thumb
+ 1395              		.syntax unified
+ 1396 0032 7047     		bx	lr
+ 1397              	.L125:
+ 1398              		.align	2
+ 1399              	.L124:
+ 1400 0034 00100240 		.word	1073876992
+ 1401              		.cfi_endproc
+ 1402              	.LFE157:
+ 1404              		.section	.text.crm_sysclk_switch_status_get,"ax",%progbits
+ 1405              		.align	1
+ 1406              		.global	crm_sysclk_switch_status_get
+ 1407              		.syntax unified
+ 1408              		.thumb
+ 1409              		.thumb_func
+ 1411              	crm_sysclk_switch_status_get:
+ 1412              	.LFB158:
+ 625:libraries/drivers/src/at32f403a_407_crm.c **** 
+ 626:libraries/drivers/src/at32f403a_407_crm.c **** /**
+ 627:libraries/drivers/src/at32f403a_407_crm.c ****   * @brief  indicate which clock source is used as system clock
+ 628:libraries/drivers/src/at32f403a_407_crm.c ****   * @param  none
+ 629:libraries/drivers/src/at32f403a_407_crm.c ****   * @retval crm_sclk
+ 630:libraries/drivers/src/at32f403a_407_crm.c ****   *         this return can be one of the following values:
+ 631:libraries/drivers/src/at32f403a_407_crm.c ****   *         - CRM_SCLK_HICK
+ 632:libraries/drivers/src/at32f403a_407_crm.c ****   *         - CRM_SCLK_HEXT
+ 633:libraries/drivers/src/at32f403a_407_crm.c ****   *         - CRM_SCLK_PLL
+ 634:libraries/drivers/src/at32f403a_407_crm.c ****   */
+ 635:libraries/drivers/src/at32f403a_407_crm.c **** crm_sclk_type crm_sysclk_switch_status_get(void)
+ 636:libraries/drivers/src/at32f403a_407_crm.c **** {
+ 1413              		.loc 1 636 1 is_stmt 1 view -0
+ 1414              		.cfi_startproc
+ 1415              		@ args = 0, pretend = 0, frame = 0
+ 1416              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1417              		@ link register save eliminated.
+ 637:libraries/drivers/src/at32f403a_407_crm.c ****   return (crm_sclk_type)CRM->cfg_bit.sclksts;
+ 1418              		.loc 1 637 3 view .LVU309
+ 1419              		.loc 1 637 37 is_stmt 0 view .LVU310
+ 1420 0000 024B     		ldr	r3, .L127
+ 1421 0002 5868     		ldr	r0, [r3, #4]
+ 638:libraries/drivers/src/at32f403a_407_crm.c **** }
+ 1422              		.loc 1 638 1 view .LVU311
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccmAcxDa.s 			page 37
+
+
+ 1423 0004 C0F38100 		ubfx	r0, r0, #2, #2
+ 1424 0008 7047     		bx	lr
+ 1425              	.L128:
+ 1426 000a 00BF     		.align	2
+ 1427              	.L127:
+ 1428 000c 00100240 		.word	1073876992
+ 1429              		.cfi_endproc
+ 1430              	.LFE158:
+ 1432              		.section	.text.crm_clocks_freq_get,"ax",%progbits
+ 1433              		.align	1
+ 1434              		.global	crm_clocks_freq_get
+ 1435              		.syntax unified
+ 1436              		.thumb
+ 1437              		.thumb_func
+ 1439              	crm_clocks_freq_get:
+ 1440              	.LVL62:
+ 1441              	.LFB159:
+ 639:libraries/drivers/src/at32f403a_407_crm.c **** 
+ 640:libraries/drivers/src/at32f403a_407_crm.c **** /**
+ 641:libraries/drivers/src/at32f403a_407_crm.c ****   * @brief  get crm clocks freqency
+ 642:libraries/drivers/src/at32f403a_407_crm.c ****   * @param  clocks
+ 643:libraries/drivers/src/at32f403a_407_crm.c ****   *         - pointer to the crm_clocks_freq structure
+ 644:libraries/drivers/src/at32f403a_407_crm.c ****   * @retval none
+ 645:libraries/drivers/src/at32f403a_407_crm.c ****   */
+ 646:libraries/drivers/src/at32f403a_407_crm.c **** void crm_clocks_freq_get(crm_clocks_freq_type *clocks_struct)
+ 647:libraries/drivers/src/at32f403a_407_crm.c **** {
+ 1442              		.loc 1 647 1 is_stmt 1 view -0
+ 1443              		.cfi_startproc
+ 1444              		@ args = 0, pretend = 0, frame = 0
+ 1445              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1446              		.loc 1 647 1 is_stmt 0 view .LVU313
+ 1447 0000 10B5     		push	{r4, lr}
+ 1448              	.LCFI1:
+ 1449              		.cfi_def_cfa_offset 8
+ 1450              		.cfi_offset 4, -8
+ 1451              		.cfi_offset 14, -4
+ 1452 0002 0446     		mov	r4, r0
+ 648:libraries/drivers/src/at32f403a_407_crm.c ****   uint32_t hext_prediv = 0, pll_mult = 0, pll_mult_h = 0, pll_clock_source = 0, temp = 0, div_value
+ 1453              		.loc 1 648 3 is_stmt 1 view .LVU314
+ 1454              	.LVL63:
+ 649:libraries/drivers/src/at32f403a_407_crm.c ****   crm_sclk_type sclk_source;
+ 1455              		.loc 1 649 3 view .LVU315
+ 650:libraries/drivers/src/at32f403a_407_crm.c **** 
+ 651:libraries/drivers/src/at32f403a_407_crm.c ****   static const uint8_t sclk_ahb_div_table[16] = {0, 0, 0, 0, 0, 0, 0, 0, 1, 2, 3, 4, 6, 7, 8, 9};
+ 1456              		.loc 1 651 3 view .LVU316
+ 652:libraries/drivers/src/at32f403a_407_crm.c ****   static const uint8_t ahb_apb1_div_table[8] = {0, 0, 0, 0, 1, 2, 3, 4};
+ 1457              		.loc 1 652 3 view .LVU317
+ 653:libraries/drivers/src/at32f403a_407_crm.c ****   static const uint8_t ahb_apb2_div_table[8] = {0, 0, 0, 0, 1, 2, 3, 4};
+ 1458              		.loc 1 653 3 view .LVU318
+ 654:libraries/drivers/src/at32f403a_407_crm.c ****   static const uint8_t adc_div_table[8] = {2, 4, 6, 8, 2, 12, 8, 16};
+ 1459              		.loc 1 654 3 view .LVU319
+ 655:libraries/drivers/src/at32f403a_407_crm.c **** 
+ 656:libraries/drivers/src/at32f403a_407_crm.c ****   /* get sclk source */
+ 657:libraries/drivers/src/at32f403a_407_crm.c ****   sclk_source = crm_sysclk_switch_status_get();
+ 1460              		.loc 1 657 3 view .LVU320
+ 1461              		.loc 1 657 17 is_stmt 0 view .LVU321
+ 1462 0004 FFF7FEFF 		bl	crm_sysclk_switch_status_get
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccmAcxDa.s 			page 38
+
+
+ 1463              	.LVL64:
+ 658:libraries/drivers/src/at32f403a_407_crm.c **** 
+ 659:libraries/drivers/src/at32f403a_407_crm.c ****   switch(sclk_source)
+ 1464              		.loc 1 659 3 is_stmt 1 view .LVU322
+ 1465 0008 0128     		cmp	r0, #1
+ 1466 000a 13D0     		beq	.L130
+ 1467 000c 0228     		cmp	r0, #2
+ 1468 000e 39D0     		beq	.L131
+ 1469 0010 0028     		cmp	r0, #0
+ 1470 0012 67D1     		bne	.L132
+ 660:libraries/drivers/src/at32f403a_407_crm.c ****   {
+ 661:libraries/drivers/src/at32f403a_407_crm.c ****     case CRM_SCLK_HICK:
+ 662:libraries/drivers/src/at32f403a_407_crm.c ****       if(((CRM->misc3_bit.hick_to_sclk) != RESET) && ((CRM->misc1_bit.hickdiv) != RESET))
+ 1471              		.loc 1 662 7 view .LVU323
+ 1472              		.loc 1 662 26 is_stmt 0 view .LVU324
+ 1473 0014 354B     		ldr	r3, .L141
+ 1474 0016 5B6D     		ldr	r3, [r3, #84]
+ 1475              		.loc 1 662 9 view .LVU325
+ 1476 0018 13F4007F 		tst	r3, #512
+ 1477 001c 07D0     		beq	.L133
+ 1478              		.loc 1 662 70 discriminator 1 view .LVU326
+ 1479 001e 334B     		ldr	r3, .L141
+ 1480 0020 1B6B     		ldr	r3, [r3, #48]
+ 1481              		.loc 1 662 51 discriminator 1 view .LVU327
+ 1482 0022 13F0007F 		tst	r3, #33554432
+ 1483 0026 02D0     		beq	.L133
+ 663:libraries/drivers/src/at32f403a_407_crm.c ****         clocks_struct->sclk_freq = HICK_VALUE * 6;
+ 1484              		.loc 1 663 9 is_stmt 1 view .LVU328
+ 1485              		.loc 1 663 34 is_stmt 0 view .LVU329
+ 1486 0028 314B     		ldr	r3, .L141+4
+ 1487 002a 2360     		str	r3, [r4]
+ 1488 002c 04E0     		b	.L134
+ 1489              	.L133:
+ 664:libraries/drivers/src/at32f403a_407_crm.c ****       else
+ 665:libraries/drivers/src/at32f403a_407_crm.c ****         clocks_struct->sclk_freq = HICK_VALUE;
+ 1490              		.loc 1 665 9 is_stmt 1 view .LVU330
+ 1491              		.loc 1 665 34 is_stmt 0 view .LVU331
+ 1492 002e 314B     		ldr	r3, .L141+8
+ 1493 0030 2360     		str	r3, [r4]
+ 1494 0032 01E0     		b	.L134
+ 1495              	.L130:
+ 666:libraries/drivers/src/at32f403a_407_crm.c ****       break;
+ 667:libraries/drivers/src/at32f403a_407_crm.c ****     case CRM_SCLK_HEXT:
+ 668:libraries/drivers/src/at32f403a_407_crm.c ****       clocks_struct->sclk_freq = HEXT_VALUE;
+ 1496              		.loc 1 668 7 is_stmt 1 view .LVU332
+ 1497              		.loc 1 668 32 is_stmt 0 view .LVU333
+ 1498 0034 2F4B     		ldr	r3, .L141+8
+ 1499 0036 2360     		str	r3, [r4]
+ 669:libraries/drivers/src/at32f403a_407_crm.c ****       break;
+ 1500              		.loc 1 669 7 is_stmt 1 view .LVU334
+ 1501              	.LVL65:
+ 1502              	.L134:
+ 670:libraries/drivers/src/at32f403a_407_crm.c ****     case CRM_SCLK_PLL:
+ 671:libraries/drivers/src/at32f403a_407_crm.c ****       pll_clock_source = CRM->cfg_bit.pllrcs;
+ 672:libraries/drivers/src/at32f403a_407_crm.c ****       /* get multiplication factor */
+ 673:libraries/drivers/src/at32f403a_407_crm.c ****       pll_mult = CRM->cfg_bit.pllmult_l;
+ 674:libraries/drivers/src/at32f403a_407_crm.c ****       pll_mult_h = CRM->cfg_bit.pllmult_h;
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccmAcxDa.s 			page 39
+
+
+ 675:libraries/drivers/src/at32f403a_407_crm.c **** 
+ 676:libraries/drivers/src/at32f403a_407_crm.c ****       /* process high bits */
+ 677:libraries/drivers/src/at32f403a_407_crm.c ****       if((pll_mult_h != 0U) || (pll_mult == 15U))
+ 678:libraries/drivers/src/at32f403a_407_crm.c ****       {
+ 679:libraries/drivers/src/at32f403a_407_crm.c ****           pll_mult += ((16U * pll_mult_h) + 1U);
+ 680:libraries/drivers/src/at32f403a_407_crm.c ****       }
+ 681:libraries/drivers/src/at32f403a_407_crm.c ****       else
+ 682:libraries/drivers/src/at32f403a_407_crm.c ****       {
+ 683:libraries/drivers/src/at32f403a_407_crm.c ****           pll_mult += 2U;
+ 684:libraries/drivers/src/at32f403a_407_crm.c ****       }
+ 685:libraries/drivers/src/at32f403a_407_crm.c **** 
+ 686:libraries/drivers/src/at32f403a_407_crm.c ****       if (pll_clock_source == 0x00)
+ 687:libraries/drivers/src/at32f403a_407_crm.c ****       {
+ 688:libraries/drivers/src/at32f403a_407_crm.c ****         /* hick divided by 2 selected as pll clock entry */
+ 689:libraries/drivers/src/at32f403a_407_crm.c ****         clocks_struct->sclk_freq = (HICK_VALUE >> 1) * pll_mult;
+ 690:libraries/drivers/src/at32f403a_407_crm.c ****       }
+ 691:libraries/drivers/src/at32f403a_407_crm.c ****       else
+ 692:libraries/drivers/src/at32f403a_407_crm.c ****       {
+ 693:libraries/drivers/src/at32f403a_407_crm.c ****         /* hext selected as pll clock entry */
+ 694:libraries/drivers/src/at32f403a_407_crm.c ****         if (CRM->cfg_bit.pllhextdiv != RESET)
+ 695:libraries/drivers/src/at32f403a_407_crm.c ****         {
+ 696:libraries/drivers/src/at32f403a_407_crm.c ****           hext_prediv = CRM->misc3_bit.hextdiv;
+ 697:libraries/drivers/src/at32f403a_407_crm.c ****           /* hext clock divided by 2 */
+ 698:libraries/drivers/src/at32f403a_407_crm.c ****           clocks_struct->sclk_freq = (HEXT_VALUE / (hext_prediv + 2)) * pll_mult;
+ 699:libraries/drivers/src/at32f403a_407_crm.c ****         }
+ 700:libraries/drivers/src/at32f403a_407_crm.c ****         else
+ 701:libraries/drivers/src/at32f403a_407_crm.c ****         {
+ 702:libraries/drivers/src/at32f403a_407_crm.c ****           clocks_struct->sclk_freq = HEXT_VALUE * pll_mult;
+ 703:libraries/drivers/src/at32f403a_407_crm.c ****         }
+ 704:libraries/drivers/src/at32f403a_407_crm.c ****       }
+ 705:libraries/drivers/src/at32f403a_407_crm.c ****       break;
+ 706:libraries/drivers/src/at32f403a_407_crm.c ****     default:
+ 707:libraries/drivers/src/at32f403a_407_crm.c ****       clocks_struct->sclk_freq = HICK_VALUE;
+ 708:libraries/drivers/src/at32f403a_407_crm.c ****       break;
+ 709:libraries/drivers/src/at32f403a_407_crm.c ****   }
+ 710:libraries/drivers/src/at32f403a_407_crm.c **** 
+ 711:libraries/drivers/src/at32f403a_407_crm.c ****   /* compute sclk, ahbclk, abp1clk apb2clk and adcclk frequencies */
+ 712:libraries/drivers/src/at32f403a_407_crm.c ****   /* get ahb division */
+ 713:libraries/drivers/src/at32f403a_407_crm.c ****   temp = CRM->cfg_bit.ahbdiv;
+ 1503              		.loc 1 713 3 view .LVU335
+ 1504              		.loc 1 713 22 is_stmt 0 view .LVU336
+ 1505 0038 2C4A     		ldr	r2, .L141
+ 1506 003a 5368     		ldr	r3, [r2, #4]
+ 1507 003c C3F30313 		ubfx	r3, r3, #4, #4
+ 1508              	.LVL66:
+ 714:libraries/drivers/src/at32f403a_407_crm.c ****   div_value = sclk_ahb_div_table[temp];
+ 1509              		.loc 1 714 3 is_stmt 1 view .LVU337
+ 1510              		.loc 1 714 33 is_stmt 0 view .LVU338
+ 1511 0040 2D49     		ldr	r1, .L141+12
+ 1512 0042 C95C     		ldrb	r1, [r1, r3]	@ zero_extendqisi2
+ 1513              	.LVL67:
+ 715:libraries/drivers/src/at32f403a_407_crm.c ****   /* ahbclk frequency */
+ 716:libraries/drivers/src/at32f403a_407_crm.c ****   clocks_struct->ahb_freq = clocks_struct->sclk_freq >> div_value;
+ 1514              		.loc 1 716 3 is_stmt 1 view .LVU339
+ 1515              		.loc 1 716 42 is_stmt 0 view .LVU340
+ 1516 0044 2368     		ldr	r3, [r4]
+ 1517              	.LVL68:
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccmAcxDa.s 			page 40
+
+
+ 1518              		.loc 1 716 54 view .LVU341
+ 1519 0046 CB40     		lsrs	r3, r3, r1
+ 1520              		.loc 1 716 27 view .LVU342
+ 1521 0048 6360     		str	r3, [r4, #4]
+ 717:libraries/drivers/src/at32f403a_407_crm.c **** 
+ 718:libraries/drivers/src/at32f403a_407_crm.c ****   /* get apb1 division */
+ 719:libraries/drivers/src/at32f403a_407_crm.c ****   temp = CRM->cfg_bit.apb1div;
+ 1522              		.loc 1 719 3 is_stmt 1 view .LVU343
+ 1523              		.loc 1 719 22 is_stmt 0 view .LVU344
+ 1524 004a 5168     		ldr	r1, [r2, #4]
+ 1525              	.LVL69:
+ 1526              		.loc 1 719 22 view .LVU345
+ 1527 004c C1F30221 		ubfx	r1, r1, #8, #3
+ 1528              	.LVL70:
+ 720:libraries/drivers/src/at32f403a_407_crm.c ****   div_value = ahb_apb1_div_table[temp];
+ 1529              		.loc 1 720 3 is_stmt 1 view .LVU346
+ 1530              		.loc 1 720 33 is_stmt 0 view .LVU347
+ 1531 0050 2A48     		ldr	r0, .L141+16
+ 1532 0052 415C     		ldrb	r1, [r0, r1]	@ zero_extendqisi2
+ 1533              	.LVL71:
+ 721:libraries/drivers/src/at32f403a_407_crm.c ****   /* apb1clk frequency */
+ 722:libraries/drivers/src/at32f403a_407_crm.c ****   clocks_struct->apb1_freq = clocks_struct->ahb_freq >> div_value;
+ 1534              		.loc 1 722 3 is_stmt 1 view .LVU348
+ 1535              		.loc 1 722 54 is_stmt 0 view .LVU349
+ 1536 0054 23FA01F1 		lsr	r1, r3, r1
+ 1537              	.LVL72:
+ 1538              		.loc 1 722 28 view .LVU350
+ 1539 0058 E160     		str	r1, [r4, #12]
+ 723:libraries/drivers/src/at32f403a_407_crm.c **** 
+ 724:libraries/drivers/src/at32f403a_407_crm.c ****   /* get apb2 division */
+ 725:libraries/drivers/src/at32f403a_407_crm.c ****   temp = CRM->cfg_bit.apb2div;
+ 1540              		.loc 1 725 3 is_stmt 1 view .LVU351
+ 1541              		.loc 1 725 22 is_stmt 0 view .LVU352
+ 1542 005a 5168     		ldr	r1, [r2, #4]
+ 1543 005c C1F3C221 		ubfx	r1, r1, #11, #3
+ 1544              	.LVL73:
+ 726:libraries/drivers/src/at32f403a_407_crm.c ****   div_value = ahb_apb2_div_table[temp];
+ 1545              		.loc 1 726 3 is_stmt 1 view .LVU353
+ 1546              		.loc 1 726 33 is_stmt 0 view .LVU354
+ 1547 0060 2748     		ldr	r0, .L141+20
+ 1548              		.loc 1 726 33 view .LVU355
+ 1549 0062 415C     		ldrb	r1, [r0, r1]	@ zero_extendqisi2
+ 1550              	.LVL74:
+ 727:libraries/drivers/src/at32f403a_407_crm.c ****   /* apb2clk frequency */
+ 728:libraries/drivers/src/at32f403a_407_crm.c ****   clocks_struct->apb2_freq = clocks_struct->ahb_freq >> div_value;
+ 1551              		.loc 1 728 3 is_stmt 1 view .LVU356
+ 1552              		.loc 1 728 54 is_stmt 0 view .LVU357
+ 1553 0064 CB40     		lsrs	r3, r3, r1
+ 1554              		.loc 1 728 28 view .LVU358
+ 1555 0066 A360     		str	r3, [r4, #8]
+ 729:libraries/drivers/src/at32f403a_407_crm.c **** 
+ 730:libraries/drivers/src/at32f403a_407_crm.c ****   /* get adc division */
+ 731:libraries/drivers/src/at32f403a_407_crm.c ****   temp = CRM->cfg_bit.adcdiv_h;
+ 1556              		.loc 1 731 3 is_stmt 1 view .LVU359
+ 1557              		.loc 1 731 22 is_stmt 0 view .LVU360
+ 1558 0068 5168     		ldr	r1, [r2, #4]
+ 1559              	.LVL75:
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccmAcxDa.s 			page 41
+
+
+ 1560              		.loc 1 731 22 view .LVU361
+ 1561 006a C1F30071 		ubfx	r1, r1, #28, #1
+ 1562              	.LVL76:
+ 732:libraries/drivers/src/at32f403a_407_crm.c ****   temp = ((temp << 2) | (CRM->cfg_bit.adcdiv_l));
+ 1563              		.loc 1 732 3 is_stmt 1 view .LVU362
+ 1564              		.loc 1 732 38 is_stmt 0 view .LVU363
+ 1565 006e 5268     		ldr	r2, [r2, #4]
+ 1566 0070 C2F38132 		ubfx	r2, r2, #14, #2
+ 1567              		.loc 1 732 8 view .LVU364
+ 1568 0074 42EA8102 		orr	r2, r2, r1, lsl #2
+ 1569              	.LVL77:
+ 733:libraries/drivers/src/at32f403a_407_crm.c ****   div_value = adc_div_table[temp];
+ 1570              		.loc 1 733 3 is_stmt 1 view .LVU365
+ 1571              		.loc 1 733 28 is_stmt 0 view .LVU366
+ 1572 0078 2249     		ldr	r1, .L141+24
+ 1573 007a 8A5C     		ldrb	r2, [r1, r2]	@ zero_extendqisi2
+ 1574              	.LVL78:
+ 734:libraries/drivers/src/at32f403a_407_crm.c ****   /* adcclk clock frequency */
+ 735:libraries/drivers/src/at32f403a_407_crm.c ****   clocks_struct->adc_freq = clocks_struct->apb2_freq / div_value;
+ 1575              		.loc 1 735 3 is_stmt 1 view .LVU367
+ 1576              		.loc 1 735 54 is_stmt 0 view .LVU368
+ 1577 007c B3FBF2F3 		udiv	r3, r3, r2
+ 1578              		.loc 1 735 27 view .LVU369
+ 1579 0080 2361     		str	r3, [r4, #16]
+ 736:libraries/drivers/src/at32f403a_407_crm.c **** }
+ 1580              		.loc 1 736 1 view .LVU370
+ 1581 0082 10BD     		pop	{r4, pc}
+ 1582              	.LVL79:
+ 1583              	.L131:
+ 671:libraries/drivers/src/at32f403a_407_crm.c ****       /* get multiplication factor */
+ 1584              		.loc 1 671 7 is_stmt 1 view .LVU371
+ 671:libraries/drivers/src/at32f403a_407_crm.c ****       /* get multiplication factor */
+ 1585              		.loc 1 671 38 is_stmt 0 view .LVU372
+ 1586 0084 1949     		ldr	r1, .L141
+ 1587 0086 4A68     		ldr	r2, [r1, #4]
+ 1588 0088 C2F30042 		ubfx	r2, r2, #16, #1
+ 1589              	.LVL80:
+ 673:libraries/drivers/src/at32f403a_407_crm.c ****       pll_mult_h = CRM->cfg_bit.pllmult_h;
+ 1590              		.loc 1 673 7 is_stmt 1 view .LVU373
+ 673:libraries/drivers/src/at32f403a_407_crm.c ****       pll_mult_h = CRM->cfg_bit.pllmult_h;
+ 1591              		.loc 1 673 30 is_stmt 0 view .LVU374
+ 1592 008c 4B68     		ldr	r3, [r1, #4]
+ 1593 008e C3F38343 		ubfx	r3, r3, #18, #4
+ 1594              	.LVL81:
+ 674:libraries/drivers/src/at32f403a_407_crm.c **** 
+ 1595              		.loc 1 674 7 is_stmt 1 view .LVU375
+ 674:libraries/drivers/src/at32f403a_407_crm.c **** 
+ 1596              		.loc 1 674 32 is_stmt 0 view .LVU376
+ 1597 0092 4968     		ldr	r1, [r1, #4]
+ 1598 0094 C1F34170 		ubfx	r0, r1, #29, #2
+ 1599              	.LVL82:
+ 677:libraries/drivers/src/at32f403a_407_crm.c ****       {
+ 1600              		.loc 1 677 7 is_stmt 1 view .LVU377
+ 677:libraries/drivers/src/at32f403a_407_crm.c ****       {
+ 1601              		.loc 1 677 9 is_stmt 0 view .LVU378
+ 1602 0098 11F0C04F 		tst	r1, #1610612736
+ 1603 009c 03D1     		bne	.L135
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccmAcxDa.s 			page 42
+
+
+ 677:libraries/drivers/src/at32f403a_407_crm.c ****       {
+ 1604              		.loc 1 677 29 discriminator 1 view .LVU379
+ 1605 009e 0F2B     		cmp	r3, #15
+ 1606 00a0 01D0     		beq	.L135
+ 683:libraries/drivers/src/at32f403a_407_crm.c ****       }
+ 1607              		.loc 1 683 11 is_stmt 1 view .LVU380
+ 683:libraries/drivers/src/at32f403a_407_crm.c ****       }
+ 1608              		.loc 1 683 20 is_stmt 0 view .LVU381
+ 1609 00a2 0233     		adds	r3, r3, #2
+ 1610              	.LVL83:
+ 683:libraries/drivers/src/at32f403a_407_crm.c ****       }
+ 1611              		.loc 1 683 20 view .LVU382
+ 1612 00a4 02E0     		b	.L137
+ 1613              	.LVL84:
+ 1614              	.L135:
+ 679:libraries/drivers/src/at32f403a_407_crm.c ****       }
+ 1615              		.loc 1 679 11 is_stmt 1 view .LVU383
+ 679:libraries/drivers/src/at32f403a_407_crm.c ****       }
+ 1616              		.loc 1 679 20 is_stmt 0 view .LVU384
+ 1617 00a6 03EB0013 		add	r3, r3, r0, lsl #4
+ 1618              	.LVL85:
+ 679:libraries/drivers/src/at32f403a_407_crm.c ****       }
+ 1619              		.loc 1 679 20 view .LVU385
+ 1620 00aa 0133     		adds	r3, r3, #1
+ 1621              	.LVL86:
+ 1622              	.L137:
+ 686:libraries/drivers/src/at32f403a_407_crm.c ****       {
+ 1623              		.loc 1 686 7 is_stmt 1 view .LVU386
+ 686:libraries/drivers/src/at32f403a_407_crm.c ****       {
+ 1624              		.loc 1 686 10 is_stmt 0 view .LVU387
+ 1625 00ac 22B9     		cbnz	r2, .L138
+ 689:libraries/drivers/src/at32f403a_407_crm.c ****       }
+ 1626              		.loc 1 689 9 is_stmt 1 view .LVU388
+ 689:libraries/drivers/src/at32f403a_407_crm.c ****       }
+ 1627              		.loc 1 689 54 is_stmt 0 view .LVU389
+ 1628 00ae 164A     		ldr	r2, .L141+28
+ 1629 00b0 02FB03F3 		mul	r3, r2, r3
+ 1630              	.LVL87:
+ 689:libraries/drivers/src/at32f403a_407_crm.c ****       }
+ 1631              		.loc 1 689 34 view .LVU390
+ 1632 00b4 2360     		str	r3, [r4]
+ 1633 00b6 BFE7     		b	.L134
+ 1634              	.LVL88:
+ 1635              	.L138:
+ 694:libraries/drivers/src/at32f403a_407_crm.c ****         {
+ 1636              		.loc 1 694 9 is_stmt 1 view .LVU391
+ 694:libraries/drivers/src/at32f403a_407_crm.c ****         {
+ 1637              		.loc 1 694 25 is_stmt 0 view .LVU392
+ 1638 00b8 0C4A     		ldr	r2, .L141
+ 1639 00ba 5268     		ldr	r2, [r2, #4]
+ 694:libraries/drivers/src/at32f403a_407_crm.c ****         {
+ 1640              		.loc 1 694 12 view .LVU393
+ 1641 00bc 12F4003F 		tst	r2, #131072
+ 1642 00c0 0BD0     		beq	.L139
+ 696:libraries/drivers/src/at32f403a_407_crm.c ****           /* hext clock divided by 2 */
+ 1643              		.loc 1 696 11 is_stmt 1 view .LVU394
+ 696:libraries/drivers/src/at32f403a_407_crm.c ****           /* hext clock divided by 2 */
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccmAcxDa.s 			page 43
+
+
+ 1644              		.loc 1 696 39 is_stmt 0 view .LVU395
+ 1645 00c2 0A4A     		ldr	r2, .L141
+ 1646 00c4 516D     		ldr	r1, [r2, #84]
+ 1647 00c6 C1F30131 		ubfx	r1, r1, #12, #2
+ 1648              	.LVL89:
+ 698:libraries/drivers/src/at32f403a_407_crm.c ****         }
+ 1649              		.loc 1 698 11 is_stmt 1 view .LVU396
+ 698:libraries/drivers/src/at32f403a_407_crm.c ****         }
+ 1650              		.loc 1 698 65 is_stmt 0 view .LVU397
+ 1651 00ca 0231     		adds	r1, r1, #2
+ 1652              	.LVL90:
+ 698:libraries/drivers/src/at32f403a_407_crm.c ****         }
+ 1653              		.loc 1 698 50 view .LVU398
+ 1654 00cc 094A     		ldr	r2, .L141+8
+ 1655 00ce B2FBF1F2 		udiv	r2, r2, r1
+ 698:libraries/drivers/src/at32f403a_407_crm.c ****         }
+ 1656              		.loc 1 698 71 view .LVU399
+ 1657 00d2 02FB03F3 		mul	r3, r2, r3
+ 1658              	.LVL91:
+ 698:libraries/drivers/src/at32f403a_407_crm.c ****         }
+ 1659              		.loc 1 698 36 view .LVU400
+ 1660 00d6 2360     		str	r3, [r4]
+ 1661 00d8 AEE7     		b	.L134
+ 1662              	.LVL92:
+ 1663              	.L139:
+ 702:libraries/drivers/src/at32f403a_407_crm.c ****         }
+ 1664              		.loc 1 702 11 is_stmt 1 view .LVU401
+ 702:libraries/drivers/src/at32f403a_407_crm.c ****         }
+ 1665              		.loc 1 702 49 is_stmt 0 view .LVU402
+ 1666 00da 064A     		ldr	r2, .L141+8
+ 1667 00dc 02FB03F3 		mul	r3, r2, r3
+ 1668              	.LVL93:
+ 702:libraries/drivers/src/at32f403a_407_crm.c ****         }
+ 1669              		.loc 1 702 36 view .LVU403
+ 1670 00e0 2360     		str	r3, [r4]
+ 1671 00e2 A9E7     		b	.L134
+ 1672              	.LVL94:
+ 1673              	.L132:
+ 707:libraries/drivers/src/at32f403a_407_crm.c ****       break;
+ 1674              		.loc 1 707 7 is_stmt 1 view .LVU404
+ 707:libraries/drivers/src/at32f403a_407_crm.c ****       break;
+ 1675              		.loc 1 707 32 is_stmt 0 view .LVU405
+ 1676 00e4 034B     		ldr	r3, .L141+8
+ 1677 00e6 2360     		str	r3, [r4]
+ 708:libraries/drivers/src/at32f403a_407_crm.c ****   }
+ 1678              		.loc 1 708 7 is_stmt 1 view .LVU406
+ 1679 00e8 A6E7     		b	.L134
+ 1680              	.L142:
+ 1681 00ea 00BF     		.align	2
+ 1682              	.L141:
+ 1683 00ec 00100240 		.word	1073876992
+ 1684 00f0 006CDC02 		.word	48000000
+ 1685 00f4 00127A00 		.word	8000000
+ 1686 00f8 00000000 		.word	sclk_ahb_div_table.3
+ 1687 00fc 00000000 		.word	ahb_apb1_div_table.2
+ 1688 0100 00000000 		.word	ahb_apb2_div_table.1
+ 1689 0104 00000000 		.word	adc_div_table.0
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccmAcxDa.s 			page 44
+
+
+ 1690 0108 00093D00 		.word	4000000
+ 1691              		.cfi_endproc
+ 1692              	.LFE159:
+ 1694              		.section	.text.crm_clock_out_set,"ax",%progbits
+ 1695              		.align	1
+ 1696              		.global	crm_clock_out_set
+ 1697              		.syntax unified
+ 1698              		.thumb
+ 1699              		.thumb_func
+ 1701              	crm_clock_out_set:
+ 1702              	.LVL95:
+ 1703              	.LFB160:
+ 737:libraries/drivers/src/at32f403a_407_crm.c **** 
+ 738:libraries/drivers/src/at32f403a_407_crm.c **** /**
+ 739:libraries/drivers/src/at32f403a_407_crm.c ****   * @brief  set crm clkout
+ 740:libraries/drivers/src/at32f403a_407_crm.c ****   * @param  clkout
+ 741:libraries/drivers/src/at32f403a_407_crm.c ****   *         this parameter can be one of the following values:
+ 742:libraries/drivers/src/at32f403a_407_crm.c ****   *         - CRM_CLKOUT_NOCLK
+ 743:libraries/drivers/src/at32f403a_407_crm.c ****   *         - CRM_CLKOUT_LICK
+ 744:libraries/drivers/src/at32f403a_407_crm.c ****   *         - CRM_CLKOUT_LEXT
+ 745:libraries/drivers/src/at32f403a_407_crm.c ****   *         - CRM_CLKOUT_SCLK
+ 746:libraries/drivers/src/at32f403a_407_crm.c ****   *         - CRM_CLKOUT_HICK
+ 747:libraries/drivers/src/at32f403a_407_crm.c ****   *         - CRM_CLKOUT_HEXT
+ 748:libraries/drivers/src/at32f403a_407_crm.c ****   *         - CRM_CLKOUT_PLL_DIV_2
+ 749:libraries/drivers/src/at32f403a_407_crm.c ****   *         - CRM_CLKOUT_PLL_DIV_4
+ 750:libraries/drivers/src/at32f403a_407_crm.c ****   *         - CRM_CLKOUT_USB
+ 751:libraries/drivers/src/at32f403a_407_crm.c ****   *         - CRM_CLKOUT_ADC
+ 752:libraries/drivers/src/at32f403a_407_crm.c ****   * @retval none
+ 753:libraries/drivers/src/at32f403a_407_crm.c ****   */
+ 754:libraries/drivers/src/at32f403a_407_crm.c **** void crm_clock_out_set(crm_clkout_select_type clkout)
+ 755:libraries/drivers/src/at32f403a_407_crm.c **** {
+ 1704              		.loc 1 755 1 view -0
+ 1705              		.cfi_startproc
+ 1706              		@ args = 0, pretend = 0, frame = 0
+ 1707              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1708              		@ link register save eliminated.
+ 756:libraries/drivers/src/at32f403a_407_crm.c ****   CRM->cfg_bit.clkout_sel = clkout & 0x7;
+ 1709              		.loc 1 756 3 view .LVU408
+ 1710              		.loc 1 756 27 is_stmt 0 view .LVU409
+ 1711 0000 054B     		ldr	r3, .L144
+ 1712 0002 5A68     		ldr	r2, [r3, #4]
+ 1713 0004 60F31A62 		bfi	r2, r0, #24, #3
+ 1714 0008 5A60     		str	r2, [r3, #4]
+ 757:libraries/drivers/src/at32f403a_407_crm.c ****   CRM->misc1_bit.clkout_sel = (clkout >> 3) & 0x1;
+ 1715              		.loc 1 757 3 is_stmt 1 view .LVU410
+ 1716              		.loc 1 757 45 is_stmt 0 view .LVU411
+ 1717 000a C0F3C000 		ubfx	r0, r0, #3, #1
+ 1718              	.LVL96:
+ 1719              		.loc 1 757 29 view .LVU412
+ 1720 000e 1A6B     		ldr	r2, [r3, #48]
+ 1721 0010 60F31042 		bfi	r2, r0, #16, #1
+ 1722 0014 1A63     		str	r2, [r3, #48]
+ 758:libraries/drivers/src/at32f403a_407_crm.c **** }
+ 1723              		.loc 1 758 1 view .LVU413
+ 1724 0016 7047     		bx	lr
+ 1725              	.L145:
+ 1726              		.align	2
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccmAcxDa.s 			page 45
+
+
+ 1727              	.L144:
+ 1728 0018 00100240 		.word	1073876992
+ 1729              		.cfi_endproc
+ 1730              	.LFE160:
+ 1732              		.section	.text.crm_interrupt_enable,"ax",%progbits
+ 1733              		.align	1
+ 1734              		.global	crm_interrupt_enable
+ 1735              		.syntax unified
+ 1736              		.thumb
+ 1737              		.thumb_func
+ 1739              	crm_interrupt_enable:
+ 1740              	.LVL97:
+ 1741              	.LFB161:
+ 759:libraries/drivers/src/at32f403a_407_crm.c **** 
+ 760:libraries/drivers/src/at32f403a_407_crm.c **** /**
+ 761:libraries/drivers/src/at32f403a_407_crm.c ****   * @brief  config crm interrupt
+ 762:libraries/drivers/src/at32f403a_407_crm.c ****   * @param  int
+ 763:libraries/drivers/src/at32f403a_407_crm.c ****   *         this parameter can be any combination of the following values:
+ 764:libraries/drivers/src/at32f403a_407_crm.c ****   *         - CRM_LICK_STABLE_INT
+ 765:libraries/drivers/src/at32f403a_407_crm.c ****   *         - CRM_LEXT_STABLE_INT
+ 766:libraries/drivers/src/at32f403a_407_crm.c ****   *         - CRM_HICK_STABLE_INT
+ 767:libraries/drivers/src/at32f403a_407_crm.c ****   *         - CRM_HEXT_STABLE_INT
+ 768:libraries/drivers/src/at32f403a_407_crm.c ****   *         - CRM_PLL_STABLE_INT
+ 769:libraries/drivers/src/at32f403a_407_crm.c ****   * @param  new_state (TRUE or FALSE)
+ 770:libraries/drivers/src/at32f403a_407_crm.c ****   * @retval none
+ 771:libraries/drivers/src/at32f403a_407_crm.c ****   */
+ 772:libraries/drivers/src/at32f403a_407_crm.c **** void crm_interrupt_enable(uint32_t crm_int, confirm_state new_state)
+ 773:libraries/drivers/src/at32f403a_407_crm.c **** {
+ 1742              		.loc 1 773 1 is_stmt 1 view -0
+ 1743              		.cfi_startproc
+ 1744              		@ args = 0, pretend = 0, frame = 0
+ 1745              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1746              		@ link register save eliminated.
+ 774:libraries/drivers/src/at32f403a_407_crm.c ****   if(new_state == TRUE)
+ 1747              		.loc 1 774 3 view .LVU415
+ 1748              		.loc 1 774 5 is_stmt 0 view .LVU416
+ 1749 0000 0129     		cmp	r1, #1
+ 1750 0002 05D0     		beq	.L149
+ 775:libraries/drivers/src/at32f403a_407_crm.c ****     CRM->clkint |= crm_int;
+ 776:libraries/drivers/src/at32f403a_407_crm.c ****   else
+ 777:libraries/drivers/src/at32f403a_407_crm.c ****     CRM->clkint &= ~crm_int;
+ 1751              		.loc 1 777 5 is_stmt 1 view .LVU417
+ 1752              		.loc 1 777 8 is_stmt 0 view .LVU418
+ 1753 0004 054A     		ldr	r2, .L150
+ 1754 0006 9368     		ldr	r3, [r2, #8]
+ 1755              		.loc 1 777 17 view .LVU419
+ 1756 0008 23EA0003 		bic	r3, r3, r0
+ 1757 000c 9360     		str	r3, [r2, #8]
+ 778:libraries/drivers/src/at32f403a_407_crm.c **** }
+ 1758              		.loc 1 778 1 view .LVU420
+ 1759 000e 7047     		bx	lr
+ 1760              	.L149:
+ 775:libraries/drivers/src/at32f403a_407_crm.c ****     CRM->clkint |= crm_int;
+ 1761              		.loc 1 775 5 is_stmt 1 view .LVU421
+ 775:libraries/drivers/src/at32f403a_407_crm.c ****     CRM->clkint |= crm_int;
+ 1762              		.loc 1 775 8 is_stmt 0 view .LVU422
+ 1763 0010 024A     		ldr	r2, .L150
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccmAcxDa.s 			page 46
+
+
+ 1764 0012 9368     		ldr	r3, [r2, #8]
+ 775:libraries/drivers/src/at32f403a_407_crm.c ****     CRM->clkint |= crm_int;
+ 1765              		.loc 1 775 17 view .LVU423
+ 1766 0014 0343     		orrs	r3, r3, r0
+ 1767 0016 9360     		str	r3, [r2, #8]
+ 1768 0018 7047     		bx	lr
+ 1769              	.L151:
+ 1770 001a 00BF     		.align	2
+ 1771              	.L150:
+ 1772 001c 00100240 		.word	1073876992
+ 1773              		.cfi_endproc
+ 1774              	.LFE161:
+ 1776              		.section	.text.crm_auto_step_mode_enable,"ax",%progbits
+ 1777              		.align	1
+ 1778              		.global	crm_auto_step_mode_enable
+ 1779              		.syntax unified
+ 1780              		.thumb
+ 1781              		.thumb_func
+ 1783              	crm_auto_step_mode_enable:
+ 1784              	.LVL98:
+ 1785              	.LFB162:
+ 779:libraries/drivers/src/at32f403a_407_crm.c **** 
+ 780:libraries/drivers/src/at32f403a_407_crm.c **** /**
+ 781:libraries/drivers/src/at32f403a_407_crm.c ****   * @brief  auto step clock switch enable
+ 782:libraries/drivers/src/at32f403a_407_crm.c ****   * @param  new_state (TRUE or FALSE)
+ 783:libraries/drivers/src/at32f403a_407_crm.c ****   * @retval none
+ 784:libraries/drivers/src/at32f403a_407_crm.c ****   */
+ 785:libraries/drivers/src/at32f403a_407_crm.c **** void crm_auto_step_mode_enable(confirm_state new_state)
+ 786:libraries/drivers/src/at32f403a_407_crm.c **** {
+ 1786              		.loc 1 786 1 is_stmt 1 view -0
+ 1787              		.cfi_startproc
+ 1788              		@ args = 0, pretend = 0, frame = 0
+ 1789              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1790              		@ link register save eliminated.
+ 787:libraries/drivers/src/at32f403a_407_crm.c ****   if(new_state == TRUE)
+ 1791              		.loc 1 787 3 view .LVU425
+ 1792              		.loc 1 787 5 is_stmt 0 view .LVU426
+ 1793 0000 0128     		cmp	r0, #1
+ 1794 0002 05D0     		beq	.L155
+ 788:libraries/drivers/src/at32f403a_407_crm.c ****     CRM->misc3_bit.auto_step_en = CRM_AUTO_STEP_MODE_ENABLE;
+ 789:libraries/drivers/src/at32f403a_407_crm.c ****   else
+ 790:libraries/drivers/src/at32f403a_407_crm.c ****     CRM->misc3_bit.auto_step_en = CRM_AUTO_STEP_MODE_DISABLE;
+ 1795              		.loc 1 790 5 is_stmt 1 view .LVU427
+ 1796              		.loc 1 790 33 is_stmt 0 view .LVU428
+ 1797 0004 054A     		ldr	r2, .L156
+ 1798 0006 536D     		ldr	r3, [r2, #84]
+ 1799 0008 23F03003 		bic	r3, r3, #48
+ 1800 000c 5365     		str	r3, [r2, #84]
+ 791:libraries/drivers/src/at32f403a_407_crm.c **** }
+ 1801              		.loc 1 791 1 view .LVU429
+ 1802 000e 7047     		bx	lr
+ 1803              	.L155:
+ 788:libraries/drivers/src/at32f403a_407_crm.c ****     CRM->misc3_bit.auto_step_en = CRM_AUTO_STEP_MODE_ENABLE;
+ 1804              		.loc 1 788 5 is_stmt 1 view .LVU430
+ 788:libraries/drivers/src/at32f403a_407_crm.c ****     CRM->misc3_bit.auto_step_en = CRM_AUTO_STEP_MODE_ENABLE;
+ 1805              		.loc 1 788 33 is_stmt 0 view .LVU431
+ 1806 0010 024A     		ldr	r2, .L156
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccmAcxDa.s 			page 47
+
+
+ 1807 0012 536D     		ldr	r3, [r2, #84]
+ 1808 0014 43F03003 		orr	r3, r3, #48
+ 1809 0018 5365     		str	r3, [r2, #84]
+ 1810 001a 7047     		bx	lr
+ 1811              	.L157:
+ 1812              		.align	2
+ 1813              	.L156:
+ 1814 001c 00100240 		.word	1073876992
+ 1815              		.cfi_endproc
+ 1816              	.LFE162:
+ 1818              		.section	.text.crm_usb_interrupt_remapping_set,"ax",%progbits
+ 1819              		.align	1
+ 1820              		.global	crm_usb_interrupt_remapping_set
+ 1821              		.syntax unified
+ 1822              		.thumb
+ 1823              		.thumb_func
+ 1825              	crm_usb_interrupt_remapping_set:
+ 1826              	.LVL99:
+ 1827              	.LFB163:
+ 792:libraries/drivers/src/at32f403a_407_crm.c **** 
+ 793:libraries/drivers/src/at32f403a_407_crm.c **** /**
+ 794:libraries/drivers/src/at32f403a_407_crm.c ****   * @brief  usbdev interrupt remapping control
+ 795:libraries/drivers/src/at32f403a_407_crm.c ****   * @param  int_remap
+ 796:libraries/drivers/src/at32f403a_407_crm.c ****   *         this parameter can be one of the following values:
+ 797:libraries/drivers/src/at32f403a_407_crm.c ****   *         - CRM_USB_INT19_INT20
+ 798:libraries/drivers/src/at32f403a_407_crm.c ****   *         - CRM_USB_INT73_INT74
+ 799:libraries/drivers/src/at32f403a_407_crm.c ****   * @retval none
+ 800:libraries/drivers/src/at32f403a_407_crm.c ****   */
+ 801:libraries/drivers/src/at32f403a_407_crm.c **** void crm_usb_interrupt_remapping_set(crm_usb_int_map_type int_remap)
+ 802:libraries/drivers/src/at32f403a_407_crm.c **** {
+ 1828              		.loc 1 802 1 is_stmt 1 view -0
+ 1829              		.cfi_startproc
+ 1830              		@ args = 0, pretend = 0, frame = 0
+ 1831              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1832              		@ link register save eliminated.
+ 803:libraries/drivers/src/at32f403a_407_crm.c ****   CRM->intmap_bit.usbintmap = int_remap;
+ 1833              		.loc 1 803 3 view .LVU433
+ 1834              		.loc 1 803 29 is_stmt 0 view .LVU434
+ 1835 0000 024B     		ldr	r3, .L159
+ 1836 0002 DA6D     		ldr	r2, [r3, #92]
+ 1837 0004 60F30002 		bfi	r2, r0, #0, #1
+ 1838 0008 DA65     		str	r2, [r3, #92]
+ 804:libraries/drivers/src/at32f403a_407_crm.c **** }
+ 1839              		.loc 1 804 1 view .LVU435
+ 1840 000a 7047     		bx	lr
+ 1841              	.L160:
+ 1842              		.align	2
+ 1843              	.L159:
+ 1844 000c 00100240 		.word	1073876992
+ 1845              		.cfi_endproc
+ 1846              	.LFE163:
+ 1848              		.section	.text.crm_hick_divider_select,"ax",%progbits
+ 1849              		.align	1
+ 1850              		.global	crm_hick_divider_select
+ 1851              		.syntax unified
+ 1852              		.thumb
+ 1853              		.thumb_func
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccmAcxDa.s 			page 48
+
+
+ 1855              	crm_hick_divider_select:
+ 1856              	.LVL100:
+ 1857              	.LFB164:
+ 805:libraries/drivers/src/at32f403a_407_crm.c **** 
+ 806:libraries/drivers/src/at32f403a_407_crm.c **** /**
+ 807:libraries/drivers/src/at32f403a_407_crm.c ****   * @brief  config hick divider select
+ 808:libraries/drivers/src/at32f403a_407_crm.c ****   * @param  value
+ 809:libraries/drivers/src/at32f403a_407_crm.c ****   *         this parameter can be one of the following values:
+ 810:libraries/drivers/src/at32f403a_407_crm.c ****   *         - CRM_HICK48_DIV6
+ 811:libraries/drivers/src/at32f403a_407_crm.c ****   *         - CRM_HICK48_NODIV
+ 812:libraries/drivers/src/at32f403a_407_crm.c ****   * @retval none
+ 813:libraries/drivers/src/at32f403a_407_crm.c ****   */
+ 814:libraries/drivers/src/at32f403a_407_crm.c **** void crm_hick_divider_select(crm_hick_div_6_type value)
+ 815:libraries/drivers/src/at32f403a_407_crm.c **** {
+ 1858              		.loc 1 815 1 is_stmt 1 view -0
+ 1859              		.cfi_startproc
+ 1860              		@ args = 0, pretend = 0, frame = 0
+ 1861              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1862              		@ link register save eliminated.
+ 816:libraries/drivers/src/at32f403a_407_crm.c ****   CRM->misc1_bit.hickdiv = value;
+ 1863              		.loc 1 816 3 view .LVU437
+ 1864              		.loc 1 816 26 is_stmt 0 view .LVU438
+ 1865 0000 024B     		ldr	r3, .L162
+ 1866 0002 1A6B     		ldr	r2, [r3, #48]
+ 1867 0004 60F35962 		bfi	r2, r0, #25, #1
+ 1868 0008 1A63     		str	r2, [r3, #48]
+ 817:libraries/drivers/src/at32f403a_407_crm.c **** }
+ 1869              		.loc 1 817 1 view .LVU439
+ 1870 000a 7047     		bx	lr
+ 1871              	.L163:
+ 1872              		.align	2
+ 1873              	.L162:
+ 1874 000c 00100240 		.word	1073876992
+ 1875              		.cfi_endproc
+ 1876              	.LFE164:
+ 1878              		.section	.text.crm_hick_sclk_frequency_select,"ax",%progbits
+ 1879              		.align	1
+ 1880              		.global	crm_hick_sclk_frequency_select
+ 1881              		.syntax unified
+ 1882              		.thumb
+ 1883              		.thumb_func
+ 1885              	crm_hick_sclk_frequency_select:
+ 1886              	.LVL101:
+ 1887              	.LFB165:
+ 818:libraries/drivers/src/at32f403a_407_crm.c **** 
+ 819:libraries/drivers/src/at32f403a_407_crm.c **** /**
+ 820:libraries/drivers/src/at32f403a_407_crm.c ****   * @brief  hick as system clock frequency select
+ 821:libraries/drivers/src/at32f403a_407_crm.c ****   * @param  value
+ 822:libraries/drivers/src/at32f403a_407_crm.c ****   *         this parameter can be one of the following values:
+ 823:libraries/drivers/src/at32f403a_407_crm.c ****   *         - CRM_HICK_SCLK_8MHZ
+ 824:libraries/drivers/src/at32f403a_407_crm.c ****   *         - CRM_HICK_SCLK_48MHZ
+ 825:libraries/drivers/src/at32f403a_407_crm.c ****   * @retval none
+ 826:libraries/drivers/src/at32f403a_407_crm.c ****   */
+ 827:libraries/drivers/src/at32f403a_407_crm.c **** void crm_hick_sclk_frequency_select(crm_hick_sclk_frequency_type value)
+ 828:libraries/drivers/src/at32f403a_407_crm.c **** {
+ 1888              		.loc 1 828 1 is_stmt 1 view -0
+ 1889              		.cfi_startproc
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccmAcxDa.s 			page 49
+
+
+ 1890              		@ args = 0, pretend = 0, frame = 0
+ 1891              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1892              		.loc 1 828 1 is_stmt 0 view .LVU441
+ 1893 0000 10B5     		push	{r4, lr}
+ 1894              	.LCFI2:
+ 1895              		.cfi_def_cfa_offset 8
+ 1896              		.cfi_offset 4, -8
+ 1897              		.cfi_offset 14, -4
+ 1898 0002 0446     		mov	r4, r0
+ 829:libraries/drivers/src/at32f403a_407_crm.c ****   crm_hick_divider_select(CRM_HICK48_NODIV);
+ 1899              		.loc 1 829 3 is_stmt 1 view .LVU442
+ 1900 0004 0120     		movs	r0, #1
+ 1901              	.LVL102:
+ 1902              		.loc 1 829 3 is_stmt 0 view .LVU443
+ 1903 0006 FFF7FEFF 		bl	crm_hick_divider_select
+ 1904              	.LVL103:
+ 830:libraries/drivers/src/at32f403a_407_crm.c ****   CRM->misc3_bit.hick_to_sclk = value;
+ 1905              		.loc 1 830 3 is_stmt 1 view .LVU444
+ 1906              		.loc 1 830 31 is_stmt 0 view .LVU445
+ 1907 000a 034B     		ldr	r3, .L166
+ 1908 000c 5A6D     		ldr	r2, [r3, #84]
+ 1909 000e 64F34922 		bfi	r2, r4, #9, #1
+ 1910 0012 5A65     		str	r2, [r3, #84]
+ 831:libraries/drivers/src/at32f403a_407_crm.c **** }
+ 1911              		.loc 1 831 1 view .LVU446
+ 1912 0014 10BD     		pop	{r4, pc}
+ 1913              	.LVL104:
+ 1914              	.L167:
+ 1915              		.loc 1 831 1 view .LVU447
+ 1916 0016 00BF     		.align	2
+ 1917              	.L166:
+ 1918 0018 00100240 		.word	1073876992
+ 1919              		.cfi_endproc
+ 1920              	.LFE165:
+ 1922              		.section	.text.crm_usb_clock_source_select,"ax",%progbits
+ 1923              		.align	1
+ 1924              		.global	crm_usb_clock_source_select
+ 1925              		.syntax unified
+ 1926              		.thumb
+ 1927              		.thumb_func
+ 1929              	crm_usb_clock_source_select:
+ 1930              	.LVL105:
+ 1931              	.LFB166:
+ 832:libraries/drivers/src/at32f403a_407_crm.c **** 
+ 833:libraries/drivers/src/at32f403a_407_crm.c **** /**
+ 834:libraries/drivers/src/at32f403a_407_crm.c ****   * @brief  usb 48 mhz clock source select
+ 835:libraries/drivers/src/at32f403a_407_crm.c ****   * @param  value
+ 836:libraries/drivers/src/at32f403a_407_crm.c ****   *         this parameter can be one of the following values:
+ 837:libraries/drivers/src/at32f403a_407_crm.c ****   *         - CRM_USB_CLOCK_SOURCE_PLL
+ 838:libraries/drivers/src/at32f403a_407_crm.c ****   *         - CRM_USB_CLOCK_SOURCE_HICK
+ 839:libraries/drivers/src/at32f403a_407_crm.c ****   * @retval none
+ 840:libraries/drivers/src/at32f403a_407_crm.c ****   */
+ 841:libraries/drivers/src/at32f403a_407_crm.c **** void crm_usb_clock_source_select(crm_usb_clock_source_type value)
+ 842:libraries/drivers/src/at32f403a_407_crm.c **** {
+ 1932              		.loc 1 842 1 is_stmt 1 view -0
+ 1933              		.cfi_startproc
+ 1934              		@ args = 0, pretend = 0, frame = 0
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccmAcxDa.s 			page 50
+
+
+ 1935              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1936              		.loc 1 842 1 is_stmt 0 view .LVU449
+ 1937 0000 10B5     		push	{r4, lr}
+ 1938              	.LCFI3:
+ 1939              		.cfi_def_cfa_offset 8
+ 1940              		.cfi_offset 4, -8
+ 1941              		.cfi_offset 14, -4
+ 1942 0002 0446     		mov	r4, r0
+ 843:libraries/drivers/src/at32f403a_407_crm.c ****   if(value == CRM_USB_CLOCK_SOURCE_HICK)
+ 1943              		.loc 1 843 3 is_stmt 1 view .LVU450
+ 1944              		.loc 1 843 5 is_stmt 0 view .LVU451
+ 1945 0004 0128     		cmp	r0, #1
+ 1946 0006 05D0     		beq	.L171
+ 1947              	.LVL106:
+ 1948              	.L169:
+ 844:libraries/drivers/src/at32f403a_407_crm.c ****   {
+ 845:libraries/drivers/src/at32f403a_407_crm.c ****     crm_hick_sclk_frequency_select(CRM_HICK_SCLK_48MHZ);
+ 846:libraries/drivers/src/at32f403a_407_crm.c ****   }
+ 847:libraries/drivers/src/at32f403a_407_crm.c ****   CRM->misc3_bit.hick_to_usb = value;
+ 1949              		.loc 1 847 3 is_stmt 1 view .LVU452
+ 1950              		.loc 1 847 30 is_stmt 0 view .LVU453
+ 1951 0008 044B     		ldr	r3, .L172
+ 1952 000a 5A6D     		ldr	r2, [r3, #84]
+ 1953 000c 64F30822 		bfi	r2, r4, #8, #1
+ 1954 0010 5A65     		str	r2, [r3, #84]
+ 848:libraries/drivers/src/at32f403a_407_crm.c **** }
+ 1955              		.loc 1 848 1 view .LVU454
+ 1956 0012 10BD     		pop	{r4, pc}
+ 1957              	.LVL107:
+ 1958              	.L171:
+ 845:libraries/drivers/src/at32f403a_407_crm.c ****   }
+ 1959              		.loc 1 845 5 is_stmt 1 view .LVU455
+ 1960 0014 0120     		movs	r0, #1
+ 1961              	.LVL108:
+ 845:libraries/drivers/src/at32f403a_407_crm.c ****   }
+ 1962              		.loc 1 845 5 is_stmt 0 view .LVU456
+ 1963 0016 FFF7FEFF 		bl	crm_hick_sclk_frequency_select
+ 1964              	.LVL109:
+ 1965 001a F5E7     		b	.L169
+ 1966              	.L173:
+ 1967              		.align	2
+ 1968              	.L172:
+ 1969 001c 00100240 		.word	1073876992
+ 1970              		.cfi_endproc
+ 1971              	.LFE166:
+ 1973              		.section	.text.crm_clkout_to_tmr10_enable,"ax",%progbits
+ 1974              		.align	1
+ 1975              		.global	crm_clkout_to_tmr10_enable
+ 1976              		.syntax unified
+ 1977              		.thumb
+ 1978              		.thumb_func
+ 1980              	crm_clkout_to_tmr10_enable:
+ 1981              	.LVL110:
+ 1982              	.LFB167:
+ 849:libraries/drivers/src/at32f403a_407_crm.c **** 
+ 850:libraries/drivers/src/at32f403a_407_crm.c **** /**
+ 851:libraries/drivers/src/at32f403a_407_crm.c ****   * @brief  enable or disable clkout direct to tmr10 channel 1
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccmAcxDa.s 			page 51
+
+
+ 852:libraries/drivers/src/at32f403a_407_crm.c ****   * @param  new_state (TRUE or FALSE)
+ 853:libraries/drivers/src/at32f403a_407_crm.c ****   * @retval none
+ 854:libraries/drivers/src/at32f403a_407_crm.c ****   */
+ 855:libraries/drivers/src/at32f403a_407_crm.c **** void crm_clkout_to_tmr10_enable(confirm_state new_state)
+ 856:libraries/drivers/src/at32f403a_407_crm.c **** {
+ 1983              		.loc 1 856 1 is_stmt 1 view -0
+ 1984              		.cfi_startproc
+ 1985              		@ args = 0, pretend = 0, frame = 0
+ 1986              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1987              		@ link register save eliminated.
+ 857:libraries/drivers/src/at32f403a_407_crm.c ****   CRM->misc2_bit.clk_to_tmr = new_state;
+ 1988              		.loc 1 857 3 view .LVU458
+ 1989              		.loc 1 857 29 is_stmt 0 view .LVU459
+ 1990 0000 024B     		ldr	r3, .L175
+ 1991 0002 1A6D     		ldr	r2, [r3, #80]
+ 1992 0004 60F31042 		bfi	r2, r0, #16, #1
+ 1993 0008 1A65     		str	r2, [r3, #80]
+ 858:libraries/drivers/src/at32f403a_407_crm.c **** }
+ 1994              		.loc 1 858 1 view .LVU460
+ 1995 000a 7047     		bx	lr
+ 1996              	.L176:
+ 1997              		.align	2
+ 1998              	.L175:
+ 1999 000c 00100240 		.word	1073876992
+ 2000              		.cfi_endproc
+ 2001              	.LFE167:
+ 2003              		.section	.text.crm_hext_clock_div_set,"ax",%progbits
+ 2004              		.align	1
+ 2005              		.global	crm_hext_clock_div_set
+ 2006              		.syntax unified
+ 2007              		.thumb
+ 2008              		.thumb_func
+ 2010              	crm_hext_clock_div_set:
+ 2011              	.LVL111:
+ 2012              	.LFB168:
+ 859:libraries/drivers/src/at32f403a_407_crm.c **** 
+ 860:libraries/drivers/src/at32f403a_407_crm.c **** /**
+ 861:libraries/drivers/src/at32f403a_407_crm.c ****   * @brief  set hext clock division
+ 862:libraries/drivers/src/at32f403a_407_crm.c ****   * @param  value
+ 863:libraries/drivers/src/at32f403a_407_crm.c ****   *         this parameter can be one of the following values:
+ 864:libraries/drivers/src/at32f403a_407_crm.c ****   *         - CRM_HEXT_DIV_2
+ 865:libraries/drivers/src/at32f403a_407_crm.c ****   *         - CRM_HEXT_DIV_3
+ 866:libraries/drivers/src/at32f403a_407_crm.c ****   *         - CRM_HEXT_DIV_4
+ 867:libraries/drivers/src/at32f403a_407_crm.c ****   *         - CRM_HEXT_DIV_5
+ 868:libraries/drivers/src/at32f403a_407_crm.c ****   * @retval none
+ 869:libraries/drivers/src/at32f403a_407_crm.c ****   */
+ 870:libraries/drivers/src/at32f403a_407_crm.c **** void crm_hext_clock_div_set(crm_hext_div_type value)
+ 871:libraries/drivers/src/at32f403a_407_crm.c **** {
+ 2013              		.loc 1 871 1 is_stmt 1 view -0
+ 2014              		.cfi_startproc
+ 2015              		@ args = 0, pretend = 0, frame = 0
+ 2016              		@ frame_needed = 0, uses_anonymous_args = 0
+ 2017              		@ link register save eliminated.
+ 872:libraries/drivers/src/at32f403a_407_crm.c ****   CRM->misc3_bit.hextdiv = value;
+ 2018              		.loc 1 872 3 view .LVU462
+ 2019              		.loc 1 872 26 is_stmt 0 view .LVU463
+ 2020 0000 024B     		ldr	r3, .L178
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccmAcxDa.s 			page 52
+
+
+ 2021 0002 5A6D     		ldr	r2, [r3, #84]
+ 2022 0004 60F30D32 		bfi	r2, r0, #12, #2
+ 2023 0008 5A65     		str	r2, [r3, #84]
+ 873:libraries/drivers/src/at32f403a_407_crm.c **** }
+ 2024              		.loc 1 873 1 view .LVU464
+ 2025 000a 7047     		bx	lr
+ 2026              	.L179:
+ 2027              		.align	2
+ 2028              	.L178:
+ 2029 000c 00100240 		.word	1073876992
+ 2030              		.cfi_endproc
+ 2031              	.LFE168:
+ 2033              		.section	.text.crm_clkout_div_set,"ax",%progbits
+ 2034              		.align	1
+ 2035              		.global	crm_clkout_div_set
+ 2036              		.syntax unified
+ 2037              		.thumb
+ 2038              		.thumb_func
+ 2040              	crm_clkout_div_set:
+ 2041              	.LVL112:
+ 2042              	.LFB169:
+ 874:libraries/drivers/src/at32f403a_407_crm.c **** 
+ 875:libraries/drivers/src/at32f403a_407_crm.c **** /**
+ 876:libraries/drivers/src/at32f403a_407_crm.c ****   * @brief  set crm clkout division
+ 877:libraries/drivers/src/at32f403a_407_crm.c ****   * @param  clkout_div
+ 878:libraries/drivers/src/at32f403a_407_crm.c ****   *         this parameter can be one of the following values:
+ 879:libraries/drivers/src/at32f403a_407_crm.c ****   *         - CRM_CLKOUT_DIV_1
+ 880:libraries/drivers/src/at32f403a_407_crm.c ****   *         - CRM_CLKOUT_DIV_2
+ 881:libraries/drivers/src/at32f403a_407_crm.c ****   *         - CRM_CLKOUT_DIV_4
+ 882:libraries/drivers/src/at32f403a_407_crm.c ****   *         - CRM_CLKOUT_DIV_8
+ 883:libraries/drivers/src/at32f403a_407_crm.c ****   *         - CRM_CLKOUT_DIV_16
+ 884:libraries/drivers/src/at32f403a_407_crm.c ****   *         - CRM_CLKOUT_DIV_64
+ 885:libraries/drivers/src/at32f403a_407_crm.c ****   *         - CRM_CLKOUT_DIV_128
+ 886:libraries/drivers/src/at32f403a_407_crm.c ****   *         - CRM_CLKOUT_DIV_256
+ 887:libraries/drivers/src/at32f403a_407_crm.c ****   *         - CRM_CLKOUT_DIV_512
+ 888:libraries/drivers/src/at32f403a_407_crm.c ****   * @retval none
+ 889:libraries/drivers/src/at32f403a_407_crm.c ****   */
+ 890:libraries/drivers/src/at32f403a_407_crm.c **** void crm_clkout_div_set(crm_clkout_div_type clkout_div)
+ 891:libraries/drivers/src/at32f403a_407_crm.c **** {
+ 2043              		.loc 1 891 1 is_stmt 1 view -0
+ 2044              		.cfi_startproc
+ 2045              		@ args = 0, pretend = 0, frame = 0
+ 2046              		@ frame_needed = 0, uses_anonymous_args = 0
+ 2047              		@ link register save eliminated.
+ 892:libraries/drivers/src/at32f403a_407_crm.c ****   CRM->misc1_bit.clkoutdiv = clkout_div;
+ 2048              		.loc 1 892 3 view .LVU466
+ 2049              		.loc 1 892 28 is_stmt 0 view .LVU467
+ 2050 0000 024B     		ldr	r3, .L181
+ 2051 0002 1A6B     		ldr	r2, [r3, #48]
+ 2052 0004 60F31F72 		bfi	r2, r0, #28, #4
+ 2053 0008 1A63     		str	r2, [r3, #48]
+ 893:libraries/drivers/src/at32f403a_407_crm.c **** }
+ 2054              		.loc 1 893 1 view .LVU468
+ 2055 000a 7047     		bx	lr
+ 2056              	.L182:
+ 2057              		.align	2
+ 2058              	.L181:
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccmAcxDa.s 			page 53
+
+
+ 2059 000c 00100240 		.word	1073876992
+ 2060              		.cfi_endproc
+ 2061              	.LFE169:
+ 2063              		.section	.rodata.adc_div_table.0,"a"
+ 2064              		.align	2
+ 2067              	adc_div_table.0:
+ 2068 0000 02040608 		.ascii	"\002\004\006\010\002\014\010\020"
+ 2068      020C0810 
+ 2069              		.section	.rodata.ahb_apb2_div_table.1,"a"
+ 2070              		.align	2
+ 2073              	ahb_apb2_div_table.1:
+ 2074 0000 00000000 		.ascii	"\000\000\000\000\001\002\003\004"
+ 2074      01020304 
+ 2075              		.section	.rodata.ahb_apb1_div_table.2,"a"
+ 2076              		.align	2
+ 2079              	ahb_apb1_div_table.2:
+ 2080 0000 00000000 		.ascii	"\000\000\000\000\001\002\003\004"
+ 2080      01020304 
+ 2081              		.section	.rodata.sclk_ahb_div_table.3,"a"
+ 2082              		.align	2
+ 2085              	sclk_ahb_div_table.3:
+ 2086 0000 00000000 		.ascii	"\000\000\000\000\000\000\000\000\001\002\003\004\006"
+ 2086      00000000 
+ 2086      01020304 
+ 2086      06
+ 2087 000d 070809   		.ascii	"\007\010\011"
+ 2088              		.text
+ 2089              	.Letext0:
+ 2090              		.file 2 "D:/gnu_toolchain/arm-none-eabi/include/machine/_default_types.h"
+ 2091              		.file 3 "D:/gnu_toolchain/arm-none-eabi/include/sys/_stdint.h"
+ 2092              		.file 4 "libraries/cmsis/cm4/device_support/at32f403a_407.h"
+ 2093              		.file 5 "libraries/drivers/inc/at32f403a_407_crm.h"
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccmAcxDa.s 			page 54
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 at32f403a_407_crm.c
+C:\Users\bians\AppData\Local\Temp\ccmAcxDa.s:21     .text.crm_reset:00000000 $t
+C:\Users\bians\AppData\Local\Temp\ccmAcxDa.s:27     .text.crm_reset:00000000 crm_reset
+C:\Users\bians\AppData\Local\Temp\ccmAcxDa.s:88     .text.crm_reset:00000044 $d
+C:\Users\bians\AppData\Local\Temp\ccmAcxDa.s:93     .text.crm_lext_bypass:00000000 $t
+C:\Users\bians\AppData\Local\Temp\ccmAcxDa.s:99     .text.crm_lext_bypass:00000000 crm_lext_bypass
+C:\Users\bians\AppData\Local\Temp\ccmAcxDa.s:118    .text.crm_lext_bypass:0000000c $d
+C:\Users\bians\AppData\Local\Temp\ccmAcxDa.s:123    .text.crm_hext_bypass:00000000 $t
+C:\Users\bians\AppData\Local\Temp\ccmAcxDa.s:129    .text.crm_hext_bypass:00000000 crm_hext_bypass
+C:\Users\bians\AppData\Local\Temp\ccmAcxDa.s:148    .text.crm_hext_bypass:0000000c $d
+C:\Users\bians\AppData\Local\Temp\ccmAcxDa.s:153    .text.crm_flag_get:00000000 $t
+C:\Users\bians\AppData\Local\Temp\ccmAcxDa.s:159    .text.crm_flag_get:00000000 crm_flag_get
+C:\Users\bians\AppData\Local\Temp\ccmAcxDa.s:197    .text.crm_interrupt_flag_get:00000000 $t
+C:\Users\bians\AppData\Local\Temp\ccmAcxDa.s:203    .text.crm_interrupt_flag_get:00000000 crm_interrupt_flag_get
+C:\Users\bians\AppData\Local\Temp\ccmAcxDa.s:220    .text.crm_interrupt_flag_get:0000000c $d
+C:\Users\bians\AppData\Local\Temp\ccmAcxDa.s:228    .text.crm_interrupt_flag_get:00000014 $t
+C:\Users\bians\AppData\Local\Temp\ccmAcxDa.s:391    .text.crm_interrupt_flag_get:000000d8 $d
+C:\Users\bians\AppData\Local\Temp\ccmAcxDa.s:396    .text.crm_hext_stable_wait:00000000 $t
+C:\Users\bians\AppData\Local\Temp\ccmAcxDa.s:402    .text.crm_hext_stable_wait:00000000 crm_hext_stable_wait
+C:\Users\bians\AppData\Local\Temp\ccmAcxDa.s:459    .text.crm_hick_clock_trimming_set:00000000 $t
+C:\Users\bians\AppData\Local\Temp\ccmAcxDa.s:465    .text.crm_hick_clock_trimming_set:00000000 crm_hick_clock_trimming_set
+C:\Users\bians\AppData\Local\Temp\ccmAcxDa.s:484    .text.crm_hick_clock_trimming_set:0000000c $d
+C:\Users\bians\AppData\Local\Temp\ccmAcxDa.s:489    .text.crm_hick_clock_calibration_set:00000000 $t
+C:\Users\bians\AppData\Local\Temp\ccmAcxDa.s:495    .text.crm_hick_clock_calibration_set:00000000 crm_hick_clock_calibration_set
+C:\Users\bians\AppData\Local\Temp\ccmAcxDa.s:525    .text.crm_hick_clock_calibration_set:00000020 $d
+C:\Users\bians\AppData\Local\Temp\ccmAcxDa.s:530    .text.crm_periph_clock_enable:00000000 $t
+C:\Users\bians\AppData\Local\Temp\ccmAcxDa.s:536    .text.crm_periph_clock_enable:00000000 crm_periph_clock_enable
+C:\Users\bians\AppData\Local\Temp\ccmAcxDa.s:587    .text.crm_periph_reset:00000000 $t
+C:\Users\bians\AppData\Local\Temp\ccmAcxDa.s:593    .text.crm_periph_reset:00000000 crm_periph_reset
+C:\Users\bians\AppData\Local\Temp\ccmAcxDa.s:644    .text.crm_periph_sleep_mode_clock_enable:00000000 $t
+C:\Users\bians\AppData\Local\Temp\ccmAcxDa.s:650    .text.crm_periph_sleep_mode_clock_enable:00000000 crm_periph_sleep_mode_clock_enable
+C:\Users\bians\AppData\Local\Temp\ccmAcxDa.s:701    .text.crm_clock_source_enable:00000000 $t
+C:\Users\bians\AppData\Local\Temp\ccmAcxDa.s:707    .text.crm_clock_source_enable:00000000 crm_clock_source_enable
+C:\Users\bians\AppData\Local\Temp\ccmAcxDa.s:720    .text.crm_clock_source_enable:00000008 $d
+C:\Users\bians\AppData\Local\Temp\ccmAcxDa.s:776    .text.crm_clock_source_enable:0000004c $d
+C:\Users\bians\AppData\Local\Temp\ccmAcxDa.s:781    .text.crm_flag_clear:00000000 $t
+C:\Users\bians\AppData\Local\Temp\ccmAcxDa.s:787    .text.crm_flag_clear:00000000 crm_flag_clear
+C:\Users\bians\AppData\Local\Temp\ccmAcxDa.s:807    .text.crm_flag_clear:00000018 $d
+C:\Users\bians\AppData\Local\Temp\ccmAcxDa.s:816    .text.crm_flag_clear:00000020 $t
+C:\Users\bians\AppData\Local\Temp\ccmAcxDa.s:910    .text.crm_flag_clear:00000090 $d
+C:\Users\bians\AppData\Local\Temp\ccmAcxDa.s:916    .text.crm_rtc_clock_select:00000000 $t
+C:\Users\bians\AppData\Local\Temp\ccmAcxDa.s:922    .text.crm_rtc_clock_select:00000000 crm_rtc_clock_select
+C:\Users\bians\AppData\Local\Temp\ccmAcxDa.s:941    .text.crm_rtc_clock_select:0000000c $d
+C:\Users\bians\AppData\Local\Temp\ccmAcxDa.s:946    .text.crm_rtc_clock_enable:00000000 $t
+C:\Users\bians\AppData\Local\Temp\ccmAcxDa.s:952    .text.crm_rtc_clock_enable:00000000 crm_rtc_clock_enable
+C:\Users\bians\AppData\Local\Temp\ccmAcxDa.s:971    .text.crm_rtc_clock_enable:0000000c $d
+C:\Users\bians\AppData\Local\Temp\ccmAcxDa.s:976    .text.crm_ahb_div_set:00000000 $t
+C:\Users\bians\AppData\Local\Temp\ccmAcxDa.s:982    .text.crm_ahb_div_set:00000000 crm_ahb_div_set
+C:\Users\bians\AppData\Local\Temp\ccmAcxDa.s:1001   .text.crm_ahb_div_set:0000000c $d
+C:\Users\bians\AppData\Local\Temp\ccmAcxDa.s:1006   .text.crm_apb1_div_set:00000000 $t
+C:\Users\bians\AppData\Local\Temp\ccmAcxDa.s:1012   .text.crm_apb1_div_set:00000000 crm_apb1_div_set
+C:\Users\bians\AppData\Local\Temp\ccmAcxDa.s:1031   .text.crm_apb1_div_set:0000000c $d
+C:\Users\bians\AppData\Local\Temp\ccmAcxDa.s:1036   .text.crm_apb2_div_set:00000000 $t
+C:\Users\bians\AppData\Local\Temp\ccmAcxDa.s:1042   .text.crm_apb2_div_set:00000000 crm_apb2_div_set
+C:\Users\bians\AppData\Local\Temp\ccmAcxDa.s:1061   .text.crm_apb2_div_set:0000000c $d
+C:\Users\bians\AppData\Local\Temp\ccmAcxDa.s:1066   .text.crm_adc_clock_div_set:00000000 $t
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccmAcxDa.s 			page 55
+
+
+C:\Users\bians\AppData\Local\Temp\ccmAcxDa.s:1072   .text.crm_adc_clock_div_set:00000000 crm_adc_clock_div_set
+C:\Users\bians\AppData\Local\Temp\ccmAcxDa.s:1099   .text.crm_adc_clock_div_set:00000018 $d
+C:\Users\bians\AppData\Local\Temp\ccmAcxDa.s:1104   .text.crm_usb_clock_div_set:00000000 $t
+C:\Users\bians\AppData\Local\Temp\ccmAcxDa.s:1110   .text.crm_usb_clock_div_set:00000000 crm_usb_clock_div_set
+C:\Users\bians\AppData\Local\Temp\ccmAcxDa.s:1137   .text.crm_usb_clock_div_set:00000018 $d
+C:\Users\bians\AppData\Local\Temp\ccmAcxDa.s:1142   .text.crm_clock_failure_detection_enable:00000000 $t
+C:\Users\bians\AppData\Local\Temp\ccmAcxDa.s:1148   .text.crm_clock_failure_detection_enable:00000000 crm_clock_failure_detection_enable
+C:\Users\bians\AppData\Local\Temp\ccmAcxDa.s:1167   .text.crm_clock_failure_detection_enable:0000000c $d
+C:\Users\bians\AppData\Local\Temp\ccmAcxDa.s:1172   .text.crm_battery_powered_domain_reset:00000000 $t
+C:\Users\bians\AppData\Local\Temp\ccmAcxDa.s:1178   .text.crm_battery_powered_domain_reset:00000000 crm_battery_powered_domain_reset
+C:\Users\bians\AppData\Local\Temp\ccmAcxDa.s:1197   .text.crm_battery_powered_domain_reset:0000000c $d
+C:\Users\bians\AppData\Local\Temp\ccmAcxDa.s:1202   .text.crm_pll_config:00000000 $t
+C:\Users\bians\AppData\Local\Temp\ccmAcxDa.s:1208   .text.crm_pll_config:00000000 crm_pll_config
+C:\Users\bians\AppData\Local\Temp\ccmAcxDa.s:1286   .text.crm_pll_config:0000005c $d
+C:\Users\bians\AppData\Local\Temp\ccmAcxDa.s:1291   .text.crm_sysclk_switch:00000000 $t
+C:\Users\bians\AppData\Local\Temp\ccmAcxDa.s:1297   .text.crm_sysclk_switch:00000000 crm_sysclk_switch
+C:\Users\bians\AppData\Local\Temp\ccmAcxDa.s:1400   .text.crm_sysclk_switch:00000034 $d
+C:\Users\bians\AppData\Local\Temp\ccmAcxDa.s:1405   .text.crm_sysclk_switch_status_get:00000000 $t
+C:\Users\bians\AppData\Local\Temp\ccmAcxDa.s:1411   .text.crm_sysclk_switch_status_get:00000000 crm_sysclk_switch_status_get
+C:\Users\bians\AppData\Local\Temp\ccmAcxDa.s:1428   .text.crm_sysclk_switch_status_get:0000000c $d
+C:\Users\bians\AppData\Local\Temp\ccmAcxDa.s:1433   .text.crm_clocks_freq_get:00000000 $t
+C:\Users\bians\AppData\Local\Temp\ccmAcxDa.s:1439   .text.crm_clocks_freq_get:00000000 crm_clocks_freq_get
+C:\Users\bians\AppData\Local\Temp\ccmAcxDa.s:1683   .text.crm_clocks_freq_get:000000ec $d
+C:\Users\bians\AppData\Local\Temp\ccmAcxDa.s:2085   .rodata.sclk_ahb_div_table.3:00000000 sclk_ahb_div_table.3
+C:\Users\bians\AppData\Local\Temp\ccmAcxDa.s:2079   .rodata.ahb_apb1_div_table.2:00000000 ahb_apb1_div_table.2
+C:\Users\bians\AppData\Local\Temp\ccmAcxDa.s:2073   .rodata.ahb_apb2_div_table.1:00000000 ahb_apb2_div_table.1
+C:\Users\bians\AppData\Local\Temp\ccmAcxDa.s:2067   .rodata.adc_div_table.0:00000000 adc_div_table.0
+C:\Users\bians\AppData\Local\Temp\ccmAcxDa.s:1695   .text.crm_clock_out_set:00000000 $t
+C:\Users\bians\AppData\Local\Temp\ccmAcxDa.s:1701   .text.crm_clock_out_set:00000000 crm_clock_out_set
+C:\Users\bians\AppData\Local\Temp\ccmAcxDa.s:1728   .text.crm_clock_out_set:00000018 $d
+C:\Users\bians\AppData\Local\Temp\ccmAcxDa.s:1733   .text.crm_interrupt_enable:00000000 $t
+C:\Users\bians\AppData\Local\Temp\ccmAcxDa.s:1739   .text.crm_interrupt_enable:00000000 crm_interrupt_enable
+C:\Users\bians\AppData\Local\Temp\ccmAcxDa.s:1772   .text.crm_interrupt_enable:0000001c $d
+C:\Users\bians\AppData\Local\Temp\ccmAcxDa.s:1777   .text.crm_auto_step_mode_enable:00000000 $t
+C:\Users\bians\AppData\Local\Temp\ccmAcxDa.s:1783   .text.crm_auto_step_mode_enable:00000000 crm_auto_step_mode_enable
+C:\Users\bians\AppData\Local\Temp\ccmAcxDa.s:1814   .text.crm_auto_step_mode_enable:0000001c $d
+C:\Users\bians\AppData\Local\Temp\ccmAcxDa.s:1819   .text.crm_usb_interrupt_remapping_set:00000000 $t
+C:\Users\bians\AppData\Local\Temp\ccmAcxDa.s:1825   .text.crm_usb_interrupt_remapping_set:00000000 crm_usb_interrupt_remapping_set
+C:\Users\bians\AppData\Local\Temp\ccmAcxDa.s:1844   .text.crm_usb_interrupt_remapping_set:0000000c $d
+C:\Users\bians\AppData\Local\Temp\ccmAcxDa.s:1849   .text.crm_hick_divider_select:00000000 $t
+C:\Users\bians\AppData\Local\Temp\ccmAcxDa.s:1855   .text.crm_hick_divider_select:00000000 crm_hick_divider_select
+C:\Users\bians\AppData\Local\Temp\ccmAcxDa.s:1874   .text.crm_hick_divider_select:0000000c $d
+C:\Users\bians\AppData\Local\Temp\ccmAcxDa.s:1879   .text.crm_hick_sclk_frequency_select:00000000 $t
+C:\Users\bians\AppData\Local\Temp\ccmAcxDa.s:1885   .text.crm_hick_sclk_frequency_select:00000000 crm_hick_sclk_frequency_select
+C:\Users\bians\AppData\Local\Temp\ccmAcxDa.s:1918   .text.crm_hick_sclk_frequency_select:00000018 $d
+C:\Users\bians\AppData\Local\Temp\ccmAcxDa.s:1923   .text.crm_usb_clock_source_select:00000000 $t
+C:\Users\bians\AppData\Local\Temp\ccmAcxDa.s:1929   .text.crm_usb_clock_source_select:00000000 crm_usb_clock_source_select
+C:\Users\bians\AppData\Local\Temp\ccmAcxDa.s:1969   .text.crm_usb_clock_source_select:0000001c $d
+C:\Users\bians\AppData\Local\Temp\ccmAcxDa.s:1974   .text.crm_clkout_to_tmr10_enable:00000000 $t
+C:\Users\bians\AppData\Local\Temp\ccmAcxDa.s:1980   .text.crm_clkout_to_tmr10_enable:00000000 crm_clkout_to_tmr10_enable
+C:\Users\bians\AppData\Local\Temp\ccmAcxDa.s:1999   .text.crm_clkout_to_tmr10_enable:0000000c $d
+C:\Users\bians\AppData\Local\Temp\ccmAcxDa.s:2004   .text.crm_hext_clock_div_set:00000000 $t
+C:\Users\bians\AppData\Local\Temp\ccmAcxDa.s:2010   .text.crm_hext_clock_div_set:00000000 crm_hext_clock_div_set
+C:\Users\bians\AppData\Local\Temp\ccmAcxDa.s:2029   .text.crm_hext_clock_div_set:0000000c $d
+C:\Users\bians\AppData\Local\Temp\ccmAcxDa.s:2034   .text.crm_clkout_div_set:00000000 $t
+C:\Users\bians\AppData\Local\Temp\ccmAcxDa.s:2040   .text.crm_clkout_div_set:00000000 crm_clkout_div_set
+C:\Users\bians\AppData\Local\Temp\ccmAcxDa.s:2059   .text.crm_clkout_div_set:0000000c $d
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccmAcxDa.s 			page 56
+
+
+C:\Users\bians\AppData\Local\Temp\ccmAcxDa.s:2064   .rodata.adc_div_table.0:00000000 $d
+C:\Users\bians\AppData\Local\Temp\ccmAcxDa.s:2070   .rodata.ahb_apb2_div_table.1:00000000 $d
+C:\Users\bians\AppData\Local\Temp\ccmAcxDa.s:2076   .rodata.ahb_apb1_div_table.2:00000000 $d
+C:\Users\bians\AppData\Local\Temp\ccmAcxDa.s:2082   .rodata.sclk_ahb_div_table.3:00000000 $d
+C:\Users\bians\AppData\Local\Temp\ccmAcxDa.s:725    .text.crm_clock_source_enable:0000000d $d
+C:\Users\bians\AppData\Local\Temp\ccmAcxDa.s:725    .text.crm_clock_source_enable:0000000e $t
+
+NO UNDEFINED SYMBOLS

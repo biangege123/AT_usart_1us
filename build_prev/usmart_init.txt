@@ -1,0 +1,23 @@
+﻿  C:\Users\bians\Desktop\uart\uart_AT32\project\src\usmart.c:197:
+  C:\Users\bians\Desktop\uart\uart_AT32\project\src\usmart.c:198:/**
+  C:\Users\bians\Desktop\uart\uart_AT32\project\src\usmart.c:199: * @brief       初始化USMART
+> C:\Users\bians\Desktop\uart\uart_AT32\project\src\usmart.c:200: * @param       tclk: 定时器的工作频率(单位:Mhz)
+  C:\Users\bians\Desktop\uart\uart_AT32\project\src\usmart.c:201: * @retval      无
+  C:\Users\bians\Desktop\uart\uart_AT32\project\src\usmart.c:202: */
+> C:\Users\bians\Desktop\uart\uart_AT32\project\src\usmart.c:203:void usmart_init(uint16_t tclk)
+  C:\Users\bians\Desktop\uart\uart_AT32\project\src\usmart.c:204:{
+  C:\Users\bians\Desktop\uart\uart_AT32\project\src\usmart.c:205:#if USMART_ENTIMX_SCAN == 1
+> C:\Users\bians\Desktop\uart\uart_AT32\project\src\usmart.c:206:    /* tclk 单位 MHz, 分频后计数频率为 10kHz; 扫描周期见 USMART_TIMX_SCAN_PERIOD */
+> C:\Users\bians\Desktop\uart\uart_AT32\project\src\usmart.c:207:    usmart_timx_init(USMART_TIMX_SCAN_PERIOD, (uint16_t)(tclk * 100U - 1U));
+  C:\Users\bians\Desktop\uart\uart_AT32\project\src\usmart.c:208:#endif
+  C:\Users\bians\Desktop\uart\uart_AT32\project\src\usmart.c:209:    usmart_dev.sptype = 1;  /* 十六进制显示参数 */
+  C:\Users\bians\Desktop\uart\uart_AT32\project\src\usmart.c:210:}
+  C:\Users\bians\Desktop\uart\uart_AT32\project\src\usmart.c:211:
+  C:\Users\bians\Desktop\uart\uart_AT32\project\src\usmart.c:212:
+  C:\Users\bians\Desktop\uart\uart_AT32\project\src\usmart.c:213:
+  C:\Users\bians\Desktop\uart\uart_AT32\project\src\usmart.c:214:
+  C:\Users\bians\Desktop\uart\uart_AT32\project\src\usmart.c:215:
+  C:\Users\bians\Desktop\uart\uart_AT32\project\src\usmart.c:216:
+  C:\Users\bians\Desktop\uart\uart_AT32\project\src\usmart.c:217:/**
+  C:\Users\bians\Desktop\uart\uart_AT32\project\src\usmart.c:218: * @brief       从str中获取函数名,id,及参数信息
+  C:\Users\bians\Desktop\uart\uart_AT32\project\src\usmart.c:219: * @param       str: 字符串指针.

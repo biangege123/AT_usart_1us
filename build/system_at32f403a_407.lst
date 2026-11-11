@@ -1,0 +1,590 @@
+ARM GAS  C:\Users\bians\AppData\Local\Temp\cc7CiWP5.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.arch armv7e-m
+   3              		.fpu fpv4-sp-d16
+   4              		.eabi_attribute 27, 1
+   5              		.eabi_attribute 28, 1
+   6              		.eabi_attribute 20, 1
+   7              		.eabi_attribute 21, 1
+   8              		.eabi_attribute 23, 3
+   9              		.eabi_attribute 24, 1
+  10              		.eabi_attribute 25, 1
+  11              		.eabi_attribute 26, 1
+  12              		.eabi_attribute 30, 1
+  13              		.eabi_attribute 34, 1
+  14              		.eabi_attribute 18, 4
+  15              		.file	"system_at32f403a_407.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.file 1 "libraries/cmsis/cm4/device_support/system_at32f403a_407.c"
+  20              		.section	.text.SystemInit,"ax",%progbits
+  21              		.align	1
+  22              		.global	SystemInit
+  23              		.syntax unified
+  24              		.thumb
+  25              		.thumb_func
+  27              	SystemInit:
+  28              	.LFB134:
+   1:libraries/cmsis/cm4/device_support/system_at32f403a_407.c **** /**
+   2:libraries/cmsis/cm4/device_support/system_at32f403a_407.c ****   **************************************************************************
+   3:libraries/cmsis/cm4/device_support/system_at32f403a_407.c ****   * @file     system_at32f403a_407.c
+   4:libraries/cmsis/cm4/device_support/system_at32f403a_407.c ****   * @brief    contains all the functions for cmsis cortex-m4 system source file
+   5:libraries/cmsis/cm4/device_support/system_at32f403a_407.c ****   **************************************************************************
+   6:libraries/cmsis/cm4/device_support/system_at32f403a_407.c ****   *
+   7:libraries/cmsis/cm4/device_support/system_at32f403a_407.c ****   * Copyright (c) 2025, Artery Technology, All rights reserved.
+   8:libraries/cmsis/cm4/device_support/system_at32f403a_407.c ****   *
+   9:libraries/cmsis/cm4/device_support/system_at32f403a_407.c ****   * The software Board Support Package (BSP) that is made available to
+  10:libraries/cmsis/cm4/device_support/system_at32f403a_407.c ****   * download from Artery official website is the copyrighted work of Artery.
+  11:libraries/cmsis/cm4/device_support/system_at32f403a_407.c ****   * Artery authorizes customers to use, copy, and distribute the BSP
+  12:libraries/cmsis/cm4/device_support/system_at32f403a_407.c ****   * software and its related documentation for the purpose of design and
+  13:libraries/cmsis/cm4/device_support/system_at32f403a_407.c ****   * development in conjunction with Artery microcontrollers. Use of the
+  14:libraries/cmsis/cm4/device_support/system_at32f403a_407.c ****   * software is governed by this copyright notice and the following disclaimer.
+  15:libraries/cmsis/cm4/device_support/system_at32f403a_407.c ****   *
+  16:libraries/cmsis/cm4/device_support/system_at32f403a_407.c ****   * THIS SOFTWARE IS PROVIDED ON "AS IS" BASIS WITHOUT WARRANTIES,
+  17:libraries/cmsis/cm4/device_support/system_at32f403a_407.c ****   * GUARANTEES OR REPRESENTATIONS OF ANY KIND. ARTERY EXPRESSLY DISCLAIMS,
+  18:libraries/cmsis/cm4/device_support/system_at32f403a_407.c ****   * TO THE FULLEST EXTENT PERMITTED BY LAW, ALL EXPRESS, IMPLIED OR
+  19:libraries/cmsis/cm4/device_support/system_at32f403a_407.c ****   * STATUTORY OR OTHER WARRANTIES, GUARANTEES OR REPRESENTATIONS,
+  20:libraries/cmsis/cm4/device_support/system_at32f403a_407.c ****   * INCLUDING BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY,
+  21:libraries/cmsis/cm4/device_support/system_at32f403a_407.c ****   * FITNESS FOR A PARTICULAR PURPOSE, OR NON-INFRINGEMENT.
+  22:libraries/cmsis/cm4/device_support/system_at32f403a_407.c ****   *
+  23:libraries/cmsis/cm4/device_support/system_at32f403a_407.c ****   **************************************************************************
+  24:libraries/cmsis/cm4/device_support/system_at32f403a_407.c ****   */
+  25:libraries/cmsis/cm4/device_support/system_at32f403a_407.c **** 
+  26:libraries/cmsis/cm4/device_support/system_at32f403a_407.c **** /** @addtogroup CMSIS
+  27:libraries/cmsis/cm4/device_support/system_at32f403a_407.c ****   * @{
+  28:libraries/cmsis/cm4/device_support/system_at32f403a_407.c ****   */
+  29:libraries/cmsis/cm4/device_support/system_at32f403a_407.c **** 
+  30:libraries/cmsis/cm4/device_support/system_at32f403a_407.c **** /** @addtogroup AT32F403A_407_system
+ARM GAS  C:\Users\bians\AppData\Local\Temp\cc7CiWP5.s 			page 2
+
+
+  31:libraries/cmsis/cm4/device_support/system_at32f403a_407.c ****   * @{
+  32:libraries/cmsis/cm4/device_support/system_at32f403a_407.c ****   */
+  33:libraries/cmsis/cm4/device_support/system_at32f403a_407.c **** 
+  34:libraries/cmsis/cm4/device_support/system_at32f403a_407.c **** #include "at32f403a_407.h"
+  35:libraries/cmsis/cm4/device_support/system_at32f403a_407.c **** 
+  36:libraries/cmsis/cm4/device_support/system_at32f403a_407.c **** /** @addtogroup AT32F403A_407_system_private_defines
+  37:libraries/cmsis/cm4/device_support/system_at32f403a_407.c ****   * @{
+  38:libraries/cmsis/cm4/device_support/system_at32f403a_407.c ****   */
+  39:libraries/cmsis/cm4/device_support/system_at32f403a_407.c **** #define VECT_TAB_OFFSET                  0x0 /*!< vector table base offset field. this value must b
+  40:libraries/cmsis/cm4/device_support/system_at32f403a_407.c **** /**
+  41:libraries/cmsis/cm4/device_support/system_at32f403a_407.c ****   * @}
+  42:libraries/cmsis/cm4/device_support/system_at32f403a_407.c ****   */
+  43:libraries/cmsis/cm4/device_support/system_at32f403a_407.c **** 
+  44:libraries/cmsis/cm4/device_support/system_at32f403a_407.c **** /** @addtogroup AT32F403A_407_system_private_variables
+  45:libraries/cmsis/cm4/device_support/system_at32f403a_407.c ****   * @{
+  46:libraries/cmsis/cm4/device_support/system_at32f403a_407.c ****   */
+  47:libraries/cmsis/cm4/device_support/system_at32f403a_407.c **** unsigned int system_core_clock           = HICK_VALUE; /*!< system clock frequency (core clock) */
+  48:libraries/cmsis/cm4/device_support/system_at32f403a_407.c **** /**
+  49:libraries/cmsis/cm4/device_support/system_at32f403a_407.c ****   * @}
+  50:libraries/cmsis/cm4/device_support/system_at32f403a_407.c ****   */
+  51:libraries/cmsis/cm4/device_support/system_at32f403a_407.c **** 
+  52:libraries/cmsis/cm4/device_support/system_at32f403a_407.c **** /** @addtogroup AT32F403A_407_system_private_functions
+  53:libraries/cmsis/cm4/device_support/system_at32f403a_407.c ****   * @{
+  54:libraries/cmsis/cm4/device_support/system_at32f403a_407.c ****   */
+  55:libraries/cmsis/cm4/device_support/system_at32f403a_407.c **** 
+  56:libraries/cmsis/cm4/device_support/system_at32f403a_407.c **** /**
+  57:libraries/cmsis/cm4/device_support/system_at32f403a_407.c ****   * @brief  setup the microcontroller system
+  58:libraries/cmsis/cm4/device_support/system_at32f403a_407.c ****   *         initialize the flash interface.
+  59:libraries/cmsis/cm4/device_support/system_at32f403a_407.c ****   * @note   this function should be used only after reset.
+  60:libraries/cmsis/cm4/device_support/system_at32f403a_407.c ****   * @param  none
+  61:libraries/cmsis/cm4/device_support/system_at32f403a_407.c ****   * @retval none
+  62:libraries/cmsis/cm4/device_support/system_at32f403a_407.c ****   */
+  63:libraries/cmsis/cm4/device_support/system_at32f403a_407.c **** void SystemInit (void)
+  64:libraries/cmsis/cm4/device_support/system_at32f403a_407.c **** {
+  29              		.loc 1 64 1 view -0
+  30              		.cfi_startproc
+  31              		@ args = 0, pretend = 0, frame = 0
+  32              		@ frame_needed = 0, uses_anonymous_args = 0
+  33              		@ link register save eliminated.
+  65:libraries/cmsis/cm4/device_support/system_at32f403a_407.c **** #if defined (__FPU_USED) && (__FPU_USED == 1U)
+  66:libraries/cmsis/cm4/device_support/system_at32f403a_407.c ****   SCB->CPACR |= ((3U << 10U * 2U) |         /* set cp10 full access */
+  34              		.loc 1 66 3 view .LVU1
+  35              		.loc 1 66 6 is_stmt 0 view .LVU2
+  36 0000 164A     		ldr	r2, .L4
+  37 0002 D2F88830 		ldr	r3, [r2, #136]
+  38              		.loc 1 66 14 view .LVU3
+  39 0006 43F47003 		orr	r3, r3, #15728640
+  40 000a C2F88830 		str	r3, [r2, #136]
+  67:libraries/cmsis/cm4/device_support/system_at32f403a_407.c ****                  (3U << 11U * 2U)  );       /* set cp11 full access */
+  68:libraries/cmsis/cm4/device_support/system_at32f403a_407.c **** #endif
+  69:libraries/cmsis/cm4/device_support/system_at32f403a_407.c **** 
+  70:libraries/cmsis/cm4/device_support/system_at32f403a_407.c ****   /* reset the crm clock configuration to the default reset state(for debug purpose) */
+  71:libraries/cmsis/cm4/device_support/system_at32f403a_407.c ****   /* set hicken bit */
+  72:libraries/cmsis/cm4/device_support/system_at32f403a_407.c ****   CRM->ctrl_bit.hicken = TRUE;
+  41              		.loc 1 72 3 is_stmt 1 view .LVU4
+  42              		.loc 1 72 24 is_stmt 0 view .LVU5
+  43 000e 144A     		ldr	r2, .L4+4
+ARM GAS  C:\Users\bians\AppData\Local\Temp\cc7CiWP5.s 			page 3
+
+
+  44 0010 1368     		ldr	r3, [r2]
+  45 0012 43F00103 		orr	r3, r3, #1
+  46 0016 1360     		str	r3, [r2]
+  73:libraries/cmsis/cm4/device_support/system_at32f403a_407.c **** 
+  74:libraries/cmsis/cm4/device_support/system_at32f403a_407.c ****   /* wait hick stable */
+  75:libraries/cmsis/cm4/device_support/system_at32f403a_407.c ****   while(CRM->ctrl_bit.hickstbl != SET);
+  47              		.loc 1 75 3 is_stmt 1 view .LVU6
+  48              	.L2:
+  49              		.loc 1 75 32 discriminator 1 view .LVU7
+  50              		.loc 1 75 22 is_stmt 0 discriminator 1 view .LVU8
+  51 0018 114B     		ldr	r3, .L4+4
+  52 001a 1B68     		ldr	r3, [r3]
+  53              		.loc 1 75 32 discriminator 1 view .LVU9
+  54 001c 13F0020F 		tst	r3, #2
+  55 0020 FAD0     		beq	.L2
+  76:libraries/cmsis/cm4/device_support/system_at32f403a_407.c **** 
+  77:libraries/cmsis/cm4/device_support/system_at32f403a_407.c ****   /* hick used as system clock */
+  78:libraries/cmsis/cm4/device_support/system_at32f403a_407.c ****   CRM->cfg_bit.sclksel = CRM_SCLK_HICK;
+  56              		.loc 1 78 3 is_stmt 1 view .LVU10
+  57              		.loc 1 78 24 is_stmt 0 view .LVU11
+  58 0022 0F4A     		ldr	r2, .L4+4
+  59 0024 5368     		ldr	r3, [r2, #4]
+  60 0026 23F00303 		bic	r3, r3, #3
+  61 002a 5360     		str	r3, [r2, #4]
+  79:libraries/cmsis/cm4/device_support/system_at32f403a_407.c **** 
+  80:libraries/cmsis/cm4/device_support/system_at32f403a_407.c ****   /* wait sclk switch status */
+  81:libraries/cmsis/cm4/device_support/system_at32f403a_407.c ****   while(CRM->cfg_bit.sclksts != CRM_SCLK_HICK);
+  62              		.loc 1 81 3 is_stmt 1 view .LVU12
+  63              	.L3:
+  64              		.loc 1 81 30 discriminator 1 view .LVU13
+  65              		.loc 1 81 21 is_stmt 0 discriminator 1 view .LVU14
+  66 002c 0C4B     		ldr	r3, .L4+4
+  67 002e 5B68     		ldr	r3, [r3, #4]
+  68              		.loc 1 81 30 discriminator 1 view .LVU15
+  69 0030 13F00C0F 		tst	r3, #12
+  70 0034 FAD1     		bne	.L3
+  82:libraries/cmsis/cm4/device_support/system_at32f403a_407.c **** 
+  83:libraries/cmsis/cm4/device_support/system_at32f403a_407.c ****   /* reset hexten, hextbyps, cfden and pllen bits */
+  84:libraries/cmsis/cm4/device_support/system_at32f403a_407.c ****   CRM->ctrl &= ~(0x010D0000U);
+  71              		.loc 1 84 3 is_stmt 1 view .LVU16
+  72              		.loc 1 84 6 is_stmt 0 view .LVU17
+  73 0036 0A4B     		ldr	r3, .L4+4
+  74 0038 1A68     		ldr	r2, [r3]
+  75              		.loc 1 84 13 view .LVU18
+  76 003a 22F08672 		bic	r2, r2, #17563648
+  77 003e 22F48032 		bic	r2, r2, #65536
+  78 0042 1A60     		str	r2, [r3]
+  85:libraries/cmsis/cm4/device_support/system_at32f403a_407.c **** 
+  86:libraries/cmsis/cm4/device_support/system_at32f403a_407.c ****   /* reset cfg register, include sclk switch, ahbdiv, apb1div, apb2div, adcdiv,
+  87:libraries/cmsis/cm4/device_support/system_at32f403a_407.c ****      clkout pllrcs, pllhextdiv, pllmult, usbdiv and pllrange bits */
+  88:libraries/cmsis/cm4/device_support/system_at32f403a_407.c ****   CRM->cfg = 0;
+  79              		.loc 1 88 3 is_stmt 1 view .LVU19
+  80              		.loc 1 88 12 is_stmt 0 view .LVU20
+  81 0044 0022     		movs	r2, #0
+  82 0046 5A60     		str	r2, [r3, #4]
+  89:libraries/cmsis/cm4/device_support/system_at32f403a_407.c **** 
+  90:libraries/cmsis/cm4/device_support/system_at32f403a_407.c ****   /* reset clkout[3], usbbufs, hickdiv, clkoutdiv */
+ARM GAS  C:\Users\bians\AppData\Local\Temp\cc7CiWP5.s 			page 4
+
+
+  91:libraries/cmsis/cm4/device_support/system_at32f403a_407.c ****   CRM->misc1 = 0;
+  83              		.loc 1 91 3 is_stmt 1 view .LVU21
+  84              		.loc 1 91 14 is_stmt 0 view .LVU22
+  85 0048 1A63     		str	r2, [r3, #48]
+  92:libraries/cmsis/cm4/device_support/system_at32f403a_407.c **** 
+  93:libraries/cmsis/cm4/device_support/system_at32f403a_407.c ****   /* disable all interrupts enable and clear pending bits  */
+  94:libraries/cmsis/cm4/device_support/system_at32f403a_407.c ****   CRM->clkint = 0x009F0000;
+  86              		.loc 1 94 3 is_stmt 1 view .LVU23
+  87              		.loc 1 94 15 is_stmt 0 view .LVU24
+  88 004a 4FF41F02 		mov	r2, #10420224
+  89 004e 9A60     		str	r2, [r3, #8]
+  95:libraries/cmsis/cm4/device_support/system_at32f403a_407.c **** 
+  96:libraries/cmsis/cm4/device_support/system_at32f403a_407.c **** #ifdef VECT_TAB_SRAM
+  97:libraries/cmsis/cm4/device_support/system_at32f403a_407.c ****   SCB->VTOR = SRAM_BASE  | VECT_TAB_OFFSET;  /* vector table relocation in internal sram. */
+  98:libraries/cmsis/cm4/device_support/system_at32f403a_407.c **** #else
+  99:libraries/cmsis/cm4/device_support/system_at32f403a_407.c ****   SCB->VTOR = FLASH_BASE | VECT_TAB_OFFSET;  /* vector table relocation in internal flash. */
+  90              		.loc 1 99 3 is_stmt 1 view .LVU25
+  91              		.loc 1 99 13 is_stmt 0 view .LVU26
+  92 0050 024B     		ldr	r3, .L4
+  93 0052 4FF00062 		mov	r2, #134217728
+  94 0056 9A60     		str	r2, [r3, #8]
+ 100:libraries/cmsis/cm4/device_support/system_at32f403a_407.c **** #endif
+ 101:libraries/cmsis/cm4/device_support/system_at32f403a_407.c **** }
+  95              		.loc 1 101 1 view .LVU27
+  96 0058 7047     		bx	lr
+  97              	.L5:
+  98 005a 00BF     		.align	2
+  99              	.L4:
+ 100 005c 00ED00E0 		.word	-536810240
+ 101 0060 00100240 		.word	1073876992
+ 102              		.cfi_endproc
+ 103              	.LFE134:
+ 105              		.section	.text.system_core_clock_update,"ax",%progbits
+ 106              		.align	1
+ 107              		.global	system_core_clock_update
+ 108              		.syntax unified
+ 109              		.thumb
+ 110              		.thumb_func
+ 112              	system_core_clock_update:
+ 113              	.LFB135:
+ 102:libraries/cmsis/cm4/device_support/system_at32f403a_407.c **** 
+ 103:libraries/cmsis/cm4/device_support/system_at32f403a_407.c **** /**
+ 104:libraries/cmsis/cm4/device_support/system_at32f403a_407.c ****   * @brief  update system_core_clock variable according to clock register values.
+ 105:libraries/cmsis/cm4/device_support/system_at32f403a_407.c ****   *         the system_core_clock variable contains the core clock (hclk), it can
+ 106:libraries/cmsis/cm4/device_support/system_at32f403a_407.c ****   *         be used by the user application to setup the systick timer or configure
+ 107:libraries/cmsis/cm4/device_support/system_at32f403a_407.c ****   *         other parameters.
+ 108:libraries/cmsis/cm4/device_support/system_at32f403a_407.c ****   * @param  none
+ 109:libraries/cmsis/cm4/device_support/system_at32f403a_407.c ****   * @retval none
+ 110:libraries/cmsis/cm4/device_support/system_at32f403a_407.c ****   */
+ 111:libraries/cmsis/cm4/device_support/system_at32f403a_407.c **** void system_core_clock_update(void)
+ 112:libraries/cmsis/cm4/device_support/system_at32f403a_407.c **** {
+ 114              		.loc 1 112 1 is_stmt 1 view -0
+ 115              		.cfi_startproc
+ 116              		@ args = 0, pretend = 0, frame = 0
+ 117              		@ frame_needed = 0, uses_anonymous_args = 0
+ 118 0000 08B5     		push	{r3, lr}
+ 119              	.LCFI0:
+ARM GAS  C:\Users\bians\AppData\Local\Temp\cc7CiWP5.s 			page 5
+
+
+ 120              		.cfi_def_cfa_offset 8
+ 121              		.cfi_offset 3, -8
+ 122              		.cfi_offset 14, -4
+ 113:libraries/cmsis/cm4/device_support/system_at32f403a_407.c ****   uint32_t hext_prediv = 0, pll_mult = 0, pll_mult_h = 0, pll_clock_source = 0, temp = 0, div_value
+ 123              		.loc 1 113 3 view .LVU29
+ 124              	.LVL0:
+ 114:libraries/cmsis/cm4/device_support/system_at32f403a_407.c ****   crm_sclk_type sclk_source;
+ 125              		.loc 1 114 3 view .LVU30
+ 115:libraries/cmsis/cm4/device_support/system_at32f403a_407.c **** 
+ 116:libraries/cmsis/cm4/device_support/system_at32f403a_407.c ****   static const uint8_t sys_ahb_div_table[16] = {0, 0, 0, 0, 0, 0, 0, 0, 1, 2, 3, 4, 6, 7, 8, 9};
+ 126              		.loc 1 116 3 view .LVU31
+ 117:libraries/cmsis/cm4/device_support/system_at32f403a_407.c **** 
+ 118:libraries/cmsis/cm4/device_support/system_at32f403a_407.c ****   /* get sclk source */
+ 119:libraries/cmsis/cm4/device_support/system_at32f403a_407.c ****   sclk_source = crm_sysclk_switch_status_get();
+ 127              		.loc 1 119 3 view .LVU32
+ 128              		.loc 1 119 17 is_stmt 0 view .LVU33
+ 129 0002 FFF7FEFF 		bl	crm_sysclk_switch_status_get
+ 130              	.LVL1:
+ 120:libraries/cmsis/cm4/device_support/system_at32f403a_407.c **** 
+ 121:libraries/cmsis/cm4/device_support/system_at32f403a_407.c ****   switch(sclk_source)
+ 131              		.loc 1 121 3 is_stmt 1 view .LVU34
+ 132 0006 0128     		cmp	r0, #1
+ 133 0008 15D0     		beq	.L7
+ 134 000a 0228     		cmp	r0, #2
+ 135 000c 21D0     		beq	.L8
+ 136 000e 0028     		cmp	r0, #0
+ 137 0010 52D1     		bne	.L9
+ 122:libraries/cmsis/cm4/device_support/system_at32f403a_407.c ****   {
+ 123:libraries/cmsis/cm4/device_support/system_at32f403a_407.c ****     case CRM_SCLK_HICK:
+ 124:libraries/cmsis/cm4/device_support/system_at32f403a_407.c ****       if(((CRM->misc3_bit.hick_to_sclk) != RESET) && ((CRM->misc1_bit.hickdiv) != RESET))
+ 138              		.loc 1 124 7 view .LVU35
+ 139              		.loc 1 124 26 is_stmt 0 view .LVU36
+ 140 0012 2B4B     		ldr	r3, .L18
+ 141 0014 5B6D     		ldr	r3, [r3, #84]
+ 142              		.loc 1 124 9 view .LVU37
+ 143 0016 13F4007F 		tst	r3, #512
+ 144 001a 08D0     		beq	.L10
+ 145              		.loc 1 124 70 discriminator 1 view .LVU38
+ 146 001c 284B     		ldr	r3, .L18
+ 147 001e 1B6B     		ldr	r3, [r3, #48]
+ 148              		.loc 1 124 51 discriminator 1 view .LVU39
+ 149 0020 13F0007F 		tst	r3, #33554432
+ 150 0024 03D0     		beq	.L10
+ 125:libraries/cmsis/cm4/device_support/system_at32f403a_407.c ****         system_core_clock = HICK_VALUE * 6;
+ 151              		.loc 1 125 9 is_stmt 1 view .LVU40
+ 152              		.loc 1 125 27 is_stmt 0 view .LVU41
+ 153 0026 274B     		ldr	r3, .L18+4
+ 154 0028 274A     		ldr	r2, .L18+8
+ 155 002a 1A60     		str	r2, [r3]
+ 156 002c 06E0     		b	.L11
+ 157              	.L10:
+ 126:libraries/cmsis/cm4/device_support/system_at32f403a_407.c ****       else
+ 127:libraries/cmsis/cm4/device_support/system_at32f403a_407.c ****         system_core_clock = HICK_VALUE;
+ 158              		.loc 1 127 9 is_stmt 1 view .LVU42
+ 159              		.loc 1 127 27 is_stmt 0 view .LVU43
+ 160 002e 254B     		ldr	r3, .L18+4
+ 161 0030 264A     		ldr	r2, .L18+12
+ARM GAS  C:\Users\bians\AppData\Local\Temp\cc7CiWP5.s 			page 6
+
+
+ 162 0032 1A60     		str	r2, [r3]
+ 163 0034 02E0     		b	.L11
+ 164              	.L7:
+ 128:libraries/cmsis/cm4/device_support/system_at32f403a_407.c ****       break;
+ 129:libraries/cmsis/cm4/device_support/system_at32f403a_407.c ****     case CRM_SCLK_HEXT:
+ 130:libraries/cmsis/cm4/device_support/system_at32f403a_407.c ****       system_core_clock = HEXT_VALUE;
+ 165              		.loc 1 130 7 is_stmt 1 view .LVU44
+ 166              		.loc 1 130 25 is_stmt 0 view .LVU45
+ 167 0036 234B     		ldr	r3, .L18+4
+ 168 0038 244A     		ldr	r2, .L18+12
+ 169 003a 1A60     		str	r2, [r3]
+ 131:libraries/cmsis/cm4/device_support/system_at32f403a_407.c ****       break;
+ 170              		.loc 1 131 7 is_stmt 1 view .LVU46
+ 171              	.LVL2:
+ 172              	.L11:
+ 132:libraries/cmsis/cm4/device_support/system_at32f403a_407.c ****     case CRM_SCLK_PLL:
+ 133:libraries/cmsis/cm4/device_support/system_at32f403a_407.c ****       pll_clock_source = CRM->cfg_bit.pllrcs;
+ 134:libraries/cmsis/cm4/device_support/system_at32f403a_407.c ****       {
+ 135:libraries/cmsis/cm4/device_support/system_at32f403a_407.c ****         /* get multiplication factor */
+ 136:libraries/cmsis/cm4/device_support/system_at32f403a_407.c ****         pll_mult = CRM->cfg_bit.pllmult_l;
+ 137:libraries/cmsis/cm4/device_support/system_at32f403a_407.c ****         pll_mult_h = CRM->cfg_bit.pllmult_h;
+ 138:libraries/cmsis/cm4/device_support/system_at32f403a_407.c ****         /* process high bits */
+ 139:libraries/cmsis/cm4/device_support/system_at32f403a_407.c ****         if((pll_mult_h != 0U) || (pll_mult == 15U)){
+ 140:libraries/cmsis/cm4/device_support/system_at32f403a_407.c ****           pll_mult += ((16U * pll_mult_h) + 1U);
+ 141:libraries/cmsis/cm4/device_support/system_at32f403a_407.c ****         }
+ 142:libraries/cmsis/cm4/device_support/system_at32f403a_407.c ****         else
+ 143:libraries/cmsis/cm4/device_support/system_at32f403a_407.c ****         {
+ 144:libraries/cmsis/cm4/device_support/system_at32f403a_407.c ****           pll_mult += 2U;
+ 145:libraries/cmsis/cm4/device_support/system_at32f403a_407.c ****         }
+ 146:libraries/cmsis/cm4/device_support/system_at32f403a_407.c **** 
+ 147:libraries/cmsis/cm4/device_support/system_at32f403a_407.c ****         if(pll_clock_source == 0x00)
+ 148:libraries/cmsis/cm4/device_support/system_at32f403a_407.c ****         {
+ 149:libraries/cmsis/cm4/device_support/system_at32f403a_407.c ****           /* hick divided by 2 selected as pll clock entry */
+ 150:libraries/cmsis/cm4/device_support/system_at32f403a_407.c ****           system_core_clock = (HICK_VALUE >> 1) * pll_mult;
+ 151:libraries/cmsis/cm4/device_support/system_at32f403a_407.c ****         }
+ 152:libraries/cmsis/cm4/device_support/system_at32f403a_407.c ****         else
+ 153:libraries/cmsis/cm4/device_support/system_at32f403a_407.c ****         {
+ 154:libraries/cmsis/cm4/device_support/system_at32f403a_407.c ****           /* hext selected as pll clock entry */
+ 155:libraries/cmsis/cm4/device_support/system_at32f403a_407.c ****           if(CRM->cfg_bit.pllhextdiv != RESET)
+ 156:libraries/cmsis/cm4/device_support/system_at32f403a_407.c ****           {
+ 157:libraries/cmsis/cm4/device_support/system_at32f403a_407.c ****             hext_prediv = CRM->misc3_bit.hextdiv;
+ 158:libraries/cmsis/cm4/device_support/system_at32f403a_407.c **** 
+ 159:libraries/cmsis/cm4/device_support/system_at32f403a_407.c ****             /* hext clock divided by 2 */
+ 160:libraries/cmsis/cm4/device_support/system_at32f403a_407.c ****             system_core_clock = (HEXT_VALUE / (hext_prediv + 2)) * pll_mult;
+ 161:libraries/cmsis/cm4/device_support/system_at32f403a_407.c ****           }
+ 162:libraries/cmsis/cm4/device_support/system_at32f403a_407.c ****           else
+ 163:libraries/cmsis/cm4/device_support/system_at32f403a_407.c ****           {
+ 164:libraries/cmsis/cm4/device_support/system_at32f403a_407.c ****             system_core_clock = HEXT_VALUE * pll_mult;
+ 165:libraries/cmsis/cm4/device_support/system_at32f403a_407.c ****           }
+ 166:libraries/cmsis/cm4/device_support/system_at32f403a_407.c ****         }
+ 167:libraries/cmsis/cm4/device_support/system_at32f403a_407.c ****       }
+ 168:libraries/cmsis/cm4/device_support/system_at32f403a_407.c ****       break;
+ 169:libraries/cmsis/cm4/device_support/system_at32f403a_407.c ****     default:
+ 170:libraries/cmsis/cm4/device_support/system_at32f403a_407.c ****       system_core_clock = HICK_VALUE;
+ 171:libraries/cmsis/cm4/device_support/system_at32f403a_407.c ****       break;
+ 172:libraries/cmsis/cm4/device_support/system_at32f403a_407.c ****   }
+ 173:libraries/cmsis/cm4/device_support/system_at32f403a_407.c **** 
+ARM GAS  C:\Users\bians\AppData\Local\Temp\cc7CiWP5.s 			page 7
+
+
+ 174:libraries/cmsis/cm4/device_support/system_at32f403a_407.c ****   /* compute sclk, ahbclk frequency */
+ 175:libraries/cmsis/cm4/device_support/system_at32f403a_407.c ****   /* get ahb division */
+ 176:libraries/cmsis/cm4/device_support/system_at32f403a_407.c ****   temp = CRM->cfg_bit.ahbdiv;
+ 173              		.loc 1 176 3 view .LVU47
+ 174              		.loc 1 176 22 is_stmt 0 view .LVU48
+ 175 003c 204B     		ldr	r3, .L18
+ 176 003e 5B68     		ldr	r3, [r3, #4]
+ 177 0040 C3F30313 		ubfx	r3, r3, #4, #4
+ 178              	.LVL3:
+ 177:libraries/cmsis/cm4/device_support/system_at32f403a_407.c ****   div_value = sys_ahb_div_table[temp];
+ 179              		.loc 1 177 3 is_stmt 1 view .LVU49
+ 180              		.loc 1 177 32 is_stmt 0 view .LVU50
+ 181 0044 224A     		ldr	r2, .L18+16
+ 182 0046 D15C     		ldrb	r1, [r2, r3]	@ zero_extendqisi2
+ 183              	.LVL4:
+ 178:libraries/cmsis/cm4/device_support/system_at32f403a_407.c ****   /* ahbclk frequency */
+ 179:libraries/cmsis/cm4/device_support/system_at32f403a_407.c ****   system_core_clock = system_core_clock >> div_value;
+ 184              		.loc 1 179 3 is_stmt 1 view .LVU51
+ 185              		.loc 1 179 41 is_stmt 0 view .LVU52
+ 186 0048 1E4A     		ldr	r2, .L18+4
+ 187 004a 1368     		ldr	r3, [r2]
+ 188              	.LVL5:
+ 189              		.loc 1 179 41 view .LVU53
+ 190 004c CB40     		lsrs	r3, r3, r1
+ 191              		.loc 1 179 21 view .LVU54
+ 192 004e 1360     		str	r3, [r2]
+ 180:libraries/cmsis/cm4/device_support/system_at32f403a_407.c **** }
+ 193              		.loc 1 180 1 view .LVU55
+ 194 0050 08BD     		pop	{r3, pc}
+ 195              	.LVL6:
+ 196              	.L8:
+ 133:libraries/cmsis/cm4/device_support/system_at32f403a_407.c ****       {
+ 197              		.loc 1 133 7 is_stmt 1 view .LVU56
+ 133:libraries/cmsis/cm4/device_support/system_at32f403a_407.c ****       {
+ 198              		.loc 1 133 38 is_stmt 0 view .LVU57
+ 199 0052 1B49     		ldr	r1, .L18
+ 200 0054 4A68     		ldr	r2, [r1, #4]
+ 201 0056 C2F30042 		ubfx	r2, r2, #16, #1
+ 202              	.LVL7:
+ 136:libraries/cmsis/cm4/device_support/system_at32f403a_407.c ****         pll_mult_h = CRM->cfg_bit.pllmult_h;
+ 203              		.loc 1 136 9 is_stmt 1 view .LVU58
+ 136:libraries/cmsis/cm4/device_support/system_at32f403a_407.c ****         pll_mult_h = CRM->cfg_bit.pllmult_h;
+ 204              		.loc 1 136 32 is_stmt 0 view .LVU59
+ 205 005a 4B68     		ldr	r3, [r1, #4]
+ 206 005c C3F38343 		ubfx	r3, r3, #18, #4
+ 207              	.LVL8:
+ 137:libraries/cmsis/cm4/device_support/system_at32f403a_407.c ****         /* process high bits */
+ 208              		.loc 1 137 9 is_stmt 1 view .LVU60
+ 137:libraries/cmsis/cm4/device_support/system_at32f403a_407.c ****         /* process high bits */
+ 209              		.loc 1 137 34 is_stmt 0 view .LVU61
+ 210 0060 4968     		ldr	r1, [r1, #4]
+ 211 0062 C1F34170 		ubfx	r0, r1, #29, #2
+ 212              	.LVL9:
+ 139:libraries/cmsis/cm4/device_support/system_at32f403a_407.c ****           pll_mult += ((16U * pll_mult_h) + 1U);
+ 213              		.loc 1 139 9 is_stmt 1 view .LVU62
+ 139:libraries/cmsis/cm4/device_support/system_at32f403a_407.c ****           pll_mult += ((16U * pll_mult_h) + 1U);
+ 214              		.loc 1 139 11 is_stmt 0 view .LVU63
+ARM GAS  C:\Users\bians\AppData\Local\Temp\cc7CiWP5.s 			page 8
+
+
+ 215 0066 11F0C04F 		tst	r1, #1610612736
+ 216 006a 03D1     		bne	.L12
+ 139:libraries/cmsis/cm4/device_support/system_at32f403a_407.c ****           pll_mult += ((16U * pll_mult_h) + 1U);
+ 217              		.loc 1 139 31 discriminator 1 view .LVU64
+ 218 006c 0F2B     		cmp	r3, #15
+ 219 006e 01D0     		beq	.L12
+ 144:libraries/cmsis/cm4/device_support/system_at32f403a_407.c ****         }
+ 220              		.loc 1 144 11 is_stmt 1 view .LVU65
+ 144:libraries/cmsis/cm4/device_support/system_at32f403a_407.c ****         }
+ 221              		.loc 1 144 20 is_stmt 0 view .LVU66
+ 222 0070 0233     		adds	r3, r3, #2
+ 223              	.LVL10:
+ 144:libraries/cmsis/cm4/device_support/system_at32f403a_407.c ****         }
+ 224              		.loc 1 144 20 view .LVU67
+ 225 0072 02E0     		b	.L14
+ 226              	.LVL11:
+ 227              	.L12:
+ 140:libraries/cmsis/cm4/device_support/system_at32f403a_407.c ****         }
+ 228              		.loc 1 140 11 is_stmt 1 view .LVU68
+ 140:libraries/cmsis/cm4/device_support/system_at32f403a_407.c ****         }
+ 229              		.loc 1 140 20 is_stmt 0 view .LVU69
+ 230 0074 03EB0013 		add	r3, r3, r0, lsl #4
+ 231              	.LVL12:
+ 140:libraries/cmsis/cm4/device_support/system_at32f403a_407.c ****         }
+ 232              		.loc 1 140 20 view .LVU70
+ 233 0078 0133     		adds	r3, r3, #1
+ 234              	.LVL13:
+ 235              	.L14:
+ 147:libraries/cmsis/cm4/device_support/system_at32f403a_407.c ****         {
+ 236              		.loc 1 147 9 is_stmt 1 view .LVU71
+ 147:libraries/cmsis/cm4/device_support/system_at32f403a_407.c ****         {
+ 237              		.loc 1 147 11 is_stmt 0 view .LVU72
+ 238 007a 2AB9     		cbnz	r2, .L15
+ 150:libraries/cmsis/cm4/device_support/system_at32f403a_407.c ****         }
+ 239              		.loc 1 150 11 is_stmt 1 view .LVU73
+ 150:libraries/cmsis/cm4/device_support/system_at32f403a_407.c ****         }
+ 240              		.loc 1 150 49 is_stmt 0 view .LVU74
+ 241 007c 154A     		ldr	r2, .L18+20
+ 242 007e 02FB03F3 		mul	r3, r2, r3
+ 243              	.LVL14:
+ 150:libraries/cmsis/cm4/device_support/system_at32f403a_407.c ****         }
+ 244              		.loc 1 150 29 view .LVU75
+ 245 0082 104A     		ldr	r2, .L18+4
+ 246 0084 1360     		str	r3, [r2]
+ 247 0086 D9E7     		b	.L11
+ 248              	.LVL15:
+ 249              	.L15:
+ 155:libraries/cmsis/cm4/device_support/system_at32f403a_407.c ****           {
+ 250              		.loc 1 155 11 is_stmt 1 view .LVU76
+ 155:libraries/cmsis/cm4/device_support/system_at32f403a_407.c ****           {
+ 251              		.loc 1 155 26 is_stmt 0 view .LVU77
+ 252 0088 0D4A     		ldr	r2, .L18
+ 253 008a 5268     		ldr	r2, [r2, #4]
+ 155:libraries/cmsis/cm4/device_support/system_at32f403a_407.c ****           {
+ 254              		.loc 1 155 13 view .LVU78
+ 255 008c 12F4003F 		tst	r2, #131072
+ 256 0090 0CD0     		beq	.L16
+ARM GAS  C:\Users\bians\AppData\Local\Temp\cc7CiWP5.s 			page 9
+
+
+ 157:libraries/cmsis/cm4/device_support/system_at32f403a_407.c **** 
+ 257              		.loc 1 157 13 is_stmt 1 view .LVU79
+ 157:libraries/cmsis/cm4/device_support/system_at32f403a_407.c **** 
+ 258              		.loc 1 157 41 is_stmt 0 view .LVU80
+ 259 0092 0B4A     		ldr	r2, .L18
+ 260 0094 516D     		ldr	r1, [r2, #84]
+ 261 0096 C1F30131 		ubfx	r1, r1, #12, #2
+ 262              	.LVL16:
+ 160:libraries/cmsis/cm4/device_support/system_at32f403a_407.c ****           }
+ 263              		.loc 1 160 13 is_stmt 1 view .LVU81
+ 160:libraries/cmsis/cm4/device_support/system_at32f403a_407.c ****           }
+ 264              		.loc 1 160 60 is_stmt 0 view .LVU82
+ 265 009a 0231     		adds	r1, r1, #2
+ 266              	.LVL17:
+ 160:libraries/cmsis/cm4/device_support/system_at32f403a_407.c ****           }
+ 267              		.loc 1 160 45 view .LVU83
+ 268 009c 0B4A     		ldr	r2, .L18+12
+ 269 009e B2FBF1F2 		udiv	r2, r2, r1
+ 160:libraries/cmsis/cm4/device_support/system_at32f403a_407.c ****           }
+ 270              		.loc 1 160 66 view .LVU84
+ 271 00a2 02FB03F3 		mul	r3, r2, r3
+ 272              	.LVL18:
+ 160:libraries/cmsis/cm4/device_support/system_at32f403a_407.c ****           }
+ 273              		.loc 1 160 31 view .LVU85
+ 274 00a6 074A     		ldr	r2, .L18+4
+ 275 00a8 1360     		str	r3, [r2]
+ 276 00aa C7E7     		b	.L11
+ 277              	.LVL19:
+ 278              	.L16:
+ 164:libraries/cmsis/cm4/device_support/system_at32f403a_407.c ****           }
+ 279              		.loc 1 164 13 is_stmt 1 view .LVU86
+ 164:libraries/cmsis/cm4/device_support/system_at32f403a_407.c ****           }
+ 280              		.loc 1 164 44 is_stmt 0 view .LVU87
+ 281 00ac 074A     		ldr	r2, .L18+12
+ 282 00ae 02FB03F3 		mul	r3, r2, r3
+ 283              	.LVL20:
+ 164:libraries/cmsis/cm4/device_support/system_at32f403a_407.c ****           }
+ 284              		.loc 1 164 31 view .LVU88
+ 285 00b2 044A     		ldr	r2, .L18+4
+ 286 00b4 1360     		str	r3, [r2]
+ 287 00b6 C1E7     		b	.L11
+ 288              	.LVL21:
+ 289              	.L9:
+ 170:libraries/cmsis/cm4/device_support/system_at32f403a_407.c ****       break;
+ 290              		.loc 1 170 7 is_stmt 1 view .LVU89
+ 170:libraries/cmsis/cm4/device_support/system_at32f403a_407.c ****       break;
+ 291              		.loc 1 170 25 is_stmt 0 view .LVU90
+ 292 00b8 024B     		ldr	r3, .L18+4
+ 293 00ba 044A     		ldr	r2, .L18+12
+ 294 00bc 1A60     		str	r2, [r3]
+ 171:libraries/cmsis/cm4/device_support/system_at32f403a_407.c ****   }
+ 295              		.loc 1 171 7 is_stmt 1 view .LVU91
+ 296 00be BDE7     		b	.L11
+ 297              	.L19:
+ 298              		.align	2
+ 299              	.L18:
+ 300 00c0 00100240 		.word	1073876992
+ARM GAS  C:\Users\bians\AppData\Local\Temp\cc7CiWP5.s 			page 10
+
+
+ 301 00c4 00000000 		.word	system_core_clock
+ 302 00c8 006CDC02 		.word	48000000
+ 303 00cc 00127A00 		.word	8000000
+ 304 00d0 00000000 		.word	sys_ahb_div_table.0
+ 305 00d4 00093D00 		.word	4000000
+ 306              		.cfi_endproc
+ 307              	.LFE135:
+ 309              		.section	.rodata.sys_ahb_div_table.0,"a"
+ 310              		.align	2
+ 313              	sys_ahb_div_table.0:
+ 314 0000 00000000 		.ascii	"\000\000\000\000\000\000\000\000\001\002\003\004\006"
+ 314      00000000 
+ 314      01020304 
+ 314      06
+ 315 000d 070809   		.ascii	"\007\010\011"
+ 316              		.global	system_core_clock
+ 317              		.section	.data.system_core_clock,"aw"
+ 318              		.align	2
+ 321              	system_core_clock:
+ 322 0000 00127A00 		.word	8000000
+ 323              		.text
+ 324              	.Letext0:
+ 325              		.file 2 "D:/gnu_toolchain/arm-none-eabi/include/machine/_default_types.h"
+ 326              		.file 3 "D:/gnu_toolchain/arm-none-eabi/include/sys/_stdint.h"
+ 327              		.file 4 "libraries/cmsis/cm4/core_support/core_cm4.h"
+ 328              		.file 5 "libraries/cmsis/cm4/device_support/at32f403a_407.h"
+ 329              		.file 6 "libraries/drivers/inc/at32f403a_407_crm.h"
+ 330              		.file 7 "libraries/drivers/inc/at32f403a_407_tmr.h"
+ 331              		.file 8 "libraries/cmsis/cm4/device_support/system_at32f403a_407.h"
+ARM GAS  C:\Users\bians\AppData\Local\Temp\cc7CiWP5.s 			page 11
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 system_at32f403a_407.c
+C:\Users\bians\AppData\Local\Temp\cc7CiWP5.s:21     .text.SystemInit:00000000 $t
+C:\Users\bians\AppData\Local\Temp\cc7CiWP5.s:27     .text.SystemInit:00000000 SystemInit
+C:\Users\bians\AppData\Local\Temp\cc7CiWP5.s:100    .text.SystemInit:0000005c $d
+C:\Users\bians\AppData\Local\Temp\cc7CiWP5.s:106    .text.system_core_clock_update:00000000 $t
+C:\Users\bians\AppData\Local\Temp\cc7CiWP5.s:112    .text.system_core_clock_update:00000000 system_core_clock_update
+C:\Users\bians\AppData\Local\Temp\cc7CiWP5.s:300    .text.system_core_clock_update:000000c0 $d
+C:\Users\bians\AppData\Local\Temp\cc7CiWP5.s:321    .data.system_core_clock:00000000 system_core_clock
+C:\Users\bians\AppData\Local\Temp\cc7CiWP5.s:313    .rodata.sys_ahb_div_table.0:00000000 sys_ahb_div_table.0
+C:\Users\bians\AppData\Local\Temp\cc7CiWP5.s:310    .rodata.sys_ahb_div_table.0:00000000 $d
+C:\Users\bians\AppData\Local\Temp\cc7CiWP5.s:318    .data.system_core_clock:00000000 $d
+
+UNDEFINED SYMBOLS
+crm_sysclk_switch_status_get

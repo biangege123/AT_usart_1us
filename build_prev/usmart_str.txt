@@ -1,0 +1,671 @@
+﻿#include "usmart_str.h"
+#include "usmart.h"
+
+#include <string.h>
+
+/**
+ * @brief       瀛楃涓叉瘮杈?
+ * @param       str1: 瀛楃涓?
+ *              str2: 瀛楃涓?
+ * @retval      0, 鐩哥瓑; 1, 涓嶇浉绛?
+ */
+uint8_t usmart_strcmp(char *str1, char *str2)
+{
+    while (1)
+    {
+        if (*str1 != *str2)
+        {
+            return 1;               /* 涓嶇浉绛?*/
+        }
+
+        if (*str1 == '\0')
+        {
+            break;                  /* 缁撴潫 */
+        }
+
+        str1++;
+        str2++;
+    }
+
+    return 0;
+}
+
+/**
+ * @brief       瀛楃涓叉嫹璐?鍖呭惈缁撴潫绗?
+ * @param       str1: 鐩殑瀛楃涓?
+ *              str2: 婧愬瓧绗︿覆
+ * @retval      鏃?
+ */
+void usmart_strcopy(char *str1, char *str2)
+{
+    while (*str2 != '\0')
+    {
+        *str1 = *str2;
+        str1++;
+        str2++;
+    }
+
+    *str1 = '\0';
+}
+
+/**
+ * @brief       寰楀埌瀛楃涓查暱搴?涓嶅寘鎷粨鏉熺)
+ * @param       str: 瀛楃涓?
+ * @retval      瀛楃涓查暱搴?
+ */
+uint8_t usmart_strlen(const char *str)
+{
+    uint8_t len = 0;
+
+    while (*str != '\0')
+    {
+        len++;
+        str++;
+    }
+
+    return len;
+}
+
+/**
+ * @brief       杩斿洖a^b鐨勫€?
+ * @param       a: 搴曟暟
+ *              b: 鎸囨暟
+ * @retval      a^b
+ */
+uint32_t usmart_pow(uint8_t a, uint8_t b)
+{
+    uint32_t res = 1;
+
+    while (b)
+    {
+        res *= a;
+        b--;
+    }
+
+    return res;
+}
+
+/**
+ * @brief       瀛楃涓茶浆鏁板瓧
+ *   @note      鏀寔10杩涘埗銆?6杩涘埗(蹇呴』0X寮€澶?, 鏀寔姝ｈ礋鍙?
+ * @param       str: 婧愬瓧绗︿覆
+ *              res: 杞崲缁撴灉
+ * @retval      0, 鎴愬姛;
+ *              1, 鍚湁闈炴硶瀛楃;
+ *              2, 16杩涘埗鏁版嵁闀垮害涓嶈冻(0X鍚庢棤鏁版嵁);
+ *              3, 16杩涘埗鏁版嵁鏈互0X寮€澶?
+ *              4, 鏃犳湁鏁堟暟瀛?
+ */
+uint8_t usmart_str2num(char *str, uint32_t *res)
+{
+    uint32_t t;
+    uint8_t bnum = 0;           /* 鏁板瓧浣嶆暟 */
+    char *p;
+    uint8_t hexdec = 10;        /* 榛樿10杩涘埗 */
+    uint8_t sign = 0;           /* 璐熸暟鏍囧織 */
+
+    p = str;
+    *res = 0;
+
+    /* 澶勭悊绗﹀彿 */
+    if (*p == '-')
+    {
+        sign = 1;
+        p++;
+    }
+    else if (*p == '+')
+    {
+        p++;
+    }
+
+    /* 妫€鏌ュ瓧绗︿覆鏄惁鍏ㄩ儴涓哄悎娉曟暟瀛?*/
+    while (1)
+    {
+        if ((*p <= '9' && *p >= '0') || (*p <= 'F' && *p >= 'A') || (*p == 'X' && bnum == 1))
+        {
+            if (*p >= 'A')
+            {
+                hexdec = 16;    /* 瀛樺湪A~F鎴栬€匵, 鎸?6杩涘埗澶勭悊 */
+            }
+            bnum++;
+        }
+        else if (*p == '\0')
+        {
+            break;
+        }
+        else
+        {
+            return 1;           /* 闈炴硶瀛楃 */
+        }
+        p++;
+    }
+
+    p = str;
+    if (sign)
+    {
+        p++;
+    }
+
+    if (hexdec == 16)
+    {
+        if (bnum < 3)
+        {
+            return 2;           /* 0X鍚庨潰娌℃湁鏁版嵁 */
+        }
+        if (*p == '0' && *(p + 1) == 'X')
+        {
+            p += 2;
+            bnum -= 2;
+        }
+        else
+        {
+            return 3;           /* 16杩涘埗蹇呴』浠?X寮€澶?*/
+        }
+    }
+    else if (bnum == 0)
+    {
+        return 4;               /* 娌℃湁鏁板瓧 */
+    }
+
+    while (1)
+    {
+        if (bnum)
+        {
+            bnum--;
+        }
+
+        if (*p <= '9' && *p >= '0')
+        {
+            t = *p - '0';
+        }
+        else
+        {
+            t = *p - 'A' + 10;
+        }
+
+        *res += t * usmart_pow(hexdec, bnum);
+        p++;
+
+        if (*p == '\0')
+        {
+            break;
+        }
+    }
+
+    if (sign)
+    {
+        *res = (uint32_t)(0U - *res);    /* 璐熸暟鍙栬ˉ鐮?*/
+    }
+
+    return 0;
+}
+
+/**
+ * @brief       寰楀埌鎸囦护鍚?
+ * @param       str: 婧愬瓧绗︿覆
+ *              cmdname: 鎸囦护鍚嶇紦瀛?
+ *              nlen: 鎸囦护鍚嶉暱搴?
+ *              maxlen: 缂撳瓨鏈€澶ч暱搴?鍖呭惈缁撴潫绗?
+ * @retval      0, 鎴愬姛; 鍏朵粬, 澶辫触
+ */
+uint8_t usmart_get_cmdname(char *str, char *cmdname, uint8_t *nlen, uint8_t maxlen)
+{
+    if (maxlen == 0)
+    {
+        return 1;
+    }
+
+    *nlen = 0;
+
+    while (*str != ' ' && *str != '\0')
+    {
+        if (*nlen >= (uint8_t)(maxlen - 1U))
+        {
+            *cmdname = '\0';
+            return 1;           /* 鎸囦护澶暱 */
+        }
+
+        *cmdname = *str;
+        str++;
+        cmdname++;
+        (*nlen)++;
+    }
+
+    *cmdname = '\0';
+    return 0;
+}
+
+/**
+ * @brief       鑾峰彇涓嬩竴涓瓧绗?蹇界暐涓棿鐨勭┖鏍?
+ * @param       str: 瀛楃涓叉寚閽?
+ * @retval      涓嬩竴涓瓧绗?
+ */
+static uint8_t usmart_search_nextc(char *str)
+{
+    str++;
+
+    while (*str == ' ' && *str != '\0')
+    {
+        str++;
+    }
+
+    return (uint8_t)*str;
+}
+
+/**
+ * @brief       浠巗tr涓緱鍒板嚱鏁板悕
+ * @param       str: 婧愬瓧绗︿覆鎸囬拡
+ *              fname: 鑾峰彇鍒扮殑鍑芥暟鍚?
+ *              pnum: 鍑芥暟鍙傛暟涓暟
+ *              rval: 鏄惁闇€瑕佹樉绀鸿繑鍥炲€?0,涓嶉渶瑕?1,闇€瑕?
+ * @retval      0, 鎴愬姛; 鍏朵粬, 閿欒浠ｇ爜
+ */
+uint8_t usmart_get_fname(char *str, char *fname, uint8_t *pnum, uint8_t *rval)
+{
+    uint8_t res;
+    uint8_t fover = 0;          /* 鎷彿娣卞害 */
+    char *strtemp;
+    uint8_t offset = 0;
+    uint8_t parmnum = 0;
+    uint8_t temp = 1;
+    char fpname[6];             /* void + X + '\0' */
+    uint8_t fplcnt = 0;         /* 绗竴涓弬鏁扮殑闀垮害璁℃暟鍣?*/
+    uint8_t pcnt = 0;           /* 鍙傛暟璁℃暟鍣?*/
+    uint8_t nchar;
+    uint8_t fname_idx = 0;
+
+    *rval = 0;
+
+    /* 鍒ゆ柇鍑芥暟鏄惁鏈夎繑鍥炲€?*/
+    strtemp = str;
+    while (*strtemp != '\0')
+    {
+        if (*strtemp != ' ' && (pcnt & 0x7F) < 5)
+        {
+            if (pcnt == 0)
+            {
+                pcnt |= 0x80;   /* 缃綅鏈€楂樹綅,鏍囪寮€濮嬫帴鏀惰繑鍥炲€肩被鍨?*/
+            }
+
+            if (((pcnt & 0x7F) == 4) && (*strtemp != '*'))
+            {
+                break;          /* 鏈€澶氳褰?涓瓧绗? 鏈€鍚庝竴涓瓧绗﹀繀椤绘槸* */
+            }
+
+            fpname[pcnt & 0x7F] = *strtemp;
+            pcnt++;
+        }
+        else if (pcnt == 0x85)
+        {
+            break;
+        }
+        strtemp++;
+    }
+
+    if (pcnt)
+    {
+        fpname[pcnt & 0x7F] = '\0';
+
+        if (usmart_strcmp(fpname, "void") == 0)
+        {
+            *rval = 0;          /* 涓嶉渶瑕佽繑鍥炲€?*/
+        }
+        else
+        {
+            *rval = 1;          /* 闇€瑕佽繑鍥炲€?*/
+        }
+        pcnt = 0;
+    }
+
+    res = 0;
+    strtemp = str;
+
+    while (*strtemp != '(' && *strtemp != '\0')     /* 鎵惧埌鍑芥暟鍚嶇殑鐪熸璧峰浣嶇疆 */
+    {
+        strtemp++;
+        res++;
+
+        if (*strtemp == ' ' || *strtemp == '*')
+        {
+            nchar = usmart_search_nextc(strtemp);
+
+            if (nchar != '(' && nchar != '*')
+            {
+                offset = res;   /* 璺宠繃绌烘牸鍜?鍙?*/
+            }
+        }
+    }
+
+    strtemp = str;
+    if (offset)
+    {
+        strtemp += offset + 1;  /* 璺冲埌鍑芥暟鍚嶅紑濮嬬殑鍦版柟 */
+    }
+
+    res = 0;
+    nchar = 0;                  /* 鏄惁姝ｅ湪瀛楃涓查噷闈㈢殑鏍囧織 */
+
+    while (1)
+    {
+        if (*strtemp == '\0')
+        {
+            res = USMART_FUNCERR;   /* 鍑芥暟閿欒 */
+            break;
+        }
+        else if (*strtemp == '(' && nchar == 0)
+        {
+            fover++;                /* 鎷彿娣卞害澧炲姞涓€绾?*/
+        }
+        else if (*strtemp == ')' && nchar == 0)
+        {
+            if (fover)
+            {
+                fover--;
+            }
+            else
+            {
+                res = USMART_FUNCERR;   /* 閿欒缁撴潫, 娌℃敹鍒?(' */
+            }
+
+            if (fover == 0)
+            {
+                break;              /* 鍒版湯灏句簡, 閫€鍑?*/
+            }
+        }
+        else if (*strtemp == '"')
+        {
+            nchar = !nchar;
+        }
+
+        if (fover == 0)         /* 鍑芥暟鍚嶈繕娌℃帴鏀跺畬 */
+        {
+            if (*strtemp != ' ')    /* 绌烘牸涓嶅睘浜庡嚱鏁板悕 */
+            {
+                if (fname_idx >= (MAX_FNAME_LEN - 1U))
+                {
+                    res = USMART_FUNCERR;   /* 鍑芥暟鍚嶅お闀?*/
+                    break;
+                }
+
+                fname[fname_idx] = *strtemp;
+                fname_idx++;
+            }
+        }
+        else                    /* 宸茬粡鎺ユ敹瀹屽嚱鏁板悕 */
+        {
+            if (*strtemp == ',')
+            {
+                temp = 1;       /* 浣胯兘澧炲姞涓€涓弬鏁?*/
+                pcnt++;
+            }
+            else if (*strtemp != ' ' && *strtemp != '(')
+            {
+                if (pcnt == 0 && fplcnt < 5)     /* 璁板綍绗竴涓弬鏁扮殑璧峰瀛楃 */
+                {
+                    fpname[fplcnt] = *strtemp;
+                    fplcnt++;
+                }
+                temp++;         /* 寰楀埌鏈夋晥鍙傛暟(闈炵┖鏍? */
+            }
+
+            if (fover == 1 && temp == 2)
+            {
+                temp++;         /* 闃叉閲嶅澧炲姞 */
+                parmnum++;      /* 鍙傛暟澧炲姞涓€涓?*/
+            }
+        }
+
+        strtemp++;
+    }
+
+    if (parmnum == 1)           /* 鍙湁1涓弬鏁?*/
+    {
+        fpname[fplcnt] = '\0';
+
+        if (usmart_strcmp(fpname, "void") == 0)
+        {
+            parmnum = 0;        /* 鍙傛暟涓簐oid, 琛ㄧず娌℃湁鍙傛暟 */
+        }
+    }
+
+    *pnum = parmnum;            /* 璁板綍鍙傛暟涓暟 */
+    fname[fname_idx] = '\0';    /* 鍔犲叆缁撴潫绗?*/
+
+    return res;
+}
+
+
+/**
+ * @brief       寰楀埌涓€涓弬鏁扮殑瀛楃涓?
+ *   @note      鏀寔鏁板瓧銆佸瓧绗︿覆, 鏁板瓧鏀寔姝ｈ礋鍙?
+ * @param       str: 婧愬瓧绗︿覆
+ *              fparm: 鍙傛暟缂撳瓨(鑷冲皯PARM_LEN+1瀛楄妭)
+ *              ptype: 鍙傛暟绫诲瀷(0,鏁板瓧;1,瀛楃涓?0XFF,閿欒)
+ * @retval      婧愬瓧绗︿覆鍋忕Щ閲?
+ */
+uint8_t usmart_get_aparm(char *str, char *fparm, uint8_t *ptype)
+{
+    uint8_t i = 0;
+    uint8_t enout = 0;
+    uint8_t type = 0;           /* 榛樿鏄暟瀛?*/
+    uint8_t string = 0;         /* 鏍囪鏄惁姝ｅ湪璇诲瓧绗︿覆 */
+    uint8_t out = 0;            /* 宸插啓鍏parm鐨勫瓧鑺傛暟 */
+
+    while (1)
+    {
+        if (*str == ',' && string == 0)
+        {
+            enout = 1;          /* 鏆傜紦绔嬪嵆閫€鍑? 鐩殑鏄鎵句笅涓€涓弬鏁扮殑璧峰鍦板潃 */
+        }
+
+        if ((*str == ')' || *str == '\0') && string == 0)
+        {
+            break;              /* 绔嬪嵆閫€鍑?*/
+        }
+
+        if (type == 0)          /* 榛樿鏄暟瀛?*/
+        {
+            if ((*str >= '0' && *str <= '9') || (*str >= 'a' && *str <= 'f') ||
+                (*str >= 'A' && *str <= 'F') || *str == 'X' || *str == 'x' ||
+                *str == '-' || *str == '+')
+            {
+                if (enout)
+                {
+                    break;      /* 鎵惧埌浜嗕笅涓€涓弬鏁? 鐩存帴閫€鍑?*/
+                }
+
+                if (out < (PARM_LEN - 1U))
+                {
+                    if (*str >= 'a')
+                    {
+                        *fparm = *str - 0x20;    /* 灏忓啓杞崲涓哄ぇ鍐?*/
+                    }
+                    else
+                    {
+                        *fparm = *str;
+                    }
+
+                    fparm++;
+                    out++;
+                }
+            }
+            else if (*str == '"')    /* 鎵惧埌瀛楃涓茬殑寮€濮嬫爣蹇?*/
+            {
+                if (enout)
+                {
+                    break;
+                }
+
+                type = 1;
+                string = 1;     /* 鏍囪姝ｅ湪璇诲瓧绗︿覆 */
+            }
+            else if (*str != ' ' && *str != ',')
+            {
+                type = 0xFF;    /* 闈炴硶瀛楃, 鍙傛暟閿欒 */
+                break;
+            }
+        }
+        else                    /* 瀛楃涓茬被 */
+        {
+            if (*str == '"')
+            {
+                string = 0;
+            }
+
+            if (enout)
+            {
+                break;
+            }
+
+            if (string)         /* 瀛楃涓叉鍦ㄨ */
+            {
+                if (*str == '\\')   /* 閬囧埌杞箟绗?*/
+                {
+                    if (*(str + 1) == '\0')
+                    {
+                        type = 0xFF;    /* 杞箟绗﹀悗娌℃湁瀛楃 */
+                        break;
+                    }
+
+                    str++;          /* 鍋忕Щ鍒拌浆涔夌鍚庨潰鐨勫瓧绗?*/
+                    i++;
+                }
+
+                if (out < (PARM_LEN - 1U))
+                {
+                    *fparm = *str;
+                    fparm++;
+                    out++;
+                }
+            }
+        }
+
+        i++;                    /* 鍋忕Щ閲忓鍔?*/
+        str++;
+    }
+
+    *fparm = '\0';              /* 鍔犲叆缁撴潫绗?*/
+    *ptype = type;              /* 杩斿洖鍙傛暟绫诲瀷 */
+    return i;                   /* 杩斿洖鍙傛暟闀垮害 */
+}
+
+
+/**
+ * @brief       寰楀埌鎸囧畾鍙傛暟鐨勮捣濮嬪湴鍧€
+ * @param       num: 绗琻um涓弬鏁? 鑼冨洿0~9
+ * @retval      璇ュ弬鏁扮殑璧峰鍦板潃
+ */
+uint8_t usmart_get_parmpos(uint8_t num)
+{
+    uint8_t temp = 0;
+    uint8_t i;
+
+    for (i = 0; i < num; i++)
+    {
+        temp += usmart_dev.plentbl[i];
+    }
+
+    return temp;
+}
+
+/**
+ * @brief       浠巗tr涓緱鍒板嚱鏁板弬鏁?
+ * @param       str: 婧愬瓧绗︿覆
+ *              parn: 鍙傛暟鐨勫灏?0琛ㄧず鏃犲弬鏁皏oid绫诲瀷)
+ * @retval      0, 鎴愬姛; 鍏朵粬, 閿欒浠ｇ爜
+ */
+uint8_t usmart_get_fparam(char *str, uint8_t *parn)
+{
+    uint8_t i, type;
+    uint32_t res;
+    uint8_t n = 0;
+    uint16_t len;
+    char tstr[PARM_LEN + 1];    /* 鏈€澶氬瓨鏀綪ARM_LEN涓瓧绗︾殑瀛楃涓?*/
+
+    for (i = 0; i < MAX_PARM; i++)
+    {
+        usmart_dev.plentbl[i] = 0;  /* 娓呯┖鍙傛暟闀垮害琛?*/
+    }
+
+    while (*str != '(')         /* 鍋忕Щ鍒板弬鏁板紑濮嬬殑鍦版柟 */
+    {
+        str++;
+
+        if (*str == '\0')
+        {
+            return USMART_FUNCERR;
+        }
+    }
+
+    str++;                      /* 鍋忕Щ鍒?("涔嬪悗鐨勭涓€涓瓧鑺?*/
+
+    while (1)
+    {
+        i = usmart_get_aparm(str, tstr, &type);     /* 寰楀埌绗竴涓弬鏁?*/
+        str += i;                                   /* 鍋忕Щ */
+
+        switch (type)
+        {
+            case 0:             /* 鏁板瓧 */
+                if (tstr[0] != '\0')    /* 鎺ユ敹鍒扮殑鍙傛暟鏈夋晥 */
+                {
+                    i = usmart_str2num(tstr, &res); /* 璁板綍璇ュ弬鏁?*/
+
+                    if (i)
+                    {
+                        return USMART_PARMERR;      /* 鍙傛暟閿欒 */
+                    }
+
+                    if (n >= MAX_PARM)
+                    {
+                        return USMART_PARMOVER;     /* 鍙傛暟澶 */
+                    }
+
+                    if ((uint16_t)usmart_get_parmpos(n) + 4U > PARM_LEN)
+                    {
+                        return USMART_PARMOVER;
+                    }
+
+                    memcpy(usmart_dev.parm + usmart_get_parmpos(n), &res, sizeof(res));
+                    usmart_dev.parmtype &= (uint16_t)~(1U << n);    /* 鏍囪鏁板瓧 */
+                    usmart_dev.plentbl[n] = 4;      /* 璇ュ弬鏁扮殑闀垮害涓? */
+                    n++;                            /* 鍙傛暟澧炲姞 */
+                }
+                break;
+
+            case 1:             /* 瀛楃涓?*/
+                len = (uint16_t)usmart_strlen(tstr) + 1U;  /* 鍖呭惈缁撴潫绗?*/
+
+                if (n >= MAX_PARM)
+                {
+                    return USMART_PARMOVER;     /* 鍙傛暟澶 */
+                }
+
+                if ((uint16_t)usmart_get_parmpos(n) + len > PARM_LEN)
+                {
+                    return USMART_PARMOVER;     /* 鍙傛暟缂撳啿鍖烘孩鍑?*/
+                }
+
+                usmart_strcopy((char *)(usmart_dev.parm + usmart_get_parmpos(n)), tstr);
+                usmart_dev.parmtype |= (uint16_t)(1U << n);     /* 鏍囪瀛楃涓?*/
+                usmart_dev.plentbl[n] = (uint8_t)len;           /* 璇ュ弬鏁扮殑闀垮害 */
+                n++;                            /* 鍙傛暟澧炲姞 */
+                break;
+
+            case 0xFF:          /* 閿欒 */
+                return USMART_PARMERR;
+
+            default:
+                return USMART_PARMERR;
+        }
+
+        if (*str == ')' || *str == '\0')
+        {
+            break;              /* 鏌ュ埌缁撴潫鏍囧織浜?*/
+        }
+    }
+
+    *parn = n;                  /* 璁板綍鍙傛暟鐨勪釜鏁?*/
+    return USMART_OK;
+}
+

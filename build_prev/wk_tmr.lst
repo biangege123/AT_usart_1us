@@ -1,0 +1,364 @@
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccV7yqOf.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.arch armv7e-m
+   3              		.fpu fpv4-sp-d16
+   4              		.eabi_attribute 27, 1
+   5              		.eabi_attribute 28, 1
+   6              		.eabi_attribute 20, 1
+   7              		.eabi_attribute 21, 1
+   8              		.eabi_attribute 23, 3
+   9              		.eabi_attribute 24, 1
+  10              		.eabi_attribute 25, 1
+  11              		.eabi_attribute 26, 1
+  12              		.eabi_attribute 30, 1
+  13              		.eabi_attribute 34, 1
+  14              		.eabi_attribute 18, 4
+  15              		.file	"wk_tmr.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.file 1 "project/src/wk_tmr.c"
+  20              		.section	.text.wk_tmr1_init,"ax",%progbits
+  21              		.align	1
+  22              		.global	wk_tmr1_init
+  23              		.syntax unified
+  24              		.thumb
+  25              		.thumb_func
+  27              	wk_tmr1_init:
+  28              	.LFB137:
+   1:project/src/wk_tmr.c **** /* add user code begin Header */
+   2:project/src/wk_tmr.c **** /**
+   3:project/src/wk_tmr.c ****   **************************************************************************
+   4:project/src/wk_tmr.c ****   * @file     wk_tmr.c
+   5:project/src/wk_tmr.c ****   * @brief    work bench config program
+   6:project/src/wk_tmr.c ****   **************************************************************************
+   7:project/src/wk_tmr.c ****   * Copyright (c) 2025, Artery Technology, All rights reserved.
+   8:project/src/wk_tmr.c ****   *
+   9:project/src/wk_tmr.c ****   * The software Board Support Package (BSP) that is made available to
+  10:project/src/wk_tmr.c ****   * download from Artery official website is the copyrighted work of Artery.
+  11:project/src/wk_tmr.c ****   * Artery authorizes customers to use, copy, and distribute the BSP
+  12:project/src/wk_tmr.c ****   * software and its related documentation for the purpose of design and
+  13:project/src/wk_tmr.c ****   * development in conjunction with Artery microcontrollers. Use of the
+  14:project/src/wk_tmr.c ****   * software is governed by this copyright notice and the following disclaimer.
+  15:project/src/wk_tmr.c ****   *
+  16:project/src/wk_tmr.c ****   * THIS SOFTWARE IS PROVIDED ON "AS IS" BASIS WITHOUT WARRANTIES,
+  17:project/src/wk_tmr.c ****   * GUARANTEES OR REPRESENTATIONS OF ANY KIND. ARTERY EXPRESSLY DISCLAIMS,
+  18:project/src/wk_tmr.c ****   * TO THE FULLEST EXTENT PERMITTED BY LAW, ALL EXPRESS, IMPLIED OR
+  19:project/src/wk_tmr.c ****   * STATUTORY OR OTHER WARRANTIES, GUARANTEES OR REPRESENTATIONS,
+  20:project/src/wk_tmr.c ****   * INCLUDING BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY,
+  21:project/src/wk_tmr.c ****   * FITNESS FOR A PARTICULAR PURPOSE, OR NON-INFRINGEMENT.
+  22:project/src/wk_tmr.c ****   *
+  23:project/src/wk_tmr.c ****   **************************************************************************
+  24:project/src/wk_tmr.c ****   */
+  25:project/src/wk_tmr.c **** /* add user code end Header */
+  26:project/src/wk_tmr.c **** 
+  27:project/src/wk_tmr.c **** /* Includes ------------------------------------------------------------------*/
+  28:project/src/wk_tmr.c **** #include "wk_tmr.h"
+  29:project/src/wk_tmr.c **** 
+  30:project/src/wk_tmr.c **** /* add user code begin 0 */
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccV7yqOf.s 			page 2
+
+
+  31:project/src/wk_tmr.c **** 
+  32:project/src/wk_tmr.c **** /* add user code end 0 */
+  33:project/src/wk_tmr.c **** 
+  34:project/src/wk_tmr.c **** /**
+  35:project/src/wk_tmr.c ****   * @brief  init tmr1 function.
+  36:project/src/wk_tmr.c ****   * @param  none
+  37:project/src/wk_tmr.c ****   * @retval none
+  38:project/src/wk_tmr.c ****   */
+  39:project/src/wk_tmr.c **** void wk_tmr1_init(void)
+  40:project/src/wk_tmr.c **** {
+  29              		.loc 1 40 1 view -0
+  30              		.cfi_startproc
+  31              		@ args = 0, pretend = 0, frame = 24
+  32              		@ frame_needed = 0, uses_anonymous_args = 0
+  33 0000 70B5     		push	{r4, r5, r6, lr}
+  34              	.LCFI0:
+  35              		.cfi_def_cfa_offset 16
+  36              		.cfi_offset 4, -16
+  37              		.cfi_offset 5, -12
+  38              		.cfi_offset 6, -8
+  39              		.cfi_offset 14, -4
+  40 0002 86B0     		sub	sp, sp, #24
+  41              	.LCFI1:
+  42              		.cfi_def_cfa_offset 40
+  41:project/src/wk_tmr.c ****   /* add user code begin tmr1_init 0 */
+  42:project/src/wk_tmr.c **** 
+  43:project/src/wk_tmr.c ****   /* add user code end tmr1_init 0 */
+  44:project/src/wk_tmr.c **** 
+  45:project/src/wk_tmr.c ****   gpio_init_type gpio_init_struct;
+  43              		.loc 1 45 3 view .LVU1
+  46:project/src/wk_tmr.c ****   tmr_output_config_type tmr_output_struct;
+  44              		.loc 1 46 3 view .LVU2
+  47:project/src/wk_tmr.c ****   tmr_brkdt_config_type tmr_brkdt_struct;
+  45              		.loc 1 47 3 view .LVU3
+  48:project/src/wk_tmr.c **** 
+  49:project/src/wk_tmr.c ****   gpio_default_para_init(&gpio_init_struct);
+  46              		.loc 1 49 3 view .LVU4
+  47 0004 04AD     		add	r5, sp, #16
+  48 0006 2846     		mov	r0, r5
+  49 0008 FFF7FEFF 		bl	gpio_default_para_init
+  50              	.LVL0:
+  50:project/src/wk_tmr.c **** 
+  51:project/src/wk_tmr.c ****   /* add user code begin tmr1_init 1 */
+  52:project/src/wk_tmr.c **** 
+  53:project/src/wk_tmr.c ****   /* add user code end tmr1_init 1 */
+  54:project/src/wk_tmr.c **** 
+  55:project/src/wk_tmr.c ****   /* configure the CH1 pin */
+  56:project/src/wk_tmr.c ****   gpio_init_struct.gpio_pins = GPIO_PINS_9;
+  51              		.loc 1 56 3 view .LVU5
+  52              		.loc 1 56 30 is_stmt 0 view .LVU6
+  53 000c 4FF40073 		mov	r3, #512
+  54 0010 0493     		str	r3, [sp, #16]
+  57:project/src/wk_tmr.c ****   gpio_init_struct.gpio_mode = GPIO_MODE_MUX;
+  55              		.loc 1 57 3 is_stmt 1 view .LVU7
+  56              		.loc 1 57 30 is_stmt 0 view .LVU8
+  57 0012 0823     		movs	r3, #8
+  58 0014 8DF81630 		strb	r3, [sp, #22]
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccV7yqOf.s 			page 3
+
+
+  58:project/src/wk_tmr.c ****   gpio_init_struct.gpio_out_type = GPIO_OUTPUT_PUSH_PULL;
+  59              		.loc 1 58 3 is_stmt 1 view .LVU9
+  60              		.loc 1 58 34 is_stmt 0 view .LVU10
+  61 0018 0024     		movs	r4, #0
+  62 001a 8DF81440 		strb	r4, [sp, #20]
+  59:project/src/wk_tmr.c ****   gpio_init_struct.gpio_pull = GPIO_PULL_NONE;
+  63              		.loc 1 59 3 is_stmt 1 view .LVU11
+  64              		.loc 1 59 30 is_stmt 0 view .LVU12
+  65 001e 0423     		movs	r3, #4
+  66 0020 8DF81530 		strb	r3, [sp, #21]
+  60:project/src/wk_tmr.c ****   gpio_init_struct.gpio_drive_strength = GPIO_DRIVE_STRENGTH_MODERATE;
+  67              		.loc 1 60 3 is_stmt 1 view .LVU13
+  68              		.loc 1 60 40 is_stmt 0 view .LVU14
+  69 0024 0223     		movs	r3, #2
+  70 0026 8DF81730 		strb	r3, [sp, #23]
+  61:project/src/wk_tmr.c ****   gpio_init(GPIOE, &gpio_init_struct);
+  71              		.loc 1 61 3 is_stmt 1 view .LVU15
+  72 002a 2946     		mov	r1, r5
+  73 002c 2F48     		ldr	r0, .L3
+  74 002e FFF7FEFF 		bl	gpio_init
+  75              	.LVL1:
+  62:project/src/wk_tmr.c **** 
+  63:project/src/wk_tmr.c ****   /* GPIO PIN remap */
+  64:project/src/wk_tmr.c ****   gpio_pin_remap_config(TMR1_GMUX_0011, TRUE); 
+  76              		.loc 1 64 3 view .LVU16
+  77 0032 0121     		movs	r1, #1
+  78 0034 2E48     		ldr	r0, .L3+4
+  79 0036 FFF7FEFF 		bl	gpio_pin_remap_config
+  80              	.LVL2:
+  65:project/src/wk_tmr.c **** 
+  66:project/src/wk_tmr.c ****   /* configure counter settings */
+  67:project/src/wk_tmr.c ****   tmr_cnt_dir_set(TMR1, TMR_COUNT_UP);
+  81              		.loc 1 67 3 view .LVU17
+  82 003a 2E4D     		ldr	r5, .L3+8
+  83 003c 2146     		mov	r1, r4
+  84 003e 2846     		mov	r0, r5
+  85 0040 FFF7FEFF 		bl	tmr_cnt_dir_set
+  86              	.LVL3:
+  68:project/src/wk_tmr.c ****   tmr_clock_source_div_set(TMR1, TMR_CLOCK_DIV1);
+  87              		.loc 1 68 3 view .LVU18
+  88 0044 2146     		mov	r1, r4
+  89 0046 2846     		mov	r0, r5
+  90 0048 FFF7FEFF 		bl	tmr_clock_source_div_set
+  91              	.LVL4:
+  69:project/src/wk_tmr.c ****   tmr_repetition_counter_set(TMR1, 0);
+  92              		.loc 1 69 3 view .LVU19
+  93 004c 2146     		mov	r1, r4
+  94 004e 2846     		mov	r0, r5
+  95 0050 FFF7FEFF 		bl	tmr_repetition_counter_set
+  96              	.LVL5:
+  70:project/src/wk_tmr.c ****   tmr_period_buffer_enable(TMR1, FALSE);
+  97              		.loc 1 70 3 view .LVU20
+  98 0054 2146     		mov	r1, r4
+  99 0056 2846     		mov	r0, r5
+ 100 0058 FFF7FEFF 		bl	tmr_period_buffer_enable
+ 101              	.LVL6:
+  71:project/src/wk_tmr.c ****   tmr_base_init(TMR1, 199, 0);
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccV7yqOf.s 			page 4
+
+
+ 102              		.loc 1 71 3 view .LVU21
+ 103 005c 2246     		mov	r2, r4
+ 104 005e C721     		movs	r1, #199
+ 105 0060 2846     		mov	r0, r5
+ 106 0062 FFF7FEFF 		bl	tmr_base_init
+ 107              	.LVL7:
+  72:project/src/wk_tmr.c **** 
+  73:project/src/wk_tmr.c ****   /* configure primary mode settings */
+  74:project/src/wk_tmr.c ****   tmr_sub_sync_mode_set(TMR1, FALSE);
+ 108              		.loc 1 74 3 view .LVU22
+ 109 0066 2146     		mov	r1, r4
+ 110 0068 2846     		mov	r0, r5
+ 111 006a FFF7FEFF 		bl	tmr_sub_sync_mode_set
+ 112              	.LVL8:
+  75:project/src/wk_tmr.c ****   tmr_primary_mode_select(TMR1, TMR_PRIMARY_SEL_RESET);
+ 113              		.loc 1 75 3 view .LVU23
+ 114 006e 2146     		mov	r1, r4
+ 115 0070 2846     		mov	r0, r5
+ 116 0072 FFF7FEFF 		bl	tmr_primary_mode_select
+ 117              	.LVL9:
+  76:project/src/wk_tmr.c **** 
+  77:project/src/wk_tmr.c ****   /* configure channel 1 output settings */
+  78:project/src/wk_tmr.c ****   tmr_output_struct.oc_mode = TMR_OUTPUT_CONTROL_OFF;
+ 118              		.loc 1 78 3 view .LVU24
+ 119              		.loc 1 78 29 is_stmt 0 view .LVU25
+ 120 0076 8DF80840 		strb	r4, [sp, #8]
+  79:project/src/wk_tmr.c ****   tmr_output_struct.oc_output_state = TRUE;
+ 121              		.loc 1 79 3 is_stmt 1 view .LVU26
+ 122              		.loc 1 79 37 is_stmt 0 view .LVU27
+ 123 007a 0126     		movs	r6, #1
+ 124 007c 8DF80D60 		strb	r6, [sp, #13]
+  80:project/src/wk_tmr.c ****   tmr_output_struct.occ_output_state = FALSE;
+ 125              		.loc 1 80 3 is_stmt 1 view .LVU28
+ 126              		.loc 1 80 38 is_stmt 0 view .LVU29
+ 127 0080 8DF80E40 		strb	r4, [sp, #14]
+  81:project/src/wk_tmr.c ****   tmr_output_struct.oc_polarity = TMR_OUTPUT_ACTIVE_HIGH;
+ 128              		.loc 1 81 3 is_stmt 1 view .LVU30
+ 129              		.loc 1 81 33 is_stmt 0 view .LVU31
+ 130 0084 8DF80B40 		strb	r4, [sp, #11]
+  82:project/src/wk_tmr.c ****   tmr_output_struct.occ_polarity = TMR_OUTPUT_ACTIVE_HIGH;
+ 131              		.loc 1 82 3 is_stmt 1 view .LVU32
+ 132              		.loc 1 82 34 is_stmt 0 view .LVU33
+ 133 0088 8DF80C40 		strb	r4, [sp, #12]
+  83:project/src/wk_tmr.c ****   tmr_output_struct.oc_idle_state = FALSE;
+ 134              		.loc 1 83 3 is_stmt 1 view .LVU34
+ 135              		.loc 1 83 35 is_stmt 0 view .LVU35
+ 136 008c 8DF80940 		strb	r4, [sp, #9]
+  84:project/src/wk_tmr.c ****   tmr_output_struct.occ_idle_state = FALSE;
+ 137              		.loc 1 84 3 is_stmt 1 view .LVU36
+ 138              		.loc 1 84 36 is_stmt 0 view .LVU37
+ 139 0090 8DF80A40 		strb	r4, [sp, #10]
+  85:project/src/wk_tmr.c ****   tmr_output_channel_config(TMR1, TMR_SELECT_CHANNEL_1, &tmr_output_struct);
+ 140              		.loc 1 85 3 is_stmt 1 view .LVU38
+ 141 0094 02AA     		add	r2, sp, #8
+ 142 0096 2146     		mov	r1, r4
+ 143 0098 2846     		mov	r0, r5
+ 144 009a FFF7FEFF 		bl	tmr_output_channel_config
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccV7yqOf.s 			page 5
+
+
+ 145              	.LVL10:
+  86:project/src/wk_tmr.c ****   tmr_channel_value_set(TMR1, TMR_SELECT_CHANNEL_1, 0);
+ 146              		.loc 1 86 3 view .LVU39
+ 147 009e 2246     		mov	r2, r4
+ 148 00a0 2146     		mov	r1, r4
+ 149 00a2 2846     		mov	r0, r5
+ 150 00a4 FFF7FEFF 		bl	tmr_channel_value_set
+ 151              	.LVL11:
+  87:project/src/wk_tmr.c ****   tmr_output_channel_buffer_enable(TMR1, TMR_SELECT_CHANNEL_1, FALSE);
+ 152              		.loc 1 87 3 view .LVU40
+ 153 00a8 2246     		mov	r2, r4
+ 154 00aa 2146     		mov	r1, r4
+ 155 00ac 2846     		mov	r0, r5
+ 156 00ae FFF7FEFF 		bl	tmr_output_channel_buffer_enable
+ 157              	.LVL12:
+  88:project/src/wk_tmr.c **** 
+  89:project/src/wk_tmr.c ****   /* configure break and dead-time settings */
+  90:project/src/wk_tmr.c ****   tmr_brkdt_struct.brk_enable = FALSE;
+ 158              		.loc 1 90 3 view .LVU41
+ 159              		.loc 1 90 31 is_stmt 0 view .LVU42
+ 160 00b2 8DF80640 		strb	r4, [sp, #6]
+  91:project/src/wk_tmr.c ****   tmr_brkdt_struct.auto_output_enable = FALSE;
+ 161              		.loc 1 91 3 is_stmt 1 view .LVU43
+ 162              		.loc 1 91 39 is_stmt 0 view .LVU44
+ 163 00b6 8DF80340 		strb	r4, [sp, #3]
+  92:project/src/wk_tmr.c ****   tmr_brkdt_struct.brk_polarity = TMR_BRK_INPUT_ACTIVE_LOW;
+ 164              		.loc 1 92 3 is_stmt 1 view .LVU45
+ 165              		.loc 1 92 33 is_stmt 0 view .LVU46
+ 166 00ba 8DF80140 		strb	r4, [sp, #1]
+  93:project/src/wk_tmr.c ****   tmr_brkdt_struct.fcsoen_state = FALSE;
+ 167              		.loc 1 93 3 is_stmt 1 view .LVU47
+ 168              		.loc 1 93 33 is_stmt 0 view .LVU48
+ 169 00be 8DF80440 		strb	r4, [sp, #4]
+  94:project/src/wk_tmr.c ****   tmr_brkdt_struct.fcsodis_state = FALSE;
+ 170              		.loc 1 94 3 is_stmt 1 view .LVU49
+ 171              		.loc 1 94 34 is_stmt 0 view .LVU50
+ 172 00c2 8DF80540 		strb	r4, [sp, #5]
+  95:project/src/wk_tmr.c ****   tmr_brkdt_struct.wp_level = TMR_WP_OFF;
+ 173              		.loc 1 95 3 is_stmt 1 view .LVU51
+ 174              		.loc 1 95 29 is_stmt 0 view .LVU52
+ 175 00c6 8DF80240 		strb	r4, [sp, #2]
+  96:project/src/wk_tmr.c ****   tmr_brkdt_struct.deadtime = 0;
+ 176              		.loc 1 96 3 is_stmt 1 view .LVU53
+ 177              		.loc 1 96 29 is_stmt 0 view .LVU54
+ 178 00ca 8DF80040 		strb	r4, [sp]
+  97:project/src/wk_tmr.c ****   tmr_brkdt_config(TMR1, &tmr_brkdt_struct);
+ 179              		.loc 1 97 3 is_stmt 1 view .LVU55
+ 180 00ce 6946     		mov	r1, sp
+ 181 00d0 2846     		mov	r0, r5
+ 182 00d2 FFF7FEFF 		bl	tmr_brkdt_config
+ 183              	.LVL13:
+  98:project/src/wk_tmr.c **** 
+  99:project/src/wk_tmr.c **** 
+ 100:project/src/wk_tmr.c ****   tmr_output_enable(TMR1, TRUE);
+ 184              		.loc 1 100 3 view .LVU56
+ 185 00d6 3146     		mov	r1, r6
+ 186 00d8 2846     		mov	r0, r5
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccV7yqOf.s 			page 6
+
+
+ 187 00da FFF7FEFF 		bl	tmr_output_enable
+ 188              	.LVL14:
+ 101:project/src/wk_tmr.c **** 
+ 102:project/src/wk_tmr.c ****   tmr_counter_enable(TMR1, TRUE);
+ 189              		.loc 1 102 3 view .LVU57
+ 190 00de 3146     		mov	r1, r6
+ 191 00e0 2846     		mov	r0, r5
+ 192 00e2 FFF7FEFF 		bl	tmr_counter_enable
+ 193              	.LVL15:
+ 103:project/src/wk_tmr.c **** 
+ 104:project/src/wk_tmr.c ****   /* add user code begin tmr1_init 2 */
+ 105:project/src/wk_tmr.c **** 
+ 106:project/src/wk_tmr.c ****   /* add user code end tmr1_init 2 */
+ 107:project/src/wk_tmr.c **** }
+ 194              		.loc 1 107 1 is_stmt 0 view .LVU58
+ 195 00e6 06B0     		add	sp, sp, #24
+ 196              	.LCFI2:
+ 197              		.cfi_def_cfa_offset 16
+ 198              		@ sp needed
+ 199 00e8 70BD     		pop	{r4, r5, r6, pc}
+ 200              	.L4:
+ 201 00ea 00BF     		.align	2
+ 202              	.L3:
+ 203 00ec 00180140 		.word	1073813504
+ 204 00f0 03040024 		.word	603980803
+ 205 00f4 002C0140 		.word	1073818624
+ 206              		.cfi_endproc
+ 207              	.LFE137:
+ 209              		.text
+ 210              	.Letext0:
+ 211              		.file 2 "D:/gnu_toolchain/arm-none-eabi/include/machine/_default_types.h"
+ 212              		.file 3 "D:/gnu_toolchain/arm-none-eabi/include/sys/_stdint.h"
+ 213              		.file 4 "libraries/cmsis/cm4/device_support/at32f403a_407.h"
+ 214              		.file 5 "libraries/drivers/inc/at32f403a_407_gpio.h"
+ 215              		.file 6 "libraries/drivers/inc/at32f403a_407_tmr.h"
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccV7yqOf.s 			page 7
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 wk_tmr.c
+C:\Users\bians\AppData\Local\Temp\ccV7yqOf.s:21     .text.wk_tmr1_init:00000000 $t
+C:\Users\bians\AppData\Local\Temp\ccV7yqOf.s:27     .text.wk_tmr1_init:00000000 wk_tmr1_init
+C:\Users\bians\AppData\Local\Temp\ccV7yqOf.s:203    .text.wk_tmr1_init:000000ec $d
+
+UNDEFINED SYMBOLS
+gpio_default_para_init
+gpio_init
+gpio_pin_remap_config
+tmr_cnt_dir_set
+tmr_clock_source_div_set
+tmr_repetition_counter_set
+tmr_period_buffer_enable
+tmr_base_init
+tmr_sub_sync_mode_set
+tmr_primary_mode_select
+tmr_output_channel_config
+tmr_channel_value_set
+tmr_output_channel_buffer_enable
+tmr_brkdt_config
+tmr_output_enable
+tmr_counter_enable

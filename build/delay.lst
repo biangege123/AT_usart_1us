@@ -1,0 +1,439 @@
+ARM GAS  C:\Users\bians\AppData\Local\Temp\cc4D1d2D.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.arch armv7e-m
+   3              		.fpu fpv4-sp-d16
+   4              		.eabi_attribute 27, 1
+   5              		.eabi_attribute 28, 1
+   6              		.eabi_attribute 20, 1
+   7              		.eabi_attribute 21, 1
+   8              		.eabi_attribute 23, 3
+   9              		.eabi_attribute 24, 1
+  10              		.eabi_attribute 25, 1
+  11              		.eabi_attribute 26, 1
+  12              		.eabi_attribute 30, 1
+  13              		.eabi_attribute 34, 1
+  14              		.eabi_attribute 18, 4
+  15              		.file	"delay.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.file 1 "project/src/delay.c"
+  20              		.section	.text.delay_init,"ax",%progbits
+  21              		.align	1
+  22              		.global	delay_init
+  23              		.syntax unified
+  24              		.thumb
+  25              		.thumb_func
+  27              	delay_init:
+  28              	.LFB134:
+   1:project/src/delay.c **** #include "delay.h"
+   2:project/src/delay.c **** 
+   3:project/src/delay.c **** 
+   4:project/src/delay.c **** static __IO uint32_t fac_us;
+   5:project/src/delay.c **** static __IO uint32_t fac_ms;
+   6:project/src/delay.c **** 
+   7:project/src/delay.c **** 
+   8:project/src/delay.c **** 
+   9:project/src/delay.c **** void delay_init()
+  10:project/src/delay.c **** {
+  29              		.loc 1 10 1 view -0
+  30              		.cfi_startproc
+  31              		@ args = 0, pretend = 0, frame = 0
+  32              		@ frame_needed = 0, uses_anonymous_args = 0
+  33 0000 08B5     		push	{r3, lr}
+  34              	.LCFI0:
+  35              		.cfi_def_cfa_offset 8
+  36              		.cfi_offset 3, -8
+  37              		.cfi_offset 14, -4
+  11:project/src/delay.c ****     systick_clock_source_config(SYSTICK_CLOCK_SOURCE_AHBCLK_NODIV);
+  38              		.loc 1 11 5 view .LVU1
+  39 0002 0420     		movs	r0, #4
+  40 0004 FFF7FEFF 		bl	systick_clock_source_config
+  41              	.LVL0:
+  12:project/src/delay.c ****     fac_us = system_core_clock / (1000000U);
+  42              		.loc 1 12 5 view .LVU2
+  43              		.loc 1 12 32 is_stmt 0 view .LVU3
+  44 0008 074B     		ldr	r3, .L3
+  45 000a 1B68     		ldr	r3, [r3]
+  46 000c 074A     		ldr	r2, .L3+4
+ARM GAS  C:\Users\bians\AppData\Local\Temp\cc4D1d2D.s 			page 2
+
+
+  47 000e A2FB0312 		umull	r1, r2, r2, r3
+  48 0012 920C     		lsrs	r2, r2, #18
+  49              		.loc 1 12 12 view .LVU4
+  50 0014 0649     		ldr	r1, .L3+8
+  51 0016 0A60     		str	r2, [r1]
+  13:project/src/delay.c ****     fac_ms = system_core_clock / (1000U);
+  52              		.loc 1 13 5 is_stmt 1 view .LVU5
+  53              		.loc 1 13 32 is_stmt 0 view .LVU6
+  54 0018 064A     		ldr	r2, .L3+12
+  55 001a A2FB0323 		umull	r2, r3, r2, r3
+  56 001e 9B09     		lsrs	r3, r3, #6
+  57              		.loc 1 13 12 view .LVU7
+  58 0020 054A     		ldr	r2, .L3+16
+  59 0022 1360     		str	r3, [r2]
+  14:project/src/delay.c **** }
+  60              		.loc 1 14 1 view .LVU8
+  61 0024 08BD     		pop	{r3, pc}
+  62              	.L4:
+  63 0026 00BF     		.align	2
+  64              	.L3:
+  65 0028 00000000 		.word	system_core_clock
+  66 002c 83DE1B43 		.word	1125899907
+  67 0030 00000000 		.word	fac_us
+  68 0034 D34D6210 		.word	274877907
+  69 0038 00000000 		.word	fac_ms
+  70              		.cfi_endproc
+  71              	.LFE134:
+  73              		.section	.text.delay_us,"ax",%progbits
+  74              		.align	1
+  75              		.global	delay_us
+  76              		.syntax unified
+  77              		.thumb
+  78              		.thumb_func
+  80              	delay_us:
+  81              	.LVL1:
+  82              	.LFB135:
+  15:project/src/delay.c **** 
+  16:project/src/delay.c **** 
+  17:project/src/delay.c **** void delay_us(uint32_t nus)
+  18:project/src/delay.c **** {
+  83              		.loc 1 18 1 is_stmt 1 view -0
+  84              		.cfi_startproc
+  85              		@ args = 0, pretend = 0, frame = 0
+  86              		@ frame_needed = 0, uses_anonymous_args = 0
+  87              		@ link register save eliminated.
+  19:project/src/delay.c ****     uint32_t temp = 0;
+  88              		.loc 1 19 5 view .LVU10
+  20:project/src/delay.c ****     SysTick->LOAD = (uint32_t)(nus*fac_us);
+  89              		.loc 1 20 5 view .LVU11
+  90              		.loc 1 20 21 is_stmt 0 view .LVU12
+  91 0000 0E4B     		ldr	r3, .L7
+  92 0002 1B68     		ldr	r3, [r3]
+  93              		.loc 1 20 35 view .LVU13
+  94 0004 03FB00F0 		mul	r0, r3, r0
+  95              	.LVL2:
+  96              		.loc 1 20 19 view .LVU14
+  97 0008 4FF0E023 		mov	r3, #-536813568
+ARM GAS  C:\Users\bians\AppData\Local\Temp\cc4D1d2D.s 			page 3
+
+
+  98 000c 5861     		str	r0, [r3, #20]
+  21:project/src/delay.c ****     SysTick->VAL = 0x00;
+  99              		.loc 1 21 5 is_stmt 1 view .LVU15
+ 100              		.loc 1 21 18 is_stmt 0 view .LVU16
+ 101 000e 0022     		movs	r2, #0
+ 102 0010 9A61     		str	r2, [r3, #24]
+  22:project/src/delay.c ****     SysTick->CTRL |= SysTick_CTRL_ENABLE_Msk;
+ 103              		.loc 1 22 5 is_stmt 1 view .LVU17
+ 104              		.loc 1 22 12 is_stmt 0 view .LVU18
+ 105 0012 1A69     		ldr	r2, [r3, #16]
+ 106              		.loc 1 22 19 view .LVU19
+ 107 0014 42F00102 		orr	r2, r2, #1
+ 108 0018 1A61     		str	r2, [r3, #16]
+ 109              	.LVL3:
+ 110              	.L6:
+  23:project/src/delay.c ****     do
+ 111              		.loc 1 23 5 is_stmt 1 view .LVU20
+  24:project/src/delay.c ****     {
+  25:project/src/delay.c ****         temp = SysTick->CTRL;
+ 112              		.loc 1 25 9 view .LVU21
+ 113              		.loc 1 25 14 is_stmt 0 view .LVU22
+ 114 001a 4FF0E023 		mov	r3, #-536813568
+ 115 001e 1B69     		ldr	r3, [r3, #16]
+ 116              	.LVL4:
+  26:project/src/delay.c ****     }while((temp & 0x01)&&!(temp &(1<<16)));
+ 117              		.loc 1 26 25 is_stmt 1 discriminator 1 view .LVU23
+ 118 0020 03F00113 		and	r3, r3, #65537
+ 119              	.LVL5:
+ 120              		.loc 1 26 25 is_stmt 0 discriminator 1 view .LVU24
+ 121 0024 012B     		cmp	r3, #1
+ 122 0026 F8D0     		beq	.L6
+  27:project/src/delay.c ****     SysTick->CTRL &= ~SysTick_CTRL_ENABLE_Msk;
+ 123              		.loc 1 27 5 is_stmt 1 view .LVU25
+ 124              		.loc 1 27 12 is_stmt 0 view .LVU26
+ 125 0028 4FF0E023 		mov	r3, #-536813568
+ 126 002c 1A69     		ldr	r2, [r3, #16]
+ 127              		.loc 1 27 19 view .LVU27
+ 128 002e 22F00102 		bic	r2, r2, #1
+ 129 0032 1A61     		str	r2, [r3, #16]
+  28:project/src/delay.c ****     SysTick->VAL = 0x00;
+ 130              		.loc 1 28 5 is_stmt 1 view .LVU28
+ 131              		.loc 1 28 18 is_stmt 0 view .LVU29
+ 132 0034 0022     		movs	r2, #0
+ 133 0036 9A61     		str	r2, [r3, #24]
+  29:project/src/delay.c **** }
+ 134              		.loc 1 29 1 view .LVU30
+ 135 0038 7047     		bx	lr
+ 136              	.L8:
+ 137 003a 00BF     		.align	2
+ 138              	.L7:
+ 139 003c 00000000 		.word	fac_us
+ 140              		.cfi_endproc
+ 141              	.LFE135:
+ 143              		.section	.text.delay_ms,"ax",%progbits
+ 144              		.align	1
+ 145              		.global	delay_ms
+ 146              		.syntax unified
+ARM GAS  C:\Users\bians\AppData\Local\Temp\cc4D1d2D.s 			page 4
+
+
+ 147              		.thumb
+ 148              		.thumb_func
+ 150              	delay_ms:
+ 151              	.LVL6:
+ 152              	.LFB136:
+  30:project/src/delay.c **** 
+  31:project/src/delay.c **** 
+  32:project/src/delay.c **** void delay_ms(uint32_t nms)
+  33:project/src/delay.c **** {
+ 153              		.loc 1 33 1 is_stmt 1 view -0
+ 154              		.cfi_startproc
+ 155              		@ args = 0, pretend = 0, frame = 0
+ 156              		@ frame_needed = 0, uses_anonymous_args = 0
+ 157              		@ link register save eliminated.
+  34:project/src/delay.c ****     uint32_t temp = 0;
+ 158              		.loc 1 34 5 view .LVU32
+  35:project/src/delay.c ****     while(nms)
+ 159              		.loc 1 35 5 view .LVU33
+ 160              		.loc 1 35 10 is_stmt 0 view .LVU34
+ 161 0000 1EE0     		b	.L10
+ 162              	.LVL7:
+ 163              	.L11:
+  36:project/src/delay.c ****     {
+  37:project/src/delay.c ****         if(nms > STEP_DELAY_MS)
+  38:project/src/delay.c ****         {
+  39:project/src/delay.c ****             SysTick->LOAD = (uint32_t)(STEP_DELAY_MS * fac_ms);
+  40:project/src/delay.c ****             nms -= STEP_DELAY_MS;
+  41:project/src/delay.c ****         }
+  42:project/src/delay.c ****         else
+  43:project/src/delay.c ****         {
+  44:project/src/delay.c ****             SysTick->LOAD = (uint32_t)(nms * fac_ms);
+ 164              		.loc 1 44 13 is_stmt 1 view .LVU35
+ 165              		.loc 1 44 29 is_stmt 0 view .LVU36
+ 166 0002 164B     		ldr	r3, .L16
+ 167 0004 1B68     		ldr	r3, [r3]
+ 168              		.loc 1 44 44 view .LVU37
+ 169 0006 00FB03F3 		mul	r3, r0, r3
+ 170              		.loc 1 44 27 view .LVU38
+ 171 000a 4FF0E022 		mov	r2, #-536813568
+ 172 000e 5361     		str	r3, [r2, #20]
+  45:project/src/delay.c ****             nms = 0;
+ 173              		.loc 1 45 13 is_stmt 1 view .LVU39
+ 174              	.LVL8:
+ 175              		.loc 1 45 17 is_stmt 0 view .LVU40
+ 176 0010 0020     		movs	r0, #0
+ 177              	.LVL9:
+ 178              	.L12:
+  46:project/src/delay.c ****         }
+  47:project/src/delay.c ****         SysTick->VAL = 0x00;
+ 179              		.loc 1 47 9 is_stmt 1 view .LVU41
+ 180              		.loc 1 47 22 is_stmt 0 view .LVU42
+ 181 0012 4FF0E023 		mov	r3, #-536813568
+ 182 0016 0022     		movs	r2, #0
+ 183 0018 9A61     		str	r2, [r3, #24]
+  48:project/src/delay.c ****         SysTick->CTRL |= SysTick_CTRL_ENABLE_Msk;
+ 184              		.loc 1 48 9 is_stmt 1 view .LVU43
+ 185              		.loc 1 48 16 is_stmt 0 view .LVU44
+ARM GAS  C:\Users\bians\AppData\Local\Temp\cc4D1d2D.s 			page 5
+
+
+ 186 001a 1A69     		ldr	r2, [r3, #16]
+ 187              		.loc 1 48 23 view .LVU45
+ 188 001c 42F00102 		orr	r2, r2, #1
+ 189 0020 1A61     		str	r2, [r3, #16]
+ 190              	.L13:
+  49:project/src/delay.c ****         do
+ 191              		.loc 1 49 9 is_stmt 1 view .LVU46
+  50:project/src/delay.c ****         {
+  51:project/src/delay.c ****             temp = SysTick->CTRL;
+ 192              		.loc 1 51 13 view .LVU47
+ 193              		.loc 1 51 18 is_stmt 0 view .LVU48
+ 194 0022 4FF0E023 		mov	r3, #-536813568
+ 195 0026 1B69     		ldr	r3, [r3, #16]
+ 196              	.LVL10:
+  52:project/src/delay.c ****         } while ((temp & 0x01)&&!(temp &(1<<16)));
+ 197              		.loc 1 52 31 is_stmt 1 discriminator 1 view .LVU49
+ 198 0028 03F00113 		and	r3, r3, #65537
+ 199              	.LVL11:
+ 200              		.loc 1 52 31 is_stmt 0 discriminator 1 view .LVU50
+ 201 002c 012B     		cmp	r3, #1
+ 202 002e F8D0     		beq	.L13
+  53:project/src/delay.c ****         
+  54:project/src/delay.c ****         SysTick->CTRL &= ~SysTick_CTRL_ENABLE_Msk;
+ 203              		.loc 1 54 9 is_stmt 1 view .LVU51
+ 204              		.loc 1 54 16 is_stmt 0 view .LVU52
+ 205 0030 4FF0E023 		mov	r3, #-536813568
+ 206 0034 1A69     		ldr	r2, [r3, #16]
+ 207              		.loc 1 54 23 view .LVU53
+ 208 0036 22F00102 		bic	r2, r2, #1
+ 209 003a 1A61     		str	r2, [r3, #16]
+  55:project/src/delay.c ****         SysTick->VAL= 0x00;
+ 210              		.loc 1 55 9 is_stmt 1 view .LVU54
+ 211              		.loc 1 55 21 is_stmt 0 view .LVU55
+ 212 003c 0022     		movs	r2, #0
+ 213 003e 9A61     		str	r2, [r3, #24]
+ 214              	.LVL12:
+ 215              	.L10:
+  35:project/src/delay.c ****     {
+ 216              		.loc 1 35 11 is_stmt 1 view .LVU56
+ 217 0040 58B1     		cbz	r0, .L15
+  37:project/src/delay.c ****         {
+ 218              		.loc 1 37 9 view .LVU57
+  37:project/src/delay.c ****         {
+ 219              		.loc 1 37 11 is_stmt 0 view .LVU58
+ 220 0042 3228     		cmp	r0, #50
+ 221 0044 DDD9     		bls	.L11
+  39:project/src/delay.c ****             nms -= STEP_DELAY_MS;
+ 222              		.loc 1 39 13 is_stmt 1 view .LVU59
+  39:project/src/delay.c ****             nms -= STEP_DELAY_MS;
+ 223              		.loc 1 39 29 is_stmt 0 view .LVU60
+ 224 0046 054B     		ldr	r3, .L16
+ 225 0048 1B68     		ldr	r3, [r3]
+ 226 004a 3222     		movs	r2, #50
+ 227 004c 02FB03F3 		mul	r3, r2, r3
+  39:project/src/delay.c ****             nms -= STEP_DELAY_MS;
+ 228              		.loc 1 39 27 view .LVU61
+ 229 0050 4FF0E022 		mov	r2, #-536813568
+ARM GAS  C:\Users\bians\AppData\Local\Temp\cc4D1d2D.s 			page 6
+
+
+ 230 0054 5361     		str	r3, [r2, #20]
+  40:project/src/delay.c ****         }
+ 231              		.loc 1 40 13 is_stmt 1 view .LVU62
+  40:project/src/delay.c ****         }
+ 232              		.loc 1 40 17 is_stmt 0 view .LVU63
+ 233 0056 3238     		subs	r0, r0, #50
+ 234              	.LVL13:
+  40:project/src/delay.c ****         }
+ 235              		.loc 1 40 17 view .LVU64
+ 236 0058 DBE7     		b	.L12
+ 237              	.L15:
+  56:project/src/delay.c **** 
+  57:project/src/delay.c ****     }
+  58:project/src/delay.c **** 
+  59:project/src/delay.c **** }
+ 238              		.loc 1 59 1 view .LVU65
+ 239 005a 7047     		bx	lr
+ 240              	.L17:
+ 241              		.align	2
+ 242              	.L16:
+ 243 005c 00000000 		.word	fac_ms
+ 244              		.cfi_endproc
+ 245              	.LFE136:
+ 247              		.section	.text.delay_sec,"ax",%progbits
+ 248              		.align	1
+ 249              		.global	delay_sec
+ 250              		.syntax unified
+ 251              		.thumb
+ 252              		.thumb_func
+ 254              	delay_sec:
+ 255              	.LVL14:
+ 256              	.LFB137:
+  60:project/src/delay.c **** 
+  61:project/src/delay.c **** void delay_sec(uint16_t sec)
+  62:project/src/delay.c **** {
+ 257              		.loc 1 62 1 is_stmt 1 view -0
+ 258              		.cfi_startproc
+ 259              		@ args = 0, pretend = 0, frame = 0
+ 260              		@ frame_needed = 0, uses_anonymous_args = 0
+ 261              		.loc 1 62 1 is_stmt 0 view .LVU67
+ 262 0000 38B5     		push	{r3, r4, r5, lr}
+ 263              	.LCFI1:
+ 264              		.cfi_def_cfa_offset 16
+ 265              		.cfi_offset 3, -16
+ 266              		.cfi_offset 4, -12
+ 267              		.cfi_offset 5, -8
+ 268              		.cfi_offset 14, -4
+ 269 0002 0546     		mov	r5, r0
+  63:project/src/delay.c ****     uint16_t index;
+ 270              		.loc 1 63 5 is_stmt 1 view .LVU68
+  64:project/src/delay.c ****     for(index = 0;index < sec; index++)
+ 271              		.loc 1 64 5 view .LVU69
+ 272              	.LVL15:
+ 273              		.loc 1 64 15 is_stmt 0 view .LVU70
+ 274 0004 0024     		movs	r4, #0
+ 275              		.loc 1 64 5 view .LVU71
+ 276 0006 09E0     		b	.L19
+ARM GAS  C:\Users\bians\AppData\Local\Temp\cc4D1d2D.s 			page 7
+
+
+ 277              	.LVL16:
+ 278              	.L20:
+  65:project/src/delay.c ****     {
+  66:project/src/delay.c ****         delay_ms(500);
+ 279              		.loc 1 66 9 is_stmt 1 view .LVU72
+ 280 0008 4FF4FA70 		mov	r0, #500
+ 281 000c FFF7FEFF 		bl	delay_ms
+ 282              	.LVL17:
+  67:project/src/delay.c ****         delay_ms(500);
+ 283              		.loc 1 67 9 view .LVU73
+ 284 0010 4FF4FA70 		mov	r0, #500
+ 285 0014 FFF7FEFF 		bl	delay_ms
+ 286              	.LVL18:
+  64:project/src/delay.c ****     for(index = 0;index < sec; index++)
+ 287              		.loc 1 64 37 discriminator 3 view .LVU74
+ 288 0018 0134     		adds	r4, r4, #1
+ 289              	.LVL19:
+  64:project/src/delay.c ****     for(index = 0;index < sec; index++)
+ 290              		.loc 1 64 37 is_stmt 0 discriminator 3 view .LVU75
+ 291 001a A4B2     		uxth	r4, r4
+ 292              	.LVL20:
+ 293              	.L19:
+  64:project/src/delay.c ****     for(index = 0;index < sec; index++)
+ 294              		.loc 1 64 25 is_stmt 1 discriminator 1 view .LVU76
+ 295 001c AC42     		cmp	r4, r5
+ 296 001e F3D3     		bcc	.L20
+  68:project/src/delay.c **** 
+  69:project/src/delay.c ****     }
+  70:project/src/delay.c **** 
+  71:project/src/delay.c **** 
+  72:project/src/delay.c **** }...
+ 297              		.loc 1 72 1 is_stmt 0 view .LVU77
+ 298 0020 38BD     		pop	{r3, r4, r5, pc}
+ 299              		.loc 1 72 1 view .LVU78
+ 300              		.cfi_endproc
+ 301              	.LFE137:
+ 303              		.section	.bss.fac_ms,"aw",%nobits
+ 304              		.align	2
+ 307              	fac_ms:
+ 308 0000 00000000 		.space	4
+ 309              		.section	.bss.fac_us,"aw",%nobits
+ 310              		.align	2
+ 313              	fac_us:
+ 314 0000 00000000 		.space	4
+ 315              		.text
+ 316              	.Letext0:
+ 317              		.file 2 "D:/gnu_toolchain/arm-none-eabi/include/machine/_default_types.h"
+ 318              		.file 3 "D:/gnu_toolchain/arm-none-eabi/include/sys/_stdint.h"
+ 319              		.file 4 "libraries/cmsis/cm4/core_support/core_cm4.h"
+ 320              		.file 5 "libraries/drivers/inc/at32f403a_407_misc.h"
+ 321              		.file 6 "libraries/drivers/inc/at32f403a_407_tmr.h"
+ 322              		.file 7 "libraries/cmsis/cm4/device_support/system_at32f403a_407.h"
+ARM GAS  C:\Users\bians\AppData\Local\Temp\cc4D1d2D.s 			page 8
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 delay.c
+C:\Users\bians\AppData\Local\Temp\cc4D1d2D.s:21     .text.delay_init:00000000 $t
+C:\Users\bians\AppData\Local\Temp\cc4D1d2D.s:27     .text.delay_init:00000000 delay_init
+C:\Users\bians\AppData\Local\Temp\cc4D1d2D.s:65     .text.delay_init:00000028 $d
+C:\Users\bians\AppData\Local\Temp\cc4D1d2D.s:313    .bss.fac_us:00000000 fac_us
+C:\Users\bians\AppData\Local\Temp\cc4D1d2D.s:307    .bss.fac_ms:00000000 fac_ms
+C:\Users\bians\AppData\Local\Temp\cc4D1d2D.s:74     .text.delay_us:00000000 $t
+C:\Users\bians\AppData\Local\Temp\cc4D1d2D.s:80     .text.delay_us:00000000 delay_us
+C:\Users\bians\AppData\Local\Temp\cc4D1d2D.s:139    .text.delay_us:0000003c $d
+C:\Users\bians\AppData\Local\Temp\cc4D1d2D.s:144    .text.delay_ms:00000000 $t
+C:\Users\bians\AppData\Local\Temp\cc4D1d2D.s:150    .text.delay_ms:00000000 delay_ms
+C:\Users\bians\AppData\Local\Temp\cc4D1d2D.s:243    .text.delay_ms:0000005c $d
+C:\Users\bians\AppData\Local\Temp\cc4D1d2D.s:248    .text.delay_sec:00000000 $t
+C:\Users\bians\AppData\Local\Temp\cc4D1d2D.s:254    .text.delay_sec:00000000 delay_sec
+C:\Users\bians\AppData\Local\Temp\cc4D1d2D.s:304    .bss.fac_ms:00000000 $d
+C:\Users\bians\AppData\Local\Temp\cc4D1d2D.s:310    .bss.fac_us:00000000 $d
+
+UNDEFINED SYMBOLS
+systick_clock_source_config
+system_core_clock

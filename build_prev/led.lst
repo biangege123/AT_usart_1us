@@ -1,0 +1,440 @@
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccB7J2DK.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.arch armv7e-m
+   3              		.fpu fpv4-sp-d16
+   4              		.eabi_attribute 27, 1
+   5              		.eabi_attribute 28, 1
+   6              		.eabi_attribute 20, 1
+   7              		.eabi_attribute 21, 1
+   8              		.eabi_attribute 23, 3
+   9              		.eabi_attribute 24, 1
+  10              		.eabi_attribute 25, 1
+  11              		.eabi_attribute 26, 1
+  12              		.eabi_attribute 30, 1
+  13              		.eabi_attribute 34, 1
+  14              		.eabi_attribute 18, 4
+  15              		.file	"led.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.file 1 "project/src/led.c"
+  20              		.section	.text.at32_led_init,"ax",%progbits
+  21              		.align	1
+  22              		.global	at32_led_init
+  23              		.syntax unified
+  24              		.thumb
+  25              		.thumb_func
+  27              	at32_led_init:
+  28              	.LVL0:
+  29              	.LFB138:
+   1:project/src/led.c **** #include "led.h"
+   2:project/src/led.c **** #include "button.h"
+   3:project/src/led.c **** #include "wk_system.h"
+   4:project/src/led.c **** 
+   5:project/src/led.c **** 
+   6:project/src/led.c **** 
+   7:project/src/led.c **** gpio_type *led_gpio_port[LED_NUM] = {LED2_GPIO,LED3_GPIO,LED4_GPIO};
+   8:project/src/led.c **** uint16_t led_gpio_pin[LED_NUM] = {LED2_PIN,LED3_PIN,LED4_PIN};
+   9:project/src/led.c **** crm_periph_clock_type led_gpio_crm_clk[LED_NUM] = {LED2_GPIO_CRM_CLK,LED3_GPIO_CRM_CLK,LED4_GPIO_CR
+  10:project/src/led.c **** 
+  11:project/src/led.c **** 
+  12:project/src/led.c **** 
+  13:project/src/led.c **** 
+  14:project/src/led.c **** void at32_board_init(void)
+  15:project/src/led.c **** {
+  16:project/src/led.c ****     //delay_init();
+  17:project/src/led.c **** 
+  18:project/src/led.c ****     at32_led_init(LED2);
+  19:project/src/led.c ****     at32_led_init(LED3);
+  20:project/src/led.c ****     at32_led_init(LED4);
+  21:project/src/led.c ****     at32_led_off(LED2);
+  22:project/src/led.c ****     at32_led_off(LED3);
+  23:project/src/led.c ****     at32_led_off(LED4);
+  24:project/src/led.c **** 
+  25:project/src/led.c ****     at32_button_init();
+  26:project/src/led.c **** 
+  27:project/src/led.c **** }
+  28:project/src/led.c **** 
+  29:project/src/led.c **** 
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccB7J2DK.s 			page 2
+
+
+  30:project/src/led.c **** 
+  31:project/src/led.c **** 
+  32:project/src/led.c **** void at32_led_init(led_type led)
+  33:project/src/led.c **** {
+  30              		.loc 1 33 1 view -0
+  31              		.cfi_startproc
+  32              		@ args = 0, pretend = 0, frame = 8
+  33              		@ frame_needed = 0, uses_anonymous_args = 0
+  34              		.loc 1 33 1 is_stmt 0 view .LVU1
+  35 0000 30B5     		push	{r4, r5, lr}
+  36              	.LCFI0:
+  37              		.cfi_def_cfa_offset 12
+  38              		.cfi_offset 4, -12
+  39              		.cfi_offset 5, -8
+  40              		.cfi_offset 14, -4
+  41 0002 83B0     		sub	sp, sp, #12
+  42              	.LCFI1:
+  43              		.cfi_def_cfa_offset 24
+  44 0004 0446     		mov	r4, r0
+  34:project/src/led.c ****     gpio_init_type gpio_init_struct;
+  45              		.loc 1 34 5 is_stmt 1 view .LVU2
+  35:project/src/led.c **** 
+  36:project/src/led.c ****     crm_periph_clock_enable(led_gpio_crm_clk[led],TRUE);
+  46              		.loc 1 36 5 view .LVU3
+  47 0006 0121     		movs	r1, #1
+  48 0008 0F4B     		ldr	r3, .L3
+  49 000a 53F82000 		ldr	r0, [r3, r0, lsl #2]
+  50              	.LVL1:
+  51              		.loc 1 36 5 is_stmt 0 view .LVU4
+  52 000e FFF7FEFF 		bl	crm_periph_clock_enable
+  53              	.LVL2:
+  37:project/src/led.c ****     gpio_default_para_init(&gpio_init_struct);
+  54              		.loc 1 37 5 is_stmt 1 view .LVU5
+  55 0012 6846     		mov	r0, sp
+  56 0014 FFF7FEFF 		bl	gpio_default_para_init
+  57              	.LVL3:
+  38:project/src/led.c **** 
+  39:project/src/led.c ****     gpio_init_struct.gpio_drive_strength = GPIO_DRIVE_STRENGTH_STRONGER;
+  58              		.loc 1 39 5 view .LVU6
+  59              		.loc 1 39 42 is_stmt 0 view .LVU7
+  60 0018 0123     		movs	r3, #1
+  61 001a 8DF80730 		strb	r3, [sp, #7]
+  40:project/src/led.c ****     gpio_init_struct.gpio_out_type = GPIO_OUTPUT_PUSH_PULL;
+  62              		.loc 1 40 5 is_stmt 1 view .LVU8
+  63              		.loc 1 40 36 is_stmt 0 view .LVU9
+  64 001e 0023     		movs	r3, #0
+  65 0020 8DF80430 		strb	r3, [sp, #4]
+  41:project/src/led.c ****     gpio_init_struct.gpio_mode = GPIO_MODE_OUTPUT;
+  66              		.loc 1 41 5 is_stmt 1 view .LVU10
+  67              		.loc 1 41 32 is_stmt 0 view .LVU11
+  68 0024 1023     		movs	r3, #16
+  69 0026 8DF80630 		strb	r3, [sp, #6]
+  42:project/src/led.c ****     gpio_init_struct.gpio_pins = led_gpio_pin[led];
+  70              		.loc 1 42 5 is_stmt 1 view .LVU12
+  71              		.loc 1 42 46 is_stmt 0 view .LVU13
+  72 002a 084B     		ldr	r3, .L3+4
+  73 002c 33F81430 		ldrh	r3, [r3, r4, lsl #1]
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccB7J2DK.s 			page 3
+
+
+  74              		.loc 1 42 32 view .LVU14
+  75 0030 0093     		str	r3, [sp]
+  43:project/src/led.c ****     gpio_init_struct.gpio_pull = GPIO_PULL_NONE;
+  76              		.loc 1 43 5 is_stmt 1 view .LVU15
+  77              		.loc 1 43 32 is_stmt 0 view .LVU16
+  78 0032 0423     		movs	r3, #4
+  79 0034 8DF80530 		strb	r3, [sp, #5]
+  44:project/src/led.c ****     gpio_init(led_gpio_port[led],&gpio_init_struct);
+  80              		.loc 1 44 5 is_stmt 1 view .LVU17
+  81 0038 6946     		mov	r1, sp
+  82 003a 054B     		ldr	r3, .L3+8
+  83 003c 53F82400 		ldr	r0, [r3, r4, lsl #2]
+  84 0040 FFF7FEFF 		bl	gpio_init
+  85              	.LVL4:
+  45:project/src/led.c **** 
+  46:project/src/led.c **** }
+  86              		.loc 1 46 1 is_stmt 0 view .LVU18
+  87 0044 03B0     		add	sp, sp, #12
+  88              	.LCFI2:
+  89              		.cfi_def_cfa_offset 12
+  90              		@ sp needed
+  91 0046 30BD     		pop	{r4, r5, pc}
+  92              	.LVL5:
+  93              	.L4:
+  94              		.loc 1 46 1 view .LVU19
+  95              		.align	2
+  96              	.L3:
+  97 0048 00000000 		.word	led_gpio_crm_clk
+  98 004c 00000000 		.word	led_gpio_pin
+  99 0050 00000000 		.word	led_gpio_port
+ 100              		.cfi_endproc
+ 101              	.LFE138:
+ 103              		.section	.text.at32_led_on,"ax",%progbits
+ 104              		.align	1
+ 105              		.global	at32_led_on
+ 106              		.syntax unified
+ 107              		.thumb
+ 108              		.thumb_func
+ 110              	at32_led_on:
+ 111              	.LVL6:
+ 112              	.LFB139:
+  47:project/src/led.c **** 
+  48:project/src/led.c **** 
+  49:project/src/led.c **** 
+  50:project/src/led.c **** 
+  51:project/src/led.c **** 
+  52:project/src/led.c **** void at32_led_on(led_type led)
+  53:project/src/led.c **** {
+ 113              		.loc 1 53 1 is_stmt 1 view -0
+ 114              		.cfi_startproc
+ 115              		@ args = 0, pretend = 0, frame = 0
+ 116              		@ frame_needed = 0, uses_anonymous_args = 0
+ 117              		@ link register save eliminated.
+  54:project/src/led.c ****     if(led > (LED_NUM - 1))
+ 118              		.loc 1 54 5 view .LVU21
+ 119              		.loc 1 54 7 is_stmt 0 view .LVU22
+ 120 0000 0228     		cmp	r0, #2
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccB7J2DK.s 			page 4
+
+
+ 121 0002 07D8     		bhi	.L5
+  55:project/src/led.c ****         return;
+  56:project/src/led.c ****     if(led_gpio_pin[led])
+ 122              		.loc 1 56 5 is_stmt 1 view .LVU23
+ 123              		.loc 1 56 20 is_stmt 0 view .LVU24
+ 124 0004 044B     		ldr	r3, .L7
+ 125 0006 33F81030 		ldrh	r3, [r3, r0, lsl #1]
+ 126              		.loc 1 56 7 view .LVU25
+ 127 000a 1BB1     		cbz	r3, .L5
+  57:project/src/led.c ****         led_gpio_port[led]->clr = led_gpio_pin[led];
+ 128              		.loc 1 57 9 is_stmt 1 view .LVU26
+ 129              		.loc 1 57 22 is_stmt 0 view .LVU27
+ 130 000c 034A     		ldr	r2, .L7+4
+ 131 000e 52F82020 		ldr	r2, [r2, r0, lsl #2]
+ 132              		.loc 1 57 33 view .LVU28
+ 133 0012 5361     		str	r3, [r2, #20]
+ 134              	.L5:
+  58:project/src/led.c **** 
+  59:project/src/led.c **** }
+ 135              		.loc 1 59 1 view .LVU29
+ 136 0014 7047     		bx	lr
+ 137              	.L8:
+ 138 0016 00BF     		.align	2
+ 139              	.L7:
+ 140 0018 00000000 		.word	led_gpio_pin
+ 141 001c 00000000 		.word	led_gpio_port
+ 142              		.cfi_endproc
+ 143              	.LFE139:
+ 145              		.section	.text.at32_led_off,"ax",%progbits
+ 146              		.align	1
+ 147              		.global	at32_led_off
+ 148              		.syntax unified
+ 149              		.thumb
+ 150              		.thumb_func
+ 152              	at32_led_off:
+ 153              	.LVL7:
+ 154              	.LFB140:
+  60:project/src/led.c **** 
+  61:project/src/led.c **** void at32_led_off(led_type led)
+  62:project/src/led.c **** {
+ 155              		.loc 1 62 1 is_stmt 1 view -0
+ 156              		.cfi_startproc
+ 157              		@ args = 0, pretend = 0, frame = 0
+ 158              		@ frame_needed = 0, uses_anonymous_args = 0
+ 159              		@ link register save eliminated.
+  63:project/src/led.c ****     if(led > (LED_NUM - 1))
+ 160              		.loc 1 63 5 view .LVU31
+ 161              		.loc 1 63 7 is_stmt 0 view .LVU32
+ 162 0000 0228     		cmp	r0, #2
+ 163 0002 07D8     		bhi	.L9
+  64:project/src/led.c ****         return;
+  65:project/src/led.c ****     if(led_gpio_pin[led])
+ 164              		.loc 1 65 5 is_stmt 1 view .LVU33
+ 165              		.loc 1 65 20 is_stmt 0 view .LVU34
+ 166 0004 044B     		ldr	r3, .L11
+ 167 0006 33F81030 		ldrh	r3, [r3, r0, lsl #1]
+ 168              		.loc 1 65 7 view .LVU35
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccB7J2DK.s 			page 5
+
+
+ 169 000a 1BB1     		cbz	r3, .L9
+  66:project/src/led.c ****         led_gpio_port[led]->scr = led_gpio_pin[led];
+ 170              		.loc 1 66 9 is_stmt 1 view .LVU36
+ 171              		.loc 1 66 22 is_stmt 0 view .LVU37
+ 172 000c 034A     		ldr	r2, .L11+4
+ 173 000e 52F82020 		ldr	r2, [r2, r0, lsl #2]
+ 174              		.loc 1 66 33 view .LVU38
+ 175 0012 1361     		str	r3, [r2, #16]
+ 176              	.L9:
+  67:project/src/led.c **** 
+  68:project/src/led.c **** }
+ 177              		.loc 1 68 1 view .LVU39
+ 178 0014 7047     		bx	lr
+ 179              	.L12:
+ 180 0016 00BF     		.align	2
+ 181              	.L11:
+ 182 0018 00000000 		.word	led_gpio_pin
+ 183 001c 00000000 		.word	led_gpio_port
+ 184              		.cfi_endproc
+ 185              	.LFE140:
+ 187              		.section	.text.at32_board_init,"ax",%progbits
+ 188              		.align	1
+ 189              		.global	at32_board_init
+ 190              		.syntax unified
+ 191              		.thumb
+ 192              		.thumb_func
+ 194              	at32_board_init:
+ 195              	.LFB137:
+  15:project/src/led.c ****     //delay_init();
+ 196              		.loc 1 15 1 is_stmt 1 view -0
+ 197              		.cfi_startproc
+ 198              		@ args = 0, pretend = 0, frame = 0
+ 199              		@ frame_needed = 0, uses_anonymous_args = 0
+ 200 0000 08B5     		push	{r3, lr}
+ 201              	.LCFI3:
+ 202              		.cfi_def_cfa_offset 8
+ 203              		.cfi_offset 3, -8
+ 204              		.cfi_offset 14, -4
+  18:project/src/led.c ****     at32_led_init(LED3);
+ 205              		.loc 1 18 5 view .LVU41
+ 206 0002 0020     		movs	r0, #0
+ 207 0004 FFF7FEFF 		bl	at32_led_init
+ 208              	.LVL8:
+  19:project/src/led.c ****     at32_led_init(LED4);
+ 209              		.loc 1 19 5 view .LVU42
+ 210 0008 0120     		movs	r0, #1
+ 211 000a FFF7FEFF 		bl	at32_led_init
+ 212              	.LVL9:
+  20:project/src/led.c ****     at32_led_off(LED2);
+ 213              		.loc 1 20 5 view .LVU43
+ 214 000e 0220     		movs	r0, #2
+ 215 0010 FFF7FEFF 		bl	at32_led_init
+ 216              	.LVL10:
+  21:project/src/led.c ****     at32_led_off(LED3);
+ 217              		.loc 1 21 5 view .LVU44
+ 218 0014 0020     		movs	r0, #0
+ 219 0016 FFF7FEFF 		bl	at32_led_off
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccB7J2DK.s 			page 6
+
+
+ 220              	.LVL11:
+  22:project/src/led.c ****     at32_led_off(LED4);
+ 221              		.loc 1 22 5 view .LVU45
+ 222 001a 0120     		movs	r0, #1
+ 223 001c FFF7FEFF 		bl	at32_led_off
+ 224              	.LVL12:
+  23:project/src/led.c **** 
+ 225              		.loc 1 23 5 view .LVU46
+ 226 0020 0220     		movs	r0, #2
+ 227 0022 FFF7FEFF 		bl	at32_led_off
+ 228              	.LVL13:
+  25:project/src/led.c **** 
+ 229              		.loc 1 25 5 view .LVU47
+ 230 0026 FFF7FEFF 		bl	at32_button_init
+ 231              	.LVL14:
+  27:project/src/led.c **** 
+ 232              		.loc 1 27 1 is_stmt 0 view .LVU48
+ 233 002a 08BD     		pop	{r3, pc}
+ 234              		.cfi_endproc
+ 235              	.LFE137:
+ 237              		.section	.text.at32_led_toggle,"ax",%progbits
+ 238              		.align	1
+ 239              		.global	at32_led_toggle
+ 240              		.syntax unified
+ 241              		.thumb
+ 242              		.thumb_func
+ 244              	at32_led_toggle:
+ 245              	.LVL15:
+ 246              	.LFB141:
+  69:project/src/led.c **** 
+  70:project/src/led.c **** void at32_led_toggle(led_type led)
+  71:project/src/led.c **** {
+ 247              		.loc 1 71 1 is_stmt 1 view -0
+ 248              		.cfi_startproc
+ 249              		@ args = 0, pretend = 0, frame = 0
+ 250              		@ frame_needed = 0, uses_anonymous_args = 0
+ 251              		@ link register save eliminated.
+  72:project/src/led.c ****     if(led > (LED_NUM - 1))
+ 252              		.loc 1 72 5 view .LVU50
+ 253              		.loc 1 72 7 is_stmt 0 view .LVU51
+ 254 0000 0228     		cmp	r0, #2
+ 255 0002 09D8     		bhi	.L15
+  73:project/src/led.c ****         return;
+  74:project/src/led.c ****     if(led_gpio_pin[led])
+ 256              		.loc 1 74 5 is_stmt 1 view .LVU52
+ 257              		.loc 1 74 20 is_stmt 0 view .LVU53
+ 258 0004 054B     		ldr	r3, .L17
+ 259 0006 33F81030 		ldrh	r3, [r3, r0, lsl #1]
+ 260              		.loc 1 74 7 view .LVU54
+ 261 000a 2BB1     		cbz	r3, .L15
+  75:project/src/led.c ****         led_gpio_port[led]->odt ^= led_gpio_pin[led];
+ 262              		.loc 1 75 9 is_stmt 1 view .LVU55
+ 263              		.loc 1 75 22 is_stmt 0 view .LVU56
+ 264 000c 044A     		ldr	r2, .L17+4
+ 265 000e 52F82010 		ldr	r1, [r2, r0, lsl #2]
+ 266              		.loc 1 75 27 view .LVU57
+ 267 0012 CA68     		ldr	r2, [r1, #12]
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccB7J2DK.s 			page 7
+
+
+ 268              		.loc 1 75 33 view .LVU58
+ 269 0014 5340     		eors	r3, r3, r2
+ 270 0016 CB60     		str	r3, [r1, #12]
+ 271              	.L15:
+  76:project/src/led.c **** 
+  77:project/src/led.c **** }
+ 272              		.loc 1 77 1 view .LVU59
+ 273 0018 7047     		bx	lr
+ 274              	.L18:
+ 275 001a 00BF     		.align	2
+ 276              	.L17:
+ 277 001c 00000000 		.word	led_gpio_pin
+ 278 0020 00000000 		.word	led_gpio_port
+ 279              		.cfi_endproc
+ 280              	.LFE141:
+ 282              		.global	led_gpio_crm_clk
+ 283              		.section	.data.led_gpio_crm_clk,"aw"
+ 284              		.align	2
+ 287              	led_gpio_crm_clk:
+ 288 0000 05001800 		.word	1572869
+ 289 0004 05001800 		.word	1572869
+ 290 0008 05001800 		.word	1572869
+ 291              		.global	led_gpio_pin
+ 292              		.section	.data.led_gpio_pin,"aw"
+ 293              		.align	2
+ 296              	led_gpio_pin:
+ 297 0000 0020     		.short	8192
+ 298 0002 0040     		.short	16384
+ 299 0004 0080     		.short	-32768
+ 300              		.global	led_gpio_port
+ 301              		.section	.data.led_gpio_port,"aw"
+ 302              		.align	2
+ 305              	led_gpio_port:
+ 306 0000 00140140 		.word	1073812480
+ 307 0004 00140140 		.word	1073812480
+ 308 0008 00140140 		.word	1073812480
+ 309              		.text
+ 310              	.Letext0:
+ 311              		.file 2 "D:/gnu_toolchain/arm-none-eabi/include/machine/_default_types.h"
+ 312              		.file 3 "D:/gnu_toolchain/arm-none-eabi/include/sys/_stdint.h"
+ 313              		.file 4 "libraries/cmsis/cm4/device_support/at32f403a_407.h"
+ 314              		.file 5 "libraries/drivers/inc/at32f403a_407_crm.h"
+ 315              		.file 6 "libraries/drivers/inc/at32f403a_407_gpio.h"
+ 316              		.file 7 "libraries/drivers/inc/at32f403a_407_tmr.h"
+ 317              		.file 8 "project/inc/led.h"
+ 318              		.file 9 "project/inc/button.h"
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccB7J2DK.s 			page 8
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 led.c
+C:\Users\bians\AppData\Local\Temp\ccB7J2DK.s:21     .text.at32_led_init:00000000 $t
+C:\Users\bians\AppData\Local\Temp\ccB7J2DK.s:27     .text.at32_led_init:00000000 at32_led_init
+C:\Users\bians\AppData\Local\Temp\ccB7J2DK.s:97     .text.at32_led_init:00000048 $d
+C:\Users\bians\AppData\Local\Temp\ccB7J2DK.s:287    .data.led_gpio_crm_clk:00000000 led_gpio_crm_clk
+C:\Users\bians\AppData\Local\Temp\ccB7J2DK.s:296    .data.led_gpio_pin:00000000 led_gpio_pin
+C:\Users\bians\AppData\Local\Temp\ccB7J2DK.s:305    .data.led_gpio_port:00000000 led_gpio_port
+C:\Users\bians\AppData\Local\Temp\ccB7J2DK.s:104    .text.at32_led_on:00000000 $t
+C:\Users\bians\AppData\Local\Temp\ccB7J2DK.s:110    .text.at32_led_on:00000000 at32_led_on
+C:\Users\bians\AppData\Local\Temp\ccB7J2DK.s:140    .text.at32_led_on:00000018 $d
+C:\Users\bians\AppData\Local\Temp\ccB7J2DK.s:146    .text.at32_led_off:00000000 $t
+C:\Users\bians\AppData\Local\Temp\ccB7J2DK.s:152    .text.at32_led_off:00000000 at32_led_off
+C:\Users\bians\AppData\Local\Temp\ccB7J2DK.s:182    .text.at32_led_off:00000018 $d
+C:\Users\bians\AppData\Local\Temp\ccB7J2DK.s:188    .text.at32_board_init:00000000 $t
+C:\Users\bians\AppData\Local\Temp\ccB7J2DK.s:194    .text.at32_board_init:00000000 at32_board_init
+C:\Users\bians\AppData\Local\Temp\ccB7J2DK.s:238    .text.at32_led_toggle:00000000 $t
+C:\Users\bians\AppData\Local\Temp\ccB7J2DK.s:244    .text.at32_led_toggle:00000000 at32_led_toggle
+C:\Users\bians\AppData\Local\Temp\ccB7J2DK.s:277    .text.at32_led_toggle:0000001c $d
+C:\Users\bians\AppData\Local\Temp\ccB7J2DK.s:284    .data.led_gpio_crm_clk:00000000 $d
+C:\Users\bians\AppData\Local\Temp\ccB7J2DK.s:293    .data.led_gpio_pin:00000000 $d
+C:\Users\bians\AppData\Local\Temp\ccB7J2DK.s:302    .data.led_gpio_port:00000000 $d
+
+UNDEFINED SYMBOLS
+crm_periph_clock_enable
+gpio_default_para_init
+gpio_init
+at32_button_init

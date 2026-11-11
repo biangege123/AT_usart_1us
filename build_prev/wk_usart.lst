@@ -1,0 +1,538 @@
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccmKhcNB.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.arch armv7e-m
+   3              		.fpu fpv4-sp-d16
+   4              		.eabi_attribute 27, 1
+   5              		.eabi_attribute 28, 1
+   6              		.eabi_attribute 20, 1
+   7              		.eabi_attribute 21, 1
+   8              		.eabi_attribute 23, 3
+   9              		.eabi_attribute 24, 1
+  10              		.eabi_attribute 25, 1
+  11              		.eabi_attribute 26, 1
+  12              		.eabi_attribute 30, 1
+  13              		.eabi_attribute 34, 1
+  14              		.eabi_attribute 18, 4
+  15              		.file	"wk_usart.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.file 1 "project/src/wk_usart.c"
+  20              		.section	.text.__io_putchar,"ax",%progbits
+  21              		.align	1
+  22              		.global	__io_putchar
+  23              		.syntax unified
+  24              		.thumb
+  25              		.thumb_func
+  27              	__io_putchar:
+  28              	.LVL0:
+  29              	.LFB137:
+   1:project/src/wk_usart.c **** /* add user code begin Header */
+   2:project/src/wk_usart.c **** /**
+   3:project/src/wk_usart.c ****   **************************************************************************
+   4:project/src/wk_usart.c ****   * @file     wk_usart.c
+   5:project/src/wk_usart.c ****   * @brief    work bench config program
+   6:project/src/wk_usart.c ****   **************************************************************************
+   7:project/src/wk_usart.c ****   * Copyright (c) 2025, Artery Technology, All rights reserved.
+   8:project/src/wk_usart.c ****   *
+   9:project/src/wk_usart.c ****   * The software Board Support Package (BSP) that is made available to
+  10:project/src/wk_usart.c ****   * download from Artery official website is the copyrighted work of Artery.
+  11:project/src/wk_usart.c ****   * Artery authorizes customers to use, copy, and distribute the BSP
+  12:project/src/wk_usart.c ****   * software and its related documentation for the purpose of design and
+  13:project/src/wk_usart.c ****   * development in conjunction with Artery microcontrollers. Use of the
+  14:project/src/wk_usart.c ****   * software is governed by this copyright notice and the following disclaimer.
+  15:project/src/wk_usart.c ****   *
+  16:project/src/wk_usart.c ****   * THIS SOFTWARE IS PROVIDED ON "AS IS" BASIS WITHOUT WARRANTIES,
+  17:project/src/wk_usart.c ****   * GUARANTEES OR REPRESENTATIONS OF ANY KIND. ARTERY EXPRESSLY DISCLAIMS,
+  18:project/src/wk_usart.c ****   * TO THE FULLEST EXTENT PERMITTED BY LAW, ALL EXPRESS, IMPLIED OR
+  19:project/src/wk_usart.c ****   * STATUTORY OR OTHER WARRANTIES, GUARANTEES OR REPRESENTATIONS,
+  20:project/src/wk_usart.c ****   * INCLUDING BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY,
+  21:project/src/wk_usart.c ****   * FITNESS FOR A PARTICULAR PURPOSE, OR NON-INFRINGEMENT.
+  22:project/src/wk_usart.c ****   *
+  23:project/src/wk_usart.c ****   **************************************************************************
+  24:project/src/wk_usart.c ****   */
+  25:project/src/wk_usart.c **** /* add user code end Header */
+  26:project/src/wk_usart.c **** 
+  27:project/src/wk_usart.c **** /* Includes ------------------------------------------------------------------*/
+  28:project/src/wk_usart.c **** #include "wk_usart.h"
+  29:project/src/wk_usart.c **** 
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccmKhcNB.s 			page 2
+
+
+  30:project/src/wk_usart.c **** /* add user code begin 0 */
+  31:project/src/wk_usart.c **** 
+  32:project/src/wk_usart.c **** /*支持使用printf函数，无需使用microlib*/
+  33:project/src/wk_usart.c **** #if (__ARMCC_VERSION > 6000000)
+  34:project/src/wk_usart.c ****   __asm(".global __use_no_semihosting\n\t");
+  35:project/src/wk_usart.c ****   void _sys_exit(int x)
+  36:project/src/wk_usart.c ****   {
+  37:project/src/wk_usart.c ****     UNUSED(x);
+  38:project/src/wk_usart.c ****   }
+  39:project/src/wk_usart.c ****   /*请求使用 __use_no_semihosting,但_ttywrch已启用*/
+  40:project/src/wk_usart.c ****   void _ttywrch(int ch)
+  41:project/src/wk_usart.c ****   {
+  42:project/src/wk_usart.c ****     UNUSED(ch);
+  43:project/src/wk_usart.c ****   }
+  44:project/src/wk_usart.c ****   FILE __stdout;
+  45:project/src/wk_usart.c **** #else
+  46:project/src/wk_usart.c ****   #ifdef __CC_ARM
+  47:project/src/wk_usart.c ****     #pragma import(__use_no_semihosting)
+  48:project/src/wk_usart.c ****     struct __FILE
+  49:project/src/wk_usart.c ****     {
+  50:project/src/wk_usart.c ****       int handle;
+  51:project/src/wk_usart.c ****     }
+  52:project/src/wk_usart.c ****     FILE __stdout;
+  53:project/src/wk_usart.c ****     void _sys_exit(int x)
+  54:project/src/wk_usart.c ****     {
+  55:project/src/wk_usart.c ****       UNUSED(x);
+  56:project/src/wk_usart.c ****     }
+  57:project/src/wk_usart.c ****     /*请求使用 __use_no_semihosting,但_ttywrch已启用*/
+  58:project/src/wk_usart.c ****     void _ttywrch(int ch)
+  59:project/src/wk_usart.c ****     {
+  60:project/src/wk_usart.c ****       UNUSED(ch);
+  61:project/src/wk_usart.c ****     }
+  62:project/src/wk_usart.c ****   #endif
+  63:project/src/wk_usart.c **** #endif
+  64:project/src/wk_usart.c **** 
+  65:project/src/wk_usart.c **** 
+  66:project/src/wk_usart.c **** 
+  67:project/src/wk_usart.c **** 
+  68:project/src/wk_usart.c **** #if defined(__GNUC__)&&!defined(__clang__)
+  69:project/src/wk_usart.c ****     #define PUTCHAR_PROTOTYPE int __io_putchar(int ch)
+  70:project/src/wk_usart.c **** #else
+  71:project/src/wk_usart.c ****     #define PUTCHAR_PROTOTYPE int fputc(int ch,FILE *f)
+  72:project/src/wk_usart.c **** #endif
+  73:project/src/wk_usart.c **** 
+  74:project/src/wk_usart.c **** 
+  75:project/src/wk_usart.c **** PUTCHAR_PROTOTYPE
+  76:project/src/wk_usart.c **** {
+  30              		.loc 1 76 1 view -0
+  31              		.cfi_startproc
+  32              		@ args = 0, pretend = 0, frame = 0
+  33              		@ frame_needed = 0, uses_anonymous_args = 0
+  34              		.loc 1 76 1 is_stmt 0 view .LVU1
+  35 0000 10B5     		push	{r4, lr}
+  36              	.LCFI0:
+  37              		.cfi_def_cfa_offset 8
+  38              		.cfi_offset 4, -8
+  39              		.cfi_offset 14, -4
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccmKhcNB.s 			page 3
+
+
+  40 0002 0446     		mov	r4, r0
+  77:project/src/wk_usart.c **** #if !defined (__GNUC__) || defined(__clang__)
+  78:project/src/wk_usart.c ****   UNUSED(f);
+  79:project/src/wk_usart.c **** #endif
+  80:project/src/wk_usart.c ****   while(usart_flag_get(PRINT_UART,USART_TDBE_FLAG)==RESET);
+  41              		.loc 1 80 3 is_stmt 1 view .LVU2
+  42              	.LVL1:
+  43              	.L2:
+  44              		.loc 1 80 51 discriminator 1 view .LVU3
+  45              		.loc 1 80 9 is_stmt 0 discriminator 1 view .LVU4
+  46 0004 8021     		movs	r1, #128
+  47 0006 0848     		ldr	r0, .L5
+  48 0008 FFF7FEFF 		bl	usart_flag_get
+  49              	.LVL2:
+  50              		.loc 1 80 51 discriminator 1 view .LVU5
+  51 000c 0028     		cmp	r0, #0
+  52 000e F9D0     		beq	.L2
+  81:project/src/wk_usart.c ****   usart_data_transmit(PRINT_UART,(uint16_t)ch);
+  53              		.loc 1 81 3 is_stmt 1 view .LVU6
+  54 0010 A1B2     		uxth	r1, r4
+  55 0012 0548     		ldr	r0, .L5
+  56 0014 FFF7FEFF 		bl	usart_data_transmit
+  57              	.LVL3:
+  82:project/src/wk_usart.c ****   while(usart_flag_get(PRINT_UART,USART_TDC_FLAG)==RESET);
+  58              		.loc 1 82 3 view .LVU7
+  59              	.L3:
+  60              		.loc 1 82 50 discriminator 1 view .LVU8
+  61              		.loc 1 82 9 is_stmt 0 discriminator 1 view .LVU9
+  62 0018 4021     		movs	r1, #64
+  63 001a 0348     		ldr	r0, .L5
+  64 001c FFF7FEFF 		bl	usart_flag_get
+  65              	.LVL4:
+  66              		.loc 1 82 50 discriminator 1 view .LVU10
+  67 0020 0028     		cmp	r0, #0
+  68 0022 F9D0     		beq	.L3
+  83:project/src/wk_usart.c ****   return ch;
+  69              		.loc 1 83 3 is_stmt 1 view .LVU11
+  84:project/src/wk_usart.c **** }
+  70              		.loc 1 84 1 is_stmt 0 view .LVU12
+  71 0024 2046     		mov	r0, r4
+  72 0026 10BD     		pop	{r4, pc}
+  73              	.LVL5:
+  74              	.L6:
+  75              		.loc 1 84 1 view .LVU13
+  76              		.align	2
+  77              	.L5:
+  78 0028 00380140 		.word	1073821696
+  79              		.cfi_endproc
+  80              	.LFE137:
+  82              		.section	.text._write,"ax",%progbits
+  83              		.align	1
+  84              		.global	_write
+  85              		.syntax unified
+  86              		.thumb
+  87              		.thumb_func
+  89              	_write:
+  90              	.LVL6:
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccmKhcNB.s 			page 4
+
+
+  91              	.LFB138:
+  85:project/src/wk_usart.c **** 
+  86:project/src/wk_usart.c **** #if (defined(__GNUC__)&&!defined(__clang__)) || (defined(__ICCARM__))
+  87:project/src/wk_usart.c **** #if defined (__GNUC__) && !defined(__clang__)
+  88:project/src/wk_usart.c **** int _write(int fd,char *pbuffer,int size)
+  89:project/src/wk_usart.c **** #elif defined(__ICCARM__)
+  90:project/src/wk_usart.c **** #pragma module_name = "?__write"
+  91:project/src/wk_usart.c **** int __write(int fd,char *pbuffer,int size)
+  92:project/src/wk_usart.c **** #endif
+  93:project/src/wk_usart.c **** {
+  92              		.loc 1 93 1 is_stmt 1 view -0
+  93              		.cfi_startproc
+  94              		@ args = 0, pretend = 0, frame = 0
+  95              		@ frame_needed = 0, uses_anonymous_args = 0
+  96              		.loc 1 93 1 is_stmt 0 view .LVU15
+  97 0000 70B5     		push	{r4, r5, r6, lr}
+  98              	.LCFI1:
+  99              		.cfi_def_cfa_offset 16
+ 100              		.cfi_offset 4, -16
+ 101              		.cfi_offset 5, -12
+ 102              		.cfi_offset 6, -8
+ 103              		.cfi_offset 14, -4
+ 104 0002 0C46     		mov	r4, r1
+ 105 0004 1646     		mov	r6, r2
+  94:project/src/wk_usart.c ****   UNUSED(fd);
+ 106              		.loc 1 94 3 is_stmt 1 view .LVU16
+  95:project/src/wk_usart.c ****   for(int i=0; i < size; i++)
+ 107              		.loc 1 95 3 view .LVU17
+ 108              	.LBB2:
+ 109              		.loc 1 95 7 view .LVU18
+ 110              	.LVL7:
+ 111              		.loc 1 95 11 is_stmt 0 view .LVU19
+ 112 0006 0025     		movs	r5, #0
+ 113              		.loc 1 95 3 view .LVU20
+ 114 0008 11E0     		b	.L8
+ 115              	.LVL8:
+ 116              	.L9:
+  96:project/src/wk_usart.c ****   {
+  97:project/src/wk_usart.c ****     while(usart_flag_get(PRINT_UART,USART_TDBE_FLAG) == RESET);
+ 117              		.loc 1 97 54 is_stmt 1 discriminator 1 view .LVU21
+ 118              		.loc 1 97 11 is_stmt 0 discriminator 1 view .LVU22
+ 119 000a 8021     		movs	r1, #128
+ 120 000c 0A48     		ldr	r0, .L12
+ 121 000e FFF7FEFF 		bl	usart_flag_get
+ 122              	.LVL9:
+ 123              		.loc 1 97 54 discriminator 1 view .LVU23
+ 124 0012 0028     		cmp	r0, #0
+ 125 0014 F9D0     		beq	.L9
+  98:project/src/wk_usart.c ****     usart_data_transmit(PRINT_UART,(uint16_t)(*pbuffer++));
+ 126              		.loc 1 98 5 is_stmt 1 view .LVU24
+ 127              	.LVL10:
+ 128              		.loc 1 98 5 is_stmt 0 view .LVU25
+ 129 0016 14F8011B 		ldrb	r1, [r4], #1	@ zero_extendqisi2
+ 130              	.LVL11:
+ 131              		.loc 1 98 5 view .LVU26
+ 132 001a 0748     		ldr	r0, .L12
+ 133 001c FFF7FEFF 		bl	usart_data_transmit
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccmKhcNB.s 			page 5
+
+
+ 134              	.LVL12:
+  99:project/src/wk_usart.c ****     while(usart_flag_get(PRINT_UART,USART_TDC_FLAG) == RESET);
+ 135              		.loc 1 99 5 is_stmt 1 view .LVU27
+ 136              	.L10:
+ 137              		.loc 1 99 53 discriminator 1 view .LVU28
+ 138              		.loc 1 99 11 is_stmt 0 discriminator 1 view .LVU29
+ 139 0020 4021     		movs	r1, #64
+ 140 0022 0548     		ldr	r0, .L12
+ 141 0024 FFF7FEFF 		bl	usart_flag_get
+ 142              	.LVL13:
+ 143              		.loc 1 99 53 discriminator 1 view .LVU30
+ 144 0028 0028     		cmp	r0, #0
+ 145 002a F9D0     		beq	.L10
+  95:project/src/wk_usart.c ****   {
+ 146              		.loc 1 95 27 is_stmt 1 discriminator 2 view .LVU31
+ 147 002c 0135     		adds	r5, r5, #1
+ 148              	.LVL14:
+ 149              	.L8:
+  95:project/src/wk_usart.c ****   {
+ 150              		.loc 1 95 18 discriminator 1 view .LVU32
+ 151 002e B542     		cmp	r5, r6
+ 152 0030 EBDB     		blt	.L9
+  95:project/src/wk_usart.c ****   {
+ 153              		.loc 1 95 18 is_stmt 0 discriminator 1 view .LVU33
+ 154              	.LBE2:
+ 100:project/src/wk_usart.c ****   }
+ 101:project/src/wk_usart.c ****   return size;
+ 155              		.loc 1 101 3 is_stmt 1 view .LVU34
+ 102:project/src/wk_usart.c **** }
+ 156              		.loc 1 102 1 is_stmt 0 view .LVU35
+ 157 0032 3046     		mov	r0, r6
+ 158 0034 70BD     		pop	{r4, r5, r6, pc}
+ 159              	.LVL15:
+ 160              	.L13:
+ 161              		.loc 1 102 1 view .LVU36
+ 162 0036 00BF     		.align	2
+ 163              	.L12:
+ 164 0038 00380140 		.word	1073821696
+ 165              		.cfi_endproc
+ 166              	.LFE138:
+ 168              		.section	.text.wk_usart1_init,"ax",%progbits
+ 169              		.align	1
+ 170              		.global	wk_usart1_init
+ 171              		.syntax unified
+ 172              		.thumb
+ 173              		.thumb_func
+ 175              	wk_usart1_init:
+ 176              	.LFB139:
+ 103:project/src/wk_usart.c **** #endif
+ 104:project/src/wk_usart.c **** 
+ 105:project/src/wk_usart.c **** 
+ 106:project/src/wk_usart.c **** 
+ 107:project/src/wk_usart.c **** 
+ 108:project/src/wk_usart.c **** 
+ 109:project/src/wk_usart.c **** 
+ 110:project/src/wk_usart.c **** 
+ 111:project/src/wk_usart.c **** 
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccmKhcNB.s 			page 6
+
+
+ 112:project/src/wk_usart.c **** 
+ 113:project/src/wk_usart.c **** 
+ 114:project/src/wk_usart.c **** /* add user code end 0 */
+ 115:project/src/wk_usart.c **** 
+ 116:project/src/wk_usart.c **** /**
+ 117:project/src/wk_usart.c ****   * @brief  init usart1 function
+ 118:project/src/wk_usart.c ****   * @param  none
+ 119:project/src/wk_usart.c ****   * @retval none
+ 120:project/src/wk_usart.c ****   */
+ 121:project/src/wk_usart.c **** void wk_usart1_init(void)
+ 122:project/src/wk_usart.c **** {
+ 177              		.loc 1 122 1 is_stmt 1 view -0
+ 178              		.cfi_startproc
+ 179              		@ args = 0, pretend = 0, frame = 8
+ 180              		@ frame_needed = 0, uses_anonymous_args = 0
+ 181 0000 2DE9F041 		push	{r4, r5, r6, r7, r8, lr}
+ 182              	.LCFI2:
+ 183              		.cfi_def_cfa_offset 24
+ 184              		.cfi_offset 4, -24
+ 185              		.cfi_offset 5, -20
+ 186              		.cfi_offset 6, -16
+ 187              		.cfi_offset 7, -12
+ 188              		.cfi_offset 8, -8
+ 189              		.cfi_offset 14, -4
+ 190 0004 82B0     		sub	sp, sp, #8
+ 191              	.LCFI3:
+ 192              		.cfi_def_cfa_offset 32
+ 123:project/src/wk_usart.c ****   /* add user code begin usart1_init 0 */
+ 124:project/src/wk_usart.c **** 
+ 125:project/src/wk_usart.c ****   /* add user code end usart1_init 0 */
+ 126:project/src/wk_usart.c **** 
+ 127:project/src/wk_usart.c ****   gpio_init_type gpio_init_struct;
+ 193              		.loc 1 127 3 view .LVU38
+ 128:project/src/wk_usart.c ****   gpio_default_para_init(&gpio_init_struct);
+ 194              		.loc 1 128 3 view .LVU39
+ 195 0006 6846     		mov	r0, sp
+ 196 0008 FFF7FEFF 		bl	gpio_default_para_init
+ 197              	.LVL16:
+ 129:project/src/wk_usart.c **** 
+ 130:project/src/wk_usart.c ****   /* add user code begin usart1_init 1 */
+ 131:project/src/wk_usart.c **** 
+ 132:project/src/wk_usart.c ****   /* add user code end usart1_init 1 */
+ 133:project/src/wk_usart.c **** 
+ 134:project/src/wk_usart.c ****   /* configure the TX pin */
+ 135:project/src/wk_usart.c ****   gpio_init_struct.gpio_drive_strength = GPIO_DRIVE_STRENGTH_MODERATE;
+ 198              		.loc 1 135 3 view .LVU40
+ 199              		.loc 1 135 40 is_stmt 0 view .LVU41
+ 200 000c 4FF00208 		mov	r8, #2
+ 201 0010 8DF80780 		strb	r8, [sp, #7]
+ 136:project/src/wk_usart.c ****   gpio_init_struct.gpio_out_type = GPIO_OUTPUT_PUSH_PULL;
+ 202              		.loc 1 136 3 is_stmt 1 view .LVU42
+ 203              		.loc 1 136 34 is_stmt 0 view .LVU43
+ 204 0014 0025     		movs	r5, #0
+ 205 0016 8DF80450 		strb	r5, [sp, #4]
+ 137:project/src/wk_usart.c ****   gpio_init_struct.gpio_mode = GPIO_MODE_MUX;
+ 206              		.loc 1 137 3 is_stmt 1 view .LVU44
+ 207              		.loc 1 137 30 is_stmt 0 view .LVU45
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccmKhcNB.s 			page 7
+
+
+ 208 001a 0823     		movs	r3, #8
+ 209 001c 8DF80630 		strb	r3, [sp, #6]
+ 138:project/src/wk_usart.c ****   gpio_init_struct.gpio_pins = GPIO_PINS_9;
+ 210              		.loc 1 138 3 is_stmt 1 view .LVU46
+ 211              		.loc 1 138 30 is_stmt 0 view .LVU47
+ 212 0020 4FF40073 		mov	r3, #512
+ 213 0024 0093     		str	r3, [sp]
+ 139:project/src/wk_usart.c ****   gpio_init_struct.gpio_pull = GPIO_PULL_NONE;
+ 214              		.loc 1 139 3 is_stmt 1 view .LVU48
+ 215              		.loc 1 139 30 is_stmt 0 view .LVU49
+ 216 0026 0427     		movs	r7, #4
+ 217 0028 8DF80570 		strb	r7, [sp, #5]
+ 140:project/src/wk_usart.c ****   gpio_init(GPIOA, &gpio_init_struct);
+ 218              		.loc 1 140 3 is_stmt 1 view .LVU50
+ 219 002c 1F4E     		ldr	r6, .L16
+ 220 002e 6946     		mov	r1, sp
+ 221 0030 3046     		mov	r0, r6
+ 222 0032 FFF7FEFF 		bl	gpio_init
+ 223              	.LVL17:
+ 141:project/src/wk_usart.c **** 
+ 142:project/src/wk_usart.c ****   /* configure the RX pin */
+ 143:project/src/wk_usart.c ****   gpio_init_struct.gpio_drive_strength = GPIO_DRIVE_STRENGTH_MODERATE;
+ 224              		.loc 1 143 3 view .LVU51
+ 225              		.loc 1 143 40 is_stmt 0 view .LVU52
+ 226 0036 8DF80780 		strb	r8, [sp, #7]
+ 144:project/src/wk_usart.c ****   gpio_init_struct.gpio_out_type  = GPIO_OUTPUT_PUSH_PULL;
+ 227              		.loc 1 144 3 is_stmt 1 view .LVU53
+ 228              		.loc 1 144 35 is_stmt 0 view .LVU54
+ 229 003a 8DF80450 		strb	r5, [sp, #4]
+ 145:project/src/wk_usart.c ****   gpio_init_struct.gpio_mode = GPIO_MODE_INPUT;
+ 230              		.loc 1 145 3 is_stmt 1 view .LVU55
+ 231              		.loc 1 145 30 is_stmt 0 view .LVU56
+ 232 003e 8DF80650 		strb	r5, [sp, #6]
+ 146:project/src/wk_usart.c ****   gpio_init_struct.gpio_pins = GPIO_PINS_10;
+ 233              		.loc 1 146 3 is_stmt 1 view .LVU57
+ 234              		.loc 1 146 30 is_stmt 0 view .LVU58
+ 235 0042 4FF48063 		mov	r3, #1024
+ 236 0046 0093     		str	r3, [sp]
+ 147:project/src/wk_usart.c ****   gpio_init_struct.gpio_pull = GPIO_PULL_NONE;
+ 237              		.loc 1 147 3 is_stmt 1 view .LVU59
+ 238              		.loc 1 147 30 is_stmt 0 view .LVU60
+ 239 0048 8DF80570 		strb	r7, [sp, #5]
+ 148:project/src/wk_usart.c ****   gpio_init(GPIOA, &gpio_init_struct);
+ 240              		.loc 1 148 3 is_stmt 1 view .LVU61
+ 241 004c 6946     		mov	r1, sp
+ 242 004e 3046     		mov	r0, r6
+ 243 0050 FFF7FEFF 		bl	gpio_init
+ 244              	.LVL18:
+ 149:project/src/wk_usart.c **** 
+ 150:project/src/wk_usart.c ****   /* configure param */
+ 151:project/src/wk_usart.c ****   usart_init(USART1, 115200, USART_DATA_8BITS, USART_STOP_1_BIT);
+ 245              		.loc 1 151 3 view .LVU62
+ 246 0054 164C     		ldr	r4, .L16+4
+ 247 0056 2B46     		mov	r3, r5
+ 248 0058 2A46     		mov	r2, r5
+ 249 005a 4FF4E131 		mov	r1, #115200
+ 250 005e 2046     		mov	r0, r4
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccmKhcNB.s 			page 8
+
+
+ 251 0060 FFF7FEFF 		bl	usart_init
+ 252              	.LVL19:
+ 152:project/src/wk_usart.c ****   usart_transmitter_enable(USART1, TRUE);
+ 253              		.loc 1 152 3 view .LVU63
+ 254 0064 0121     		movs	r1, #1
+ 255 0066 2046     		mov	r0, r4
+ 256 0068 FFF7FEFF 		bl	usart_transmitter_enable
+ 257              	.LVL20:
+ 153:project/src/wk_usart.c ****   usart_receiver_enable(USART1, TRUE);
+ 258              		.loc 1 153 3 view .LVU64
+ 259 006c 0121     		movs	r1, #1
+ 260 006e 2046     		mov	r0, r4
+ 261 0070 FFF7FEFF 		bl	usart_receiver_enable
+ 262              	.LVL21:
+ 154:project/src/wk_usart.c ****   usart_parity_selection_config(USART1, USART_PARITY_NONE);
+ 263              		.loc 1 154 3 view .LVU65
+ 264 0074 2946     		mov	r1, r5
+ 265 0076 2046     		mov	r0, r4
+ 266 0078 FFF7FEFF 		bl	usart_parity_selection_config
+ 267              	.LVL22:
+ 155:project/src/wk_usart.c **** 
+ 156:project/src/wk_usart.c ****   usart_dma_transmitter_enable(USART1, TRUE);
+ 268              		.loc 1 156 3 view .LVU66
+ 269 007c 0121     		movs	r1, #1
+ 270 007e 2046     		mov	r0, r4
+ 271 0080 FFF7FEFF 		bl	usart_dma_transmitter_enable
+ 272              	.LVL23:
+ 157:project/src/wk_usart.c **** 
+ 158:project/src/wk_usart.c ****   usart_dma_receiver_enable(USART1, TRUE);
+ 273              		.loc 1 158 3 view .LVU67
+ 274 0084 0121     		movs	r1, #1
+ 275 0086 2046     		mov	r0, r4
+ 276 0088 FFF7FEFF 		bl	usart_dma_receiver_enable
+ 277              	.LVL24:
+ 159:project/src/wk_usart.c **** 
+ 160:project/src/wk_usart.c ****   usart_hardware_flow_control_set(USART1, USART_HARDWARE_FLOW_NONE);
+ 278              		.loc 1 160 3 view .LVU68
+ 279 008c 2946     		mov	r1, r5
+ 280 008e 2046     		mov	r0, r4
+ 281 0090 FFF7FEFF 		bl	usart_hardware_flow_control_set
+ 282              	.LVL25:
+ 161:project/src/wk_usart.c **** 
+ 162:project/src/wk_usart.c ****   /* add user code begin usart1_init 2 */
+ 163:project/src/wk_usart.c **** 
+ 164:project/src/wk_usart.c ****   /* add user code end usart1_init 2 */
+ 165:project/src/wk_usart.c **** 
+ 166:project/src/wk_usart.c ****   usart_enable(USART1, TRUE);
+ 283              		.loc 1 166 3 view .LVU69
+ 284 0094 0121     		movs	r1, #1
+ 285 0096 2046     		mov	r0, r4
+ 286 0098 FFF7FEFF 		bl	usart_enable
+ 287              	.LVL26:
+ 167:project/src/wk_usart.c **** 
+ 168:project/src/wk_usart.c ****   /* add user code begin usart1_init 3 */
+ 169:project/src/wk_usart.c ****   /* USMART 的 printf 使用轮询发送, 关闭 USART1 TX DMA 请求,
+ 170:project/src/wk_usart.c ****    * 避免 printf 写 DR 时触发 DMA 把内存数据覆盖到 DR 上 */
+ 171:project/src/wk_usart.c ****   usart_dma_transmitter_enable(USART1, FALSE);
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccmKhcNB.s 			page 9
+
+
+ 288              		.loc 1 171 3 view .LVU70
+ 289 009c 2946     		mov	r1, r5
+ 290 009e 2046     		mov	r0, r4
+ 291 00a0 FFF7FEFF 		bl	usart_dma_transmitter_enable
+ 292              	.LVL27:
+ 172:project/src/wk_usart.c ****   /* add user code end usart1_init 3 */
+ 173:project/src/wk_usart.c **** }
+ 293              		.loc 1 173 1 is_stmt 0 view .LVU71
+ 294 00a4 02B0     		add	sp, sp, #8
+ 295              	.LCFI4:
+ 296              		.cfi_def_cfa_offset 24
+ 297              		@ sp needed
+ 298 00a6 BDE8F081 		pop	{r4, r5, r6, r7, r8, pc}
+ 299              	.L17:
+ 300 00aa 00BF     		.align	2
+ 301              	.L16:
+ 302 00ac 00080140 		.word	1073809408
+ 303 00b0 00380140 		.word	1073821696
+ 304              		.cfi_endproc
+ 305              	.LFE139:
+ 307              		.text
+ 308              	.Letext0:
+ 309              		.file 2 "D:/gnu_toolchain/arm-none-eabi/include/machine/_default_types.h"
+ 310              		.file 3 "D:/gnu_toolchain/arm-none-eabi/include/sys/_stdint.h"
+ 311              		.file 4 "libraries/cmsis/cm4/device_support/at32f403a_407.h"
+ 312              		.file 5 "libraries/drivers/inc/at32f403a_407_gpio.h"
+ 313              		.file 6 "libraries/drivers/inc/at32f403a_407_usart.h"
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccmKhcNB.s 			page 10
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 wk_usart.c
+C:\Users\bians\AppData\Local\Temp\ccmKhcNB.s:21     .text.__io_putchar:00000000 $t
+C:\Users\bians\AppData\Local\Temp\ccmKhcNB.s:27     .text.__io_putchar:00000000 __io_putchar
+C:\Users\bians\AppData\Local\Temp\ccmKhcNB.s:78     .text.__io_putchar:00000028 $d
+C:\Users\bians\AppData\Local\Temp\ccmKhcNB.s:83     .text._write:00000000 $t
+C:\Users\bians\AppData\Local\Temp\ccmKhcNB.s:89     .text._write:00000000 _write
+C:\Users\bians\AppData\Local\Temp\ccmKhcNB.s:164    .text._write:00000038 $d
+C:\Users\bians\AppData\Local\Temp\ccmKhcNB.s:169    .text.wk_usart1_init:00000000 $t
+C:\Users\bians\AppData\Local\Temp\ccmKhcNB.s:175    .text.wk_usart1_init:00000000 wk_usart1_init
+C:\Users\bians\AppData\Local\Temp\ccmKhcNB.s:302    .text.wk_usart1_init:000000ac $d
+
+UNDEFINED SYMBOLS
+usart_flag_get
+usart_data_transmit
+gpio_default_para_init
+gpio_init
+usart_init
+usart_transmitter_enable
+usart_receiver_enable
+usart_parity_selection_config
+usart_dma_transmitter_enable
+usart_dma_receiver_enable
+usart_hardware_flow_control_set
+usart_enable

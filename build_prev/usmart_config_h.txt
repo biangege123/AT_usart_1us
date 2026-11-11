@@ -1,0 +1,6 @@
+﻿#ifndef __USMART_CONFIG_H
+#define __USMART_CONFIG_H
+
+/* USMART 鍙皟鐢ㄥ嚱鏁拌〃鍦?usmart_config.c 涓畾涔?*/
+
+#endif

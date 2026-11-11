@@ -1,0 +1,894 @@
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccKWnmDk.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.arch armv7e-m
+   3              		.fpu fpv4-sp-d16
+   4              		.eabi_attribute 27, 1
+   5              		.eabi_attribute 28, 1
+   6              		.eabi_attribute 20, 1
+   7              		.eabi_attribute 21, 1
+   8              		.eabi_attribute 23, 3
+   9              		.eabi_attribute 24, 1
+  10              		.eabi_attribute 25, 1
+  11              		.eabi_attribute 26, 1
+  12              		.eabi_attribute 30, 1
+  13              		.eabi_attribute 34, 1
+  14              		.eabi_attribute 18, 4
+  15              		.file	"wk_tmr.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.file 1 "project/src/wk_tmr.c"
+  20              		.section	.text.wk_tmr1_init,"ax",%progbits
+  21              		.align	1
+  22              		.global	wk_tmr1_init
+  23              		.syntax unified
+  24              		.thumb
+  25              		.thumb_func
+  27              	wk_tmr1_init:
+  28              	.LFB137:
+   1:project/src/wk_tmr.c **** /* add user code begin Header */
+   2:project/src/wk_tmr.c **** /**
+   3:project/src/wk_tmr.c ****   **************************************************************************
+   4:project/src/wk_tmr.c ****   * @file     wk_tmr.c
+   5:project/src/wk_tmr.c ****   * @brief    work bench config program
+   6:project/src/wk_tmr.c ****   **************************************************************************
+   7:project/src/wk_tmr.c ****   * Copyright (c) 2025, Artery Technology, All rights reserved.
+   8:project/src/wk_tmr.c ****   *
+   9:project/src/wk_tmr.c ****   * The software Board Support Package (BSP) that is made available to
+  10:project/src/wk_tmr.c ****   * download from Artery official website is the copyrighted work of Artery.
+  11:project/src/wk_tmr.c ****   * Artery authorizes customers to use, copy, and distribute the BSP
+  12:project/src/wk_tmr.c ****   * software and its related documentation for the purpose of design and
+  13:project/src/wk_tmr.c ****   * development in conjunction with Artery microcontrollers. Use of the
+  14:project/src/wk_tmr.c ****   * software is governed by this copyright notice and the following disclaimer.
+  15:project/src/wk_tmr.c ****   *
+  16:project/src/wk_tmr.c ****   * THIS SOFTWARE IS PROVIDED ON "AS IS" BASIS WITHOUT WARRANTIES,
+  17:project/src/wk_tmr.c ****   * GUARANTEES OR REPRESENTATIONS OF ANY KIND. ARTERY EXPRESSLY DISCLAIMS,
+  18:project/src/wk_tmr.c ****   * TO THE FULLEST EXTENT PERMITTED BY LAW, ALL EXPRESS, IMPLIED OR
+  19:project/src/wk_tmr.c ****   * STATUTORY OR OTHER WARRANTIES, GUARANTEES OR REPRESENTATIONS,
+  20:project/src/wk_tmr.c ****   * INCLUDING BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY,
+  21:project/src/wk_tmr.c ****   * FITNESS FOR A PARTICULAR PURPOSE, OR NON-INFRINGEMENT.
+  22:project/src/wk_tmr.c ****   *
+  23:project/src/wk_tmr.c ****   **************************************************************************
+  24:project/src/wk_tmr.c ****   */
+  25:project/src/wk_tmr.c **** /* add user code end Header */
+  26:project/src/wk_tmr.c **** 
+  27:project/src/wk_tmr.c **** /* Includes ------------------------------------------------------------------*/
+  28:project/src/wk_tmr.c **** #include "wk_tmr.h"
+  29:project/src/wk_tmr.c **** 
+  30:project/src/wk_tmr.c **** /* add user code begin 0 */
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccKWnmDk.s 			page 2
+
+
+  31:project/src/wk_tmr.c **** 
+  32:project/src/wk_tmr.c **** /* add user code end 0 */
+  33:project/src/wk_tmr.c **** 
+  34:project/src/wk_tmr.c **** /**
+  35:project/src/wk_tmr.c ****   * @brief  init tmr1 function.
+  36:project/src/wk_tmr.c ****   * @param  none
+  37:project/src/wk_tmr.c ****   * @retval none
+  38:project/src/wk_tmr.c ****   */
+  39:project/src/wk_tmr.c **** void wk_tmr1_init(void)
+  40:project/src/wk_tmr.c **** {
+  29              		.loc 1 40 1 view -0
+  30              		.cfi_startproc
+  31              		@ args = 0, pretend = 0, frame = 24
+  32              		@ frame_needed = 0, uses_anonymous_args = 0
+  33 0000 70B5     		push	{r4, r5, r6, lr}
+  34              	.LCFI0:
+  35              		.cfi_def_cfa_offset 16
+  36              		.cfi_offset 4, -16
+  37              		.cfi_offset 5, -12
+  38              		.cfi_offset 6, -8
+  39              		.cfi_offset 14, -4
+  40 0002 86B0     		sub	sp, sp, #24
+  41              	.LCFI1:
+  42              		.cfi_def_cfa_offset 40
+  41:project/src/wk_tmr.c ****   /* add user code begin tmr1_init 0 */
+  42:project/src/wk_tmr.c **** 
+  43:project/src/wk_tmr.c ****   /* add user code end tmr1_init 0 */
+  44:project/src/wk_tmr.c **** 
+  45:project/src/wk_tmr.c ****   gpio_init_type gpio_init_struct;
+  43              		.loc 1 45 3 view .LVU1
+  46:project/src/wk_tmr.c ****   tmr_output_config_type tmr_output_struct;
+  44              		.loc 1 46 3 view .LVU2
+  47:project/src/wk_tmr.c ****   tmr_brkdt_config_type tmr_brkdt_struct;
+  45              		.loc 1 47 3 view .LVU3
+  48:project/src/wk_tmr.c **** 
+  49:project/src/wk_tmr.c ****   gpio_default_para_init(&gpio_init_struct);
+  46              		.loc 1 49 3 view .LVU4
+  47 0004 04AD     		add	r5, sp, #16
+  48 0006 2846     		mov	r0, r5
+  49 0008 FFF7FEFF 		bl	gpio_default_para_init
+  50              	.LVL0:
+  50:project/src/wk_tmr.c **** 
+  51:project/src/wk_tmr.c ****   /* add user code begin tmr1_init 1 */
+  52:project/src/wk_tmr.c **** 
+  53:project/src/wk_tmr.c ****   /* add user code end tmr1_init 1 */
+  54:project/src/wk_tmr.c **** 
+  55:project/src/wk_tmr.c ****   /* configure the CH1 pin */
+  56:project/src/wk_tmr.c ****   gpio_init_struct.gpio_pins = GPIO_PINS_9;
+  51              		.loc 1 56 3 view .LVU5
+  52              		.loc 1 56 30 is_stmt 0 view .LVU6
+  53 000c 4FF40073 		mov	r3, #512
+  54 0010 0493     		str	r3, [sp, #16]
+  57:project/src/wk_tmr.c ****   gpio_init_struct.gpio_mode = GPIO_MODE_MUX;
+  55              		.loc 1 57 3 is_stmt 1 view .LVU7
+  56              		.loc 1 57 30 is_stmt 0 view .LVU8
+  57 0012 0823     		movs	r3, #8
+  58 0014 8DF81630 		strb	r3, [sp, #22]
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccKWnmDk.s 			page 3
+
+
+  58:project/src/wk_tmr.c ****   gpio_init_struct.gpio_out_type = GPIO_OUTPUT_PUSH_PULL;
+  59              		.loc 1 58 3 is_stmt 1 view .LVU9
+  60              		.loc 1 58 34 is_stmt 0 view .LVU10
+  61 0018 0024     		movs	r4, #0
+  62 001a 8DF81440 		strb	r4, [sp, #20]
+  59:project/src/wk_tmr.c ****   gpio_init_struct.gpio_pull = GPIO_PULL_NONE;
+  63              		.loc 1 59 3 is_stmt 1 view .LVU11
+  64              		.loc 1 59 30 is_stmt 0 view .LVU12
+  65 001e 0423     		movs	r3, #4
+  66 0020 8DF81530 		strb	r3, [sp, #21]
+  60:project/src/wk_tmr.c ****   gpio_init_struct.gpio_drive_strength = GPIO_DRIVE_STRENGTH_MODERATE;
+  67              		.loc 1 60 3 is_stmt 1 view .LVU13
+  68              		.loc 1 60 40 is_stmt 0 view .LVU14
+  69 0024 0223     		movs	r3, #2
+  70 0026 8DF81730 		strb	r3, [sp, #23]
+  61:project/src/wk_tmr.c ****   gpio_init(GPIOE, &gpio_init_struct);
+  71              		.loc 1 61 3 is_stmt 1 view .LVU15
+  72 002a 2946     		mov	r1, r5
+  73 002c 2F48     		ldr	r0, .L3
+  74 002e FFF7FEFF 		bl	gpio_init
+  75              	.LVL1:
+  62:project/src/wk_tmr.c **** 
+  63:project/src/wk_tmr.c ****   /* GPIO PIN remap */
+  64:project/src/wk_tmr.c ****   gpio_pin_remap_config(TMR1_GMUX_0011, TRUE); 
+  76              		.loc 1 64 3 view .LVU16
+  77 0032 0121     		movs	r1, #1
+  78 0034 2E48     		ldr	r0, .L3+4
+  79 0036 FFF7FEFF 		bl	gpio_pin_remap_config
+  80              	.LVL2:
+  65:project/src/wk_tmr.c **** 
+  66:project/src/wk_tmr.c ****   /* configure counter settings */
+  67:project/src/wk_tmr.c ****   tmr_cnt_dir_set(TMR1, TMR_COUNT_UP);
+  81              		.loc 1 67 3 view .LVU17
+  82 003a 2E4D     		ldr	r5, .L3+8
+  83 003c 2146     		mov	r1, r4
+  84 003e 2846     		mov	r0, r5
+  85 0040 FFF7FEFF 		bl	tmr_cnt_dir_set
+  86              	.LVL3:
+  68:project/src/wk_tmr.c ****   tmr_clock_source_div_set(TMR1, TMR_CLOCK_DIV1);
+  87              		.loc 1 68 3 view .LVU18
+  88 0044 2146     		mov	r1, r4
+  89 0046 2846     		mov	r0, r5
+  90 0048 FFF7FEFF 		bl	tmr_clock_source_div_set
+  91              	.LVL4:
+  69:project/src/wk_tmr.c ****   tmr_repetition_counter_set(TMR1, 0);
+  92              		.loc 1 69 3 view .LVU19
+  93 004c 2146     		mov	r1, r4
+  94 004e 2846     		mov	r0, r5
+  95 0050 FFF7FEFF 		bl	tmr_repetition_counter_set
+  96              	.LVL5:
+  70:project/src/wk_tmr.c ****   tmr_period_buffer_enable(TMR1, FALSE);
+  97              		.loc 1 70 3 view .LVU20
+  98 0054 2146     		mov	r1, r4
+  99 0056 2846     		mov	r0, r5
+ 100 0058 FFF7FEFF 		bl	tmr_period_buffer_enable
+ 101              	.LVL6:
+  71:project/src/wk_tmr.c ****   tmr_base_init(TMR1, 199, 0);
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccKWnmDk.s 			page 4
+
+
+ 102              		.loc 1 71 3 view .LVU21
+ 103 005c 2246     		mov	r2, r4
+ 104 005e C721     		movs	r1, #199
+ 105 0060 2846     		mov	r0, r5
+ 106 0062 FFF7FEFF 		bl	tmr_base_init
+ 107              	.LVL7:
+  72:project/src/wk_tmr.c **** 
+  73:project/src/wk_tmr.c ****   /* configure primary mode settings */
+  74:project/src/wk_tmr.c ****   tmr_sub_sync_mode_set(TMR1, FALSE);
+ 108              		.loc 1 74 3 view .LVU22
+ 109 0066 2146     		mov	r1, r4
+ 110 0068 2846     		mov	r0, r5
+ 111 006a FFF7FEFF 		bl	tmr_sub_sync_mode_set
+ 112              	.LVL8:
+  75:project/src/wk_tmr.c ****   tmr_primary_mode_select(TMR1, TMR_PRIMARY_SEL_RESET);
+ 113              		.loc 1 75 3 view .LVU23
+ 114 006e 2146     		mov	r1, r4
+ 115 0070 2846     		mov	r0, r5
+ 116 0072 FFF7FEFF 		bl	tmr_primary_mode_select
+ 117              	.LVL9:
+  76:project/src/wk_tmr.c **** 
+  77:project/src/wk_tmr.c ****   /* configure channel 1 output settings */
+  78:project/src/wk_tmr.c ****   tmr_output_struct.oc_mode = TMR_OUTPUT_CONTROL_OFF;
+ 118              		.loc 1 78 3 view .LVU24
+ 119              		.loc 1 78 29 is_stmt 0 view .LVU25
+ 120 0076 8DF80840 		strb	r4, [sp, #8]
+  79:project/src/wk_tmr.c ****   tmr_output_struct.oc_output_state = TRUE;
+ 121              		.loc 1 79 3 is_stmt 1 view .LVU26
+ 122              		.loc 1 79 37 is_stmt 0 view .LVU27
+ 123 007a 0126     		movs	r6, #1
+ 124 007c 8DF80D60 		strb	r6, [sp, #13]
+  80:project/src/wk_tmr.c ****   tmr_output_struct.occ_output_state = FALSE;
+ 125              		.loc 1 80 3 is_stmt 1 view .LVU28
+ 126              		.loc 1 80 38 is_stmt 0 view .LVU29
+ 127 0080 8DF80E40 		strb	r4, [sp, #14]
+  81:project/src/wk_tmr.c ****   tmr_output_struct.oc_polarity = TMR_OUTPUT_ACTIVE_HIGH;
+ 128              		.loc 1 81 3 is_stmt 1 view .LVU30
+ 129              		.loc 1 81 33 is_stmt 0 view .LVU31
+ 130 0084 8DF80B40 		strb	r4, [sp, #11]
+  82:project/src/wk_tmr.c ****   tmr_output_struct.occ_polarity = TMR_OUTPUT_ACTIVE_HIGH;
+ 131              		.loc 1 82 3 is_stmt 1 view .LVU32
+ 132              		.loc 1 82 34 is_stmt 0 view .LVU33
+ 133 0088 8DF80C40 		strb	r4, [sp, #12]
+  83:project/src/wk_tmr.c ****   tmr_output_struct.oc_idle_state = FALSE;
+ 134              		.loc 1 83 3 is_stmt 1 view .LVU34
+ 135              		.loc 1 83 35 is_stmt 0 view .LVU35
+ 136 008c 8DF80940 		strb	r4, [sp, #9]
+  84:project/src/wk_tmr.c ****   tmr_output_struct.occ_idle_state = FALSE;
+ 137              		.loc 1 84 3 is_stmt 1 view .LVU36
+ 138              		.loc 1 84 36 is_stmt 0 view .LVU37
+ 139 0090 8DF80A40 		strb	r4, [sp, #10]
+  85:project/src/wk_tmr.c ****   tmr_output_channel_config(TMR1, TMR_SELECT_CHANNEL_1, &tmr_output_struct);
+ 140              		.loc 1 85 3 is_stmt 1 view .LVU38
+ 141 0094 02AA     		add	r2, sp, #8
+ 142 0096 2146     		mov	r1, r4
+ 143 0098 2846     		mov	r0, r5
+ 144 009a FFF7FEFF 		bl	tmr_output_channel_config
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccKWnmDk.s 			page 5
+
+
+ 145              	.LVL10:
+  86:project/src/wk_tmr.c ****   tmr_channel_value_set(TMR1, TMR_SELECT_CHANNEL_1, 0);
+ 146              		.loc 1 86 3 view .LVU39
+ 147 009e 2246     		mov	r2, r4
+ 148 00a0 2146     		mov	r1, r4
+ 149 00a2 2846     		mov	r0, r5
+ 150 00a4 FFF7FEFF 		bl	tmr_channel_value_set
+ 151              	.LVL11:
+  87:project/src/wk_tmr.c ****   tmr_output_channel_buffer_enable(TMR1, TMR_SELECT_CHANNEL_1, FALSE);
+ 152              		.loc 1 87 3 view .LVU40
+ 153 00a8 2246     		mov	r2, r4
+ 154 00aa 2146     		mov	r1, r4
+ 155 00ac 2846     		mov	r0, r5
+ 156 00ae FFF7FEFF 		bl	tmr_output_channel_buffer_enable
+ 157              	.LVL12:
+  88:project/src/wk_tmr.c **** 
+  89:project/src/wk_tmr.c ****   /* configure break and dead-time settings */
+  90:project/src/wk_tmr.c ****   tmr_brkdt_struct.brk_enable = FALSE;
+ 158              		.loc 1 90 3 view .LVU41
+ 159              		.loc 1 90 31 is_stmt 0 view .LVU42
+ 160 00b2 8DF80640 		strb	r4, [sp, #6]
+  91:project/src/wk_tmr.c ****   tmr_brkdt_struct.auto_output_enable = FALSE;
+ 161              		.loc 1 91 3 is_stmt 1 view .LVU43
+ 162              		.loc 1 91 39 is_stmt 0 view .LVU44
+ 163 00b6 8DF80340 		strb	r4, [sp, #3]
+  92:project/src/wk_tmr.c ****   tmr_brkdt_struct.brk_polarity = TMR_BRK_INPUT_ACTIVE_LOW;
+ 164              		.loc 1 92 3 is_stmt 1 view .LVU45
+ 165              		.loc 1 92 33 is_stmt 0 view .LVU46
+ 166 00ba 8DF80140 		strb	r4, [sp, #1]
+  93:project/src/wk_tmr.c ****   tmr_brkdt_struct.fcsoen_state = FALSE;
+ 167              		.loc 1 93 3 is_stmt 1 view .LVU47
+ 168              		.loc 1 93 33 is_stmt 0 view .LVU48
+ 169 00be 8DF80440 		strb	r4, [sp, #4]
+  94:project/src/wk_tmr.c ****   tmr_brkdt_struct.fcsodis_state = FALSE;
+ 170              		.loc 1 94 3 is_stmt 1 view .LVU49
+ 171              		.loc 1 94 34 is_stmt 0 view .LVU50
+ 172 00c2 8DF80540 		strb	r4, [sp, #5]
+  95:project/src/wk_tmr.c ****   tmr_brkdt_struct.wp_level = TMR_WP_OFF;
+ 173              		.loc 1 95 3 is_stmt 1 view .LVU51
+ 174              		.loc 1 95 29 is_stmt 0 view .LVU52
+ 175 00c6 8DF80240 		strb	r4, [sp, #2]
+  96:project/src/wk_tmr.c ****   tmr_brkdt_struct.deadtime = 0;
+ 176              		.loc 1 96 3 is_stmt 1 view .LVU53
+ 177              		.loc 1 96 29 is_stmt 0 view .LVU54
+ 178 00ca 8DF80040 		strb	r4, [sp]
+  97:project/src/wk_tmr.c ****   tmr_brkdt_config(TMR1, &tmr_brkdt_struct);
+ 179              		.loc 1 97 3 is_stmt 1 view .LVU55
+ 180 00ce 6946     		mov	r1, sp
+ 181 00d0 2846     		mov	r0, r5
+ 182 00d2 FFF7FEFF 		bl	tmr_brkdt_config
+ 183              	.LVL13:
+  98:project/src/wk_tmr.c **** 
+  99:project/src/wk_tmr.c **** 
+ 100:project/src/wk_tmr.c ****   tmr_output_enable(TMR1, TRUE);
+ 184              		.loc 1 100 3 view .LVU56
+ 185 00d6 3146     		mov	r1, r6
+ 186 00d8 2846     		mov	r0, r5
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccKWnmDk.s 			page 6
+
+
+ 187 00da FFF7FEFF 		bl	tmr_output_enable
+ 188              	.LVL14:
+ 101:project/src/wk_tmr.c **** 
+ 102:project/src/wk_tmr.c ****   tmr_counter_enable(TMR1, TRUE);
+ 189              		.loc 1 102 3 view .LVU57
+ 190 00de 3146     		mov	r1, r6
+ 191 00e0 2846     		mov	r0, r5
+ 192 00e2 FFF7FEFF 		bl	tmr_counter_enable
+ 193              	.LVL15:
+ 103:project/src/wk_tmr.c **** 
+ 104:project/src/wk_tmr.c ****   /* add user code begin tmr1_init 2 */
+ 105:project/src/wk_tmr.c **** 
+ 106:project/src/wk_tmr.c ****   /* add user code end tmr1_init 2 */
+ 107:project/src/wk_tmr.c **** }
+ 194              		.loc 1 107 1 is_stmt 0 view .LVU58
+ 195 00e6 06B0     		add	sp, sp, #24
+ 196              	.LCFI2:
+ 197              		.cfi_def_cfa_offset 16
+ 198              		@ sp needed
+ 199 00e8 70BD     		pop	{r4, r5, r6, pc}
+ 200              	.L4:
+ 201 00ea 00BF     		.align	2
+ 202              	.L3:
+ 203 00ec 00180140 		.word	1073813504
+ 204 00f0 03040024 		.word	603980803
+ 205 00f4 002C0140 		.word	1073818624
+ 206              		.cfi_endproc
+ 207              	.LFE137:
+ 209              		.section	.text.wk_tmr2_init,"ax",%progbits
+ 210              		.align	1
+ 211              		.global	wk_tmr2_init
+ 212              		.syntax unified
+ 213              		.thumb
+ 214              		.thumb_func
+ 216              	wk_tmr2_init:
+ 217              	.LFB138:
+ 108:project/src/wk_tmr.c **** 
+ 109:project/src/wk_tmr.c **** /**
+ 110:project/src/wk_tmr.c ****   * @brief  init tmr2 function.
+ 111:project/src/wk_tmr.c ****   * @param  none
+ 112:project/src/wk_tmr.c ****   * @retval none
+ 113:project/src/wk_tmr.c ****   */
+ 114:project/src/wk_tmr.c **** void wk_tmr2_init(void)
+ 115:project/src/wk_tmr.c **** {
+ 218              		.loc 1 115 1 is_stmt 1 view -0
+ 219              		.cfi_startproc
+ 220              		@ args = 0, pretend = 0, frame = 16
+ 221              		@ frame_needed = 0, uses_anonymous_args = 0
+ 222 0000 2DE9F043 		push	{r4, r5, r6, r7, r8, r9, lr}
+ 223              	.LCFI3:
+ 224              		.cfi_def_cfa_offset 28
+ 225              		.cfi_offset 4, -28
+ 226              		.cfi_offset 5, -24
+ 227              		.cfi_offset 6, -20
+ 228              		.cfi_offset 7, -16
+ 229              		.cfi_offset 8, -12
+ 230              		.cfi_offset 9, -8
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccKWnmDk.s 			page 7
+
+
+ 231              		.cfi_offset 14, -4
+ 232 0004 85B0     		sub	sp, sp, #20
+ 233              	.LCFI4:
+ 234              		.cfi_def_cfa_offset 48
+ 116:project/src/wk_tmr.c ****   /* add user code begin tmr2_init 0 */
+ 117:project/src/wk_tmr.c **** 
+ 118:project/src/wk_tmr.c ****   /* add user code end tmr2_init 0 */
+ 119:project/src/wk_tmr.c **** 
+ 120:project/src/wk_tmr.c ****   gpio_init_type gpio_init_struct;
+ 235              		.loc 1 120 3 view .LVU60
+ 121:project/src/wk_tmr.c ****   tmr_input_config_type  tmr_input_struct;
+ 236              		.loc 1 121 3 view .LVU61
+ 122:project/src/wk_tmr.c **** 
+ 123:project/src/wk_tmr.c ****   gpio_default_para_init(&gpio_init_struct);
+ 237              		.loc 1 123 3 view .LVU62
+ 238 0006 02AE     		add	r6, sp, #8
+ 239 0008 3046     		mov	r0, r6
+ 240 000a FFF7FEFF 		bl	gpio_default_para_init
+ 241              	.LVL16:
+ 124:project/src/wk_tmr.c **** 
+ 125:project/src/wk_tmr.c ****   /* add user code begin tmr2_init 1 */
+ 126:project/src/wk_tmr.c **** 
+ 127:project/src/wk_tmr.c ****   /* add user code end tmr2_init 1 */
+ 128:project/src/wk_tmr.c **** 
+ 129:project/src/wk_tmr.c ****   /* configure the CH1 pin */
+ 130:project/src/wk_tmr.c ****   gpio_init_struct.gpio_pins = GPIO_PINS_0;
+ 242              		.loc 1 130 3 view .LVU63
+ 243              		.loc 1 130 30 is_stmt 0 view .LVU64
+ 244 000e 0125     		movs	r5, #1
+ 245 0010 0295     		str	r5, [sp, #8]
+ 131:project/src/wk_tmr.c ****   gpio_init_struct.gpio_mode = GPIO_MODE_INPUT;
+ 246              		.loc 1 131 3 is_stmt 1 view .LVU65
+ 247              		.loc 1 131 30 is_stmt 0 view .LVU66
+ 248 0012 0024     		movs	r4, #0
+ 249 0014 8DF80E40 		strb	r4, [sp, #14]
+ 132:project/src/wk_tmr.c ****   gpio_init_struct.gpio_out_type = GPIO_OUTPUT_PUSH_PULL;
+ 250              		.loc 1 132 3 is_stmt 1 view .LVU67
+ 251              		.loc 1 132 34 is_stmt 0 view .LVU68
+ 252 0018 8DF80C40 		strb	r4, [sp, #12]
+ 133:project/src/wk_tmr.c ****   gpio_init_struct.gpio_pull = GPIO_PULL_NONE;
+ 253              		.loc 1 133 3 is_stmt 1 view .LVU69
+ 254              		.loc 1 133 30 is_stmt 0 view .LVU70
+ 255 001c 4FF00409 		mov	r9, #4
+ 256 0020 8DF80D90 		strb	r9, [sp, #13]
+ 134:project/src/wk_tmr.c ****   gpio_init_struct.gpio_drive_strength = GPIO_DRIVE_STRENGTH_STRONGER;
+ 257              		.loc 1 134 3 is_stmt 1 view .LVU71
+ 258              		.loc 1 134 40 is_stmt 0 view .LVU72
+ 259 0024 8DF80F50 		strb	r5, [sp, #15]
+ 135:project/src/wk_tmr.c ****   gpio_init(GPIOA, &gpio_init_struct);
+ 260              		.loc 1 135 3 is_stmt 1 view .LVU73
+ 261 0028 DFF8C480 		ldr	r8, .L7
+ 262 002c 3146     		mov	r1, r6
+ 263 002e 4046     		mov	r0, r8
+ 264 0030 FFF7FEFF 		bl	gpio_init
+ 265              	.LVL17:
+ 136:project/src/wk_tmr.c **** 
+ 137:project/src/wk_tmr.c ****   /* configure the CH2 pin */
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccKWnmDk.s 			page 8
+
+
+ 138:project/src/wk_tmr.c ****   gpio_init_struct.gpio_pins = GPIO_PINS_1;
+ 266              		.loc 1 138 3 view .LVU74
+ 267              		.loc 1 138 30 is_stmt 0 view .LVU75
+ 268 0034 0227     		movs	r7, #2
+ 269 0036 0297     		str	r7, [sp, #8]
+ 139:project/src/wk_tmr.c ****   gpio_init_struct.gpio_mode = GPIO_MODE_INPUT;
+ 270              		.loc 1 139 3 is_stmt 1 view .LVU76
+ 271              		.loc 1 139 30 is_stmt 0 view .LVU77
+ 272 0038 8DF80E40 		strb	r4, [sp, #14]
+ 140:project/src/wk_tmr.c ****   gpio_init_struct.gpio_out_type = GPIO_OUTPUT_PUSH_PULL;
+ 273              		.loc 1 140 3 is_stmt 1 view .LVU78
+ 274              		.loc 1 140 34 is_stmt 0 view .LVU79
+ 275 003c 8DF80C40 		strb	r4, [sp, #12]
+ 141:project/src/wk_tmr.c ****   gpio_init_struct.gpio_pull = GPIO_PULL_NONE;
+ 276              		.loc 1 141 3 is_stmt 1 view .LVU80
+ 277              		.loc 1 141 30 is_stmt 0 view .LVU81
+ 278 0040 8DF80D90 		strb	r9, [sp, #13]
+ 142:project/src/wk_tmr.c ****   gpio_init_struct.gpio_drive_strength = GPIO_DRIVE_STRENGTH_STRONGER;
+ 279              		.loc 1 142 3 is_stmt 1 view .LVU82
+ 280              		.loc 1 142 40 is_stmt 0 view .LVU83
+ 281 0044 8DF80F50 		strb	r5, [sp, #15]
+ 143:project/src/wk_tmr.c ****   gpio_init(GPIOA, &gpio_init_struct);
+ 282              		.loc 1 143 3 is_stmt 1 view .LVU84
+ 283 0048 3146     		mov	r1, r6
+ 284 004a 4046     		mov	r0, r8
+ 285 004c FFF7FEFF 		bl	gpio_init
+ 286              	.LVL18:
+ 144:project/src/wk_tmr.c **** 
+ 145:project/src/wk_tmr.c ****   /* configure counter settings */
+ 146:project/src/wk_tmr.c ****   tmr_cnt_dir_set(TMR2, TMR_COUNT_UP);
+ 287              		.loc 1 146 3 view .LVU85
+ 288 0050 2146     		mov	r1, r4
+ 289 0052 4FF08040 		mov	r0, #1073741824
+ 290 0056 FFF7FEFF 		bl	tmr_cnt_dir_set
+ 291              	.LVL19:
+ 147:project/src/wk_tmr.c ****   tmr_clock_source_div_set(TMR2, TMR_CLOCK_DIV1);
+ 292              		.loc 1 147 3 view .LVU86
+ 293 005a 2146     		mov	r1, r4
+ 294 005c 4FF08040 		mov	r0, #1073741824
+ 295 0060 FFF7FEFF 		bl	tmr_clock_source_div_set
+ 296              	.LVL20:
+ 148:project/src/wk_tmr.c ****   tmr_period_buffer_enable(TMR2, FALSE);
+ 297              		.loc 1 148 3 view .LVU87
+ 298 0064 2146     		mov	r1, r4
+ 299 0066 4FF08040 		mov	r0, #1073741824
+ 300 006a FFF7FEFF 		bl	tmr_period_buffer_enable
+ 301              	.LVL21:
+ 149:project/src/wk_tmr.c ****   tmr_32_bit_function_enable(TMR2, TRUE);
+ 302              		.loc 1 149 3 view .LVU88
+ 303 006e 2946     		mov	r1, r5
+ 304 0070 4FF08040 		mov	r0, #1073741824
+ 305 0074 FFF7FEFF 		bl	tmr_32_bit_function_enable
+ 306              	.LVL22:
+ 150:project/src/wk_tmr.c ****   tmr_base_init(TMR2, 0xFFFFFFFFU, 199U);
+ 307              		.loc 1 150 3 view .LVU89
+ 308 0078 C722     		movs	r2, #199
+ 309 007a 4FF0FF31 		mov	r1, #-1
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccKWnmDk.s 			page 9
+
+
+ 310 007e 4FF08040 		mov	r0, #1073741824
+ 311 0082 FFF7FEFF 		bl	tmr_base_init
+ 312              	.LVL23:
+ 151:project/src/wk_tmr.c **** 
+ 152:project/src/wk_tmr.c ****   /* configure primary mode settings */
+ 153:project/src/wk_tmr.c ****   tmr_sub_sync_mode_set(TMR2, FALSE);
+ 313              		.loc 1 153 3 view .LVU90
+ 314 0086 2146     		mov	r1, r4
+ 315 0088 4FF08040 		mov	r0, #1073741824
+ 316 008c FFF7FEFF 		bl	tmr_sub_sync_mode_set
+ 317              	.LVL24:
+ 154:project/src/wk_tmr.c ****   tmr_primary_mode_select(TMR2, TMR_PRIMARY_SEL_RESET);
+ 318              		.loc 1 154 3 view .LVU91
+ 319 0090 2146     		mov	r1, r4
+ 320 0092 4FF08040 		mov	r0, #1073741824
+ 321 0096 FFF7FEFF 		bl	tmr_primary_mode_select
+ 322              	.LVL25:
+ 155:project/src/wk_tmr.c **** 
+ 156:project/src/wk_tmr.c ****   /* configure channel 1 input settings */
+ 157:project/src/wk_tmr.c ****   tmr_input_struct.input_channel_select = TMR_SELECT_CHANNEL_1;
+ 323              		.loc 1 157 3 view .LVU92
+ 324              		.loc 1 157 41 is_stmt 0 view .LVU93
+ 325 009a 8DF80440 		strb	r4, [sp, #4]
+ 158:project/src/wk_tmr.c ****   tmr_input_struct.input_mapped_select = TMR_CC_CHANNEL_MAPPED_DIRECT;
+ 326              		.loc 1 158 3 is_stmt 1 view .LVU94
+ 327              		.loc 1 158 40 is_stmt 0 view .LVU95
+ 328 009e 8DF80650 		strb	r5, [sp, #6]
+ 159:project/src/wk_tmr.c ****   tmr_input_struct.input_polarity_select = TMR_INPUT_RISING_EDGE;
+ 329              		.loc 1 159 3 is_stmt 1 view .LVU96
+ 330              		.loc 1 159 42 is_stmt 0 view .LVU97
+ 331 00a2 8DF80540 		strb	r4, [sp, #5]
+ 160:project/src/wk_tmr.c ****   tmr_input_struct.input_filter_value = 0;
+ 332              		.loc 1 160 3 is_stmt 1 view .LVU98
+ 333              		.loc 1 160 39 is_stmt 0 view .LVU99
+ 334 00a6 8DF80740 		strb	r4, [sp, #7]
+ 161:project/src/wk_tmr.c ****   tmr_input_channel_init(TMR2, &tmr_input_struct, TMR_CHANNEL_INPUT_DIV_1);
+ 335              		.loc 1 161 3 is_stmt 1 view .LVU100
+ 336 00aa 0DEB0906 		add	r6, sp, r9
+ 337 00ae 2246     		mov	r2, r4
+ 338 00b0 3146     		mov	r1, r6
+ 339 00b2 4FF08040 		mov	r0, #1073741824
+ 340 00b6 FFF7FEFF 		bl	tmr_input_channel_init
+ 341              	.LVL26:
+ 162:project/src/wk_tmr.c **** 
+ 163:project/src/wk_tmr.c ****   /* configure channel 2 input settings */
+ 164:project/src/wk_tmr.c ****   tmr_input_struct.input_channel_select = TMR_SELECT_CHANNEL_2;
+ 342              		.loc 1 164 3 view .LVU101
+ 343              		.loc 1 164 41 is_stmt 0 view .LVU102
+ 344 00ba 8DF80470 		strb	r7, [sp, #4]
+ 165:project/src/wk_tmr.c ****   tmr_input_struct.input_mapped_select = TMR_CC_CHANNEL_MAPPED_DIRECT;
+ 345              		.loc 1 165 3 is_stmt 1 view .LVU103
+ 346              		.loc 1 165 40 is_stmt 0 view .LVU104
+ 347 00be 8DF80650 		strb	r5, [sp, #6]
+ 166:project/src/wk_tmr.c ****   tmr_input_struct.input_polarity_select = TMR_INPUT_RISING_EDGE;
+ 348              		.loc 1 166 3 is_stmt 1 view .LVU105
+ 349              		.loc 1 166 42 is_stmt 0 view .LVU106
+ 350 00c2 8DF80540 		strb	r4, [sp, #5]
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccKWnmDk.s 			page 10
+
+
+ 167:project/src/wk_tmr.c ****   tmr_input_struct.input_filter_value = 0;
+ 351              		.loc 1 167 3 is_stmt 1 view .LVU107
+ 352              		.loc 1 167 39 is_stmt 0 view .LVU108
+ 353 00c6 8DF80740 		strb	r4, [sp, #7]
+ 168:project/src/wk_tmr.c ****   tmr_input_channel_init(TMR2, &tmr_input_struct, TMR_CHANNEL_INPUT_DIV_1);
+ 354              		.loc 1 168 3 is_stmt 1 view .LVU109
+ 355 00ca 2246     		mov	r2, r4
+ 356 00cc 3146     		mov	r1, r6
+ 357 00ce 4FF08040 		mov	r0, #1073741824
+ 358 00d2 FFF7FEFF 		bl	tmr_input_channel_init
+ 359              	.LVL27:
+ 169:project/src/wk_tmr.c **** 
+ 170:project/src/wk_tmr.c ****   tmr_flag_clear(TMR2, TMR_C1_FLAG | TMR_C2_FLAG | TMR_OVF_FLAG);
+ 360              		.loc 1 170 3 view .LVU110
+ 361 00d6 0721     		movs	r1, #7
+ 362 00d8 4FF08040 		mov	r0, #1073741824
+ 363 00dc FFF7FEFF 		bl	tmr_flag_clear
+ 364              	.LVL28:
+ 171:project/src/wk_tmr.c ****   tmr_counter_enable(TMR2, TRUE);
+ 365              		.loc 1 171 3 view .LVU111
+ 366 00e0 2946     		mov	r1, r5
+ 367 00e2 4FF08040 		mov	r0, #1073741824
+ 368 00e6 FFF7FEFF 		bl	tmr_counter_enable
+ 369              	.LVL29:
+ 172:project/src/wk_tmr.c **** 
+ 173:project/src/wk_tmr.c ****   /* add user code begin tmr2_init 2 */
+ 174:project/src/wk_tmr.c **** 
+ 175:project/src/wk_tmr.c ****   /* add user code end tmr2_init 2 */
+ 176:project/src/wk_tmr.c **** }
+ 370              		.loc 1 176 1 is_stmt 0 view .LVU112
+ 371 00ea 05B0     		add	sp, sp, #20
+ 372              	.LCFI5:
+ 373              		.cfi_def_cfa_offset 28
+ 374              		@ sp needed
+ 375 00ec BDE8F083 		pop	{r4, r5, r6, r7, r8, r9, pc}
+ 376              	.L8:
+ 377              		.align	2
+ 378              	.L7:
+ 379 00f0 00080140 		.word	1073809408
+ 380              		.cfi_endproc
+ 381              	.LFE138:
+ 383              		.section	.text.wk_tmr8_init,"ax",%progbits
+ 384              		.align	1
+ 385              		.global	wk_tmr8_init
+ 386              		.syntax unified
+ 387              		.thumb
+ 388              		.thumb_func
+ 390              	wk_tmr8_init:
+ 391              	.LFB139:
+ 177:project/src/wk_tmr.c **** 
+ 178:project/src/wk_tmr.c **** /**
+ 179:project/src/wk_tmr.c ****   * @brief  init tmr8 function.
+ 180:project/src/wk_tmr.c ****   * @param  none
+ 181:project/src/wk_tmr.c ****   * @retval none
+ 182:project/src/wk_tmr.c ****   */
+ 183:project/src/wk_tmr.c **** void wk_tmr8_init(void)
+ 184:project/src/wk_tmr.c **** {
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccKWnmDk.s 			page 11
+
+
+ 392              		.loc 1 184 1 is_stmt 1 view -0
+ 393              		.cfi_startproc
+ 394              		@ args = 0, pretend = 0, frame = 24
+ 395              		@ frame_needed = 0, uses_anonymous_args = 0
+ 396 0000 70B5     		push	{r4, r5, r6, lr}
+ 397              	.LCFI6:
+ 398              		.cfi_def_cfa_offset 16
+ 399              		.cfi_offset 4, -16
+ 400              		.cfi_offset 5, -12
+ 401              		.cfi_offset 6, -8
+ 402              		.cfi_offset 14, -4
+ 403 0002 86B0     		sub	sp, sp, #24
+ 404              	.LCFI7:
+ 405              		.cfi_def_cfa_offset 40
+ 185:project/src/wk_tmr.c ****   /* add user code begin tmr8_init 0 */
+ 186:project/src/wk_tmr.c **** 
+ 187:project/src/wk_tmr.c ****   /* add user code end tmr8_init 0 */
+ 188:project/src/wk_tmr.c **** 
+ 189:project/src/wk_tmr.c ****   gpio_init_type gpio_init_struct;
+ 406              		.loc 1 189 3 view .LVU114
+ 190:project/src/wk_tmr.c ****   tmr_output_config_type tmr_output_struct;
+ 407              		.loc 1 190 3 view .LVU115
+ 191:project/src/wk_tmr.c ****   tmr_brkdt_config_type tmr_brkdt_struct;
+ 408              		.loc 1 191 3 view .LVU116
+ 192:project/src/wk_tmr.c **** 
+ 193:project/src/wk_tmr.c ****   gpio_default_para_init(&gpio_init_struct);
+ 409              		.loc 1 193 3 view .LVU117
+ 410 0004 04AD     		add	r5, sp, #16
+ 411 0006 2846     		mov	r0, r5
+ 412 0008 FFF7FEFF 		bl	gpio_default_para_init
+ 413              	.LVL30:
+ 194:project/src/wk_tmr.c **** 
+ 195:project/src/wk_tmr.c ****   /* add user code begin tmr8_init 1 */
+ 196:project/src/wk_tmr.c **** 
+ 197:project/src/wk_tmr.c ****   /* add user code end tmr8_init 1 */
+ 198:project/src/wk_tmr.c **** 
+ 199:project/src/wk_tmr.c ****   /* configure the CH1 pin */
+ 200:project/src/wk_tmr.c ****   gpio_init_struct.gpio_pins = GPIO_PINS_6;
+ 414              		.loc 1 200 3 view .LVU118
+ 415              		.loc 1 200 30 is_stmt 0 view .LVU119
+ 416 000c 4023     		movs	r3, #64
+ 417 000e 0493     		str	r3, [sp, #16]
+ 201:project/src/wk_tmr.c ****   gpio_init_struct.gpio_mode = GPIO_MODE_MUX;
+ 418              		.loc 1 201 3 is_stmt 1 view .LVU120
+ 419              		.loc 1 201 30 is_stmt 0 view .LVU121
+ 420 0010 0823     		movs	r3, #8
+ 421 0012 8DF81630 		strb	r3, [sp, #22]
+ 202:project/src/wk_tmr.c ****   gpio_init_struct.gpio_out_type = GPIO_OUTPUT_PUSH_PULL;
+ 422              		.loc 1 202 3 is_stmt 1 view .LVU122
+ 423              		.loc 1 202 34 is_stmt 0 view .LVU123
+ 424 0016 0024     		movs	r4, #0
+ 425 0018 8DF81440 		strb	r4, [sp, #20]
+ 203:project/src/wk_tmr.c ****   gpio_init_struct.gpio_pull = GPIO_PULL_NONE;
+ 426              		.loc 1 203 3 is_stmt 1 view .LVU124
+ 427              		.loc 1 203 30 is_stmt 0 view .LVU125
+ 428 001c 0423     		movs	r3, #4
+ 429 001e 8DF81530 		strb	r3, [sp, #21]
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccKWnmDk.s 			page 12
+
+
+ 204:project/src/wk_tmr.c ****   gpio_init_struct.gpio_drive_strength = GPIO_DRIVE_STRENGTH_MODERATE;
+ 430              		.loc 1 204 3 is_stmt 1 view .LVU126
+ 431              		.loc 1 204 40 is_stmt 0 view .LVU127
+ 432 0022 0223     		movs	r3, #2
+ 433 0024 8DF81730 		strb	r3, [sp, #23]
+ 205:project/src/wk_tmr.c ****   gpio_init(GPIOC, &gpio_init_struct);
+ 434              		.loc 1 205 3 is_stmt 1 view .LVU128
+ 435 0028 2946     		mov	r1, r5
+ 436 002a 2D48     		ldr	r0, .L11
+ 437 002c FFF7FEFF 		bl	gpio_init
+ 438              	.LVL31:
+ 206:project/src/wk_tmr.c **** 
+ 207:project/src/wk_tmr.c ****   /* configure counter settings */
+ 208:project/src/wk_tmr.c ****   tmr_cnt_dir_set(TMR8, TMR_COUNT_UP);
+ 439              		.loc 1 208 3 view .LVU129
+ 440 0030 2C4D     		ldr	r5, .L11+4
+ 441 0032 2146     		mov	r1, r4
+ 442 0034 2846     		mov	r0, r5
+ 443 0036 FFF7FEFF 		bl	tmr_cnt_dir_set
+ 444              	.LVL32:
+ 209:project/src/wk_tmr.c ****   tmr_clock_source_div_set(TMR8, TMR_CLOCK_DIV1);
+ 445              		.loc 1 209 3 view .LVU130
+ 446 003a 2146     		mov	r1, r4
+ 447 003c 2846     		mov	r0, r5
+ 448 003e FFF7FEFF 		bl	tmr_clock_source_div_set
+ 449              	.LVL33:
+ 210:project/src/wk_tmr.c ****   tmr_repetition_counter_set(TMR8, 0);
+ 450              		.loc 1 210 3 view .LVU131
+ 451 0042 2146     		mov	r1, r4
+ 452 0044 2846     		mov	r0, r5
+ 453 0046 FFF7FEFF 		bl	tmr_repetition_counter_set
+ 454              	.LVL34:
+ 211:project/src/wk_tmr.c ****   tmr_period_buffer_enable(TMR8, FALSE);
+ 455              		.loc 1 211 3 view .LVU132
+ 456 004a 2146     		mov	r1, r4
+ 457 004c 2846     		mov	r0, r5
+ 458 004e FFF7FEFF 		bl	tmr_period_buffer_enable
+ 459              	.LVL35:
+ 212:project/src/wk_tmr.c ****   tmr_base_init(TMR8, 199, 0);
+ 460              		.loc 1 212 3 view .LVU133
+ 461 0052 2246     		mov	r2, r4
+ 462 0054 C721     		movs	r1, #199
+ 463 0056 2846     		mov	r0, r5
+ 464 0058 FFF7FEFF 		bl	tmr_base_init
+ 465              	.LVL36:
+ 213:project/src/wk_tmr.c **** 
+ 214:project/src/wk_tmr.c ****   /* configure primary mode settings */
+ 215:project/src/wk_tmr.c ****   tmr_sub_sync_mode_set(TMR8, FALSE);
+ 466              		.loc 1 215 3 view .LVU134
+ 467 005c 2146     		mov	r1, r4
+ 468 005e 2846     		mov	r0, r5
+ 469 0060 FFF7FEFF 		bl	tmr_sub_sync_mode_set
+ 470              	.LVL37:
+ 216:project/src/wk_tmr.c ****   tmr_primary_mode_select(TMR8, TMR_PRIMARY_SEL_RESET);
+ 471              		.loc 1 216 3 view .LVU135
+ 472 0064 2146     		mov	r1, r4
+ 473 0066 2846     		mov	r0, r5
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccKWnmDk.s 			page 13
+
+
+ 474 0068 FFF7FEFF 		bl	tmr_primary_mode_select
+ 475              	.LVL38:
+ 217:project/src/wk_tmr.c **** 
+ 218:project/src/wk_tmr.c ****   /* configure channel 1 output settings */
+ 219:project/src/wk_tmr.c ****   tmr_output_struct.oc_mode = TMR_OUTPUT_CONTROL_OFF;
+ 476              		.loc 1 219 3 view .LVU136
+ 477              		.loc 1 219 29 is_stmt 0 view .LVU137
+ 478 006c 8DF80840 		strb	r4, [sp, #8]
+ 220:project/src/wk_tmr.c ****   tmr_output_struct.oc_output_state = TRUE;
+ 479              		.loc 1 220 3 is_stmt 1 view .LVU138
+ 480              		.loc 1 220 37 is_stmt 0 view .LVU139
+ 481 0070 0126     		movs	r6, #1
+ 482 0072 8DF80D60 		strb	r6, [sp, #13]
+ 221:project/src/wk_tmr.c ****   tmr_output_struct.occ_output_state = FALSE;
+ 483              		.loc 1 221 3 is_stmt 1 view .LVU140
+ 484              		.loc 1 221 38 is_stmt 0 view .LVU141
+ 485 0076 8DF80E40 		strb	r4, [sp, #14]
+ 222:project/src/wk_tmr.c ****   tmr_output_struct.oc_polarity = TMR_OUTPUT_ACTIVE_HIGH;
+ 486              		.loc 1 222 3 is_stmt 1 view .LVU142
+ 487              		.loc 1 222 33 is_stmt 0 view .LVU143
+ 488 007a 8DF80B40 		strb	r4, [sp, #11]
+ 223:project/src/wk_tmr.c ****   tmr_output_struct.occ_polarity = TMR_OUTPUT_ACTIVE_HIGH;
+ 489              		.loc 1 223 3 is_stmt 1 view .LVU144
+ 490              		.loc 1 223 34 is_stmt 0 view .LVU145
+ 491 007e 8DF80C40 		strb	r4, [sp, #12]
+ 224:project/src/wk_tmr.c ****   tmr_output_struct.oc_idle_state = FALSE;
+ 492              		.loc 1 224 3 is_stmt 1 view .LVU146
+ 493              		.loc 1 224 35 is_stmt 0 view .LVU147
+ 494 0082 8DF80940 		strb	r4, [sp, #9]
+ 225:project/src/wk_tmr.c ****   tmr_output_struct.occ_idle_state = FALSE;
+ 495              		.loc 1 225 3 is_stmt 1 view .LVU148
+ 496              		.loc 1 225 36 is_stmt 0 view .LVU149
+ 497 0086 8DF80A40 		strb	r4, [sp, #10]
+ 226:project/src/wk_tmr.c ****   tmr_output_channel_config(TMR8, TMR_SELECT_CHANNEL_1, &tmr_output_struct);
+ 498              		.loc 1 226 3 is_stmt 1 view .LVU150
+ 499 008a 02AA     		add	r2, sp, #8
+ 500 008c 2146     		mov	r1, r4
+ 501 008e 2846     		mov	r0, r5
+ 502 0090 FFF7FEFF 		bl	tmr_output_channel_config
+ 503              	.LVL39:
+ 227:project/src/wk_tmr.c ****   tmr_channel_value_set(TMR8, TMR_SELECT_CHANNEL_1, 0);
+ 504              		.loc 1 227 3 view .LVU151
+ 505 0094 2246     		mov	r2, r4
+ 506 0096 2146     		mov	r1, r4
+ 507 0098 2846     		mov	r0, r5
+ 508 009a FFF7FEFF 		bl	tmr_channel_value_set
+ 509              	.LVL40:
+ 228:project/src/wk_tmr.c ****   tmr_output_channel_buffer_enable(TMR8, TMR_SELECT_CHANNEL_1, FALSE);
+ 510              		.loc 1 228 3 view .LVU152
+ 511 009e 2246     		mov	r2, r4
+ 512 00a0 2146     		mov	r1, r4
+ 513 00a2 2846     		mov	r0, r5
+ 514 00a4 FFF7FEFF 		bl	tmr_output_channel_buffer_enable
+ 515              	.LVL41:
+ 229:project/src/wk_tmr.c **** 
+ 230:project/src/wk_tmr.c ****   /* configure break and dead-time settings */
+ 231:project/src/wk_tmr.c ****   tmr_brkdt_struct.brk_enable = FALSE;
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccKWnmDk.s 			page 14
+
+
+ 516              		.loc 1 231 3 view .LVU153
+ 517              		.loc 1 231 31 is_stmt 0 view .LVU154
+ 518 00a8 8DF80640 		strb	r4, [sp, #6]
+ 232:project/src/wk_tmr.c ****   tmr_brkdt_struct.auto_output_enable = FALSE;
+ 519              		.loc 1 232 3 is_stmt 1 view .LVU155
+ 520              		.loc 1 232 39 is_stmt 0 view .LVU156
+ 521 00ac 8DF80340 		strb	r4, [sp, #3]
+ 233:project/src/wk_tmr.c ****   tmr_brkdt_struct.brk_polarity = TMR_BRK_INPUT_ACTIVE_LOW;
+ 522              		.loc 1 233 3 is_stmt 1 view .LVU157
+ 523              		.loc 1 233 33 is_stmt 0 view .LVU158
+ 524 00b0 8DF80140 		strb	r4, [sp, #1]
+ 234:project/src/wk_tmr.c ****   tmr_brkdt_struct.fcsoen_state = FALSE;
+ 525              		.loc 1 234 3 is_stmt 1 view .LVU159
+ 526              		.loc 1 234 33 is_stmt 0 view .LVU160
+ 527 00b4 8DF80440 		strb	r4, [sp, #4]
+ 235:project/src/wk_tmr.c ****   tmr_brkdt_struct.fcsodis_state = FALSE;
+ 528              		.loc 1 235 3 is_stmt 1 view .LVU161
+ 529              		.loc 1 235 34 is_stmt 0 view .LVU162
+ 530 00b8 8DF80540 		strb	r4, [sp, #5]
+ 236:project/src/wk_tmr.c ****   tmr_brkdt_struct.wp_level = TMR_WP_OFF;
+ 531              		.loc 1 236 3 is_stmt 1 view .LVU163
+ 532              		.loc 1 236 29 is_stmt 0 view .LVU164
+ 533 00bc 8DF80240 		strb	r4, [sp, #2]
+ 237:project/src/wk_tmr.c ****   tmr_brkdt_struct.deadtime = 0;
+ 534              		.loc 1 237 3 is_stmt 1 view .LVU165
+ 535              		.loc 1 237 29 is_stmt 0 view .LVU166
+ 536 00c0 8DF80040 		strb	r4, [sp]
+ 238:project/src/wk_tmr.c ****   tmr_brkdt_config(TMR8, &tmr_brkdt_struct);
+ 537              		.loc 1 238 3 is_stmt 1 view .LVU167
+ 538 00c4 6946     		mov	r1, sp
+ 539 00c6 2846     		mov	r0, r5
+ 540 00c8 FFF7FEFF 		bl	tmr_brkdt_config
+ 541              	.LVL42:
+ 239:project/src/wk_tmr.c **** 
+ 240:project/src/wk_tmr.c **** 
+ 241:project/src/wk_tmr.c ****   tmr_output_enable(TMR8, TRUE);
+ 542              		.loc 1 241 3 view .LVU168
+ 543 00cc 3146     		mov	r1, r6
+ 544 00ce 2846     		mov	r0, r5
+ 545 00d0 FFF7FEFF 		bl	tmr_output_enable
+ 546              	.LVL43:
+ 242:project/src/wk_tmr.c **** 
+ 243:project/src/wk_tmr.c ****   tmr_counter_enable(TMR8, TRUE);
+ 547              		.loc 1 243 3 view .LVU169
+ 548 00d4 3146     		mov	r1, r6
+ 549 00d6 2846     		mov	r0, r5
+ 550 00d8 FFF7FEFF 		bl	tmr_counter_enable
+ 551              	.LVL44:
+ 244:project/src/wk_tmr.c **** 
+ 245:project/src/wk_tmr.c ****   /* add user code begin tmr8_init 2 */
+ 246:project/src/wk_tmr.c **** 
+ 247:project/src/wk_tmr.c ****   /* add user code end tmr8_init 2 */
+ 248:project/src/wk_tmr.c **** }
+ 552              		.loc 1 248 1 is_stmt 0 view .LVU170
+ 553 00dc 06B0     		add	sp, sp, #24
+ 554              	.LCFI8:
+ 555              		.cfi_def_cfa_offset 16
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccKWnmDk.s 			page 15
+
+
+ 556              		@ sp needed
+ 557 00de 70BD     		pop	{r4, r5, r6, pc}
+ 558              	.L12:
+ 559              		.align	2
+ 560              	.L11:
+ 561 00e0 00100140 		.word	1073811456
+ 562 00e4 00340140 		.word	1073820672
+ 563              		.cfi_endproc
+ 564              	.LFE139:
+ 566              		.text
+ 567              	.Letext0:
+ 568              		.file 2 "D:/gnu_toolchain/arm-none-eabi/include/machine/_default_types.h"
+ 569              		.file 3 "D:/gnu_toolchain/arm-none-eabi/include/sys/_stdint.h"
+ 570              		.file 4 "libraries/cmsis/cm4/device_support/at32f403a_407.h"
+ 571              		.file 5 "libraries/drivers/inc/at32f403a_407_gpio.h"
+ 572              		.file 6 "libraries/drivers/inc/at32f403a_407_tmr.h"
+ARM GAS  C:\Users\bians\AppData\Local\Temp\ccKWnmDk.s 			page 16
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 wk_tmr.c
+C:\Users\bians\AppData\Local\Temp\ccKWnmDk.s:21     .text.wk_tmr1_init:00000000 $t
+C:\Users\bians\AppData\Local\Temp\ccKWnmDk.s:27     .text.wk_tmr1_init:00000000 wk_tmr1_init
+C:\Users\bians\AppData\Local\Temp\ccKWnmDk.s:203    .text.wk_tmr1_init:000000ec $d
+C:\Users\bians\AppData\Local\Temp\ccKWnmDk.s:210    .text.wk_tmr2_init:00000000 $t
+C:\Users\bians\AppData\Local\Temp\ccKWnmDk.s:216    .text.wk_tmr2_init:00000000 wk_tmr2_init
+C:\Users\bians\AppData\Local\Temp\ccKWnmDk.s:379    .text.wk_tmr2_init:000000f0 $d
+C:\Users\bians\AppData\Local\Temp\ccKWnmDk.s:384    .text.wk_tmr8_init:00000000 $t
+C:\Users\bians\AppData\Local\Temp\ccKWnmDk.s:390    .text.wk_tmr8_init:00000000 wk_tmr8_init
+C:\Users\bians\AppData\Local\Temp\ccKWnmDk.s:561    .text.wk_tmr8_init:000000e0 $d
+
+UNDEFINED SYMBOLS
+gpio_default_para_init
+gpio_init
+gpio_pin_remap_config
+tmr_cnt_dir_set
+tmr_clock_source_div_set
+tmr_repetition_counter_set
+tmr_period_buffer_enable
+tmr_base_init
+tmr_sub_sync_mode_set
+tmr_primary_mode_select
+tmr_output_channel_config
+tmr_channel_value_set
+tmr_output_channel_buffer_enable
+tmr_brkdt_config
+tmr_output_enable
+tmr_counter_enable
+tmr_32_bit_function_enable
+tmr_input_channel_init
+tmr_flag_clear

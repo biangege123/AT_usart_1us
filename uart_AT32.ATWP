@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Root>
+    <WorkBenchVersion>
+        <Version>V1.2.06</Version>
+    </WorkBenchVersion>
+    <MCUInfo>
+        <MCUSerials>AT32F403A</MCUSerials>
+        <MCUName>AT32F403AVGT7</MCUName>
+        <MCUPackage>LQFP100</MCUPackage>
+    </MCUInfo>
+    <CRM>
+        <Mode>
+            <ModeSub name="HEXT" value="HEXT-External-Oscillator"/>
+        </Mode>
+        <Parameters>
+            <ParametersSub name="HEXT" value="HEXT_CRYSTAL"/>
+        </Parameters>
+    </CRM>
+    <DEBUG>
+        <Mode>
+            <ModeSub name="Debug interface" value="JTAG (5pin)"/>
+        </Mode>
+    </DEBUG>
+    <EXINT>
+        <Mode>
+            <ModeSub name="EXINT0" value="TRUE"/>
+        </Mode>
+    </EXINT>
+    <I2C1>
+        <Mode>
+            <ModeSub name="I2C" value="I2C"/>
+        </Mode>
+        <Parameters>
+            <ParametersSub name="I2C_Mode" value="I2C_Fast"/>
+            <ParametersSub name="DutyCycle" value="I2C_FSMODE_DUTY_2_1"/>
+            <ParametersSub name="DualAddressMode" value="DISABLE"/>
+            <ParametersSub name="GeneralCallMode" value="FALSE"/>
+        </Parameters>
+    </I2C1>
+    <SYSTEM>
+        <Mode>
+            <ModeSub name="Time_Base" value="SysTick"/>
+        </Mode>
+    </SYSTEM>
+    <TMR1>
+        <Mode>
+            <ModeSub name="Channel1 mode" value="Output_CH1"/>
+            <ModeSub name="Activated" value="TRUE"/>
+        </Mode>
+        <Parameters>
+            <ParametersSub name="Period" value="199"/>
+        </Parameters>
+    </TMR1>
+    <TMR2>
+        <Mode>
+            <ModeSub name="Channel1 mode" value="Input_direct_mode"/>
+            <ModeSub name="Channel2 mode" value="Input_direct_mode"/>
+            <ModeSub name="Activated" value="TRUE"/>
+        </Mode>
+        <Parameters>
+            <ParametersSub name="Period" value="199"/>
+        </Parameters>
+    </TMR2>
+    <TMR8>
+        <Mode>
+            <ModeSub name="Channel1 mode" value="Output_CH1"/>
+            <ModeSub name="Activated" value="TRUE"/>
+        </Mode>
+        <Parameters>
+            <ParametersSub name="Period" value="199"/>
+        </Parameters>
+    </TMR8>
+    <USART1>
+        <Mode>
+            <ModeSub name="Mode" value="Asynchronous"/>
+        </Mode>
+        <Parameters>
+            <ParametersSub name="RealBaudRate" value="115207"/>
+        </Parameters>
+    </USART1>
+    <I2C_Application>
+        <Mode>
+            <ModeSub name="I2C1_Mode" value="Poll_Mode"/>
+        </Mode>
+        <Parameters>
+            <ParametersSub name="I2C1_Communication_Mode" value="Memory_device"/>
+            <ParametersSub name="I2C1_Master_Send" value="TRUE"/>
+            <ParametersSub name="I2C1_Master_Send_Slave_Addr" value="0x3C"/>
+        </Parameters>
+    </I2C_Application>
+    <DMA>
+        <USART1_RX>
+            <ParametersSub name="Instance" value="DMA1_Channel1"/>
+            <ParametersSub name="Priority" value="DMA_PRIORITY_MEDIUM"/>
+        </USART1_RX>
+        <USART1_TX>
+            <ParametersSub name="Instance" value="DMA1_Channel2"/>
+            <ParametersSub name="Priority" value="DMA_PRIORITY_MEDIUM"/>
+        </USART1_TX>
+    </DMA>
+    <NVIC>
+        <SysTick_Handler>1;15;0;0;0;1</SysTick_Handler>
+        <FLASH_IRQHandler>0;0;0;0;0;0</FLASH_IRQHandler>
+        <CRM_IRQHandler>0;0;0;0;0;0</CRM_IRQHandler>
+        <EXINT0_IRQHandler>1;0;0;0;0;1</EXINT0_IRQHandler>
+        <DMA1_Channel1_IRQHandler>0;0;0;0;0;0</DMA1_Channel1_IRQHandler>
+        <DMA1_Channel2_IRQHandler>0;0;0;0;0;0</DMA1_Channel2_IRQHandler>
+        <TMR1_BRK_TMR9_IRQHandler>0;0;0;0;0;0</TMR1_BRK_TMR9_IRQHandler>
+        <TMR1_OVF_TMR10_IRQHandler>0;0;0;0;0;0</TMR1_OVF_TMR10_IRQHandler>
+        <TMR1_TRG_HALL_TMR11_IRQHandler>0;0;0;0;0;0</TMR1_TRG_HALL_TMR11_IRQHandler>
+        <TMR1_CH_IRQHandler>0;0;0;0;0;0</TMR1_CH_IRQHandler>
+        <TMR2_GLOBAL_IRQHandler>0;0;0;0;0;0</TMR2_GLOBAL_IRQHandler>
+        <I2C1_EVT_IRQHandler>0;0;0;0;0;0</I2C1_EVT_IRQHandler>
+        <I2C1_ERR_IRQHandler>0;0;0;0;0;0</I2C1_ERR_IRQHandler>
+        <USART1_IRQHandler>1;0;0;0;0;1</USART1_IRQHandler>
+        <TMR8_BRK_TMR12_IRQHandler>0;0;0;0;0;0</TMR8_BRK_TMR12_IRQHandler>
+        <TMR8_OVF_TMR13_IRQHandler>0;0;0;0;0;0</TMR8_OVF_TMR13_IRQHandler>
+        <TMR8_TRG_HALL_TMR14_IRQHandler>0;0;0;0;0;0</TMR8_TRG_HALL_TMR14_IRQHandler>
+        <TMR8_CH_IRQHandler>0;0;0;0;0;0</TMR8_CH_IRQHandler>
+    </NVIC>
+    <ClockConfiguration>
+        <rtcsel>0</rtcsel>
+        <hext>8.000000</hext>
+        <hextdiv>2</hextdiv>
+        <pllhextdiv>0</pllhextdiv>
+        <pllrcs>0</pllrcs>
+        <pllmult>25</pllmult>
+        <sclkselect>1</sclkselect>
+        <ahbdiv>1</ahbdiv>
+        <apb1div>2</apb1div>
+        <apb2div>2</apb2div>
+        <usbdiv>4.0</usbdiv>
+        <hicktousb>1</hicktousb>
+        <hicktosclk>0</hicktosclk>
+        <clkout>0</clkout>
+        <clkoutdiv>1</clkoutdiv>
+        <adcdiv>6</adcdiv>
+        <systicsel>8</systicsel>
+    </ClockConfiguration>
+    <PINInfo>
+        <PinSub pinname="HEXT_IN" signalname="CRM_HEXT_IN" signaltype="2"/>
+        <PinSub pinname="HEXT_OUT" signalname="CRM_HEXT_OUT" signaltype="2"/>
+        <PinSub pinname="PC0" signalname="EXINT0" signaltype="2"/>
+        <PinSub pinname="PA0" signalname="TMR2_CH1" signaltype="2"/>
+        <PinSub pinname="PA1" signalname="TMR2_CH2" signaltype="2"/>
+        <PinSub pinname="PE9" signalname="TMR1_CH1" signaltype="2"/>
+        <PinSub pinname="PC6" signalname="TMR8_CH1" signaltype="2"/>
+        <PinSub pinname="PA9" signalname="USART1_TX" signaltype="2"/>
+        <PinSub pinname="PA10" signalname="USART1_RX" signaltype="2"/>
+        <PinSub pinname="PA13" signalname="DEBUG_JTMS_SWDIO" signaltype="2"/>
+        <PinSub pinname="PA14" signalname="DEBUG_JTCK_SWCLK" signaltype="2"/>
+        <PinSub pinname="PA15" signalname="DEBUG_JTDI" signaltype="2"/>
+        <PinSub pinname="PB3" signalname="DEBUG_JTDO" signaltype="2"/>
+        <PinSub pinname="PB4" signalname="DEBUG_NJTRST" signaltype="2"/>
+        <PinSub pinname="PB6" signalname="I2C1_SCL" signaltype="2"/>
+        <PinSub pinname="PB7" signalname="I2C1_SDA" signaltype="2"/>
+    </PINInfo>
+    <ProjectInfomation>
+        <ProjectName>uart_AT32</ProjectName>
+        <ProjectLocation>C:/Users/bians/Desktop/uart</ProjectLocation>
+        <ToolchainIDE>Makefile</ToolchainIDE>
+        <ARMCompiler>0</ARMCompiler>
+        <BackupCode>true</BackupCode>
+        <KeepUserCode>true</KeepUserCode>
+        <NotUsedPinAnalog>false</NotUsedPinAnalog>
+        <CodeSplitIP>true</CodeSplitIP>
+        <AddNecessaryFileFlag>true</AddNecessaryFileFlag>
+        <DeletePriviousFiles>true</DeletePriviousFiles>
+        <MinHeapSize>0x200</MinHeapSize>
+        <MinStackSize>0x400</MinStackSize>
+        <UseFirmware>true</UseFirmware>
+        <PackageVersion>V2.2.2</PackageVersion>
+    </ProjectInfomation>
+    <FunctionRankInfo>
+        <RankSub RankNum="1" FixPosFlag="TRUE" FuncName="wk_system_clock_config" InstanceName="CRM" CodeSection="config_system_clock_rtthread" MainDoNotCallFlag="FALSE"/>
+        <RankSub RankNum="2" FixPosFlag="TRUE" FuncName="wk_periph_clock_config" InstanceName="CRM" CodeSection="config periph clock" MainDoNotCallFlag="FALSE"/>
+        <RankSub RankNum="7" FixPosFlag="TRUE" FuncName="wk_nvic_config" InstanceName="NVIC" CodeSection="config nvic" MainDoNotCallFlag="FALSE"/>
+        <RankSub RankNum="8" FixPosFlag="TRUE" FuncName="wk_timebase_init" InstanceName="SYSTEM" CodeSection="config timebase" MainDoNotCallFlag="FALSE"/>
+        <RankSub RankNum="32" FixPosFlag="FALSE" FuncName="wk_usart1_init" InstanceName="USART1" CodeSection="usart1 function" MainDoNotCallFlag="FALSE"/>
+        <RankSub RankNum="48" FixPosFlag="FALSE" FuncName="wk_i2c1_init" InstanceName="I2C1" CodeSection="i2c1 function" MainDoNotCallFlag="FALSE"/>
+        <RankSub RankNum="81" FixPosFlag="FALSE" FuncName="wk_i2c_app_init" InstanceName="I2C_Application" CodeSection="i2c_app_init" MainDoNotCallFlag="FALSE"/>
+        <RankSub RankNum="14" FixPosFlag="FALSE" FuncName="wk_dma1_channel1_init" InstanceName="DMA1_Channel1" CodeSection="dma1_channel1_init" MainDoNotCallFlag="FALSE"/>
+        <RankSub RankNum="15" FixPosFlag="FALSE" FuncName="wk_dma1_channel2_init" InstanceName="DMA1_Channel2" CodeSection="dma1_channel2_init" MainDoNotCallFlag="FALSE"/>
+        <RankSub RankNum="52" FixPosFlag="FALSE" FuncName="wk_exint_config" InstanceName="EXINT" CodeSection="exint function" MainDoNotCallFlag="FALSE"/>
+        <RankSub RankNum="56" FixPosFlag="FALSE" FuncName="wk_tmr1_init" InstanceName="TMR1" CodeSection="tmr1 function" MainDoNotCallFlag="FALSE"/>
+        <RankSub RankNum="63" FixPosFlag="FALSE" FuncName="wk_tmr8_init" InstanceName="TMR8" CodeSection="tmr8 function" MainDoNotCallFlag="FALSE"/>
+        <RankSub RankNum="57" FixPosFlag="FALSE" FuncName="wk_tmr2_init" InstanceName="TMR2" CodeSection="tmr2 function" MainDoNotCallFlag="FALSE"/>
+    </FunctionRankInfo>
+</Root>

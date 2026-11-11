@@ -1,0 +1,265 @@
+ARM GAS  C:\Users\bians\AppData\Local\Temp\cc9NV0gb.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.arch armv7e-m
+   3              		.fpu fpv4-sp-d16
+   4              		.eabi_attribute 27, 1
+   5              		.eabi_attribute 28, 1
+   6              		.eabi_attribute 20, 1
+   7              		.eabi_attribute 21, 1
+   8              		.eabi_attribute 23, 3
+   9              		.eabi_attribute 24, 1
+  10              		.eabi_attribute 25, 1
+  11              		.eabi_attribute 26, 1
+  12              		.eabi_attribute 30, 1
+  13              		.eabi_attribute 34, 1
+  14              		.eabi_attribute 18, 4
+  15              		.file	"wk_i2c.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.file 1 "project/src/wk_i2c.c"
+  20              		.section	.text.wk_i2c1_init,"ax",%progbits
+  21              		.align	1
+  22              		.global	wk_i2c1_init
+  23              		.syntax unified
+  24              		.thumb
+  25              		.thumb_func
+  27              	wk_i2c1_init:
+  28              	.LFB137:
+   1:project/src/wk_i2c.c **** /* add user code begin Header */
+   2:project/src/wk_i2c.c **** /**
+   3:project/src/wk_i2c.c ****   **************************************************************************
+   4:project/src/wk_i2c.c ****   * @file     wk_i2c.c
+   5:project/src/wk_i2c.c ****   * @brief    work bench config program
+   6:project/src/wk_i2c.c ****   **************************************************************************
+   7:project/src/wk_i2c.c ****   * Copyright (c) 2025, Artery Technology, All rights reserved.
+   8:project/src/wk_i2c.c ****   *
+   9:project/src/wk_i2c.c ****   * The software Board Support Package (BSP) that is made available to
+  10:project/src/wk_i2c.c ****   * download from Artery official website is the copyrighted work of Artery.
+  11:project/src/wk_i2c.c ****   * Artery authorizes customers to use, copy, and distribute the BSP
+  12:project/src/wk_i2c.c ****   * software and its related documentation for the purpose of design and
+  13:project/src/wk_i2c.c ****   * development in conjunction with Artery microcontrollers. Use of the
+  14:project/src/wk_i2c.c ****   * software is governed by this copyright notice and the following disclaimer.
+  15:project/src/wk_i2c.c ****   *
+  16:project/src/wk_i2c.c ****   * THIS SOFTWARE IS PROVIDED ON "AS IS" BASIS WITHOUT WARRANTIES,
+  17:project/src/wk_i2c.c ****   * GUARANTEES OR REPRESENTATIONS OF ANY KIND. ARTERY EXPRESSLY DISCLAIMS,
+  18:project/src/wk_i2c.c ****   * TO THE FULLEST EXTENT PERMITTED BY LAW, ALL EXPRESS, IMPLIED OR
+  19:project/src/wk_i2c.c ****   * STATUTORY OR OTHER WARRANTIES, GUARANTEES OR REPRESENTATIONS,
+  20:project/src/wk_i2c.c ****   * INCLUDING BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY,
+  21:project/src/wk_i2c.c ****   * FITNESS FOR A PARTICULAR PURPOSE, OR NON-INFRINGEMENT.
+  22:project/src/wk_i2c.c ****   *
+  23:project/src/wk_i2c.c ****   **************************************************************************
+  24:project/src/wk_i2c.c ****   */
+  25:project/src/wk_i2c.c **** /* add user code end Header */
+  26:project/src/wk_i2c.c **** 
+  27:project/src/wk_i2c.c **** /* Includes ------------------------------------------------------------------*/
+  28:project/src/wk_i2c.c **** #include "wk_i2c.h"
+  29:project/src/wk_i2c.c **** 
+  30:project/src/wk_i2c.c **** /* add user code begin 0 */
+ARM GAS  C:\Users\bians\AppData\Local\Temp\cc9NV0gb.s 			page 2
+
+
+  31:project/src/wk_i2c.c **** 
+  32:project/src/wk_i2c.c **** /* add user code end 0 */
+  33:project/src/wk_i2c.c **** 
+  34:project/src/wk_i2c.c **** /**
+  35:project/src/wk_i2c.c ****   * @brief  init i2c1 function.
+  36:project/src/wk_i2c.c ****   * @param  none
+  37:project/src/wk_i2c.c ****   * @retval none
+  38:project/src/wk_i2c.c ****   */
+  39:project/src/wk_i2c.c **** void wk_i2c1_init(void)
+  40:project/src/wk_i2c.c **** {
+  29              		.loc 1 40 1 view -0
+  30              		.cfi_startproc
+  31              		@ args = 0, pretend = 0, frame = 8
+  32              		@ frame_needed = 0, uses_anonymous_args = 0
+  33 0000 2DE9F041 		push	{r4, r5, r6, r7, r8, lr}
+  34              	.LCFI0:
+  35              		.cfi_def_cfa_offset 24
+  36              		.cfi_offset 4, -24
+  37              		.cfi_offset 5, -20
+  38              		.cfi_offset 6, -16
+  39              		.cfi_offset 7, -12
+  40              		.cfi_offset 8, -8
+  41              		.cfi_offset 14, -4
+  42 0004 82B0     		sub	sp, sp, #8
+  43              	.LCFI1:
+  44              		.cfi_def_cfa_offset 32
+  41:project/src/wk_i2c.c ****   /* add user code begin i2c1_init 0 */
+  42:project/src/wk_i2c.c **** 
+  43:project/src/wk_i2c.c ****   /* add user code end i2c1_init 0 */
+  44:project/src/wk_i2c.c **** 
+  45:project/src/wk_i2c.c ****   gpio_init_type gpio_init_struct;
+  45              		.loc 1 45 3 view .LVU1
+  46:project/src/wk_i2c.c **** 
+  47:project/src/wk_i2c.c ****   gpio_default_para_init(&gpio_init_struct);
+  46              		.loc 1 47 3 view .LVU2
+  47 0006 6846     		mov	r0, sp
+  48 0008 FFF7FEFF 		bl	gpio_default_para_init
+  49              	.LVL0:
+  48:project/src/wk_i2c.c **** 
+  49:project/src/wk_i2c.c ****   /* add user code begin i2c1_init 1 */
+  50:project/src/wk_i2c.c **** 
+  51:project/src/wk_i2c.c ****   /* add user code end i2c1_init 1 */
+  52:project/src/wk_i2c.c **** 
+  53:project/src/wk_i2c.c ****   /* configure the SCL pin */
+  54:project/src/wk_i2c.c ****   gpio_init_struct.gpio_out_type = GPIO_OUTPUT_OPEN_DRAIN;
+  50              		.loc 1 54 3 view .LVU3
+  51              		.loc 1 54 34 is_stmt 0 view .LVU4
+  52 000c 0424     		movs	r4, #4
+  53 000e 8DF80440 		strb	r4, [sp, #4]
+  55:project/src/wk_i2c.c ****   gpio_init_struct.gpio_pull = GPIO_PULL_NONE;
+  54              		.loc 1 55 3 is_stmt 1 view .LVU5
+  55              		.loc 1 55 30 is_stmt 0 view .LVU6
+  56 0012 8DF80540 		strb	r4, [sp, #5]
+  56:project/src/wk_i2c.c ****   gpio_init_struct.gpio_mode = GPIO_MODE_MUX;
+  57              		.loc 1 56 3 is_stmt 1 view .LVU7
+  58              		.loc 1 56 30 is_stmt 0 view .LVU8
+  59 0016 4FF00808 		mov	r8, #8
+ARM GAS  C:\Users\bians\AppData\Local\Temp\cc9NV0gb.s 			page 3
+
+
+  60 001a 8DF80680 		strb	r8, [sp, #6]
+  57:project/src/wk_i2c.c ****   gpio_init_struct.gpio_drive_strength = GPIO_DRIVE_STRENGTH_MODERATE;
+  61              		.loc 1 57 3 is_stmt 1 view .LVU9
+  62              		.loc 1 57 40 is_stmt 0 view .LVU10
+  63 001e 0227     		movs	r7, #2
+  64 0020 8DF80770 		strb	r7, [sp, #7]
+  58:project/src/wk_i2c.c ****   gpio_init_struct.gpio_pins = GPIO_PINS_6;
+  65              		.loc 1 58 3 is_stmt 1 view .LVU11
+  66              		.loc 1 58 30 is_stmt 0 view .LVU12
+  67 0024 4023     		movs	r3, #64
+  68 0026 0093     		str	r3, [sp]
+  59:project/src/wk_i2c.c ****   gpio_init(GPIOB, &gpio_init_struct);
+  69              		.loc 1 59 3 is_stmt 1 view .LVU13
+  70 0028 184E     		ldr	r6, .L3
+  71 002a 6946     		mov	r1, sp
+  72 002c 3046     		mov	r0, r6
+  73 002e FFF7FEFF 		bl	gpio_init
+  74              	.LVL1:
+  60:project/src/wk_i2c.c **** 
+  61:project/src/wk_i2c.c ****   /* configure the SDA pin */
+  62:project/src/wk_i2c.c ****   gpio_init_struct.gpio_out_type = GPIO_OUTPUT_OPEN_DRAIN;
+  75              		.loc 1 62 3 view .LVU14
+  76              		.loc 1 62 34 is_stmt 0 view .LVU15
+  77 0032 8DF80440 		strb	r4, [sp, #4]
+  63:project/src/wk_i2c.c ****   gpio_init_struct.gpio_pull = GPIO_PULL_NONE;
+  78              		.loc 1 63 3 is_stmt 1 view .LVU16
+  79              		.loc 1 63 30 is_stmt 0 view .LVU17
+  80 0036 8DF80540 		strb	r4, [sp, #5]
+  64:project/src/wk_i2c.c ****   gpio_init_struct.gpio_mode = GPIO_MODE_MUX;
+  81              		.loc 1 64 3 is_stmt 1 view .LVU18
+  82              		.loc 1 64 30 is_stmt 0 view .LVU19
+  83 003a 8DF80680 		strb	r8, [sp, #6]
+  65:project/src/wk_i2c.c ****   gpio_init_struct.gpio_drive_strength = GPIO_DRIVE_STRENGTH_MODERATE;
+  84              		.loc 1 65 3 is_stmt 1 view .LVU20
+  85              		.loc 1 65 40 is_stmt 0 view .LVU21
+  86 003e 8DF80770 		strb	r7, [sp, #7]
+  66:project/src/wk_i2c.c ****   gpio_init_struct.gpio_pins = GPIO_PINS_7;
+  87              		.loc 1 66 3 is_stmt 1 view .LVU22
+  88              		.loc 1 66 30 is_stmt 0 view .LVU23
+  89 0042 8023     		movs	r3, #128
+  90 0044 0093     		str	r3, [sp]
+  67:project/src/wk_i2c.c ****   gpio_init(GPIOB, &gpio_init_struct);
+  91              		.loc 1 67 3 is_stmt 1 view .LVU24
+  92 0046 6946     		mov	r1, sp
+  93 0048 3046     		mov	r0, r6
+  94 004a FFF7FEFF 		bl	gpio_init
+  95              	.LVL2:
+  68:project/src/wk_i2c.c **** 
+  69:project/src/wk_i2c.c ****   i2c_init(I2C1, I2C_FSMODE_DUTY_2_1, 400000);
+  96              		.loc 1 69 3 view .LVU25
+  97 004e 104C     		ldr	r4, .L3+4
+  98 0050 104A     		ldr	r2, .L3+8
+  99 0052 0021     		movs	r1, #0
+ 100 0054 2046     		mov	r0, r4
+ 101 0056 FFF7FEFF 		bl	i2c_init
+ 102              	.LVL3:
+  70:project/src/wk_i2c.c ****   i2c_own_address1_set(I2C1, I2C_ADDRESS_MODE_7BIT, 0x0);
+ARM GAS  C:\Users\bians\AppData\Local\Temp\cc9NV0gb.s 			page 4
+
+
+ 103              		.loc 1 70 3 view .LVU26
+ 104 005a 0022     		movs	r2, #0
+ 105 005c 1146     		mov	r1, r2
+ 106 005e 2046     		mov	r0, r4
+ 107 0060 FFF7FEFF 		bl	i2c_own_address1_set
+ 108              	.LVL4:
+  71:project/src/wk_i2c.c ****   i2c_ack_enable(I2C1, TRUE);
+ 109              		.loc 1 71 3 view .LVU27
+ 110 0064 0121     		movs	r1, #1
+ 111 0066 2046     		mov	r0, r4
+ 112 0068 FFF7FEFF 		bl	i2c_ack_enable
+ 113              	.LVL5:
+  72:project/src/wk_i2c.c ****   i2c_clock_stretch_enable(I2C1, TRUE);
+ 114              		.loc 1 72 3 view .LVU28
+ 115 006c 0121     		movs	r1, #1
+ 116 006e 2046     		mov	r0, r4
+ 117 0070 FFF7FEFF 		bl	i2c_clock_stretch_enable
+ 118              	.LVL6:
+  73:project/src/wk_i2c.c ****   i2c_general_call_enable(I2C1, FALSE);
+ 119              		.loc 1 73 3 view .LVU29
+ 120 0074 0021     		movs	r1, #0
+ 121 0076 2046     		mov	r0, r4
+ 122 0078 FFF7FEFF 		bl	i2c_general_call_enable
+ 123              	.LVL7:
+  74:project/src/wk_i2c.c **** 
+  75:project/src/wk_i2c.c ****   /* add user code begin i2c1_init 2 */
+  76:project/src/wk_i2c.c **** 
+  77:project/src/wk_i2c.c ****   /* add user code end i2c1_init 2 */
+  78:project/src/wk_i2c.c **** 
+  79:project/src/wk_i2c.c ****   i2c_enable(I2C1, TRUE);
+ 124              		.loc 1 79 3 view .LVU30
+ 125 007c 0121     		movs	r1, #1
+ 126 007e 2046     		mov	r0, r4
+ 127 0080 FFF7FEFF 		bl	i2c_enable
+ 128              	.LVL8:
+  80:project/src/wk_i2c.c **** 
+  81:project/src/wk_i2c.c ****   /* add user code begin i2c1_init 3 */
+  82:project/src/wk_i2c.c **** 
+  83:project/src/wk_i2c.c ****   /* add user code end i2c1_init 3 */
+  84:project/src/wk_i2c.c **** }
+ 129              		.loc 1 84 1 is_stmt 0 view .LVU31
+ 130 0084 02B0     		add	sp, sp, #8
+ 131              	.LCFI2:
+ 132              		.cfi_def_cfa_offset 24
+ 133              		@ sp needed
+ 134 0086 BDE8F081 		pop	{r4, r5, r6, r7, r8, pc}
+ 135              	.L4:
+ 136 008a 00BF     		.align	2
+ 137              	.L3:
+ 138 008c 000C0140 		.word	1073810432
+ 139 0090 00540040 		.word	1073763328
+ 140 0094 801A0600 		.word	400000
+ 141              		.cfi_endproc
+ 142              	.LFE137:
+ 144              		.text
+ 145              	.Letext0:
+ 146              		.file 2 "D:/gnu_toolchain/arm-none-eabi/include/machine/_default_types.h"
+ARM GAS  C:\Users\bians\AppData\Local\Temp\cc9NV0gb.s 			page 5
+
+
+ 147              		.file 3 "D:/gnu_toolchain/arm-none-eabi/include/sys/_stdint.h"
+ 148              		.file 4 "libraries/cmsis/cm4/device_support/at32f403a_407.h"
+ 149              		.file 5 "libraries/drivers/inc/at32f403a_407_gpio.h"
+ 150              		.file 6 "libraries/drivers/inc/at32f403a_407_i2c.h"
+ARM GAS  C:\Users\bians\AppData\Local\Temp\cc9NV0gb.s 			page 6
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 wk_i2c.c
+C:\Users\bians\AppData\Local\Temp\cc9NV0gb.s:21     .text.wk_i2c1_init:00000000 $t
+C:\Users\bians\AppData\Local\Temp\cc9NV0gb.s:27     .text.wk_i2c1_init:00000000 wk_i2c1_init
+C:\Users\bians\AppData\Local\Temp\cc9NV0gb.s:138    .text.wk_i2c1_init:0000008c $d
+
+UNDEFINED SYMBOLS
+gpio_default_para_init
+gpio_init
+i2c_init
+i2c_own_address1_set
+i2c_ack_enable
+i2c_clock_stretch_enable
+i2c_general_call_enable
+i2c_enable
